@@ -2,6 +2,7 @@
 
 ## What does it do?
 This library provides an angular component providing an input field for searching / filtering [MatSelect](https://material.angular.io/components/select/overview) options of the [Angular Material](https://material.angular.io) library.
+
 ![Example](src/assets/example.png)
 
 See it in action at [https://stackblitz.com/github/bithost-gmbh/ngx-mat-select-search](https://stackblitz.com/github/bithost-gmbh/ngx-mat-select-search)
@@ -19,9 +20,15 @@ npm install ngx-mat-select-search
 
 Import the `NgxMatSelectSearchModule` in your `app.module.ts`:
 ```typescript
+import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 @NgModule({
   imports: [
-    ...
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatFormFieldModule,
     NgxMatSelectSearchModule
   ],
 })
