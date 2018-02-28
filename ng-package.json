@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "src": "lib",
+  "dest": "dist-lib",
+  "workingDirectory": ".ng_build",
+  "lib": {
+    "entryFile": "src/app/mat-select-search/public_api.ts"
+  }
+}
