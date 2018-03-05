@@ -53,6 +53,20 @@ and [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/a
 how to wire the `ngx-mat-select-search` and filter the options available.
 Or have a look at [https://github.com/bithost-gmbh/ngx-mat-select-search-example](https://github.com/bithost-gmbh/ngx-mat-select-search-example) to see it in a standalone app.
 
+### API
+The `MatSelectSearchComponent` implements the [ControlValueAccessor](https://angular.io/api/forms/ControlValueAccessor) interface.
+Furthermore, it provides the following inputs:
+
+#### Inputs
+```
+  /** Label of the search placeholder */
+  @Input() placeholderLabel = 'Suche';
+
+  /** Label to be shown when no entries are found. Set to null if no message should be shown. */
+  @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
+```
+
+
 ## Development
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
@@ -67,6 +81,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+### Library Build / NPM Package
+Run `npm run build-lib` to build the library and generate an NPM package.
 
 ### Running unit tests
 
