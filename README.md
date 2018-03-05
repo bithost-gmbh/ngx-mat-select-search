@@ -38,7 +38,7 @@ export class AppModule {}
 ```
 
 Use the `ngx-mat-select-search` component inside a `mat-select` element:
-```
+```html
 <mat-form-field>
   <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
     <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
@@ -58,7 +58,7 @@ The `MatSelectSearchComponent` implements the [ControlValueAccessor](https://ang
 Furthermore, it provides the following inputs:
 
 #### Inputs
-```
+```typescript
   /** Label of the search placeholder */
   @Input() placeholderLabel = 'Suche';
 
