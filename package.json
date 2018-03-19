@@ -1,13 +1,14 @@
 {
   "name": "ngx-mat-select-search",
   "description": "Library that provides an angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
-  "version": "1.0.0",
+  "version": "1.0.1-SNAPSHOT",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
+    "test.ci": "npm run test -- --progress=false --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-lib": "ng-packagr -p ng-package.json"
