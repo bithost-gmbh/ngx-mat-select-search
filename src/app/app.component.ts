@@ -61,6 +61,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
   @ViewChild('singleSelect') singleSelect: MatSelect;
+  @ViewChild('multiSelect') multiSelect: MatSelect;
 
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
@@ -68,6 +69,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     // set initial selection
     this.bankCtrl.setValue(this.banks[10]);
+    this.bankMultiCtrl.setValue([this.banks[10], this.banks[11], this.banks[12]]);
 
     // load the initial bank list
     this.filteredBanks.next(this.banks.slice());
@@ -109,6 +111,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
         this.singleSelect.compareWith = (a: Bank, b: Bank) => a.id === b.id;
+        this.multiSelect.compareWith = (a: Bank, b: Bank) => a.id === b.id;
       });
   }
 

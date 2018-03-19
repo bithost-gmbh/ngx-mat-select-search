@@ -8,7 +8,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "build.ci": "npm run build -- --progress=false",
-    "test": "ng test",
+    "test": "ng test --watch=false --code-coverage",
     "test.ci": "npm run test -- --progress=false --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
