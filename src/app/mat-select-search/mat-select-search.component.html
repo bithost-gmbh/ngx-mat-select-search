@@ -5,6 +5,7 @@
      [ngClass]="{'mat-select-search-inner-multiple': matSelect.multiple}">
   <input matInput
          class="mat-select-search-input"
+         autocomplete="off"
          #searchSelectInput
          (keydown)="_handleKeydown($event)"
          (input)="onInputChange($event.target.value)"
