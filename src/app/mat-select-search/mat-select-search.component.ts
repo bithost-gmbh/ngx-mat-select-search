@@ -239,6 +239,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   onInputChange(value) {
     const valueChanged = value !== this._value;
     if (valueChanged) {
+      this.initMultiSelectedValues();
       this._value = value;
       this.onChange(value);
       this.change.emit(value);
@@ -349,6 +350,17 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           this.previousSelectedValues = values;
         }
       });
+  }
+
+  /**
+   *  Initialize this.previousSelectedValues once the first filtering occurs.
+   */
+  initMultiSelectedValues() {
+    if (this.matSelect.multiple && !this._value) {
+      this.previousSelectedValues = this.matSelect.options
+        .filter(option => option.selected)
+        .map(option => option.value);
+    }
   }
 
 }
