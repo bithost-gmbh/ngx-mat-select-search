@@ -6,6 +6,7 @@
   
   Thanks to @joqkey 
 
+* Bugfix: show "no options found" message as soon as no options are found [#4](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/4), [#10](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/10)
 
 ## 1.0.0
 
