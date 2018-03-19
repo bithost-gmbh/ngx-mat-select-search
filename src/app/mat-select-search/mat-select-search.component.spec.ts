@@ -11,7 +11,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatFormFieldModule, MatInputModule, MatSelect,
+  MatFormFieldModule, MatSelect,
   MatSelectModule
 } from '@angular/material';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -19,6 +19,7 @@ import { Subject } from 'rxjs/Subject';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchComponent } from './mat-select-search.component';
+import { NgxMatSelectSearchModule } from './ngx-mat-select-search.module';
 
 /* tslint:disable:component-selector */
 
@@ -107,10 +108,9 @@ describe('MatSelectSearchComponent', () => {
         ReactiveFormsModule,
         MatFormFieldModule,
         MatSelectModule,
-        MatButtonModule,
-        MatInputModule
+        NgxMatSelectSearchModule
       ],
-      declarations: [MatSelectSearchComponent, MatSelectSearchTestComponent]
+      declarations: [MatSelectSearchTestComponent]
     })
       .compileComponents();
   }));
