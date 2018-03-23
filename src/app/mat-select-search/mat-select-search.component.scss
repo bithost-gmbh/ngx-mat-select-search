@@ -30,6 +30,7 @@ $multiple-check-width: 33px;
   /* allow absolute positioning relative to outer options container */
   transform: none !important;
   max-height: 350px;
+  overflow-x:hidden;
 }
 
 .mat-select-search-input {
