@@ -5,7 +5,8 @@ import {MatSelect} from '@angular/material';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
-import { take, takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators/take';
+import { takeUntil } from 'rxjs/operators/takeUntil';
 
 interface Bank {
  id: string;
