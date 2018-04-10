@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5
+
+* Enhancement: Really improve tree-shaking by importing RxJS operators from specific path [#17](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/17)
+  
+  Thanks to @mtraynham
+
 ## 1.0.4
 
 * Enhancement: improve tree-shaking by importing RxJS operators from specific path [#17](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/17)
