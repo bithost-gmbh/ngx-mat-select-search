@@ -6,7 +6,6 @@
  */
 
 $mat-menu-side-padding: 16px !default;
-$scrollbar-width: 17px;
 $clear-button-width: 20px;
 $multiple-check-width: 33px;
 
@@ -16,13 +15,14 @@ $multiple-check-width: 33px;
 .mat-select-search-inner {
   position: absolute;
   top: 0;
-  width: calc(100% + #{2 * $mat-menu-side-padding - $scrollbar-width});
-  border-bottom: 1px solid #cccccc;
-  background: white;
+  width: 100%;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
   z-index: 100;
+  font-size: inherit;
   &.mat-select-search-inner-multiple {
 
-    width: calc(100% + #{2 * $mat-menu-side-padding - $scrollbar-width + $multiple-check-width});
+    width: 100%;
   }
 }
 
@@ -30,22 +30,21 @@ $multiple-check-width: 33px;
   /* allow absolute positioning relative to outer options container */
   transform: none !important;
   max-height: 350px;
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 
 .mat-select-search-input {
   padding: $mat-menu-side-padding;
   padding-right: $mat-menu-side-padding + $clear-button-width;
   box-sizing: border-box;
-
 }
 .mat-select-search-no-entries-found {
   padding: $mat-menu-side-padding;
 }
 .mat-select-search-clear {
   position: absolute;
-  right: 0;
-  top: 4px;
+  right: 4px;
+  top: 5px;
 }
 /deep/ .cdk-overlay-pane-select-search {
   /* correct offsetY so that the selected option is at the position of the select box when opening */

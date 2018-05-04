@@ -118,6 +118,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
 
+  /** Reference to the search input field */
+  @ViewChild('innerSelectSearch', {read: ElementRef}) innerSelectSearch: ElementRef;
+
   /** Current search value */
   get value(): string {
     return this._value;
@@ -170,6 +173,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .subscribe((opened) => {
         if (opened) {
           // focus the search field when opening
+          this.getWidth();
           this._focus();
         } else {
           // clear it when closing
@@ -191,6 +195,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               // avoid "expression has been changed" error
               setTimeout(() => {
                 keyManager.setFirstItemActive();
+                this.getWidth();
               });
             }
           });
@@ -358,6 +363,31 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           this.previousSelectedValues = values;
         }
       });
+  }
+
+  /**
+   *  Set the width of the innerSelectSearch to fit even custom scrollbars
+   *  And support all Operation Systems
+   */
+  private getWidth() {
+    const element = this.innerSelectSearch.nativeElement;
+    // Need to check that the parentElement is referenced
+    // because angulars change detection will run this earlier
+    if (element.parentElement.parentElement) {
+      const container = element.parentElement.parentElement.parentElement;
+      const scrollbarWidth = container.offsetWidth - container.clientWidth;
+
+      // Constants from scss file
+      const matMenuSidePadding = 16;
+      const multipleCheckWidth = 32;
+
+      const amountToAdd = 2 * matMenuSidePadding - scrollbarWidth;
+      if (!this.matSelect.multiple) {
+        element.style.width = 'calc(100% + ' + amountToAdd + 'px)';
+      } else {
+        element.style.width = 'calc(100% + ' + (amountToAdd + multipleCheckWidth) + 'px)';
+      }
+    }
   }
 
   /**
