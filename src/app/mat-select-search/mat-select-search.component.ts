@@ -118,6 +118,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
 
+  /** Reference to the search input field */
+  @ViewChild('innerSelectSearch', {read: ElementRef}) innerSelectSearch: ElementRef;
+
   /** Current search value */
   get value(): string {
     return this._value;
@@ -204,6 +207,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       });
 
     this.initMultipleHandling();
+
+    this.setWidths();
   }
 
   ngOnDestroy() {
@@ -358,6 +363,54 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           this.previousSelectedValues = values;
         }
       });
+  }
+
+  /**
+   *  Set the width of the innerSelectSearch to fit even custom scrollbars
+   *  And support all Operation Systems
+   */
+  private setWidths() {
+    const scrollbarWidth = this.getScrollbarWidth();
+
+    // Constants from scss file
+    const matMenuSidePadding = 16;
+    const multipleCheckWidth = 32;
+
+    const amountToAdd = 2 * matMenuSidePadding - scrollbarWidth;
+    if (!this.matSelect.multiple) {
+      this.innerSelectSearch.nativeElement.style.width = 'calc(100% + ' + amountToAdd + 'px)';
+    } else {
+      this.innerSelectSearch.nativeElement.style.width = 'calc(100% + ' + (amountToAdd + multipleCheckWidth) + 'px)';
+    }
+  }
+
+  /**
+   *  Function to determine the scrollbar width in case of
+   *  custom chrome scrollbars or OS-Differences
+   */
+  private getScrollbarWidth() {
+    const outer = document.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.width = '100px';
+    outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+
+    document.body.appendChild(outer);
+
+    const widthNoScroll = outer.offsetWidth;
+    // force scrollbars
+    outer.style.overflow = 'scroll';
+
+    // add innerdiv
+    const inner = document.createElement('div');
+    inner.style.width = '100%';
+    outer.appendChild(inner);
+
+    const widthWithScroll = inner.offsetWidth;
+
+    // remove divs
+    outer.parentNode.removeChild(outer);
+
+    return widthNoScroll - widthWithScroll;
   }
 
   /**
