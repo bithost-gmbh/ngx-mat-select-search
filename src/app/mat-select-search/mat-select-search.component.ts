@@ -377,8 +377,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       const container = element.parentElement.parentElement.parentElement;
       const scrollbarWidth = container.offsetWidth - container.clientWidth;
 
-      console.log(scrollbarWidth, container.offsetWidth, container.clientWidth);
-
       // Constants from scss file
       const matMenuSidePadding = 16;
       const multipleCheckWidth = 32;
