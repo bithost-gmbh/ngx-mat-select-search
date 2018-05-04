@@ -173,6 +173,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .subscribe((opened) => {
         if (opened) {
           // focus the search field when opening
+          this.getWidth();
           this._focus();
         } else {
           // clear it when closing
@@ -194,6 +195,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               // avoid "expression has been changed" error
               setTimeout(() => {
                 keyManager.setFirstItemActive();
+                this.getWidth();
               });
             }
           });
@@ -207,8 +209,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       });
 
     this.initMultipleHandling();
-
-    this.setWidths();
   }
 
   ngOnDestroy() {
@@ -369,48 +369,27 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    *  Set the width of the innerSelectSearch to fit even custom scrollbars
    *  And support all Operation Systems
    */
-  private setWidths() {
-    const scrollbarWidth = this.getScrollbarWidth();
+  private getWidth() {
+    const element = this.innerSelectSearch.nativeElement;
+    // Need to check that the parentElement is referenced
+    // because angulars change detection will run this earlier
+    if (element.parentElement.parentElement) {
+      const container = element.parentElement.parentElement.parentElement;
+      const scrollbarWidth = container.offsetWidth - container.clientWidth;
 
-    // Constants from scss file
-    const matMenuSidePadding = 16;
-    const multipleCheckWidth = 32;
+      console.log(scrollbarWidth, container.offsetWidth, container.clientWidth);
 
-    const amountToAdd = 2 * matMenuSidePadding - scrollbarWidth;
-    if (!this.matSelect.multiple) {
-      this.innerSelectSearch.nativeElement.style.width = 'calc(100% + ' + amountToAdd + 'px)';
-    } else {
-      this.innerSelectSearch.nativeElement.style.width = 'calc(100% + ' + (amountToAdd + multipleCheckWidth) + 'px)';
+      // Constants from scss file
+      const matMenuSidePadding = 16;
+      const multipleCheckWidth = 32;
+
+      const amountToAdd = 2 * matMenuSidePadding - scrollbarWidth;
+      if (!this.matSelect.multiple) {
+        element.style.width = 'calc(100% + ' + amountToAdd + 'px)';
+      } else {
+        element.style.width = 'calc(100% + ' + (amountToAdd + multipleCheckWidth) + 'px)';
+      }
     }
-  }
-
-  /**
-   *  Function to determine the scrollbar width in case of
-   *  custom chrome scrollbars or OS-Differences
-   */
-  private getScrollbarWidth() {
-    const outer = document.createElement('div');
-    outer.style.visibility = 'hidden';
-    outer.style.width = '100px';
-    outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
-
-    document.body.appendChild(outer);
-
-    const widthNoScroll = outer.offsetWidth;
-    // force scrollbars
-    outer.style.overflow = 'scroll';
-
-    // add innerdiv
-    const inner = document.createElement('div');
-    inner.style.width = '100%';
-    outer.appendChild(inner);
-
-    const widthWithScroll = inner.offsetWidth;
-
-    // remove divs
-    outer.parentNode.removeChild(outer);
-
-    return widthNoScroll - widthWithScroll;
   }
 
   /**
