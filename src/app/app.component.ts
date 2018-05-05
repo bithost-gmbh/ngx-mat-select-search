@@ -4,9 +4,9 @@ import { FormControl } from '@angular/forms';
 import {MatSelect} from '@angular/material';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { Subject } from 'rxjs/Subject';
-import { take } from 'rxjs/operators/take';
-import { takeUntil } from 'rxjs/operators/takeUntil';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 interface Bank {
  id: string;

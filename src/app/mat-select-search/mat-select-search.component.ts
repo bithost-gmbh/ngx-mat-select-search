@@ -13,9 +13,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, MatSelect } from '@angular/material';
-import { Subject } from 'rxjs/Subject';
-import { take } from 'rxjs/operators/take';
-import { takeUntil } from 'rxjs/operators/takeUntil';
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 /* tslint:disable:member-ordering component-selector */
 /**
