@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.1
+## 1.2.0
 
 * Enhancement: allow preventing clearing the search input when closing the select, needed for server-side filtering. [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
 
