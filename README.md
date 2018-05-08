@@ -64,6 +64,12 @@ Furthermore, it provides the following inputs:
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
+
+  /** 
+    * Whether or not the search field should be cleared after the dropdown menu is closed. 
+    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3) 
+    */
+  @Input() clearSearchInput = false;
 ```
 
 
