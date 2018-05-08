@@ -64,6 +64,9 @@ Furthermore, it provides the following inputs:
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
+
+  /** Whether or not the search field should be cleared after the dropdown menu is closed */
+  @Input() clearSearchInput = false;
 ```
 
 

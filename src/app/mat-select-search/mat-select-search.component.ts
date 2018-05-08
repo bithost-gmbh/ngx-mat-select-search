@@ -114,6 +114,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
+  /** Whether or not the search field should be cleared after the dropdown menu is closed */
+  @Input() clearSearchInput = true;
+
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
 
@@ -297,8 +300,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (!this.searchSelectInput) {
       return;
     }
-    this.searchSelectInput.nativeElement.value = '';
-    this.onInputChange('');
+    if (this.clearSearchInput) {
+      this.searchSelectInput.nativeElement.value = '';
+      this.onInputChange('');
+    }
     if (focus) {
       this._focus();
     }
