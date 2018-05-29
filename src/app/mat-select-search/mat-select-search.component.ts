@@ -14,7 +14,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, MatSelect } from '@angular/material';
 import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import {delay, take, takeUntil} from 'rxjs/operators';
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -114,9 +114,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
-  /** 
-    * Whether or not the search field should be cleared after the dropdown menu is closed. 
-    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3) 
+  /**
+    * Whether or not the search field should be cleared after the dropdown menu is closed.
+    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
     */
   @Input() clearSearchInput = true;
 
@@ -174,7 +174,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
     // when the select dropdown panel is opened or closed
     this.matSelect.openedChange
-      .pipe(takeUntil(this._onDestroy))
+      .pipe(
+        delay(1),
+        takeUntil(this._onDestroy)
+      )
       .subscribe((opened) => {
         if (opened) {
           // focus the search field when opening
@@ -201,7 +204,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               setTimeout(() => {
                 keyManager.setFirstItemActive();
                 this.getWidth();
-              });
+              }, 1);
             }
           });
       });
@@ -384,16 +387,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       const container = element.parentElement.parentElement.parentElement;
       const scrollbarWidth = container.offsetWidth - container.clientWidth;
 
-      // Constants from scss file
-      const matMenuSidePadding = 16;
-      const multipleCheckWidth = 32;
-
-      const amountToAdd = 2 * matMenuSidePadding - scrollbarWidth;
-      if (!this.matSelect.multiple) {
-        element.style.width = 'calc(100% + ' + amountToAdd + 'px)';
-      } else {
-        element.style.width = 'calc(100% + ' + (amountToAdd + multipleCheckWidth) + 'px)';
-      }
+      element.style.width = 'calc(' + container.clientWidth + 'px + ' + scrollbarWidth + 'px)';
     }
   }
 

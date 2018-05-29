@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     {name: 'Bank H (Italy)', id: 'H'},
     {name: 'Bank I (Italy)', id: 'I'},
     {name: 'Bank J (Italy)', id: 'J'},
-    {name: 'Bank K (Italy)', id: 'K'},
+    {name: 'Bank Kolombia (United States of America)', id: 'K'},
     {name: 'Bank L (Germany)', id: 'L'},
     {name: 'Bank M (Germany)', id: 'M'},
     {name: 'Bank N (Germany)', id: 'N'},
