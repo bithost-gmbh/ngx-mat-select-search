@@ -16,7 +16,7 @@ import {
 } from '@angular/material';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {delay, take} from 'rxjs/operators';
 import { takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchComponent } from './mat-select-search.component';
@@ -241,7 +241,10 @@ describe('MatSelectSearchComponent', () => {
           fixture.detectChanges();
 
           component.matSelect.openedChange
-            .pipe(take(1))
+            .pipe(
+              take(1),
+              delay(1)
+            )
             .subscribe((opened) => {
               expect(opened).toBe(true);
               const searchField = document.querySelector('.cdk-overlay-pane-select-search .mat-select-search-inner .mat-select-search-input');
