@@ -1,7 +1,7 @@
 {
   "name": "ngx-mat-select-search",
   "description": "Library that provides an angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -39,6 +39,7 @@
     "rxjs": "^5.5.2 || ^6.0.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.6.5",
     "@angular/animations": "^6.0.3",
     "@angular/cdk": "^6.1.0",
     "@angular/cli": "^6.0.5",
@@ -67,12 +68,11 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^2.4.2",
     "protractor": "~5.1.2",
-    "rxjs": "^5.6.0-forward-compat.5",
+    "rxjs": "^6.2.0",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2",
     "web-animations-js": "^2.3.1",
-    "zone.js": "^0.8.19",
-    "@angular-devkit/build-angular": "~0.6.5"
+    "zone.js": "^0.8.19"
   }
 }

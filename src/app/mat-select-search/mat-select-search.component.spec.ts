@@ -14,7 +14,7 @@ import {
   MatFormFieldModule, MatSelect,
   MatSelectModule
 } from '@angular/material';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject } from 'rxjs';
 import { Subject } from 'rxjs';
 import {delay, take} from 'rxjs/operators';
 import { takeUntil } from 'rxjs/operators';

@@ -387,7 +387,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       const container = element.parentElement.parentElement.parentElement;
       const scrollbarWidth = container.offsetWidth - container.clientWidth;
 
-      element.style.width = 'calc(' + container.clientWidth + 'px + ' + scrollbarWidth + 'px)';
+      element.style.width = container.clientWidth + 'px';
     }
   }
 

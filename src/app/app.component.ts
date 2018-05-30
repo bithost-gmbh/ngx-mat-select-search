@@ -3,7 +3,7 @@ import {VERSION} from '@angular/material';
 import { FormControl } from '@angular/forms';
 import {MatSelect} from '@angular/material';
 
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject } from 'rxjs';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { takeUntil } from 'rxjs/operators';
