@@ -2,7 +2,7 @@
 
 ## 1.2.1
 
-* Bug fix: Width of the input field is wrong in IE11 when using large option texts. [#29](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/29)
+* Bugfix: Width of the input field is wrong in IE11 when using large option texts. [#29](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/29)
 
   Thanks to @Sabartius 
   
