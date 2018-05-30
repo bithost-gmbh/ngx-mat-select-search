@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1
+
+* Bugfix: Width of the input field is wrong in IE11 when using large option texts with angular material 6+. [#29](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/29)
+
+  Thanks to @Sabartius 
+  
 ## 1.2.0
 
 * Enhancement: allow preventing clearing the search input when closing the select, needed for server-side filtering. [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
