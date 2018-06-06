@@ -7,6 +7,7 @@ This library provides an angular component providing an input field for searchin
 
 ![Example](src/assets/example.png)
 
+## Try it
 See it in action at [https://stackblitz.com/github/bithost-gmbh/ngx-mat-select-search-example](https://stackblitz.com/github/bithost-gmbh/ngx-mat-select-search-example?file=src%2Fapp%2Fapp.component.html)
 
 **Important Note**: This project is meant as a temporary implementation of [https://github.com/angular/material2/issues/5697](https://github.com/angular/material2/issues/5697).
@@ -52,6 +53,13 @@ See the example in [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/m
 and [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/app.component.ts](https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/app.component.ts)
 how to wire the `ngx-mat-select-search` and filter the options available.
 Or have a look at [https://github.com/bithost-gmbh/ngx-mat-select-search-example](https://github.com/bithost-gmbh/ngx-mat-select-search-example) to see it in a standalone app.
+
+### Compatibility
+
+* `@angular/core`: `^5.0.0 || ^6.0.0`,
+* `@angular/cdk`: `^5.0.0 || ^6.0.0`,
+* `@angular/material`: `^5.0.0 || ^6.0.0`,
+* `rxjs`: `^5.5.2 || ^6.0.0`
 
 ### API
 The `MatSelectSearchComponent` implements the [ControlValueAccessor](https://angular.io/api/forms/ControlValueAccessor) interface.
