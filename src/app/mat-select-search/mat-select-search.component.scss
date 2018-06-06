@@ -23,7 +23,7 @@ $multiple-check-width: 33px;
   /*
     compensate effects of .mat-datepicker-content
     (see https://github.com/angular/material2/blob/master/src/lib/datepicker/datepicker-content.scss#L27)
-    until propert theming is implemented in https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34
+    TODO: implement propert theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
   */
   box-shadow: none;
   border-radius: none;
