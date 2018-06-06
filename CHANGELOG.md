@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2
+* Bugfix: input shows drop shadow when used together with MatDatepicker [#33](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/33)
+
+  Thanks @irowbin for reporting
+
 ## 1.2.1
 
 * Bugfix: Width of the input field is wrong in IE11 when using large option texts with angular material 6+. [#29](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/29)
