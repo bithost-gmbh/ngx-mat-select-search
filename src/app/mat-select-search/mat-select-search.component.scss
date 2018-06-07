@@ -26,7 +26,7 @@ $multiple-check-width: 33px;
     TODO: implement propert theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
   */
   box-shadow: none;
-  border-radius: none;
+  border-radius: 0;
   &.mat-select-search-inner-multiple {
 
     width: 100%;
