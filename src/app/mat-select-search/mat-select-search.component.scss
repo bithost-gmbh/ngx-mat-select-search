@@ -23,10 +23,10 @@ $multiple-check-width: 33px;
   /*
     compensate effects of .mat-datepicker-content
     (see https://github.com/angular/material2/blob/master/src/lib/datepicker/datepicker-content.scss#L27)
-    TODO: implement propert theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
+    TODO: implement proper theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
   */
   box-shadow: none;
-  border-radius: none;
+  border-radius: 0;
   &.mat-select-search-inner-multiple {
 
     width: 100%;
