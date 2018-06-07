@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.3
+* Bugfix: input shows rounded corners when used together with MatDatepicker [#33](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/33)
+
 ## 1.2.2
 * Bugfix: input shows drop shadow when used together with MatDatepicker [#33](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/33)
 
