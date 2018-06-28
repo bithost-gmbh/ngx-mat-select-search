@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.4
+* Enhancement: ensure forward compatibility independent of markup changes [#38](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/38)
+* Enhancement: fix warnings in tests, improve example
+
 ## 1.2.3
 * Bugfix: input shows rounded corners when used together with MatDatepicker [#33](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/33)
 

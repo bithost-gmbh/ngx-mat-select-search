@@ -149,8 +149,8 @@ export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterVie
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        this.matSelect.compareWith = (a: Bank, b: Bank) => a.id === b.id;
-        this.matSelectMulti.compareWith = (a: Bank, b: Bank) => a.id === b.id;
+        this.matSelect.compareWith = (a: Bank, b: Bank) => a && b && a.id === b.id;
+        this.matSelectMulti.compareWith = (a: Bank, b: Bank) => a && b && a.id === b.id;
       });
   }
 
