@@ -329,8 +329,17 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         // note: this is hacky, but currently there is no better way to do this
-        this.searchSelectInput.nativeElement.parentElement.parentElement
-          .parentElement.parentElement.parentElement.classList.add(overlayClass);
+        let element: HTMLElement = this.searchSelectInput.nativeElement;
+        let overlayElement: HTMLElement;
+        while (element = element.parentElement) {
+          if (element.classList.contains('cdk-overlay-pane')) {
+            overlayElement = element;
+            break;
+          }
+        }
+        if (overlayElement) {
+          overlayElement.classList.add(overlayClass);
+        }
       });
 
     this.overlayClassSet = true;
@@ -380,14 +389,19 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    *  And support all Operation Systems
    */
   private getWidth() {
-    const element = this.innerSelectSearch.nativeElement;
-    // Need to check that the parentElement is referenced
-    // because angulars change detection will run this earlier
-    if (element.parentElement.parentElement) {
-      const container = element.parentElement.parentElement.parentElement;
-      const scrollbarWidth = container.offsetWidth - container.clientWidth;
-
-      element.style.width = container.clientWidth + 'px';
+    if (!this.innerSelectSearch || !this.innerSelectSearch.nativeElement) {
+      return;
+    }
+    let element: HTMLElement = this.innerSelectSearch.nativeElement;
+    let panelElement: HTMLElement;
+    while (element = element.parentElement) {
+      if (element.classList.contains('mat-select-search-panel')) {
+        panelElement = element;
+        break;
+      }
+    }
+    if (panelElement) {
+      this.innerSelectSearch.nativeElement.style.width = panelElement.clientWidth + 'px';
     }
   }
 
