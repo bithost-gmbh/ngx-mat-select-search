@@ -111,8 +111,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        this.singleSelect.compareWith = (a: Bank, b: Bank) => a.id === b.id;
-        this.multiSelect.compareWith = (a: Bank, b: Bank) => a.id === b.id;
+        this.singleSelect.compareWith = (a: Bank, b: Bank) => a && b && a.id === b.id;
+        this.multiSelect.compareWith = (a: Bank, b: Bank) => a && b && a.id === b.id;
       });
   }
 
