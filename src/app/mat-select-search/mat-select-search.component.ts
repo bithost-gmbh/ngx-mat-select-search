@@ -395,7 +395,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     let element: HTMLElement = this.innerSelectSearch.nativeElement;
     let panelElement: HTMLElement;
     while (element = element.parentElement) {
-      if (element.classList.contains('mat-select-search-panel')) {
+      if (element.classList.contains('mat-select-panel')) {
         panelElement = element;
         break;
       }
