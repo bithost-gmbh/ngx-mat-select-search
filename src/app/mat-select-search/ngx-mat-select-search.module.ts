@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { MatSelectSearchComponent } from './mat-select-search.component';
 import { MatButtonModule, MatInputModule, MatIconModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
+import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
 @NgModule({
   imports: [
@@ -18,10 +19,12 @@ import { CommonModule } from '@angular/common';
     MatInputModule
   ],
   declarations: [
-    MatSelectSearchComponent
+    MatSelectSearchComponent,
+    MatSelectSearchClearDirective
   ],
   exports: [
-    MatSelectSearchComponent
+    MatSelectSearchComponent,
+    MatSelectSearchClearDirective
   ]
 })
 export class NgxMatSelectSearchModule { }
