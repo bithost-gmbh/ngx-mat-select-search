@@ -79,8 +79,14 @@ Furthermore, it provides the following inputs:
     */
   @Input() clearSearchInput = false;
 ```
+
 #### Customize clear icon
-In order to customize the search icon, add the ``
+In order to customize the search icon, add the `ngxMatSelectSearchClear` to your custom clear item (a `mat-icon` or any other element) and place it inside the `ngx-mat-select-search` component:
+```
+<ngx-mat-select-search>
+   <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+ </ngx-mat-select-search>
+```
 
 ## Known Problems / Solutions
 
