@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-    selector: 'mat-icon[ngxMatSelectSearchClear]'
+    selector: '[ngxMatSelectSearchClear]'
 })
 export class MatSelectSearchClearDirective {}
