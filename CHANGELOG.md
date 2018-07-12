@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.0
+* Enhancement: allow customization of the clear icon [#41](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/41)
+
 ## 1.2.4
 * Enhancement: ensure forward compatibility independent of markup changes [#38](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/38)
 * Enhancement: fix warnings in tests, improve example

@@ -79,6 +79,10 @@ Furthermore, it provides the following inputs:
     */
   @Input() clearSearchInput = false;
 ```
+#### Customize clear icon
+In order to customize the search icon, add the ``
+
+## Known Problems / Solutions
 
 
 ## Development
