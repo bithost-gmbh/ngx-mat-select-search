@@ -80,15 +80,31 @@ Furthermore, it provides the following inputs:
   @Input() clearSearchInput = false;
 ```
 
+#### Customize clear icon
+In order to customize the search icon, add the `ngxMatSelectSearchClear` to your custom clear item (a `mat-icon` or any other element) and place it inside the `ngx-mat-select-search` component:
+```html
+<ngx-mat-select-search>
+   <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+ </ngx-mat-select-search>
+```
+
+## Known Problems / Solutions
+* The search input is placed outside of the visible screen if the select element is at the top of the screen 
+    (in the stackblitz example, remove the header 
+     or add some content above the select and scroll the select to the top edge). [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1)
+  
+  Workaround: use the disableOptionCentering option on the `<mat-select>` 
+  [https://material.angular.io/components/select/api](https://material.angular.io/components/select/api) 
+
 
 ## Development
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
 
-## Contributions
+### Contributions
 Contributions are welcome, please open an issue and preferrably file a pull request.
 
-## Development server
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
