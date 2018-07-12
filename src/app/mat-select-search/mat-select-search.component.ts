@@ -9,12 +9,14 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnDestroy, OnInit, QueryList,
-  ViewChild
+  ViewChild,
+  ContentChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, MatSelect } from '@angular/material';
 import { Subject } from 'rxjs';
 import {delay, take, takeUntil} from 'rxjs/operators';
+import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -125,6 +127,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   /** Reference to the search input field */
   @ViewChild('innerSelectSearch', {read: ElementRef}) innerSelectSearch: ElementRef;
+
+  /** Reference to custom search input clear icon */
+  @ContentChild(MatSelectSearchClearDirective) clearIcon: MatSelectSearchClearDirective;
 
   /** Current search value */
   get value(): string {

@@ -4,7 +4,8 @@ import { NgxMatSelectSearchModule } from './mat-select-search/ngx-mat-select-sea
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import { MatFormFieldModule, MatIconModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,6 +16,7 @@ describe('AppComponent', () => {
         MatFormFieldModule,
         MatSelectModule,
         MatToolbarModule,
+        MatIconModule,
         NgxMatSelectSearchModule
       ],
       declarations: [

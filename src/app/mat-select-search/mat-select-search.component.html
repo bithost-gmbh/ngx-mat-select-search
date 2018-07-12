@@ -20,7 +20,10 @@
           aria-label="Clear"
           (click)="_reset(true)"
           class="mat-select-search-clear">
-    <mat-icon>close</mat-icon>
+    <ng-content *ngIf="clearIcon; else defaultIcon" select="[ngxMatSelectSearchClear]"></ng-content>
+    <ng-template #defaultIcon>
+      <mat-icon>close</mat-icon>
+    </ng-template>
   </button>
 </div>
 
