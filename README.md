@@ -54,6 +54,16 @@ and [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/a
 how to wire the `ngx-mat-select-search` and filter the options available.
 Or have a look at [https://github.com/bithost-gmbh/ngx-mat-select-search-example](https://github.com/bithost-gmbh/ngx-mat-select-search-example) to see it in a standalone app.
 
+### Labels
+In order to change the labels, use the inputs specified in the [API](#api) section as follows:
+```html
+...
+<ngx-mat-select-search [formControl]="bankFilterCtrl" 
+                       [placeholderLabel]="'Find bank...'" 
+                       [noEntriesFoundLabel]="'no matching bank found'"></ngx-mat-select-search>
+...
+```
+
 ### Compatibility
 
 * `@angular/core`: `^5.0.0 || ^6.0.0`,
