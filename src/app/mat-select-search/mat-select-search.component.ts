@@ -233,10 +233,16 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     this.setOverlayClass();
 
     // update view when available options change
-    this.matSelect.options.changes
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.changeDetectorRef.markForCheck();
+    this.matSelect.openedChange
+      .pipe(
+        take(1),
+        takeUntil(this._onDestroy)
+      ).subscribe(() => {
+        this.matSelect.options.changes
+          .pipe(takeUntil(this._onDestroy))
+          .subscribe(() => {
+            this.changeDetectorRef.markForCheck();
+          });
       });
   }
 
