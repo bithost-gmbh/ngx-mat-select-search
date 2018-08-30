@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.1
+* Bugfix: Error thrown when used together with `*ngIf` [#53](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/53)
+
+  Thanks to @rhyre for reporting
+
 ## 1.3.0
 * Enhancement: allow customization of the clear icon [#41](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/41)
 
