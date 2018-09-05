@@ -1,6 +1,9 @@
 # NgxMatSelectSearch
 [https://github.com/bithost-gmbh/ngx-mat-select-search](https://github.com/bithost-gmbh/ngx-mat-select-search)
 
+[![npm version](https://img.shields.io/npm/v/ngx-mat-select-search.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-select-search)
+[![npm downloads](https://img.shields.io/npm/dm/ngx-mat-select-search.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-select-search)
+[![CircleCI](https://circleci.com/gh/bithost-gmbh/ngx-mat-select-search.svg?style=svg)](https://circleci.com/gh/bithost-gmbh/ngx-mat-select-search)
 
 ## What does it do?
 This library provides an angular component providing an input field for searching / filtering [MatSelect](https://material.angular.io/components/select/overview) options of the [Angular Material](https://material.angular.io) library.
