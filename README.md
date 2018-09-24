@@ -4,6 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/ngx-mat-select-search.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-select-search)
 [![npm downloads](https://img.shields.io/npm/dm/ngx-mat-select-search.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-select-search)
 [![CircleCI](https://circleci.com/gh/bithost-gmbh/ngx-mat-select-search.svg?style=svg)](https://circleci.com/gh/bithost-gmbh/ngx-mat-select-search)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-yellow.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NAX558HVGAX8Q)
 
 ## What does it do?
 This library provides an angular component providing an input field for searching / filtering [MatSelect](https://material.angular.io/components/select/overview) options of the [Angular Material](https://material.angular.io) library.
@@ -109,6 +110,12 @@ In order to customize the search icon, add the `ngxMatSelectSearchClear` to your
   Workaround: use the disableOptionCentering option on the `<mat-select>` 
   [https://material.angular.io/components/select/api](https://material.angular.io/components/select/api) 
 
+## Support Development
+
+We aim at providing the best service possible by constantly improving `NgxMatSelectSearch` and responding fast to bug reports. We do this fully free of cost.
+If you feel like this library was useful to you and saved you and your business some precious time, please consider making a donation to support its maintenance and further development.
+
+[![PayPal](https://www.paypalobjects.com/en_US/CH/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NAX558HVGAX8Q)
 
 ## Development
 
