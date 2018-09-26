@@ -122,6 +122,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     */
   @Input() clearSearchInput = true;
 
+  /** Disables initial focusing of the input field */
+  @Input() disableInitialFocus = false;
+
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
 
@@ -187,7 +190,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
         if (opened) {
           // focus the search field when opening
           this.getWidth();
-          this._focus();
+          if (!this.disableInitialFocus) {
+            this._focus();
+          }
         } else {
           // clear it when closing
           this._reset();

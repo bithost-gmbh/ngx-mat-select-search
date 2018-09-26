@@ -92,6 +92,9 @@ Furthermore, it provides the following inputs:
     * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3) 
     */
   @Input() clearSearchInput = false;
+  
+  /** Disables initial focusing of the input field */
+  @Input() disableInitialFocus = false;
 ```
 
 #### Customize clear icon
