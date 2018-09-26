@@ -195,7 +195,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           }
         } else {
           // clear it when closing
-          this._reset();
+          if (this.clearSearchInput) {
+            this._reset();
+          }
         }
       });
 
@@ -322,10 +324,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (!this.searchSelectInput) {
       return;
     }
-    if (this.clearSearchInput) {
-      this.searchSelectInput.nativeElement.value = '';
-      this.onInputChange('');
-    }
+    this.searchSelectInput.nativeElement.value = '';
+    this.onInputChange('');
     if (focus) {
       this._focus();
     }
