@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.2
+* Enhancement: Tested and update peer dependency compatibility to allow 
+               `@angular/core`: `^7.0.0`, `@angular/cdk`: `^7.0.0`, `@angular/material`: `^7.0.0`
+
+
 ## 1.3.1
 * Bugfix: Error thrown when used together with `*ngIf` [#53](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/53)
 
