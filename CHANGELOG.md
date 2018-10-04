@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.4.1
+* Bugfix: Wrong panel positioning when select is at bottom edge of viewport 
+          due to overridden panel height (`350px`). The default panel height (`256px`) will be used
+          [#63](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/63)
+          
+  Note: the panel height can be changed via css (not recommended, as it leads to issues):
+  ```css
+  .mat-select-search-panel {
+    ...
+    max-height: 350px;
+  }
+  ```
+  
+  Thanks to @hadsy for reporting.
+
 ## 1.4.0
 * Enhancement: Tested and update peer dependency compatibility to allow 
                `@angular/core`: `^7.0.0`, `@angular/cdk`: `^7.0.0`, `@angular/material`: `^7.0.0`
