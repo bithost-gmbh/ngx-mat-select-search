@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.4.2
+* Bugfix: Error when quickly selecting an option [#69](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/69)
+
+  Thanks to @olaf89 for reporting
+  
+* Bugfix: Filter selection jumps to next entry [#73](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/73)
+  
+  Thanks to @Kimmova
+
 ## 1.4.1
 * Bugfix: Wrong panel positioning when select is at bottom edge of viewport 
           due to overridden panel height (`350px`). The default panel height (`256px`) will be used

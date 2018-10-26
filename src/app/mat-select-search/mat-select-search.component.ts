@@ -19,6 +19,7 @@ import {
   Z,
   ZERO,
   NINE,
+  SPACE,
 } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
 import {delay, take, takeUntil} from 'rxjs/operators';
@@ -265,10 +266,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * @param event
    */
   _handleKeydown(event: KeyboardEvent) {
-	// Prevent propagation for all alphanumeric characters
-	if ((event.key && event.key.length === 1) || 
-		(event.keyCode >= A && event.keyCode <= Z) || 
-		(event.keyCode >= ZERO && event.keyCode <= NINE)) {
+  // Prevent propagation for all alphanumeric characters in order to avoid selection issues
+  if ((event.key && event.key.length === 1) ||
+    (event.keyCode >= A && event.keyCode <= Z) ||
+    (event.keyCode >= ZERO && event.keyCode <= NINE) ||
+    (event.keyCode === SPACE)) {
       event.stopPropagation();
     }
   }
@@ -309,7 +311,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * Focuses the search input field
    */
   public _focus() {
-    if (!this.searchSelectInput) {
+    if (!this.searchSelectInput || !this.matSelect.panel) {
       return;
     }
     // save and restore scrollTop of panel, since it will be reset by focus()
