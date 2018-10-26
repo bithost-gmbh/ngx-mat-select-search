@@ -14,6 +14,12 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, MatSelect } from '@angular/material';
+import {
+  A,
+  Z,
+  ZERO,
+  NINE,
+} from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
 import {delay, take, takeUntil} from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
@@ -259,11 +265,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * @param event
    */
   _handleKeydown(event: KeyboardEvent) {
-    if (event.keyCode === 32) {
-      // do not propagate spaces to MatSelect, as this would select the currently active option
+	// Prevent propagation for all alphanumeric characters
+	if ((event.key && event.key.length === 1) || 
+		(event.keyCode >= A && event.keyCode <= Z) || 
+		(event.keyCode >= ZERO && event.keyCode <= NINE)) {
       event.stopPropagation();
     }
-
   }
 
 
