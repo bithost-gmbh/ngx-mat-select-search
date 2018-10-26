@@ -309,7 +309,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * Focuses the search input field
    */
   public _focus() {
-    if (!this.searchSelectInput) {
+    if (!this.searchSelectInput || !this.matSelect.panel) {
       return;
     }
     // save and restore scrollTop of panel, since it will be reset by focus()
