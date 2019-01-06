@@ -5,8 +5,7 @@ import {MatSelect} from '@angular/material';
 
 import { ReplaySubject } from 'rxjs';
 import { Subject } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, delay, filter, map, take, debounceTime } from 'rxjs/operators';
 
 interface Bank {
  id: string;
@@ -32,6 +31,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
    /** control for the MatSelect filter keyword multi-selection */
   public bankMultiFilterCtrl: FormControl = new FormControl();
+
+    /** control for the selected bank for server side filtering */
+  public bankServerSideCtrl: FormControl = new FormControl();
+
+  /** control for filter for server side. */
+  public bankServerSideFilteringCtrl: FormControl = new FormControl();
 
   /** list of banks */
   private banks: Bank[] = [
@@ -61,6 +66,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   /** list of banks filtered by search keyword for multi-selection */
   public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
+  /** list of banks filtered after simulating server side search */
+  public  filteredServerSideBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
+
   @ViewChild('singleSelect') singleSelect: MatSelect;
   @ViewChild('multiSelect') multiSelect: MatSelect;
 
@@ -87,7 +95,20 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.filterBanksMulti();
       });
-
+    this.bankServerSideFilteringCtrl.valueChanges
+      .pipe(
+        takeUntil(this._onDestroy),
+        debounceTime(200),
+        filter(search => !!search),
+        map(search => {
+          if (!this.banks) {
+            return [];
+          }
+          return this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
+        }),
+        delay(500) // add server simulation
+      )
+      .subscribe(this.filteredServerSideBanks);
   }
 
   ngAfterViewInit() {

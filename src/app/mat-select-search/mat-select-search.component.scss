@@ -54,5 +54,5 @@ $multiple-check-width: 33px;
 }
 /deep/ .cdk-overlay-pane-select-search {
   /* correct offsetY so that the selected option is at the position of the select box when opening */
-  margin-top: -50px;
+  margin-top: 50px; // This won't be required anymore if mat-select-search is inside mat-option.
 }
