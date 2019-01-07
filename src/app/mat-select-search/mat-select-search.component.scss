@@ -27,6 +27,7 @@ $multiple-check-width: 33px;
   */
   box-shadow: none;
   border-radius: 0;
+  -webkit-transform: translate3d(0,0,0);
   &.mat-select-search-inner-multiple {
 
     width: 100%;
