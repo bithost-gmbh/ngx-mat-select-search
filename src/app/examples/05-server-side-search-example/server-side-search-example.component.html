@@ -2,7 +2,8 @@
 <p>
   <mat-form-field>
     <mat-select [formControl]="bankServerSideCtrl" placeholder="Bank">
-      <mat-option disabled="true" class="contains-select-search">
+      <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+      <mat-option>
         <ngx-mat-select-search [formControl]="bankServerSideFilteringCtrl"></ngx-mat-select-search>
       </mat-option>
       <mat-option *ngFor="let bank of filteredServerSideBanks | async" [value]="bank">
