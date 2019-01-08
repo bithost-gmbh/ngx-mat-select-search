@@ -117,10 +117,10 @@ In order to customize the search icon, add the `ngxMatSelectSearchClear` to your
      or add some content above the select and scroll the select to the top edge). 
      See [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1)
   
-  **Workaround 1**:  place the `<ngx-mat-select-search>` inside a disabled `<mat-option>`
+  **Workaround 1**:  place the `<ngx-mat-select-search>` inside a `<mat-option>`
    ```html
       <mat-select>
-        <mat-option class="contains-mat-select-search">
+        <mat-option>
           <ngx-mat-select-search></ngx-mat-select-search>
         </mat-option>
         <mat-option *ngFor="let bank of ...">...</mat-option>
