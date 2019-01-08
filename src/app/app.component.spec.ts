@@ -5,22 +5,13 @@ import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatIconModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        CommonModule,
-        NoopAnimationsModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatToolbarModule,
-        MatIconModule,
-        NgxMatSelectSearchModule
-      ],
-      declarations: [
-        AppComponent
+        AppModule
       ],
     }).compileComponents();
   }));

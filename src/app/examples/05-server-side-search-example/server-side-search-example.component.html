@@ -1,0 +1,16 @@
+<h3>Server Side Search</h3>
+<p>
+  <mat-form-field>
+    <mat-select [formControl]="bankServerSideCtrl" placeholder="Bank">
+      <mat-option disabled="true" class="contains-select-search">
+        <ngx-mat-select-search [formControl]="bankServerSideFilteringCtrl"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let bank of filteredServerSideBanks | async" [value]="bank">
+        {{bank.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</p>
+<p>
+  Selected Bank: {{bankServerSideCtrl.value?.name}}
+</p>
