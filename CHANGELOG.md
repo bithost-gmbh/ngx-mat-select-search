@@ -6,7 +6,10 @@
   Thanks to @JiaHongL
 
 * Enhancement / Bugfix: Allow placing `<ngx-mat-select-search>` inside a `<mat-option>` element.
-  This allows avoiding search field being placed outside of the visible viewport ([#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1)).
+  This prevents the search field being placed outside of the visible viewport ([#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1)).
+
+  Note: it is still possible to place the `<ngx-mat-select-search>` element directly inside `<mat-select>` 
+        without wrapping it in an `<mat-option>` element.
 
   Thanks to @hanuhimanshu
   
@@ -18,7 +21,7 @@
 
   Thanks to @maechler
   
-* Examples: refactor examples into separate components
+* Examples: refactor examples into separate components [#86](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/86)
 
 ## 1.4.2
 * Bugfix: Error when quickly selecting an option [#69](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/69)
