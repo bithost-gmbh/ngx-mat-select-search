@@ -36,7 +36,6 @@ $multiple-check-width: 33px;
 /deep/ .mat-select-search-panel {
   /* allow absolute positioning relative to outer options container */
   transform: none !important;
-  max-height: 350px;
   overflow-x: hidden;
 }
 

@@ -70,9 +70,9 @@ In order to change the labels, use the inputs specified in the [API](#api) secti
 
 ### Compatibility
 
-* `@angular/core`: `^5.0.0 || ^6.0.0`,
-* `@angular/cdk`: `^5.0.0 || ^6.0.0`,
-* `@angular/material`: `^5.0.0 || ^6.0.0`,
+* `@angular/core`: `^5.0.0 || ^6.0.0 || ^7.0.0`,
+* `@angular/cdk`: `^5.0.0 || ^6.0.0 || ^7.0.0`,
+* `@angular/material`: `^5.0.0 || ^6.0.0 || ^7.0.0`,
 * `rxjs`: `^5.5.2 || ^6.0.0`
 
 ### API
@@ -92,6 +92,9 @@ Furthermore, it provides the following inputs:
     * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3) 
     */
   @Input() clearSearchInput = false;
+  
+  /** Disables initial focusing of the input field */
+  @Input() disableInitialFocus = false;
 ```
 
 #### Customize clear icon
@@ -117,12 +120,12 @@ If you feel like this library was useful to you and saved you and your business 
 
 [![PayPal](https://www.paypalobjects.com/en_US/CH/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NAX558HVGAX8Q)
 
+### Contributions
+Contributions are welcome, please open an issue and preferrably file a pull request.
+
 ## Development
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
-
-### Contributions
-Contributions are welcome, please open an issue and preferrably file a pull request.
 
 ### Development server
 

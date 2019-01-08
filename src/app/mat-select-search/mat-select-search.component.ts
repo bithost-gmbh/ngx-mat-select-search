@@ -14,6 +14,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, MatSelect } from '@angular/material';
+import {
+  A,
+  Z,
+  ZERO,
+  NINE,
+  SPACE,
+} from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
 import {delay, take, takeUntil} from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
@@ -122,6 +129,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     */
   @Input() clearSearchInput = true;
 
+  /** Disables initial focusing of the input field */
+  @Input() disableInitialFocus = false;
+
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
 
@@ -187,10 +197,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
         if (opened) {
           // focus the search field when opening
           this.getWidth();
-          this._focus();
+          if (!this.disableInitialFocus) {
+            this._focus();
+          }
         } else {
           // clear it when closing
-          this._reset();
+          if (this.clearSearchInput) {
+            this._reset();
+          }
         }
       });
 
@@ -252,11 +266,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * @param event
    */
   _handleKeydown(event: KeyboardEvent) {
-    if (event.keyCode === 32) {
-      // do not propagate spaces to MatSelect, as this would select the currently active option
+  // Prevent propagation for all alphanumeric characters in order to avoid selection issues
+  if ((event.key && event.key.length === 1) ||
+    (event.keyCode >= A && event.keyCode <= Z) ||
+    (event.keyCode >= ZERO && event.keyCode <= NINE) ||
+    (event.keyCode === SPACE)) {
       event.stopPropagation();
     }
-
   }
 
 
@@ -295,7 +311,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * Focuses the search input field
    */
   public _focus() {
-    if (!this.searchSelectInput) {
+    if (!this.searchSelectInput || !this.matSelect.panel) {
       return;
     }
     // save and restore scrollTop of panel, since it will be reset by focus()
@@ -317,10 +333,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (!this.searchSelectInput) {
       return;
     }
-    if (this.clearSearchInput) {
-      this.searchSelectInput.nativeElement.value = '';
-      this.onInputChange('');
-    }
+    this.searchSelectInput.nativeElement.value = '';
+    this.onInputChange('');
     if (focus) {
       this._focus();
     }
