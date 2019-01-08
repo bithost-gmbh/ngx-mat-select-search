@@ -62,7 +62,7 @@ Or have a look at [https://github.com/bithost-gmbh/ngx-mat-select-search-example
 
 Note: it is also possible to place the `<ngx-mat-select-search>` element directly inside `<mat-select>` 
 without wrapping it in an `<mat-option>` element. However, the search field might be outside of the visible viewport. 
-See [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1) and [Known Problems / Solutions](#knownproblemssolutions)
+See [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1) and [Known Problems / Solutions](#known-problems--solutions)
 
 ### Labels
 In order to change the labels, use the inputs specified in the [API](#api) section as follows:
