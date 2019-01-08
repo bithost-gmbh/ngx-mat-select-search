@@ -474,11 +474,7 @@ describe('MatSelectSearchComponent', () => {
                         .pipe(take(1))
                         .subscribe(() => {
                           fixture.detectChanges();
-                          if (component.matSelectSearchMatOption.clearSearchInput) {
-                            expect(component.matSelectMatOption.options.length).toBe(4);
-                          } else {
-                            expect(component.matSelectMatOption.options.length).toBe(2);
-                          }
+                          expect(component.matSelectMatOption.options.length).toBe(5);
 
                           done();
                         });
