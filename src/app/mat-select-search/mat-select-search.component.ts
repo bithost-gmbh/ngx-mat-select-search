@@ -10,7 +10,7 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnDestroy, OnInit, QueryList,
   ViewChild,
-  ContentChild
+  ContentChild, Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, MatSelect } from '@angular/material';
@@ -167,7 +167,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
-              private changeDetectorRef: ChangeDetectorRef) {
+              private changeDetectorRef: ChangeDetectorRef,
+              @Optional() @Inject(MatOption) public matOption: MatOption = null) {
 
 
   }
@@ -185,6 +186,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       }
     } else {
       this.matSelect.panelClass = panelClass;
+    }
+
+    // set custom mat-option class if the component was placed inside a mat-option
+    if (this.matOption) {
+      this.matOption.disabled = true;
+      this.matOption._getHostElement().classList.add('contains-mat-select-search');
     }
 
     // when the select dropdown panel is opened or closed
@@ -348,7 +355,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (this.overlayClassSet) {
       return;
     }
-    const overlayClass = 'cdk-overlay-pane-select-search';
+    const overlayClasses: string[] = ['cdk-overlay-pane-select-search'];
+
+    if (!this.matOption) {
+      // add offset to panel if component is not placed inside mat-option
+      overlayClasses.push('cdk-overlay-pane-select-search-with-offset');
+    }
 
     this.matSelect.overlayDir.attach
       .pipe(takeUntil(this._onDestroy))
@@ -363,7 +375,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           }
         }
         if (overlayElement) {
-          overlayElement.classList.add(overlayClass);
+          overlayClasses.forEach(overlayClass => {
+            overlayElement.classList.add(overlayClass);
+          });
         }
       });
 
