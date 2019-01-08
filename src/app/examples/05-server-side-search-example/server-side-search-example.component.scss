@@ -1,7 +1,0 @@
-
-/deep/ .mat-option[aria-disabled=true].contains-select-search {
-  /* let move mat-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
-  position: static;
-  padding: 0;
-}
-

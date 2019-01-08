@@ -42,11 +42,13 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 export class AppModule {}
 ```
 
-Use the `ngx-mat-select-search` component inside a `mat-select` element:
+Use the `ngx-mat-select-search` component inside a `mat-select` element by placing it inside a `<mat-option>` element:
 ```html
 <mat-form-field>
   <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
-    <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+    <mat-option>
+      <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+    </mat-option>
     <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
       {{bank.name}}
     </mat-option>
@@ -57,6 +59,10 @@ See the example in [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/m
 and [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/app.component.ts](https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/app.component.ts)
 how to wire the `ngx-mat-select-search` and filter the options available.
 Or have a look at [https://github.com/bithost-gmbh/ngx-mat-select-search-example](https://github.com/bithost-gmbh/ngx-mat-select-search-example) to see it in a standalone app.
+
+Note: it is also possible to place the `<ngx-mat-select-search>` element directly inside `<mat-select>` 
+without wrapping it in an `<mat-option>` element. However, the search field might be outside of the visible viewport. 
+See [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1) and [Known Problems / Solutions](#known-problems--solutions)
 
 ### Labels
 In order to change the labels, use the inputs specified in the [API](#api) section as follows:
@@ -102,16 +108,31 @@ In order to customize the search icon, add the `ngxMatSelectSearchClear` to your
 ```html
 <ngx-mat-select-search>
    <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
- </ngx-mat-select-search>
+</ngx-mat-select-search>
 ```
 
 ## Known Problems / Solutions
 * The search input is placed outside of the visible screen if the select element is at the top of the screen 
     (in the stackblitz example, remove the header 
-     or add some content above the select and scroll the select to the top edge). [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1)
+     or add some content above the select and scroll the select to the top edge). 
+     See [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1)
   
-  Workaround: use the disableOptionCentering option on the `<mat-select>` 
-  [https://material.angular.io/components/select/api](https://material.angular.io/components/select/api) 
+  **Workaround 1**:  place the `<ngx-mat-select-search>` inside a `<mat-option>`
+   ```html
+      <mat-select>
+        <mat-option>
+          <ngx-mat-select-search></ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let bank of ...">...</mat-option>
+      </mat-select>
+   ```
+   Caveat: the currently selected option might be hidden under the search input field when opening the options panel.
+   
+  **Workaround 2**: use the disableOptionCentering option on the `<mat-select>` 
+   [https://material.angular.io/components/select/api](https://material.angular.io/components/select/api)
+   while placing the `<ngx-mat-select-search>` element directly inside `<mat-select>` 
+   without wrapping it in an `<mat-option>` element.
+  
 
 ## Support Development
 
