@@ -447,7 +447,7 @@ describe('MatSelectSearchComponent', () => {
                 expect(component.matSelectMatOption.options.length).toBe(5);
 
                 // search for "c"
-                component.matSelectSearch.onInputChange('c');
+                component.matSelectSearchMatOption.onInputChange('c');
                 fixture.detectChanges();
 
                 expect(component.bankFilterCtrlMatOption.value).toBe('c');
