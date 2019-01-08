@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.5.0
+* Bugfix: Fix scroll issue in iOS [#70](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/70)
+
+  Thanks to @JiaHongL
+
+* Enhancement / Bugfix: Allow placing `<ngx-mat-select-search>` inside a `<mat-option>` element.
+  This prevents the search field being placed outside of the visible viewport ([#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1)).
+
+  Note: it is still possible to place the `<ngx-mat-select-search>` element directly inside `<mat-select>` 
+        without wrapping it in an `<mat-option>` element.
+
+  Thanks to @hanuhimanshu
+  
+* Examples: Add example for server-side filtering [#26](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/26)
+
+  Thanks to @hanuhimanshu
+  
+* Examples: Add example for option groups [#15](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/15)
+
+  Thanks to @maechler
+  
+* Examples: refactor examples into separate components [#86](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/86)
+
 ## 1.4.2
 * Bugfix: Error when quickly selecting an option [#69](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/69)
 
