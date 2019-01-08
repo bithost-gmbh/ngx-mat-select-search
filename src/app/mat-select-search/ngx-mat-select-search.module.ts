@@ -11,6 +11,9 @@ import { MatButtonModule, MatInputModule, MatIconModule } from '@angular/materia
 import { CommonModule } from '@angular/common';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
+export const MatSelectSearchVersion = '1.5.0';
+
+
 @NgModule({
   imports: [
     CommonModule,

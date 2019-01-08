@@ -1,0 +1,16 @@
+<h3>Single selection with option groups</h3>
+<p>
+  <mat-form-field>
+    <mat-select [formControl]="bankGroupsCtrl" placeholder="Bank" #singleSelect>
+      <ngx-mat-select-search [formControl]="bankGroupsFilterCtrl"></ngx-mat-select-search>
+      <mat-optgroup *ngFor="let group of filteredBankGroups | async" [label]="group.name">
+        <mat-option *ngFor="let bank of group.banks" [value]="bank">
+          {{bank.name}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+</p>
+<p>
+  Selected Bank: {{bankGroupsCtrl.value?.name}}
+</p>

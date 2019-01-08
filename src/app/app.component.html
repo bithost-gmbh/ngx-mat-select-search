@@ -3,7 +3,7 @@
 </mat-toolbar>
 <div class="basic-container">
   <h1>ngx-mat-select-search</h1>
-  <p>This library provides an angular component providing an input field for searching / filtering
+  <p>Angular component providing an input field for searching / filtering
     <a href="https://material.angular.io/components/select/overview" target="_blank">MatSelect</a>
     options of the <a href="https://material.angular.io">Angular Material</a> library.</p>
 
@@ -11,54 +11,21 @@
 
   <h2>Examples</h2>
 
-  <h3>Single selection</h3>
-  <p>
-    <mat-form-field>
-      <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
-        <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
-        <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
-          {{bank.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </p>
-  <p>
-    Selected Bank: {{bankCtrl.value?.name}}
-  </p>
+  <app-single-selection-example></app-single-selection-example>
 
-  <h3>Multiple selection</h3>
-  <p>
-    <mat-form-field>
-      <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
-        <ngx-mat-select-search [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
-        <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
-          {{bank.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </p>
-  <p>
-    Selected Banks:
-  </p>
-  <ul *ngFor="let bank of bankMultiCtrl?.value">
-    <li>{{bank.name}}</li>
-  </ul>
+  <app-multiple-selection-example></app-multiple-selection-example>
 
-  <h3>Single selection with custom clear icon</h3>
-  <p>
-    <mat-form-field>
-      <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
-        <ngx-mat-select-search *ngIf="true" [formControl]="bankFilterCtrl">
-          <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
-        </ngx-mat-select-search>
-        <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
-          {{bank.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </p>
-  <p>
-    Selected Bank: {{bankCtrl.value?.name}}
-  </p>
-  <span class="version-info">Current build: {{version.full}}</span>
+  <app-custom-clear-icon-example></app-custom-clear-icon-example>
+
+  <app-option-groups-example></app-option-groups-example>
+
+  <app-server-side-search-example></app-server-side-search-example>
+
+
+  <span class="version-info">
+    ngx-mat-select-search Version: {{matSelectSearchVersion}} <br/>
+    Material Version: {{version.full}}
+  </span>
+
+
 </div>
