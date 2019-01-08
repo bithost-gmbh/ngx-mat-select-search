@@ -27,6 +27,10 @@ $multiple-check-width: 33px;
   */
   box-shadow: none;
   border-radius: 0;
+  
+  /* Prevent iOS scroll issue (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/70)*/
+  -webkit-transform: translate3d(0,0,0);
+  
   &.mat-select-search-inner-multiple {
 
     width: 100%;
