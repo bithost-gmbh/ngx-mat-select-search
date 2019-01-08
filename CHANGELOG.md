@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.4.3
+* Bugfix: Fix scroll issue in iOS [#70](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/70)
+
+  Thanks to @JiaHongL
+  
+* Examples: Add example for server-side filtering [#26](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/26)
+
+  Thanks to @hanuhimanshu
+  
+* Examples: Add example for option groups [#15](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/15)
+
+  Thanks to @maechler
+  
+* Examples: refactor examples into separate components
+
 ## 1.4.2
 * Bugfix: Error when quickly selecting an option [#69](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/69)
 
