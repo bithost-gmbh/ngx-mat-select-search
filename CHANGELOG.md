@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.1
+* Bugfix: Hide checkbox when placing `<ngx-mat-select-search>` inside a `<mat-option>` element 
+          and with `<mat-select  multi="true">` [#98](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/98)
+          
+  Thanks to @jkhadivi for reporting
+
 ## 1.5.0
 * Bugfix: Fix scroll issue in iOS [#70](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/70)
 
