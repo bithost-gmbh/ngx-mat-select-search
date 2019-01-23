@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.2
+* Bugfix: Show "no entries found" message when placing `<ngx-mat-select-search>` inside a `<mat-option>` element
+  [#101](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/101)
+          
+  Thanks to @mstawick for reporting
+  
 ## 1.5.1
 * Bugfix: Hide checkbox when placing `<ngx-mat-select-search>` inside a `<mat-option>` element 
           and with `<mat-select  multi="true">` [#98](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/98)

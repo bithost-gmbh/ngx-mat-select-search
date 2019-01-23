@@ -27,7 +27,7 @@
   </button>
 </div>
 
-<div *ngIf="noEntriesFoundLabel && value && _options?.length === 0"
+<div *ngIf="_noEntriesFound()"
      class="mat-select-search-no-entries-found">
   {{noEntriesFoundLabel}}
 </div>

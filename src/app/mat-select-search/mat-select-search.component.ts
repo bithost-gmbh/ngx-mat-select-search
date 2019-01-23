@@ -455,4 +455,18 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
+  /**
+   * Returns whether the "no entries found" message should be displayed
+   */
+  public _noEntriesFound(): boolean {
+    if (!this._options) {
+      return;
+    }
+    if (this.matOption) {
+      return this.noEntriesFoundLabel && this.value && this._options.length === 1;
+    } else {
+      return this.noEntriesFoundLabel && this.value && this._options.length === 0;
+    }
+  }
+
 }
