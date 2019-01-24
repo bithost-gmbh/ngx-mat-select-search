@@ -8,6 +8,7 @@
 $mat-menu-side-padding: 16px !default;
 $clear-button-width: 20px;
 $multiple-check-width: 33px;
+$mat-option-height: 3em;
 
 .mat-select-search-hidden {
   visibility: hidden;
@@ -56,6 +57,20 @@ $multiple-check-width: 33px;
   right: 4px;
   top: 5px;
 }
+
+/** override styling when inside a mat-option */
+:host.mat-select-search-inside-mat-option {
+  .mat-select-search-input {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: $mat-option-height;
+    line-height: $mat-option-height;
+  }
+  .mat-select-search-clear {
+    top: 3px;
+  }
+}
+
 /deep/ .cdk-overlay-pane-select-search {
   &.cdk-overlay-pane-select-search-with-offset{
     /* correct offsetY so that the selected option is at the position of the select box when opening */
@@ -72,5 +87,8 @@ $multiple-check-width: 33px;
   }
   .mat-option-pseudo-checkbox {
     display: none;
+  }
+  &.mat-select-search-no-entries-found {
+    height: 2 * $mat-option-height;
   }
 }
