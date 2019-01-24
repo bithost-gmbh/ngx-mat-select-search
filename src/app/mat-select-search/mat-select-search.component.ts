@@ -10,7 +10,7 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnDestroy, OnInit, QueryList,
   ViewChild,
-  ContentChild, Optional
+  ContentChild, Optional, HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, MatSelect } from '@angular/material';
@@ -141,6 +141,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Reference to custom search input clear icon */
   @ContentChild(MatSelectSearchClearDirective) clearIcon: MatSelectSearchClearDirective;
 
+  @HostBinding('class.mat-select-search-inside-mat-option')
+  get isInsideMatOption(): boolean {
+    return !!this.matOption;
+  }
+
   /** Current search value */
   get value(): string {
     return this._value;
@@ -226,11 +231,23 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           .subscribe(() => {
             const keyManager = this.matSelect._keyManager;
             if (keyManager && this.matSelect.panelOpen) {
+
               // avoid "expression has been changed" error
               setTimeout(() => {
+                // set first item active and input width
                 keyManager.setFirstItemActive();
                 this.getWidth();
+
+                // set no entries found class on mat option
+                if (this.matOption) {
+                  if (this._noEntriesFound()) {
+                    this.matOption._getHostElement().classList.add('mat-select-search-no-entries-found');
+                  } else {
+                    this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
+                  }
+                }
               }, 1);
+
             }
           });
       });
