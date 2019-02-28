@@ -197,6 +197,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (this.matOption) {
       this.matOption.disabled = true;
       this.matOption._getHostElement().classList.add('contains-mat-select-search');
+      // remove no entries found class on mat option
+      this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
     }
 
     // when the select dropdown panel is opened or closed
