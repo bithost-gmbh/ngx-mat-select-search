@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.3
+* Bugfix: Avoid space when opening select panel after previously showing "no entries found" message when placing `<ngx-mat-select-search>` inside a `<mat-option>` element
+  [#107](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/107)
+  
+  Thanks to @aroblu94 for reporting
+
 ## 1.5.2
 * Bugfix: Show "no entries found" message when placing `<ngx-mat-select-search>` inside a `<mat-option>` element
   [#101](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/101)

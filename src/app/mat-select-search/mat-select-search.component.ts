@@ -172,7 +172,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
-              private changeDetectorRef: ChangeDetectorRef,
+              public changeDetectorRef: ChangeDetectorRef,
               @Optional() @Inject(MatOption) public matOption: MatOption = null) {
 
 
@@ -359,6 +359,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     }
     this.searchSelectInput.nativeElement.value = '';
     this.onInputChange('');
+    if (this.matOption && !focus) {
+      // remove no entries found class on mat option
+      this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
+    }
     if (focus) {
       this._focus();
     }
