@@ -359,7 +359,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     }
     this.searchSelectInput.nativeElement.value = '';
     this.onInputChange('');
-    if (this.matOption) {
+    if (this.matOption && !focus) {
       // remove no entries found class on mat option
       this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
     }
