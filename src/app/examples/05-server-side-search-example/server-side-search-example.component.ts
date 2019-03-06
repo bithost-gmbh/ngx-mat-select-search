@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import {debounceTime, delay, distinctUntilChanged, filter, map, takeUntil} from 'rxjs/operators';
+import {debounceTime, delay, tap, filter, map, takeUntil} from 'rxjs/operators';
 
 import { Bank, BANKS } from '../demo-data';
 
@@ -32,17 +32,14 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
   protected _onDestroy = new Subject<void>();
 
   ngOnInit() {
-    // start searching indicator as soon as value changes
-    this.bankServerSideFilteringCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy), filter(search => !!search), distinctUntilChanged())
-      .subscribe(() => this.searching = true);
 
     // listen for search field value changes
     this.bankServerSideFilteringCtrl.valueChanges
       .pipe(
+        filter(search => !!search),
+        tap(() => this.searching = true),
         takeUntil(this._onDestroy),
         debounceTime(200),
-        filter(search => !!search),
         map(search => {
           if (!this.banks) {
             return [];
