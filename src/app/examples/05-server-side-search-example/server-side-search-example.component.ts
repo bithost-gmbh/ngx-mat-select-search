@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import { debounceTime, delay, filter, map, takeUntil } from 'rxjs/operators';
+import {debounceTime, delay, distinctUntilChanged, filter, map, takeUntil} from 'rxjs/operators';
 
 import { Bank, BANKS } from '../demo-data';
 
@@ -22,6 +22,9 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
   /** control for filter for server side. */
   public bankServerSideFilteringCtrl: FormControl = new FormControl();
 
+  /** indicate search operation is in progress */
+  public searching: boolean = false;
+
   /** list of banks filtered after simulating server side search */
   public  filteredServerSideBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
@@ -29,6 +32,10 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
   protected _onDestroy = new Subject<void>();
 
   ngOnInit() {
+    // start searching indicator as soon as value changes
+    this.bankServerSideFilteringCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy), filter(search => !!search), distinctUntilChanged())
+      .subscribe(() => this.searching = true);
 
     // listen for search field value changes
     this.bankServerSideFilteringCtrl.valueChanges
@@ -40,12 +47,21 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
           if (!this.banks) {
             return [];
           }
+
           // simulate server fetching and filtering data
           return this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
         }),
         delay(500)
       )
-      .subscribe(this.filteredServerSideBanks);
+      .subscribe(filteredBanks => {
+        this.searching = false;
+        this.filteredServerSideBanks.next(filteredBanks);
+      },
+        error => {
+          // no errors in our simulated example
+          this.searching = false;
+          // handle error...
+        });
 
   }
 
