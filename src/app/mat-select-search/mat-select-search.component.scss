@@ -58,6 +58,12 @@ $mat-option-height: 3em;
   top: 5px;
 }
 
+.mat-select-search-spinner {
+  position: absolute;
+  right: 16px;
+  top: calc(50% - 8px);
+}
+
 /** override styling when inside a mat-option */
 :host.mat-select-search-inside-mat-option {
   .mat-select-search-input {

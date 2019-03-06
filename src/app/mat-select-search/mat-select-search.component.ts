@@ -129,6 +129,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     */
   @Input() clearSearchInput = true;
 
+  /**
+   * Display / hide search-in-progress indicator
+   */
+  @Input() searching = false;
+
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
 
