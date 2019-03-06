@@ -15,7 +15,11 @@
          (blur)="onBlur($event.target.value)"
          [placeholder]="placeholderLabel"
   />
-  <button mat-button *ngIf="value"
+  <mat-spinner *ngIf="searching"
+          class="mat-select-search-spinner"
+          diameter="16"></mat-spinner>
+
+  <button mat-button *ngIf="value && !searching"
           mat-icon-button
           aria-label="Clear"
           (click)="_reset(true)"

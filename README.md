@@ -99,6 +99,9 @@ Furthermore, it provides the following inputs:
     */
   @Input() clearSearchInput = false;
   
+  /** Whether to show the search-in-progress indicator */
+  @Input() searching = false;
+  
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
 ```
