@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.0
+* Enhancement: Allow showing a loading / searching indicator with `@Input() searching` 
+               [#114](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/114)
+
+  Thanks to @mstawick
+
+
 ## 1.5.3
 * Bugfix: Avoid space when opening select panel after previously showing "no entries found" message when placing `<ngx-mat-select-search>` inside a `<mat-option>` element
   [#107](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/107)

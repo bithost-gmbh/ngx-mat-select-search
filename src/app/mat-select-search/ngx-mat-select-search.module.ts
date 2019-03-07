@@ -11,7 +11,7 @@ import {MatButtonModule, MatInputModule, MatIconModule, MatProgressSpinnerModule
 import { CommonModule } from '@angular/common';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
-export const MatSelectSearchVersion = '1.5.3';
+export const MatSelectSearchVersion = '1.6.0';
 
 
 @NgModule({
