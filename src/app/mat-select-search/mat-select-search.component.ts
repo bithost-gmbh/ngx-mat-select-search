@@ -21,6 +21,8 @@ import {
   NINE,
   SPACE,
 } from '@angular/cdk/keycodes';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subject } from 'rxjs';
 import {delay, take, takeUntil} from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
@@ -113,6 +115,19 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
       multi: true
     }
   ],
+  animations: [
+    trigger('enterAnimation', [
+      state('void', style({
+        opacity: 0
+      })),
+      state('*', style({
+        opacity: 1
+      })),
+      transition('void <=> *', [
+        animate('0.1s ease-out')
+      ])
+    ])
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
@@ -176,6 +191,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
               public changeDetectorRef: ChangeDetectorRef,
+              private _viewportRuler: ViewportRuler,
               @Optional() @Inject(MatOption) public matOption: MatOption = null) {
 
 
@@ -210,8 +226,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       )
       .subscribe((opened) => {
         if (opened) {
+          this.updateInputWidth();
           // focus the search field when opening
-          this.getWidth();
           if (!this.disableInitialFocus) {
             this._focus();
           }
@@ -239,7 +255,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               setTimeout(() => {
                 // set first item active and input width
                 keyManager.setFirstItemActive();
-                this.getWidth();
+                this.updateInputWidth();
 
                 // set no entries found class on mat option
                 if (this.matOption) {
@@ -260,6 +276,15 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         this.changeDetectorRef.detectChanges();
+      });
+
+    // resize the input width when the viewport is resized, i.e. the trigger width could potentially be resized
+    this._viewportRuler.change()
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        if (this.matSelect.panelOpen) {
+          this.updateInputWidth();
+        }
       });
 
     this.initMultipleHandling();
@@ -451,7 +476,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    *  Set the width of the innerSelectSearch to fit even custom scrollbars
    *  And support all Operation Systems
    */
-  private getWidth() {
+  public updateInputWidth() {
     if (!this.innerSelectSearch || !this.innerSelectSearch.nativeElement) {
       return;
     }
