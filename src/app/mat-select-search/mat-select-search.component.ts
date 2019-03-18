@@ -13,7 +13,7 @@ import {
   ContentChild, Optional, HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatOption, MatSelect } from '@angular/material';
+import { MatOption, MatSelect, SELECT_PANEL_MAX_HEIGHT, _countGroupLabelsBeforeOption } from '@angular/material';
 import {
   A,
   Z,
@@ -285,6 +285,30 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
             this.changeDetectorRef.markForCheck();
           });
       });
+
+      if (this.matSelect._keyManager) {
+        this.matSelect._keyManager.change.pipe(takeUntil(this._onDestroy))
+        .subscribe(() => {
+          if (this.matSelect.panel) {
+            const activeOptionIndex = this.matSelect._keyManager.activeItemIndex || 0;
+            const labelCount = _countGroupLabelsBeforeOption(activeOptionIndex, this.matSelect.options, this.matSelect.optionGroups);
+            // If the component is in a MatOption, the activeItemIndex will be offset by one.
+            const indexOfOptionToFitIntoView = (this.matOption ? -1 : 0) + labelCount + activeOptionIndex;
+            const currentScrollTop = this.matSelect.panel.nativeElement.scrollTop;
+
+            const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight
+            const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / this.matSelect._getItemHeight());
+            
+            const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / this.matSelect._getItemHeight()) - 1;
+            
+            if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
+              this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * this.matSelect._getItemHeight();
+            } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
+              this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * this.matSelect._getItemHeight() - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
+            }
+          }
+        });
+      }
   }
 
   /**
