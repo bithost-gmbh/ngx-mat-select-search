@@ -228,6 +228,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .pipe(take(1))
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
+        if (this.matSelect._keyManager) {
+          this.matSelect._keyManager.change.pipe(takeUntil(this._onDestroy))
+            .subscribe(() => this.adjustScrollTopToFitActiveOptionIntoView())
+        } else {
+          console.log('_keyManager was not initialized.');
+        }
+
         this._options = this.matSelect.options;
         this._options.changes
           .pipe(takeUntil(this._onDestroy))
@@ -285,30 +292,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
             this.changeDetectorRef.markForCheck();
           });
       });
-
-      if (this.matSelect._keyManager) {
-        this.matSelect._keyManager.change.pipe(takeUntil(this._onDestroy))
-        .subscribe(() => {
-          if (this.matSelect.panel) {
-            const activeOptionIndex = this.matSelect._keyManager.activeItemIndex || 0;
-            const labelCount = _countGroupLabelsBeforeOption(activeOptionIndex, this.matSelect.options, this.matSelect.optionGroups);
-            // If the component is in a MatOption, the activeItemIndex will be offset by one.
-            const indexOfOptionToFitIntoView = (this.matOption ? -1 : 0) + labelCount + activeOptionIndex;
-            const currentScrollTop = this.matSelect.panel.nativeElement.scrollTop;
-
-            const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight
-            const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / this.matSelect._getItemHeight());
-            
-            const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / this.matSelect._getItemHeight()) - 1;
-            
-            if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
-              this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * this.matSelect._getItemHeight();
-            } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
-              this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * this.matSelect._getItemHeight() - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
-            }
-          }
-        });
-      }
   }
 
   /**
@@ -469,6 +452,27 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           this.previousSelectedValues = values;
         }
       });
+  }
+
+  private adjustScrollTopToFitActiveOptionIntoView(): void {
+    if (this.matSelect.panel) {
+      const activeOptionIndex = this.matSelect._keyManager.activeItemIndex || 0;
+      const labelCount = _countGroupLabelsBeforeOption(activeOptionIndex, this.matSelect.options, this.matSelect.optionGroups);
+      // If the component is in a MatOption, the activeItemIndex will be offset by one.
+      const indexOfOptionToFitIntoView = (this.matOption ? -1 : 0) + labelCount + activeOptionIndex;
+      const currentScrollTop = this.matSelect.panel.nativeElement.scrollTop;
+
+      const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight
+      const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / this.matSelect._getItemHeight());
+      
+      const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / this.matSelect._getItemHeight()) - 1;
+      
+      if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
+        this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * this.matSelect._getItemHeight();
+      } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
+        this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * this.matSelect._getItemHeight() - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
+      }
+    }
   }
 
   /**
