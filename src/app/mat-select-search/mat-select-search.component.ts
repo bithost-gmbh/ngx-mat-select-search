@@ -455,7 +455,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   private adjustScrollTopToFitActiveOptionIntoView(): void {
-    if (this.matSelect.panel) {
+    if (this.matSelect.panel && this.matSelect.options.length > 0) {
+      const matOptionHeight = this.getMatOptionHeight();
       const activeOptionIndex = this.matSelect._keyManager.activeItemIndex || 0;
       const labelCount = _countGroupLabelsBeforeOption(activeOptionIndex, this.matSelect.options, this.matSelect.optionGroups);
       // If the component is in a MatOption, the activeItemIndex will be offset by one.
@@ -463,14 +464,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       const currentScrollTop = this.matSelect.panel.nativeElement.scrollTop;
 
       const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight
-      const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / this.matSelect._getItemHeight());
+      const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / matOptionHeight);
       
-      const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / this.matSelect._getItemHeight()) - 1;
+      const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / matOptionHeight) - 1;
       
       if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
-        this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * this.matSelect._getItemHeight();
+        this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * matOptionHeight;
       } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
-        this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * this.matSelect._getItemHeight() - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
+        this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * matOptionHeight - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
       }
     }
   }
@@ -494,6 +495,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (panelElement) {
       this.innerSelectSearch.nativeElement.style.width = panelElement.clientWidth + 'px';
     }
+  }
+
+  private getMatOptionHeight(): number {
+    if (this.matSelect.options.length > 0) {
+      return this.matSelect.options.first._getHostElement().getBoundingClientRect().height;
+    }
+
+    return 0;
   }
 
   /**
