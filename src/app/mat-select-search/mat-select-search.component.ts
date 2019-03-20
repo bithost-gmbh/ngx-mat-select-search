@@ -256,6 +256,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
                     this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
                   }
                 }
+
+                this.adjustScrollTopToFitActiveOptionIntoView();
               }, 1);
 
             }
