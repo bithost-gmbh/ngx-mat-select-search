@@ -2,7 +2,7 @@
 <p>
   <mat-form-field>
     <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
-      <ngx-mat-select-search *ngIf="true" [formControl]="bankFilterCtrl">
+      <ngx-mat-select-search *ngIf="true" [formControl]="bankFilterCtrl" [preventHomeEndKeyPropagation]="true">
         <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
       </ngx-mat-select-search>
       <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">

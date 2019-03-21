@@ -19,8 +19,8 @@ import {
   Z,
   ZERO,
   NINE,
-  SPACE,
-} from '@angular/cdk/keycodes';
+  SPACE, END, HOME,
+} from "@angular/cdk/keycodes";
 import { Subject } from 'rxjs';
 import {delay, take, takeUntil} from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
@@ -134,6 +134,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
+
+  /**
+   * Prevents home / end key being propagated to mat-select,
+   * allowing to move the cursor within the search input instead of navigating the options
+   */
+  @Input() preventHomeEndKeyPropagation = false;
 
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
@@ -297,7 +303,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   if ((event.key && event.key.length === 1) ||
     (event.keyCode >= A && event.keyCode <= Z) ||
     (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-    (event.keyCode === SPACE)) {
+    (event.keyCode === SPACE)
+    || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
+  ) {
       event.stopPropagation();
     }
   }
