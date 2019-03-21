@@ -13,7 +13,7 @@ import {
   ContentChild, Optional, HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatOption, MatSelect } from '@angular/material';
+import { MatOption, MatSelect, SELECT_PANEL_MAX_HEIGHT, _countGroupLabelsBeforeOption } from '@angular/material';
 import {
   A,
   Z,
@@ -21,6 +21,8 @@ import {
   NINE,
   SPACE, END, HOME,
 } from "@angular/cdk/keycodes";
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subject } from 'rxjs';
 import {delay, take, takeUntil} from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
@@ -113,6 +115,19 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
       multi: true
     }
   ],
+  animations: [
+    trigger('enterAnimation', [
+      state('void', style({
+        opacity: 0
+      })),
+      state('*', style({
+        opacity: 1
+      })),
+      transition('void <=> *', [
+        animate('0.1s ease-out')
+      ])
+    ])
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
@@ -182,6 +197,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
               public changeDetectorRef: ChangeDetectorRef,
+              private _viewportRuler: ViewportRuler,
               @Optional() @Inject(MatOption) public matOption: MatOption = null) {
 
 
@@ -216,8 +232,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       )
       .subscribe((opened) => {
         if (opened) {
+          this.updateInputWidth();
           // focus the search field when opening
-          this.getWidth();
           if (!this.disableInitialFocus) {
             this._focus();
           }
@@ -234,6 +250,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .pipe(take(1))
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
+        if (this.matSelect._keyManager) {
+          this.matSelect._keyManager.change.pipe(takeUntil(this._onDestroy))
+            .subscribe(() => this.adjustScrollTopToFitActiveOptionIntoView())
+        } else {
+          console.log('_keyManager was not initialized.');
+        }
+
         this._options = this.matSelect.options;
         this._options.changes
           .pipe(takeUntil(this._onDestroy))
@@ -245,7 +268,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               setTimeout(() => {
                 // set first item active and input width
                 keyManager.setFirstItemActive();
-                this.getWidth();
+                this.updateInputWidth();
 
                 // set no entries found class on mat option
                 if (this.matOption) {
@@ -255,6 +278,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
                     this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
                   }
                 }
+
+                this.adjustScrollTopToFitActiveOptionIntoView();
               }, 1);
 
             }
@@ -266,6 +291,15 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         this.changeDetectorRef.detectChanges();
+      });
+
+    // resize the input width when the viewport is resized, i.e. the trigger width could potentially be resized
+    this._viewportRuler.change()
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        if (this.matSelect.panelOpen) {
+          this.updateInputWidth();
+        }
       });
 
     this.initMultipleHandling();
@@ -455,11 +489,33 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       });
   }
 
+  private adjustScrollTopToFitActiveOptionIntoView(): void {
+    if (this.matSelect.panel && this.matSelect.options.length > 0) {
+      const matOptionHeight = this.getMatOptionHeight();
+      const activeOptionIndex = this.matSelect._keyManager.activeItemIndex || 0;
+      const labelCount = _countGroupLabelsBeforeOption(activeOptionIndex, this.matSelect.options, this.matSelect.optionGroups);
+      // If the component is in a MatOption, the activeItemIndex will be offset by one.
+      const indexOfOptionToFitIntoView = (this.matOption ? -1 : 0) + labelCount + activeOptionIndex;
+      const currentScrollTop = this.matSelect.panel.nativeElement.scrollTop;
+
+      const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight
+      const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / matOptionHeight);
+
+      const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / matOptionHeight) - 1;
+
+      if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
+        this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * matOptionHeight;
+      } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
+        this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * matOptionHeight - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
+      }
+    }
+  }
+
   /**
    *  Set the width of the innerSelectSearch to fit even custom scrollbars
    *  And support all Operation Systems
    */
-  private getWidth() {
+  public updateInputWidth() {
     if (!this.innerSelectSearch || !this.innerSelectSearch.nativeElement) {
       return;
     }
@@ -474,6 +530,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (panelElement) {
       this.innerSelectSearch.nativeElement.style.width = panelElement.clientWidth + 'px';
     }
+  }
+
+  private getMatOptionHeight(): number {
+    if (this.matSelect.options.length > 0) {
+      return this.matSelect.options.first._getHostElement().getBoundingClientRect().height;
+    }
+
+    return 0;
   }
 
   /**
