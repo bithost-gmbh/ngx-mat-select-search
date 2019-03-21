@@ -1,11 +1,24 @@
 # Changelog
 
-## 1.6.NEXT
+## 1.7.0
+* Enhancement: ensure the active option is not covered by the search input when navigating 
+  with the arrow keys or when the option list changes when searching. 
+  [#119](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/119)
+  
+  Thanks to @Mabiro
+  
+* Enhancement: allow disabling propagation of home / end key via `@Input() preventHomeEndKeyPropagation` 
+  to enable moving the cursor inside the search field instead of navigating the options when pressing
+  <kbd>Home</kbd> / <kbd>End</kbd> [#43](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/43)
+  
+  Thanks to @geraldhe for reporting
+  
 * Bugfix / Enhancement: Update the input width when the viewport is resized
   [#81](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/81)
   
   Thanks to @mhosman for reporting
-* Enhancement: add opacity transition animation for search clear icon / 
+  
+* Enhancement: add opacity transition animation for search clear icon 
 
 ## 1.6.0
 * Enhancement: Allow showing a loading / searching indicator with `@Input() searching` 
