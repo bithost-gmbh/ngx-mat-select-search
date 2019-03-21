@@ -16,10 +16,13 @@
          [placeholder]="placeholderLabel"
   />
   <mat-spinner *ngIf="searching"
+          [@enterAnimation]
           class="mat-select-search-spinner"
           diameter="16"></mat-spinner>
 
-  <button mat-button *ngIf="value && !searching"
+  <button mat-button
+          *ngIf="value && !searching"
+          [@enterAnimation]
           mat-icon-button
           aria-label="Clear"
           (click)="_reset(true)"

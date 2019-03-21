@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.NEXT
+* Bugfix / Enhancement: Update the input width when the viewport is resized
+  [#81](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/81)
+  
+  Thanks to @mhosman for reporting
+* Enhancement: add opacity transition animation for search clear icon / 
+
 ## 1.6.0
 * Enhancement: Allow showing a loading / searching indicator with `@Input() searching` 
                [#114](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/114)
