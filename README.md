@@ -104,6 +104,12 @@ Furthermore, it provides the following inputs:
   
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
+    
+  /**
+   * Prevents home / end key being propagated to mat-select,
+   * allowing to move the cursor within the search input instead of navigating the options
+   */
+  @Input() preventHomeEndKeyPropagation = false;
 ```
 
 #### Customize clear icon
