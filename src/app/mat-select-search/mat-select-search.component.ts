@@ -19,8 +19,8 @@ import {
   Z,
   ZERO,
   NINE,
-  SPACE,
-} from '@angular/cdk/keycodes';
+  SPACE, END, HOME,
+} from "@angular/cdk/keycodes";
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subject } from 'rxjs';
@@ -149,6 +149,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
+
+  /**
+   * Prevents home / end key being propagated to mat-select,
+   * allowing to move the cursor within the search input instead of navigating the options
+   */
+  @Input() preventHomeEndKeyPropagation = false;
 
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
@@ -331,7 +337,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   if ((event.key && event.key.length === 1) ||
     (event.keyCode >= A && event.keyCode <= Z) ||
     (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-    (event.keyCode === SPACE)) {
+    (event.keyCode === SPACE)
+    || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
+  ) {
       event.stopPropagation();
     }
   }
@@ -492,9 +500,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
       const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight
       const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / matOptionHeight);
-      
+
       const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / matOptionHeight) - 1;
-      
+
       if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
         this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * matOptionHeight;
       } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
