@@ -20,11 +20,12 @@ import {
   ZERO,
   NINE,
   SPACE, END, HOME,
-} from "@angular/cdk/keycodes";
+} from '@angular/cdk/keycodes';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subject } from 'rxjs';
-import {delay, take, takeUntil} from 'rxjs/operators';
+import { delay, take, takeUntil } from 'rxjs/operators';
+
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
 /* tslint:disable:member-ordering component-selector */
@@ -156,6 +157,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    */
   @Input() preventHomeEndKeyPropagation = false;
 
+  /** Disables scrolling to active options when option list changes. Useful for server-side search */
+  @Input() disableScrollToActiveOnOptionsChanged = false;
+
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
 
@@ -279,7 +283,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
                   }
                 }
 
-                this.adjustScrollTopToFitActiveOptionIntoView();
+                if (!this.disableScrollToActiveOnOptionsChanged) {
+                  this.adjustScrollTopToFitActiveOptionIntoView();
+                }
+
               }, 1);
 
             }
@@ -333,13 +340,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * @param event
    */
   _handleKeydown(event: KeyboardEvent) {
-  // Prevent propagation for all alphanumeric characters in order to avoid selection issues
-  if ((event.key && event.key.length === 1) ||
-    (event.keyCode >= A && event.keyCode <= Z) ||
-    (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-    (event.keyCode === SPACE)
-    || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
-  ) {
+    // Prevent propagation for all alphanumeric characters in order to avoid selection issues
+    if ((event.key && event.key.length === 1) ||
+      (event.keyCode >= A && event.keyCode <= Z) ||
+      (event.keyCode >= ZERO && event.keyCode <= NINE) ||
+      (event.keyCode === SPACE)
+      || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
+    ) {
       event.stopPropagation();
     }
   }
@@ -489,6 +496,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       });
   }
 
+  /**
+   * Scrolls the currently active option into the view if it is not yet visible.
+   */
   private adjustScrollTopToFitActiveOptionIntoView(): void {
     if (this.matSelect.panel && this.matSelect.options.length > 0) {
       const matOptionHeight = this.getMatOptionHeight();

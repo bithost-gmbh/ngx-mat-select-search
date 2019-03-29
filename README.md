@@ -64,6 +64,12 @@ Note: it is also possible to place the `<ngx-mat-select-search>` element directl
 without wrapping it in an `<mat-option>` element. However, the search field might be outside of the visible viewport. 
 See [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1) and [Known Problems / Solutions](#known-problems--solutions)
 
+### Template driven forms
+You can alternatively use it with template driven forms as follows:
+```html
+<ngx-mat-select-search ngModel (ngModelChange)="filterMyOptions($event)">
+```
+
 ### Labels
 In order to change the labels, use the inputs specified in the [API](#api) section as follows:
 ```html
@@ -110,6 +116,10 @@ Furthermore, it provides the following inputs:
    * allowing to move the cursor within the search input instead of navigating the options
    */
   @Input() preventHomeEndKeyPropagation = false;
+  
+  
+  /** Disables scrolling to active options when option list changes. Useful for server-side search */
+  @Input() disableScrollToActiveOnOptionsChanged = false;
 ```
 
 #### Customize clear icon

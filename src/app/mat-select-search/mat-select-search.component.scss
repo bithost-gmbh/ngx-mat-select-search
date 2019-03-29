@@ -33,8 +33,16 @@ $mat-option-height: 3em;
   -webkit-transform: translate3d(0,0,0);
 
   &.mat-select-search-inner-multiple {
-
     width: 100%;
+  }
+  
+  .mat-input-element {
+    &:-ms-input-placeholder {
+      // fix IE11 not able to focus programmatically with css style -ms-user-select: none
+      // see https://github.com/angular/material2/issues/15093
+      // needed for angular material ^7.0.0 < 8.0.0
+      -ms-user-select: text;
+    }
   }
 }
 
