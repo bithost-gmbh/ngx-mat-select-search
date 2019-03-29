@@ -110,6 +110,10 @@ Furthermore, it provides the following inputs:
    * allowing to move the cursor within the search input instead of navigating the options
    */
   @Input() preventHomeEndKeyPropagation = false;
+  
+  
+  /** Disables scrolling to active options when option list changes. Useful for server-side search */
+  @Input() disableScrollToActiveOnOptionsChanged = false;
 ```
 
 #### Customize clear icon
