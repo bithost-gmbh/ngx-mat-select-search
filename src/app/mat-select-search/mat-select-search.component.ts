@@ -157,6 +157,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    */
   @Input() preventHomeEndKeyPropagation = false;
 
+  /** Disables scrolling to active options when option list changes. Useful for server-side search */
+  @Input() disableScrollToActiveOnOptionsChanged = false;
+
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
 
@@ -280,7 +283,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
                   }
                 }
 
-                this.adjustScrollTopToFitActiveOptionIntoView();
+                if (!this.disableScrollToActiveOnOptionsChanged) {
+                  this.adjustScrollTopToFitActiveOptionIntoView();
+                }
+
               }, 1);
 
             }
@@ -490,6 +496,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       });
   }
 
+  /**
+   * Scrolls the currently active option into the view if it is not yet visible.
+   */
   private adjustScrollTopToFitActiveOptionIntoView(): void {
     if (this.matSelect.panel && this.matSelect.options.length > 0) {
       const matOptionHeight = this.getMatOptionHeight();
