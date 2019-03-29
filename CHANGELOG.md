@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.7.1
+* Enhancement: allow disabling scrolling active element into view when option list changes 
+  with `@Input() disableScrollToActiveOnOptionsChanged` [#130](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/130)
+  
+  Thanks to @drakeBear for reporting
+  
+* Bugfix: input field not focused in IE [#131](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/131)
+* Bugfix: clear button not visible after reopening select panel in combination with `[clearSearchInput]="false"`
+  [#133](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/133)
+
+  Thanks to @cappster for reporting
+
 ## 1.7.0
 * Enhancement: ensure the active option is not covered by the search input when navigating 
   with the arrow keys or when the option list changes when searching. 
