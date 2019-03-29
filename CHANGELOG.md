@@ -8,6 +8,7 @@
   
 * Bugfix: input field not focused in IE [#131](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/131)
 * Bugfix: clear button not visible after reopening select panel in combination with `[clearSearchInput]="false"`
+  [#133](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/133)
 
   Thanks to @cappster for reporting
 
