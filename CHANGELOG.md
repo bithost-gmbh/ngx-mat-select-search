@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.7.1
-* Enhancement: allow disable scrolling active element into view when option list changes 
+* Enhancement: allow disabling scrolling active element into view when option list changes 
   with `@Input() disableScrollToActiveOnOptionsChanged` [#130](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/130)
   
   Thanks to @drakeBear for reporting
