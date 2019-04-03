@@ -14,6 +14,7 @@
          (input)="onInputChange($event.target.value)"
          (blur)="onBlur($event.target.value)"
          [placeholder]="placeholderLabel"
+         aria-label="dropdown search"
   />
   <mat-spinner *ngIf="searching"
           [@enterAnimation]
