@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.7.NEXT
+## 1.7.2
 * Enhancement: Tested and update peer dependency compatibility to allow 
                `@angular/core`: `^8.0.0`, `@angular/material`: `^8.0.0`
 
