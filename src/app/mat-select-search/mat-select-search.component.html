@@ -9,6 +9,7 @@
   <input matInput
          class="mat-select-search-input"
          autocomplete="off"
+         [type]="type"
          #searchSelectInput
          (keydown)="_handleKeydown($event)"
          (input)="onInputChange($event.target.value)"
