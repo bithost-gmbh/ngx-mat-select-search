@@ -122,6 +122,9 @@ Furthermore, it provides the following inputs:
   
   /** Disables scrolling to active options when option list changes. Useful for server-side search */
   @Input() disableScrollToActiveOnOptionsChanged = false;
+
+  /** Adds 508 screen reader support for search box */
+  @Input() ariaLabel = 'dropdown search';
 ```
 
 #### Customize clear icon
