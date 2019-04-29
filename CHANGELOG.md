@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.7.2
+* Enhancement: Allow setting type of the search input field with `@Input() type` 
+  [#138](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/138)
+
+  Thanks to @botoxparty
+  
+* Enhancement: Tested and update peer dependency compatibility to allow 
+               `@angular/core`: `^8.0.0`, `@angular/material`: `^8.0.0`
+
 ## 1.7.1
 * Enhancement: allow disabling scrolling active element into view when option list changes 
   with `@Input() disableScrollToActiveOnOptionsChanged` [#130](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/130)
