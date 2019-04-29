@@ -163,6 +163,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Disables scrolling to active options when option list changes. Useful for server-side search */
   @Input() disableScrollToActiveOnOptionsChanged = false;
 
+  /** Adds 508 screen reader support for search box */
+  @Input() ariaLabel = 'dropdown search';
+
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
 
