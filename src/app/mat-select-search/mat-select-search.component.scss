@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
+ @import '~@angular/material/theming';
+
 $mat-menu-side-padding: 16px !default;
 $clear-button-width: 20px;
 $multiple-check-width: 33px;
@@ -35,7 +37,7 @@ $mat-option-height: 3em;
   &.mat-select-search-inner-multiple {
     width: 100%;
   }
-  
+
   .mat-input-element {
     &:-ms-input-placeholder {
       // fix IE11 not able to focus programmatically with css style -ms-user-select: none
@@ -82,6 +84,9 @@ $mat-option-height: 3em;
   }
   .mat-select-search-clear {
     top: 3px;
+  }
+  > div.mat-select-search-inner {
+    color: $black-87-opacity;
   }
 }
 
