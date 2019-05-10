@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.3
+* Enhancement: Allow setting accessibility label of the input with ` @Input() ariaLabel` 
+  [#137](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/137)
+
+  Thanks to @tonyholt
+  
 ## 1.7.2
 * Enhancement: Allow setting type of the search input field with `@Input() type` 
   [#138](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/138)
