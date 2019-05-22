@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.5
+* Bugfix: Avoid `Cannot read property 'attach' of undefined` when `<ngx-mat-select-search>` 
+  is not inside a `<mat-option>` element with Angular 8
+  [#146](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1476)
+  
 ## 1.7.4
 * Enhancement: Allow setting the initial value of the search input 
   [#147](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/147)
