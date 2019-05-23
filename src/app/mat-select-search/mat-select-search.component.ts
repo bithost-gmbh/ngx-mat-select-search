@@ -135,7 +135,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   /** Label of the search placeholder */
   @Input() placeholderLabel = 'Suche';
-  
+
   /** Type of the search input field */
   @Input() type = "text";
 
@@ -324,7 +324,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngAfterViewInit() {
-    this.setOverlayClass();
+    setTimeout(() => {
+      this.setOverlayClass();
+    });
 
     // update view when available options change
     this.matSelect.openedChange

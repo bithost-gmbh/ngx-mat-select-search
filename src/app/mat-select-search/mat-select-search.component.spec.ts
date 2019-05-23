@@ -287,7 +287,10 @@ describe('MatSelectSearchComponent', () => {
     it('should show a search field and focus it when opening the select', (done) => {
 
       component.filteredBanks
-        .pipe(take(1))
+        .pipe(
+          take(1),
+          delay(1)
+        )
         .subscribe(() => {
           // when the filtered banks are initialized
           fixture.detectChanges();
@@ -324,7 +327,10 @@ describe('MatSelectSearchComponent', () => {
     it('should filter the options available and hightlight the first option in the list, filter the options by input "c" and reset the list', (done) => {
 
       component.filteredBanks
-        .pipe(take(1))
+        .pipe(
+          take(1),
+          delay(1)
+        )
         .subscribe(() => {
           // when the filtered banks are initialized
           fixture.detectChanges();
@@ -392,7 +398,10 @@ describe('MatSelectSearchComponent', () => {
       it('should show a search field and focus it when opening the select', (done) => {
 
         component.filteredBanksMatOption
-          .pipe(take(1))
+          .pipe(
+            take(1),
+            delay(1)
+          )
           .subscribe(() => {
             // when the filtered banks are initialized
             fixture.detectChanges();
@@ -429,7 +438,10 @@ describe('MatSelectSearchComponent', () => {
       it('should filter the options available and hightlight the first option in the list, filter the options by input "c" and reset the list', (done) => {
 
         component.filteredBanksMatOption
-          .pipe(take(1))
+          .pipe(
+            take(1),
+            delay(1)
+          )
           .subscribe(() => {
             // when the filtered banks are initialized
             fixture.detectChanges();
@@ -499,7 +511,10 @@ describe('MatSelectSearchComponent', () => {
       fixture.detectChanges();
 
       component.filteredBanks
-        .pipe(take(1))
+        .pipe(
+          take(1),
+          delay(1)
+        )
         .subscribe(() => {
 
           // when the filtered banks are initialized
@@ -537,7 +552,10 @@ describe('MatSelectSearchComponent', () => {
       fixture.detectChanges();
 
       component.filteredBanksMulti
-        .pipe(take(1))
+        .pipe(
+          take(1),
+          delay(1)
+        )
         .subscribe(() => {
           // when the filtered banks are initialized
           fixture.detectChanges();
