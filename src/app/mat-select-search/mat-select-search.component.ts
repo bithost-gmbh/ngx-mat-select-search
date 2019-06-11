@@ -21,7 +21,6 @@ import {
   NINE,
   SPACE, END, HOME,
 } from '@angular/cdk/keycodes';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subject } from 'rxjs';
 import { delay, take, takeUntil } from 'rxjs/operators';
@@ -115,19 +114,6 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
       useExisting: forwardRef(() => MatSelectSearchComponent),
       multi: true
     }
-  ],
-  animations: [
-    trigger('enterAnimation', [
-      state('void', style({
-        opacity: 0
-      })),
-      state('*', style({
-        opacity: 1
-      })),
-      transition('void <=> *', [
-        animate('0.1s ease-out')
-      ])
-    ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
