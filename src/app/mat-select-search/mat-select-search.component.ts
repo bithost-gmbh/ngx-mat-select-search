@@ -190,6 +190,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
 
+  /** Whether the "no entries found" message should be displayed */
+  public _noEntriesFound: boolean;
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
               public changeDetectorRef: ChangeDetectorRef,
@@ -266,9 +268,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
                 keyManager.setFirstItemActive();
                 this.updateInputWidth();
 
+                // set no entries found variable
+                this._noEntriesFound = (
+                  this.noEntriesFoundLabel && this.value &&
+                  this._options.length === ((this.matOption)? 1: 0));
+
                 // set no entries found class on mat option
                 if (this.matOption) {
-                  if (this._noEntriesFound()) {
+                  if (this._noEntriesFound) {
                     this.matOption._getHostElement().classList.add('mat-select-search-no-entries-found');
                   } else {
                     this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
@@ -554,19 +561,4 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
         .map(option => option.value);
     }
   }
-
-  /**
-   * Returns whether the "no entries found" message should be displayed
-   */
-  public _noEntriesFound(): boolean {
-    if (!this._options) {
-      return;
-    }
-    if (this.matOption) {
-      return this.noEntriesFoundLabel && this.value && this._options.length === 1;
-    } else {
-      return this.noEntriesFoundLabel && this.value && this._options.length === 0;
-    }
-  }
-
 }
