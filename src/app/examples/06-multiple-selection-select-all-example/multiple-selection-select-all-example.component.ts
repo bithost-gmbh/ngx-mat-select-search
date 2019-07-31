@@ -57,13 +57,15 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
     this._onDestroy.complete();
   }
 
-  toggleSelectAll(selectAllValue: boolean){
-    this.filteredBanksMulti.subscribe(val => {
-      if (selectAllValue)
-        this.bankMultiCtrl.patchValue(val);
-      else
-        this.bankMultiCtrl.patchValue([]);
-    }).unsubscribe();
+  toggleSelectAll(selectAllValue: boolean) {
+    this.filteredBanksMulti.pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(val => {
+        if (selectAllValue) {
+          this.bankMultiCtrl.patchValue(val);
+        } else {
+          this.bankMultiCtrl.patchValue([]);
+        }
+      });
   }
 
   /**

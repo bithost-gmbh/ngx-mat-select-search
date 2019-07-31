@@ -12,7 +12,7 @@ import {
   ViewChild,
   ContentChild, Optional, HostBinding, Output
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, MatSelect, SELECT_PANEL_MAX_HEIGHT, _countGroupLabelsBeforeOption } from '@angular/material';
 import {
   A,
@@ -123,7 +123,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @Input() placeholderLabel = 'Suche';
 
   /** Type of the search input field */
-  @Input() type = "text";
+  @Input() type = 'text';
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
@@ -152,12 +152,17 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Adds 508 screen reader support for search box */
   @Input() ariaLabel = 'dropdown search';
 
-  /** Configurable to show Select All Checkbox */
-  @Input() showToggleAllCheckbox: boolean = false;
+  /** Whether to show Select All Checkbox (for mat-select[multi=true]) */
+  @Input() showToggleAllCheckbox = false;
 
-  /** Output emitter to send to parent component with the select all boolean */
-  @Output() toggleSelectAll = new EventEmitter<boolean>();
-  selectAllCheckbox = new FormControl();
+  /** select all checkbox checked state */
+  @Input() toggleAllCheckboxChecked = false;
+
+  /** select all checkbox indeterminate state */
+  @Input() toggleAllCheckboxIndeterminate = false;
+
+  /** Output emitter to send to parent component with the toggle all boolean */
+  @Output() toggleAll = new EventEmitter<boolean>();
 
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
@@ -211,7 +216,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     const panelClass = 'mat-select-search-panel';
     if (this.matSelect.panelClass) {
       if (Array.isArray(this.matSelect.panelClass)) {
-        this.matSelect.panelClass.push(panelClass);
+        (<string[]>this.matSelect.panelClass).push(panelClass);
       } else if (typeof this.matSelect.panelClass === 'string') {
         this.matSelect.panelClass = [this.matSelect.panelClass, panelClass];
       } else if (typeof this.matSelect.panelClass === 'object') {
@@ -255,7 +260,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .subscribe(() => {
         if (this.matSelect._keyManager) {
           this.matSelect._keyManager.change.pipe(takeUntil(this._onDestroy))
-            .subscribe(() => this.adjustScrollTopToFitActiveOptionIntoView())
+            .subscribe(() => this.adjustScrollTopToFitActiveOptionIntoView());
         } else {
           console.log('_keyManager was not initialized.');
         }
@@ -308,18 +313,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
         }
       });
 
-    // detect when select all checkbox changes
-    this.selectAllCheckbox.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.emitSelectAllBooleanToParent();
-      });
-
     this.initMultipleHandling();
   }
 
-  emitSelectAllBooleanToParent() {
-    this.toggleSelectAll.emit(this.selectAllCheckbox.value);
+  _emitSelectAllBooleanToParent(state: boolean) {
+    this.toggleAll.emit(state);
   }
 
   ngOnDestroy() {

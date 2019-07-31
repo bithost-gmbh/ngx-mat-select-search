@@ -96,35 +96,46 @@ Furthermore, it provides the following inputs:
   @Input() placeholderLabel = 'Suche';
 
   /** Type of the search input field */
-  @Input() type = "text";
-  
+  @Input() type = 'text';
+
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
-  /** 
-    * Whether or not the search field should be cleared after the dropdown menu is closed. 
-    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3) 
+  /**
+    * Whether or not the search field should be cleared after the dropdown menu is closed.
+    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
     */
-  @Input() clearSearchInput = false;
-  
+  @Input() clearSearchInput = true;
+
   /** Whether to show the search-in-progress indicator */
   @Input() searching = false;
-  
+
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
-    
+
   /**
    * Prevents home / end key being propagated to mat-select,
    * allowing to move the cursor within the search input instead of navigating the options
    */
   @Input() preventHomeEndKeyPropagation = false;
-  
-  
+
   /** Disables scrolling to active options when option list changes. Useful for server-side search */
   @Input() disableScrollToActiveOnOptionsChanged = false;
 
   /** Adds 508 screen reader support for search box */
   @Input() ariaLabel = 'dropdown search';
+
+  /** Whether to show Select All Checkbox (for mat-select[multi=true]) */
+  @Input() showToggleAllCheckbox = false;
+
+  /** select all checkbox checked state */
+  @Input() toggleAllCheckboxChecked = false;
+
+  /** select all checkbox indeterminate state */
+  @Input() toggleAllCheckboxIndeterminate = false;
+
+  /** Output emitter to send to parent component with the toggle all boolean */
+  @Output() toggleAll = new EventEmitter<boolean>();
 ```
 
 #### Customize clear icon
@@ -132,6 +143,14 @@ In order to customize the search icon, add the `ngxMatSelectSearchClear` to your
 ```html
 <ngx-mat-select-search>
    <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+</ngx-mat-select-search>
+```
+
+#### Custom content
+Custom content with the CSS class `mat-select-search-custom-header-content` can be transcluded as follows:
+```html
+<ngx-mat-select-search>
+   <div class="mat-select-search-custom-header-content">something special</div>
 </ngx-mat-select-search>
 ```
 

@@ -39,7 +39,7 @@ $mat-option-height: 3em;
       align-items: center;
     }
   }
-  
+
   .mat-input-element {
     flex-basis: auto;
     &:-ms-input-placeholder {
@@ -112,6 +112,7 @@ $mat-option-height: 3em;
   }
 }
 
-.mat-select-all-checkbox {
+.mat-select-search-toggle-all-checkbox {
   padding-left: 16px;
+  padding-bottom: 2px;
 }
