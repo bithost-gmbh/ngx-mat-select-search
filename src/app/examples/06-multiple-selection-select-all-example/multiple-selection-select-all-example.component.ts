@@ -7,11 +7,11 @@ import { MatSelect } from '@angular/material';
 import { Bank, BANKS } from '../demo-data';
 
 @Component({
-  selector: 'app-multiple-selection-example',
-  templateUrl: './multiple-selection-example.component.html',
-  styleUrls: ['./multiple-selection-example.component.scss']
+  selector: 'app-multiple-selection-select-all-example',
+  templateUrl: './multiple-selection-select-all-example.component.html',
+  styleUrls: ['./multiple-selection-select-all-example.component.scss']
 })
-export class MultipleSelectionExampleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MultipleSelectionSelectAllExampleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** list of banks */
   protected banks: Bank[] = BANKS;
@@ -58,14 +58,12 @@ export class MultipleSelectionExampleComponent implements OnInit, AfterViewInit,
   }
 
   toggleSelectAll(selectAllValue: boolean){
-    this.filteredBanksMulti
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(val => {
-        if (selectAllValue)
-          this.bankMultiCtrl.patchValue(val);
-        else
-          this.bankMultiCtrl.patchValue([]);
-      }).unsubscribe();
+    this.filteredBanksMulti.subscribe(val => {
+      if (selectAllValue)
+        this.bankMultiCtrl.patchValue(val);
+      else
+        this.bankMultiCtrl.patchValue([]);
+    }).unsubscribe();
   }
 
   /**

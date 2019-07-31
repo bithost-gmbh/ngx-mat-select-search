@@ -5,12 +5,12 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { MatSelectSearchComponent } from './mat-select-search.component';
 import { MatButtonModule, MatInputModule, MatIconModule, MatProgressSpinnerModule, MatCheckboxModule} from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const MatSelectSearchVersion = '1.7.5';
 
