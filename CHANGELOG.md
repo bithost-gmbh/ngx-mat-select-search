@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.8.0
+* Enhancement: Add option to show a toggle all checkbox with `[showToggleAllCheckbox]="true"`
+  [#145](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/145)
+
+  Thanks to @blazewalker59
+  
+* Enhancement: Allow custom content transclusion with `.mat-select-search-custom-header-content`
+
 ## 1.7.6
 * Bugfix: spinner not visible after reopening select panel
   [#153](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/153)

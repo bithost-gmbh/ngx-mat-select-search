@@ -6,7 +6,15 @@
       #innerSelectSearch
       class="mat-select-search-inner mat-typography mat-datepicker-content mat-tab-header"
       [ngClass]="{'mat-select-search-inner-multiple': matSelect.multiple, 'mat-select-search-inner-toggle-all': _isToggleAllCheckboxVisible() }">
-  <mat-checkbox *ngIf="_isToggleAllCheckboxVisible()" color="primary" class="mat-select-all-checkbox" [formControl]="selectAllCheckbox"></mat-checkbox>
+
+  <mat-checkbox *ngIf="_isToggleAllCheckboxVisible()"
+                color="primary"
+                class="mat-select-search-toggle-all-checkbox"
+                [checked]="toggleAllCheckboxChecked"
+                [indeterminate]="toggleAllCheckboxIndeterminate"
+                (change)="_emitSelectAllBooleanToParent($event.checked)"
+  ></mat-checkbox>
+
   <input matInput
          class="mat-select-search-input"
          autocomplete="off"
@@ -34,6 +42,9 @@
       <mat-icon>close</mat-icon>
     </ng-template>
   </button>
+
+  <ng-content select=".mat-select-search-custom-header-content"></ng-content>
+
 </div>
 
 <div *ngIf="_noEntriesFound()"
