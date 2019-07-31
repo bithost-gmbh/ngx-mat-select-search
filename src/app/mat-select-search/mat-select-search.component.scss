@@ -41,7 +41,7 @@ $mat-option-height: 3em;
   }
   
   .mat-input-element {
-    width: 100%;
+    flex-basis: auto;
     &:-ms-input-placeholder {
       // fix IE11 not able to focus programmatically with css style -ms-user-select: none
       // see https://github.com/angular/material2/issues/15093
