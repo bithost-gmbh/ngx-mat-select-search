@@ -18,7 +18,6 @@ export const MatSelectSearchVersion = '1.7.5';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -33,9 +32,6 @@ export const MatSelectSearchVersion = '1.7.5';
   exports: [
     MatSelectSearchComponent,
     MatSelectSearchClearDirective
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class NgxMatSelectSearchModule { }

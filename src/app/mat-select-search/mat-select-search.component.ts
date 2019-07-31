@@ -152,8 +152,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Adds 508 screen reader support for search box */
   @Input() ariaLabel = 'dropdown search';
 
+  /** Configurable to show Select All Checkbox */
+  @Input() showToggleAllCheckbox: boolean = false;
+
   /** Output emitter to send to parent component with the select all boolean */
-  @Output() selectAllBooleanEmitter = new EventEmitter<boolean>();
+  @Output() toggleSelectAll = new EventEmitter<boolean>();
   selectAllCheckbox = new FormControl();
 
   /** Reference to the search input field */
@@ -316,8 +319,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   emitSelectAllBooleanToParent() {
-    console.log(this.selectAllCheckbox.value);
-    this.selectAllBooleanEmitter.emit(this.selectAllCheckbox.value);
+    this.toggleSelectAll.emit(this.selectAllCheckbox.value);
   }
 
   ngOnDestroy() {
@@ -342,6 +344,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
             this.changeDetectorRef.markForCheck();
           });
       });
+  }
+
+  _isToggleAllCheckboxVisible(): boolean {
+    return this.matSelect.multiple && this.showToggleAllCheckbox;
   }
 
   /**

@@ -3,7 +3,7 @@
 <p>
   <mat-form-field>
     <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect disableOptionCentering>
-      <ngx-mat-select-search (selectAllBooleanEmitter)="toggleSelectAll($event)" [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
+      <ngx-mat-select-search [showToggleAllCheckbox]="true" (toggleSelectAll)="toggleSelectAll($event)" [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
       <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
         {{bank.name}}
       </mat-option>
