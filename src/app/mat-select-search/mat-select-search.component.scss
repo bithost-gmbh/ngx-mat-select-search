@@ -34,9 +34,14 @@ $mat-option-height: 3em;
 
   &.mat-select-search-inner-multiple {
     width: 100%;
+    &.mat-select-search-inner-toggle-all {
+      display: flex;
+      align-items: center;
+    }
   }
   
   .mat-input-element {
+    flex-basis: auto;
     &:-ms-input-placeholder {
       // fix IE11 not able to focus programmatically with css style -ms-user-select: none
       // see https://github.com/angular/material2/issues/15093
@@ -105,4 +110,8 @@ $mat-option-height: 3em;
   &.mat-select-search-no-entries-found {
     height: 2 * $mat-option-height;
   }
+}
+
+.mat-select-all-checkbox {
+  padding-left: 16px;
 }
