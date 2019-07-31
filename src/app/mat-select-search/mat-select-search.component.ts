@@ -10,9 +10,9 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnDestroy, OnInit, QueryList,
   ViewChild,
-  ContentChild, Optional, HostBinding
+  ContentChild, Optional, HostBinding, Output
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { MatOption, MatSelect, SELECT_PANEL_MAX_HEIGHT, _countGroupLabelsBeforeOption } from '@angular/material';
 import {
   A,
@@ -151,6 +151,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   /** Adds 508 screen reader support for search box */
   @Input() ariaLabel = 'dropdown search';
+
+  /** Output emitter to send to parent component with the select all boolean */
+  @Output() selectAllBooleanEmitter = new EventEmitter<boolean>();
+  selectAllCheckbox = new FormControl();
 
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
@@ -301,7 +305,19 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
         }
       });
 
+    // detect when select all checkbox changes
+    this.selectAllCheckbox.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.emitSelectAllBooleanToParent();
+      });
+
     this.initMultipleHandling();
+  }
+
+  emitSelectAllBooleanToParent() {
+    console.log(this.selectAllCheckbox.value);
+    this.selectAllBooleanEmitter.emit(this.selectAllCheckbox.value);
   }
 
   ngOnDestroy() {

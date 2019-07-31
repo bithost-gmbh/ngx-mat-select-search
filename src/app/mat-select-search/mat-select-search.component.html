@@ -6,6 +6,7 @@
       #innerSelectSearch
       class="mat-select-search-inner mat-typography mat-datepicker-content mat-tab-header"
       [ngClass]="{'mat-select-search-inner-multiple': matSelect.multiple}">
+  <mat-checkbox *ngIf="matSelect.multiple" color="primary" class="mat-select-all-checkbox" [formControl]="selectAllCheckbox"></mat-checkbox>
   <input matInput
          class="mat-select-search-input"
          autocomplete="off"

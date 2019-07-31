@@ -57,6 +57,15 @@ export class MultipleSelectionExampleComponent implements OnInit, AfterViewInit,
     this._onDestroy.complete();
   }
 
+  toggleSelectAll(selectAllValue: boolean){
+    this.filteredBanksMulti.subscribe(val => {
+      if (selectAllValue)
+        this.bankMultiCtrl.patchValue(val);
+      else
+        this.bankMultiCtrl.patchValue([]);
+    }).unsubscribe();
+  }
+
   /**
    * Sets the initial value after the filteredBanks are loaded initially
    */
