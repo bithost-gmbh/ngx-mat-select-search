@@ -14,6 +14,7 @@ $mat-option-height: 3em;
   visibility: hidden;
 }
 .mat-select-search-inner {
+  border-radius: 4px 4px 0 0;
   position: absolute;
   top: 0;
   width: 100%;
@@ -58,6 +59,7 @@ $mat-option-height: 3em;
 }
 
 .mat-select-search-input {
+   border-radius: 4px;
   padding: $mat-menu-side-padding;
   padding-right: $mat-menu-side-padding + $clear-button-width;
   box-sizing: border-box;
