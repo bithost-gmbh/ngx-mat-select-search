@@ -2,7 +2,8 @@
 [https://github.com/bithost-gmbh/ngx-mat-select-search](https://github.com/bithost-gmbh/ngx-mat-select-search)
 
 [![npm version](https://img.shields.io/npm/v/ngx-mat-select-search.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-select-search)
-[![npm downloads](https://img.shields.io/npm/dm/ngx-mat-select-search.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-select-search)
+[![npm downloads total](https://img.shields.io/npm/dt/ngx-mat-select-search.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-select-search)
+[![npm downloads monthly](https://img.shields.io/npm/dm/ngx-mat-select-search.svg?style=flat-square)](https://www.npmjs.com/package/ngx-mat-select-search)
 [![CircleCI](https://circleci.com/gh/bithost-gmbh/ngx-mat-select-search.svg?style=svg)](https://circleci.com/gh/bithost-gmbh/ngx-mat-select-search)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-yellow.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NAX558HVGAX8Q)
 
