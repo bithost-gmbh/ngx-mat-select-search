@@ -10,10 +10,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatFormFieldModule, MatSelect,
-  MatSelectModule
-} from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { ReplaySubject } from 'rxjs';
 import { Subject } from 'rxjs';
 import {delay, take} from 'rxjs/operators';
@@ -85,12 +83,12 @@ interface Bank {
 })
 export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild('selectSingle') matSelect: MatSelect;
-  @ViewChild('selectSingleMatOption') matSelectMatOption: MatSelect;
-  @ViewChild('selectMulti') matSelectMulti: MatSelect;
-  @ViewChild('selectSearchSingle') matSelectSearch: MatSelectSearchComponent;
-  @ViewChild('selectSearchSingleMatOption') matSelectSearchMatOption: MatSelectSearchComponent;
-  @ViewChild('selectSearchMulti') matSelectSearchMulti: MatSelectSearchComponent;
+  @ViewChild('selectSingle', /* TODO: add static flag */ {}) matSelect: MatSelect;
+  @ViewChild('selectSingleMatOption', /* TODO: add static flag */ {}) matSelectMatOption: MatSelect;
+  @ViewChild('selectMulti', /* TODO: add static flag */ {}) matSelectMulti: MatSelect;
+  @ViewChild('selectSearchSingle', /* TODO: add static flag */ {}) matSelectSearch: MatSelectSearchComponent;
+  @ViewChild('selectSearchSingleMatOption', /* TODO: add static flag */ {}) matSelectSearchMatOption: MatSelectSearchComponent;
+  @ViewChild('selectSearchMulti', /* TODO: add static flag */ {}) matSelectSearchMulti: MatSelectSearchComponent;
 
   // control for the selected bank
   public bankCtrl: FormControl = new FormControl();

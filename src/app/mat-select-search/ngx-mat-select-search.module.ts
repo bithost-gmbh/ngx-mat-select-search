@@ -7,7 +7,11 @@
 
 import { NgModule } from '@angular/core';
 import { MatSelectSearchComponent } from './mat-select-search.component';
-import { MatButtonModule, MatInputModule, MatIconModule, MatProgressSpinnerModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
