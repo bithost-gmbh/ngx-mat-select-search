@@ -55,7 +55,7 @@
     "core-js": "^2.6.1",
     "jasmine-core": "~3.3.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.1.4",
+    "karma": "^4.3.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "^2.0.4",
     "karma-jasmine": "~2.0.1",
@@ -64,8 +64,8 @@
     "protractor": "~5.4.2",
     "rxjs": "^6.5.3",
     "ts-node": "~7.0.1",
-    "tslint": "~5.12.0",
     "tsickle": "^0.37.0",
+    "tslint": "~5.12.0",
     "typescript": "~3.5.3",
     "zone.js": "~0.9.1"
   }
