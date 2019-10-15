@@ -83,9 +83,12 @@ In order to change the labels, use the inputs specified in the [API](#api) secti
 
 ### Compatibility
 
-* `@angular/core`: `^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0`,
-* `@angular/material`: `^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0`,
-* `rxjs`: `^5.5.2 || ^6.0.0`
+* `@angular/core`: `^8.0.0 || ^9.0.0`,
+* `@angular/material`: `^8.0.0 || ^9.0.0`,
+* `rxjs`: `^6.5.3`
+
+For compatibility with `@angular/core`: `^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0`, 
+use version `1.8.0`.
 
 ### API
 The `MatSelectSearchComponent` implements the [ControlValueAccessor](https://angular.io/api/forms/ControlValueAccessor) interface.

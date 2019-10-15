@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.0
+* Enhancement: Update to Angular `8.2.10`
+* Enhancement: Add compatibility with `@angular/core`: `^9.0.0`, `@angular/material`: `^9.0.0`
+               [#173](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/173)
+               
+  **Breaking Change**:  `@angular/core`: `< 8.0.0` is not supported anymore, please use version `1.8.0`.
+* Enhancement: Replace `@angular/material` root imports
+               [#161](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/161)
+
 ## 1.8.0
 * Enhancement: Add option to show a toggle all checkbox with `[showToggleAllCheckbox]="true"`
   [#145](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/145)

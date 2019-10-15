@@ -13,7 +13,8 @@ import {
   ContentChild, Optional, HostBinding, Output
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatOption, MatSelect, SELECT_PANEL_MAX_HEIGHT, _countGroupLabelsBeforeOption } from '@angular/material';
+import { MatOption, _countGroupLabelsBeforeOption } from '@angular/material/core';
+import { MatSelect, SELECT_PANEL_MAX_HEIGHT } from '@angular/material/select';
 import {
   A,
   Z,
@@ -165,13 +166,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @Output() toggleAll = new EventEmitter<boolean>();
 
   /** Reference to the search input field */
-  @ViewChild('searchSelectInput', {read: ElementRef}) searchSelectInput: ElementRef;
+  @ViewChild('searchSelectInput', { read: ElementRef, static: true }) searchSelectInput: ElementRef;
 
   /** Reference to the search input field */
-  @ViewChild('innerSelectSearch', {read: ElementRef}) innerSelectSearch: ElementRef;
+  @ViewChild('innerSelectSearch', { read: ElementRef, static: true }) innerSelectSearch: ElementRef;
 
   /** Reference to custom search input clear icon */
-  @ContentChild(MatSelectSearchClearDirective) clearIcon: MatSelectSearchClearDirective;
+  @ContentChild(MatSelectSearchClearDirective, {static: false}) clearIcon: MatSelectSearchClearDirective;
 
   @HostBinding('class.mat-select-search-inside-mat-option')
   get isInsideMatOption(): boolean {
