@@ -1,7 +1,8 @@
 {
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "ngx-mat-select-search",
   "description": "Angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
-  "version": "1.8.0",
+  "version": "2.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -12,7 +13,7 @@
     "test.ci": "npm run test -- --progress=false --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-lib": "ng-packagr -p ng-package.json"
+    "build-lib": "ng-packagr -p package.json"
   },
   "author": "Esteban Gehring, Bithost GmbH",
   "bugs": {
@@ -32,7 +33,17 @@
     "filter"
   ],
   "homepage": "https://github.com/bithost-gmbh/ngx-mat-select-search",
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@angular/core": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0",
+    "@angular/material": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0",
+    "rxjs": "^5.5.2 || ^6.0.0"
+  },
+  "ngPackage": {
+    "dest": "dist-lib",
+    "lib": {
+      "entryFile": "src/app/mat-select-search/public_api.ts"
+    }
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.9",
     "@angular/animations": "^8.2.10",

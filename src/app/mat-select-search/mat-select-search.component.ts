@@ -172,7 +172,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @ViewChild('innerSelectSearch', { read: ElementRef, static: true }) innerSelectSearch: ElementRef;
 
   /** Reference to custom search input clear icon */
-  @ContentChild(MatSelectSearchClearDirective, /* TODO: add static flag */ {}) clearIcon: MatSelectSearchClearDirective;
+  @ContentChild(MatSelectSearchClearDirective, {static: false}) clearIcon: MatSelectSearchClearDirective;
 
   @HostBinding('class.mat-select-search-inside-mat-option')
   get isInsideMatOption(): boolean {
