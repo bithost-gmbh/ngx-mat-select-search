@@ -5,7 +5,7 @@
 * Enhancement: Add compatibility with `@angular/core`: `^9.0.0`, `@angular/material`: `^9.0.0`
                [#173](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/173)
                
-  **Breaking Change**:  `@angular/core`: `< 8.0.0` is not supported anymore, please use version `1.8.0`.
+  **Breaking Change**:  `@angular/core`: `< 8.0.0` is not supported anymore, please use version `8.1.0`.
 * Enhancement: Replace `@angular/material` root imports
                [#161](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/161)
 
