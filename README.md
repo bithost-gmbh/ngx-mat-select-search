@@ -79,6 +79,10 @@ In order to change the labels, use the inputs specified in the [API](#api) secti
                        [placeholderLabel]="'Find bank...'" 
                        [noEntriesFoundLabel]="'no matching bank found'"></ngx-mat-select-search>
 ...
+or
+<ngx-mat-select-search [formControl]="bankFilterCtrl" 
+                       placeholderLabel="Find bank..." 
+                       [noEntriesFoundLabel]="'no matching bank found'"></ngx-mat-select-search>
 ```
 
 ### Compatibility
