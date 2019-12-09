@@ -131,7 +131,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
-   *  Text that is announced by screen readers, informing the user of the current index, value and total options.
+   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total options.
    *  eg: Bank R (Germany) 1 of 6
   */
   @Input() indexAndLengthScreenReaderText = ' of ';
@@ -381,8 +381,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * @param event
    */
   _handleKeyup(event: KeyboardEvent) {
-    const activeDescendant = this._options.find((item) => item.id === this.matSelect._getAriaActiveDescendant());
-    const index = this._options.toArray().findIndex(item => item === activeDescendant);
+    const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
+    const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
     this.liveAnnouncer.announce(
       ' ' + activeDescendant.viewValue + index + this.indexAndLengthScreenReaderText + (this._options.toArray().length - 1)
       );
