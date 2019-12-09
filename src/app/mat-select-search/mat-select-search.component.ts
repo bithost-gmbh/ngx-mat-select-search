@@ -378,7 +378,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /**
    * Handles the key up event with MatSelect.
    * Allows e.g. the announcing of the currently activeDescendant by screen readers.
-   * @param event
    */
   _handleKeyup(event: KeyboardEvent) {
     // Filter out all events that are not up arrow(38) or down arrow(40)
