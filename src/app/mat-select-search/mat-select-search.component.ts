@@ -381,12 +381,15 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * @param event
    */
   _handleKeyup(event: KeyboardEvent) {
-    const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
-    const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
-    const activeDescendant = this._options.toArray().find(item => item.id === ariaActiveDescendantId);
-    this.liveAnnouncer.announce(
-      ' ' + activeDescendant.viewValue + index + this.indexAndLengthScreenReaderText + (this._options.toArray().length - 1)
-      );
+    // Filter out all events that are not up arrow(38) or down arrow(40)
+    if (event.keyCode === 38 || event.keyCode === 40) {
+      const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
+      const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
+      const activeDescendant = this._options.toArray().find(item => item.id === ariaActiveDescendantId);
+      this.liveAnnouncer.announce(
+        ' ' + activeDescendant.viewValue + index + this.indexAndLengthScreenReaderText + (this._options.toArray().length - 1)
+        );
+    }
   }
 
   writeValue(value: string) {
