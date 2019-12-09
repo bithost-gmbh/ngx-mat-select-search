@@ -384,7 +384,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
       const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
-      const activeDescendant = this._options.toArray().find(item => item.id === ariaActiveDescendantId);
+      const activeDescendant = this._options.toArray()[index];
       this.liveAnnouncer.announce(
         ' ' + activeDescendant.viewValue + index + this.indexAndLengthScreenReaderText + (this._options.toArray().length - 1)
         );
