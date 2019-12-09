@@ -20,7 +20,7 @@ import {
   Z,
   ZERO,
   NINE,
-  SPACE, END, HOME,
+  SPACE, END, HOME, UP_ARROW, DOWN_ARROW,
 } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subject } from 'rxjs';
@@ -380,15 +380,43 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * Allows e.g. the announcing of the currently activeDescendant by screen readers.
    */
   _handleKeyup(event: KeyboardEvent) {
-    // Filter out all events that are not up arrow(38) or down arrow(40)
     if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
       const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
       const activeDescendant = this._options.toArray()[index];
       this.liveAnnouncer.announce(
-        ' ' + activeDescendant.viewValue + index + this.indexAndLengthScreenReaderText + (this._options.toArray().length - 1)
+        ' ' + activeDescendant.viewValue
+        + this.getAriaIndex(index)
+        + this.indexAndLengthScreenReaderText
+        + this.getAriaLength()
         );
     }
+  }
+
+  /**
+   * Calculate the index of the current option, taking the offset to length into account.
+   * examples:
+   *    Case 1 [Search, 1, 2, 3] will have offset of 1, due to search and will read index of total.
+   *    Case 2 [1, 2, 3] will have offset of 0 and will read index +1 of total.
+   */
+  getAriaIndex(optionIndex: number): number {
+    if (this.getOptionsLengthOffset() === 0) {
+      return optionIndex + 1;
+    }
+    return optionIndex;
+  }
+
+  /**
+   * Calculate the length of the options, taking the offset to length into account.
+   * examples:
+   *    Case 1 [Search, 1, 2, 3] will have length of options.length -1, due to search.
+   *    Case 2 [1, 2, 3] will have length of options.length.
+   */
+  getAriaLength(): number {
+    if (this.getOptionsLengthOffset() === 1) {
+      return (this._options.toArray().length - 1);
+    }
+    return this._options.toArray().length;
   }
 
   writeValue(value: string) {
@@ -607,10 +635,18 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (!this._options) {
       return;
     }
+
+    return this.noEntriesFoundLabel && this.value && this._options.length === this.getOptionsLengthOffset();
+  }
+
+  /**
+   * Determine the offset to length that can be caused by the optional matOption used as a search input.
+   */
+  private getOptionsLengthOffset(): number {
     if (this.matOption) {
-      return this.noEntriesFoundLabel && this.value && this._options.length === 1;
+      return 1;
     } else {
-      return this.noEntriesFoundLabel && this.value && this._options.length === 0;
+      return 0;
     }
   }
 
