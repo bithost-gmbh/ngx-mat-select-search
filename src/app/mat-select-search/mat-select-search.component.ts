@@ -413,7 +413,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    *    Case 2 [1, 2, 3] will have length of options.length.
    */
   getAriaLength(): number {
-    if (this.getOptionsLengthOffset() === 1) {
+    return this._options.toArray().length - this.getOptionsLengthOffset()
       return (this._options.toArray().length - 1);
     }
     return this._options.toArray().length;
