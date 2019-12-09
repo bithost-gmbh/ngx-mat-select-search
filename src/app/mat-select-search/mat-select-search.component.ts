@@ -27,6 +27,7 @@ import { Subject } from 'rxjs';
 import { delay, take, takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -130,6 +131,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
+   *  Text that is announced by screen readers, informing the user of the current index, value and total options.
+   *  eg: Bank R (Germany) 1 of 6
+  */
+  @Input() indexAndLengthScreenReaderText = ' of ';
+
+  /**
     * Whether or not the search field should be cleared after the dropdown menu is closed.
     * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
     */
@@ -205,9 +212,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
-              public changeDetectorRef: ChangeDetectorRef,
-              private _viewportRuler: ViewportRuler,
-              @Optional() @Inject(MatOption) public matOption: MatOption = null) {
+    public changeDetectorRef: ChangeDetectorRef,
+    private _viewportRuler: ViewportRuler,
+    @Optional() @Inject(MatOption) public matOption: MatOption = null,
+    private liveAnnouncer: LiveAnnouncer
+  ) {
 
 
   }
@@ -366,6 +375,18 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
+  /**
+   * Handles the key up event with MatSelect.
+   * Allows e.g. the announcing of the currently activeDescendant by screen readers.
+   * @param event
+   */
+  _handleKeyup(event: KeyboardEvent) {
+    const activeDescendant = this._options.find((item) => item.id === this.matSelect._getAriaActiveDescendant());
+    const index = this._options.toArray().findIndex(item => item === activeDescendant);
+    this.liveAnnouncer.announce(
+      ' ' + activeDescendant.viewValue + index + this.indexAndLengthScreenReaderText + (this._options.toArray().length - 1)
+      );
+  }
 
   writeValue(value: string) {
     const valueChanged = value !== this._value;
