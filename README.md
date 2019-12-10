@@ -138,8 +138,17 @@ Furthermore, it provides the following inputs:
   /** select all checkbox indeterminate state */
   @Input() toggleAllCheckboxIndeterminate = false;
 
+  /**
+  *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total
+  *  options.
+  *  eg: Bank R (Germany) 1 of 6
+  */
+  @Input() indexAndLengthScreenReaderText = ' of ';
+  
   /** Output emitter to send to parent component with the toggle all boolean */
   @Output() toggleAll = new EventEmitter<boolean>();
+
+
 ```
 
 #### Customize clear icon

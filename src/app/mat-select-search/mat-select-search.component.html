@@ -22,6 +22,7 @@
          [value]="value"
          #searchSelectInput
          (keydown)="_handleKeydown($event)"
+         (keyup)="_handleKeyup($event)"
          (input)="onInputChange($event.target.value)"
          (blur)="onBlur($event.target.value)"
          [placeholder]="placeholderLabel"

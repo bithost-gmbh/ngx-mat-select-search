@@ -20,13 +20,14 @@ import {
   Z,
   ZERO,
   NINE,
-  SPACE, END, HOME,
+  SPACE, END, HOME, UP_ARROW, DOWN_ARROW,
 } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subject } from 'rxjs';
 import { delay, take, takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -130,6 +131,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
+   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total options.
+   *  eg: Bank R (Germany) 1 of 6
+  */
+  @Input() indexAndLengthScreenReaderText = ' of ';
+
+  /**
     * Whether or not the search field should be cleared after the dropdown menu is closed.
     * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
     */
@@ -205,9 +212,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
-              public changeDetectorRef: ChangeDetectorRef,
-              private _viewportRuler: ViewportRuler,
-              @Optional() @Inject(MatOption) public matOption: MatOption = null) {
+    public changeDetectorRef: ChangeDetectorRef,
+    private _viewportRuler: ViewportRuler,
+    @Optional() @Inject(MatOption) public matOption: MatOption = null,
+    private liveAnnouncer: LiveAnnouncer
+  ) {
 
 
   }
@@ -366,6 +375,46 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
+  /**
+   * Handles the key up event with MatSelect.
+   * Allows e.g. the announcing of the currently activeDescendant by screen readers.
+   */
+  _handleKeyup(event: KeyboardEvent) {
+    if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
+      const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
+      const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
+      const activeDescendant = this._options.toArray()[index];
+      this.liveAnnouncer.announce(
+        ' ' + activeDescendant.viewValue
+        + this.getAriaIndex(index)
+        + this.indexAndLengthScreenReaderText
+        + this.getAriaLength()
+        );
+    }
+  }
+
+  /**
+   * Calculate the index of the current option, taking the offset to length into account.
+   * examples:
+   *    Case 1 [Search, 1, 2, 3] will have offset of 1, due to search and will read index of total.
+   *    Case 2 [1, 2, 3] will have offset of 0 and will read index +1 of total.
+   */
+  getAriaIndex(optionIndex: number): number {
+    if (this.getOptionsLengthOffset() === 0) {
+      return optionIndex + 1;
+    }
+    return optionIndex;
+  }
+
+  /**
+   * Calculate the length of the options, taking the offset to length into account.
+   * examples:
+   *    Case 1 [Search, 1, 2, 3] will have length of options.length -1, due to search.
+   *    Case 2 [1, 2, 3] will have length of options.length.
+   */
+  getAriaLength(): number {
+    return this._options.toArray().length - this.getOptionsLengthOffset();
+  }
 
   writeValue(value: string) {
     const valueChanged = value !== this._value;
@@ -583,10 +632,18 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (!this._options) {
       return;
     }
+
+    return this.noEntriesFoundLabel && this.value && this._options.length === this.getOptionsLengthOffset();
+  }
+
+  /**
+   * Determine the offset to length that can be caused by the optional matOption used as a search input.
+   */
+  private getOptionsLengthOffset(): number {
     if (this.matOption) {
-      return this.noEntriesFoundLabel && this.value && this._options.length === 1;
+      return 1;
     } else {
-      return this.noEntriesFoundLabel && this.value && this._options.length === 0;
+      return 0;
     }
   }
 
