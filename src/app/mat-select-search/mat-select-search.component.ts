@@ -286,7 +286,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               setTimeout(() => {
                 // set first item active and input width
                 keyManager.setFirstItemActive();
-                this.updateInputWidth();
+                // wait for panel width changes
+                setTimeout(() => {
+                  this.updateInputWidth();
+                });
 
                 // set no entries found class on mat option
                 if (this.matOption) {
