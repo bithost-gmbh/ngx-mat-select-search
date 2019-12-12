@@ -8,7 +8,7 @@
       [ngClass]="{'mat-select-search-inner-multiple': matSelect.multiple, 'mat-select-search-inner-toggle-all': _isToggleAllCheckboxVisible() }">
 
   <mat-checkbox *ngIf="_isToggleAllCheckboxVisible()"
-                color="primary"
+                [color]="matFormField?.color"
                 class="mat-select-search-toggle-all-checkbox"
                 [checked]="toggleAllCheckboxChecked"
                 [indeterminate]="toggleAllCheckboxIndeterminate"
@@ -22,6 +22,7 @@
          [value]="value"
          #searchSelectInput
          (keydown)="_handleKeydown($event)"
+         (keyup)="_handleKeyup($event)"
          (input)="onInputChange($event.target.value)"
          (blur)="onBlur($event.target.value)"
          [placeholder]="placeholderLabel"
