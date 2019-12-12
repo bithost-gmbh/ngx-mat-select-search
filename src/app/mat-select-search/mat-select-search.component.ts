@@ -15,6 +15,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatOption, _countGroupLabelsBeforeOption } from '@angular/material/core';
 import { MatSelect, SELECT_PANEL_MAX_HEIGHT } from '@angular/material/select';
+import { MatFormField } from '@angular/material/form-field';
 import {
   A,
   Z,
@@ -23,11 +24,11 @@ import {
   SPACE, END, HOME, UP_ARROW, DOWN_ARROW,
 } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
 import { delay, take, takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -215,7 +216,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
     @Optional() @Inject(MatOption) public matOption: MatOption = null,
-    private liveAnnouncer: LiveAnnouncer
+    private liveAnnouncer: LiveAnnouncer,
+    @Optional() @Inject(MatFormField) public matFormField: MatFormField = null
   ) {
 
 
