@@ -74,15 +74,17 @@ You can alternatively use it with template driven forms as follows:
 ### Labels
 In order to change the labels, use the inputs specified in the [API](#api) section as follows:
 ```html
-...
-<ngx-mat-select-search [formControl]="bankFilterCtrl" 
-                       [placeholderLabel]="'Find bank...'" 
-                       [noEntriesFoundLabel]="'no matching bank found'"></ngx-mat-select-search>
-...
-or
 <ngx-mat-select-search [formControl]="bankFilterCtrl" 
                        placeholderLabel="Find bank..." 
-                       [noEntriesFoundLabel]="'no matching bank found'"></ngx-mat-select-search>
+                       noEntriesFoundLabel="'no matching bank found'"></ngx-mat-select-search>
+```
+To use the [i18n](https://angular.io/guide/i18n) API for translation of the labels, add the corresponding `i18n-...` attributes:
+```html
+<ngx-mat-select-search [formControl]="bankFilterCtrl" 
+                       placeholderLabel="Find bank..." 
+                       i18n-placeholderLabel
+                       noEntriesFoundLabel="'no matching bank found'"
+                       i18n-noEntriesFoundLabel></ngx-mat-select-search>
 ```
 
 ### Compatibility
