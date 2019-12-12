@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.1.0
+* Enhancement: Improve accessibility by reading the selected option 
+               [#186](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/186)
+
+  Thanks to @ZacaryPaynter
+
+* Bugfix: Fix corners not rounded 
+          [#176](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/176)
+
+  Thanks to @jfcere
+
+* Bugfix: Fix input width not updated correctly 
+          [#175](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/175)
+* Bugfix: ToggleAllCheckbox doesn't use correct theme color 
+          [183](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/183)
+          
+  Thanks to @LoganDupont for reporting
+
+* Enhancement: Improve readme on how to use i18n translation for labels
+               [#180](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/180)
+               
+  Thanks to @JomalJohny
+
 ## 2.0.0
 * Enhancement: Update to Angular `8.2.10`
 * Enhancement: Add compatibility with `@angular/core`: `^9.0.0`, `@angular/material`: `^9.0.0`
