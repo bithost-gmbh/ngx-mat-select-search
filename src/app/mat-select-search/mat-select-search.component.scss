@@ -27,7 +27,7 @@ $mat-option-height: 3em;
     TODO: implement proper theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
   */
   box-shadow: none;
-  border-radius: 0;
+  border-radius: 4px 4px 0 0;
 
   /* Prevent iOS scroll issue (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/70)*/
   -webkit-transform: translate3d(0,0,0);
