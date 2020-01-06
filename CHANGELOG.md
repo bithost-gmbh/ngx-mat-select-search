@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.1
+* Fix: Prevent unhandled exceptions when pressing arrow keys with no available options [#201](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/201)
+
+  Thanks to @josephdecock
+
 ## 2.1.0
 * Enhancement: Improve accessibility by reading the selected option 
                [#186](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/186)
