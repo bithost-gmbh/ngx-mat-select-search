@@ -391,7 +391,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       if (index !== -1) {
         const activeDescendant = this._options.toArray()[index];
         this.liveAnnouncer.announce(
-          ' ' + activeDescendant.viewValue
+          activeDescendant.viewValue + ' '
           + this.getAriaIndex(index)
           + this.indexAndLengthScreenReaderText
           + this.getAriaLength()
