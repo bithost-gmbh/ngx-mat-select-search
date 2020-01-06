@@ -19,6 +19,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchComponent } from './mat-select-search.component';
 import { NgxMatSelectSearchModule } from './ngx-mat-select-search.module';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
 /* tslint:disable:component-selector */
 
@@ -261,7 +263,14 @@ describe('MatSelectSearchComponent', () => {
         MatSelectModule,
         NgxMatSelectSearchModule
       ],
-      declarations: [MatSelectSearchTestComponent]
+      declarations: [MatSelectSearchTestComponent],
+      providers: [{
+          provide: LiveAnnouncer,
+          useValue: {
+            announce: jasmine.createSpy('announce')
+          }
+        }
+      ]
     })
       .compileComponents();
   }));
@@ -389,6 +398,45 @@ describe('MatSelectSearchComponent', () => {
 
         });
 
+    });
+
+    it('should not announce active option if there are no options', (done) => {
+      const announcer = TestBed.get(LiveAnnouncer);
+      component.filteredBanks
+        .pipe(
+          take(1),
+          delay(1)
+        )
+        .subscribe(() => {
+          // when the filtered banks are initialized
+          fixture.detectChanges();
+
+          component.matSelect.open();
+          fixture.detectChanges();
+
+          component.matSelect.openedChange
+            .pipe(take(1))
+            .subscribe((opened) => {
+
+              // search for "something definitely not in the list"
+              component.matSelectSearch.onInputChange('something definitely not in the list');
+              fixture.detectChanges();
+
+              component.filteredBanks
+                .pipe(take(1))
+                .subscribe(() => {
+                  fixture.detectChanges();
+
+                  setTimeout(() => {
+                    expect(component.matSelect.options.length).toBe(0);
+
+                    component.matSelectSearch._handleKeyup(<KeyboardEvent>{ keyCode: DOWN_ARROW });
+                    expect(announcer.announce).not.toHaveBeenCalled();
+                    done();
+                  });
+                });
+            });
+        });
     });
 
     describe('inside mat-option', () => {
