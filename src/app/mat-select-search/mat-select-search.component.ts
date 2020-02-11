@@ -506,23 +506,26 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       overlayClasses.push('cdk-overlay-pane-select-search-with-offset');
     }
 
-    this.matSelect.overlayDir.attach
+    this.matSelect.openedChange
       .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        // note: this is hacky, but currently there is no better way to do this
-        let element: HTMLElement = this.searchSelectInput.nativeElement;
-        let overlayElement: HTMLElement;
-        while (element = element.parentElement) {
-          if (element.classList.contains('cdk-overlay-pane')) {
-            overlayElement = element;
-            break;
+      .subscribe((opened: boolean) => {
+        if (opened) {
+          // note: this is hacky, but currently there is no better way to do this
+          let element: HTMLElement = this.searchSelectInput.nativeElement;
+          let overlayElement: HTMLElement;
+          while (element = element.parentElement) {
+            if (element.classList.contains('cdk-overlay-pane')) {
+              overlayElement = element;
+              break;
+            }
+          }
+          if (overlayElement) {
+            overlayClasses.forEach(overlayClass => {
+              overlayElement.classList.add(overlayClass);
+            });
           }
         }
-        if (overlayElement) {
-          overlayClasses.forEach(overlayClass => {
-            overlayElement.classList.add(overlayClass);
-          });
-        }
+
       });
 
     this.overlayClassSet = true;
