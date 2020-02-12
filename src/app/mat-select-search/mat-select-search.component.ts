@@ -26,7 +26,7 @@ import {
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
-import { delay, take, takeUntil } from 'rxjs/operators';
+import { delay, take, takeUntil, filter } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
@@ -507,25 +507,25 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     }
 
     this.matSelect.openedChange
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe((opened: boolean) => {
-        if (opened) {
-          // note: this is hacky, but currently there is no better way to do this
-          let element: HTMLElement = this.searchSelectInput.nativeElement;
-          let overlayElement: HTMLElement;
-          while (element = element.parentElement) {
-            if (element.classList.contains('cdk-overlay-pane')) {
-              overlayElement = element;
-              break;
-            }
-          }
-          if (overlayElement) {
-            overlayClasses.forEach(overlayClass => {
-              overlayElement.classList.add(overlayClass);
-            });
+      .pipe(
+        filter(opened => opened)
+        takeUntil(this._onDestroy)
+      )
+      .subscribe(() => {
+        // note: this is hacky, but currently there is no better way to do this
+        let element: HTMLElement = this.searchSelectInput.nativeElement;
+        let overlayElement: HTMLElement;
+        while (element = element.parentElement) {
+          if (element.classList.contains('cdk-overlay-pane')) {
+            overlayElement = element;
+            break;
           }
         }
-
+        if (overlayElement) {
+          overlayClasses.forEach(overlayClass => {
+            overlayElement.classList.add(overlayClass);
+          });
+        }
       });
 
     this.overlayClassSet = true;
