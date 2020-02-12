@@ -508,7 +508,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
     this.matSelect.openedChange
       .pipe(
-        filter(opened => opened)
+        filter(opened => opened),
         takeUntil(this._onDestroy)
       )
       .subscribe(() => {
