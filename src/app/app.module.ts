@@ -17,7 +17,9 @@ import { MultipleSelectionExampleComponent } from './examples/02-multiple-select
 import { CustomClearIconExampleComponent } from './examples/03-custom-clear-icon-example/custom-clear-icon-example.component';
 import { OptionGroupsExampleComponent } from './examples/04-option-groups-example/option-groups-example.component';
 import { ServerSideSearchExampleComponent } from './examples/05-server-side-search-example/server-side-search-example.component';
-import { MultipleSelectionSelectAllExampleComponent } from './examples/06-multiple-selection-select-all-example/multiple-selection-select-all-example.component';
+import {
+  MultipleSelectionSelectAllExampleComponent
+} from './examples/06-multiple-selection-select-all-example/multiple-selection-select-all-example.component';
 
 /**
  * NgModule that includes all Material modules that are required to serve the app.

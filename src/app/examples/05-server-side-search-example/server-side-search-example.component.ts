@@ -23,7 +23,7 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
   public bankServerSideFilteringCtrl: FormControl = new FormControl();
 
   /** indicate search operation is in progress */
-  public searching: boolean = false;
+  public searching = false;
 
   /** list of banks filtered after simulating server side search */
   public  filteredServerSideBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
@@ -48,7 +48,8 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
           // simulate server fetching and filtering data
           return this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
         }),
-        delay(500)
+        delay(500),
+        takeUntil(this._onDestroy)
       )
       .subscribe(filteredBanks => {
         this.searching = false;

@@ -132,7 +132,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
-   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total options.
+   *  Text that is appended to the currently active item label announced by screen readers,
+   *  informing the user of the current index, value and total options.
    *  eg: Bank R (Germany) 1 of 6
   */
   @Input() indexAndLengthScreenReaderText = ' of ';
@@ -579,7 +580,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       const indexOfOptionToFitIntoView = (this.matOption ? -1 : 0) + labelCount + activeOptionIndex;
       const currentScrollTop = this.matSelect.panel.nativeElement.scrollTop;
 
-      const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight
+      const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight;
       const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / matOptionHeight);
 
       const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / matOptionHeight) - 1;
@@ -587,7 +588,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
         this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * matOptionHeight;
       } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
-        this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * matOptionHeight - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
+        this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * matOptionHeight
+          - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
       }
     }
   }

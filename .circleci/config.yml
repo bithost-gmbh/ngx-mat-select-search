@@ -36,5 +36,6 @@ jobs:
 
       # run tests!
       - run: npm run test.ci
+      - run: npm run lint
       - run: npm run build.ci --prod
       - run: npm run build-lib
