@@ -288,7 +288,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               // avoid "expression has been changed" error
               setTimeout(() => {
                 // set first item active and input width
-                keyManager.setFirstItemActive();
+                if (!this.disableScrollToActiveOnOptionsChanged) {
+                  keyManager.setFirstItemActive();
+                }
                 // wait for panel width changes
                 setTimeout(() => {
                   this.updateInputWidth();
