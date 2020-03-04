@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
-export const MatSelectSearchVersion = '2.1.1';
+export const MatSelectSearchVersion = '2.1.2';
 
 
 @NgModule({
