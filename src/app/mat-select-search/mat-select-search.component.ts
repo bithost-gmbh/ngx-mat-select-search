@@ -550,8 +550,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
             }
             const optionValues = this.matSelect.options.map(option => option.value);
             this.previousSelectedValues.forEach(previousValue => {
-              if (!values.find(v => this.matSelect.compareWith(v, previousValue))
-                && !optionValues.find(v => this.matSelect.compareWith(v, previousValue))) {
+              if (!values.some(v => this.matSelect.compareWith(v, previousValue))
+                && !optionValues.some(v => this.matSelect.compareWith(v, previousValue))) {
                 // if a value that was selected before is deselected and not found in the options, it was deselected
                 // due to the filtering, so we restore it.
                 values.push(previousValue);
