@@ -144,6 +144,12 @@ Furthermore, it provides the following inputs:
   /** select all checkbox indeterminate state */
   @Input() toggleAllCheckboxIndeterminate = false;
 
+  /** Display a message in a tooltip on the checkbox */
+  @Input() toggleAllCheckboxTooltipMessage = '';
+
+  /** Define the position of the tooltip. Available options: 'left' | 'right' | 'above' | 'below' | 'before' | 'after'. */
+  @Input() toogleAllCheckboxTooltipPosition = 'below';
+
   /**
   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total
   *  options.
