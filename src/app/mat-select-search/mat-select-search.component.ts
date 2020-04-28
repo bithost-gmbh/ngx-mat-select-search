@@ -174,7 +174,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Display a message in a tooltip on the toggle-all checkbox */
   @Input() toggleAllCheckboxTooltipMessage = '';
 
-  /** Define the position of the tooltip. Available options: 'left' | 'right' | 'above' | 'below' | 'before' | 'after'. Default: 'below' */
+  /** Define the position of the tooltip on the toggle-all checkbox. */
   @Input() toogleAllCheckboxTooltipPosition = 'below';
 
   /** Output emitter to send to parent component with the toggle all boolean */
