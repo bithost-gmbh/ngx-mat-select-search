@@ -147,7 +147,7 @@ Furthermore, it provides the following inputs:
   /** Display a message in a tooltip on the checkbox */
   @Input() toggleAllCheckboxTooltipMessage = '';
 
-  /** Define the position of the tooltip. Available options: 'left' | 'right' | 'above' | 'below' | 'before' | 'after'. */
+  /** Define the position of the tooltip on the toggle-all checkbox. */
   @Input() toogleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
 
   /**
