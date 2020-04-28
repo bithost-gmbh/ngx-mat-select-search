@@ -144,7 +144,7 @@ Furthermore, it provides the following inputs:
   /** select all checkbox indeterminate state */
   @Input() toggleAllCheckboxIndeterminate = false;
 
-  /** Display a message in a tooltip on the checkbox */
+  /** Display a message in a tooltip on the toggle-all checkbox */
   @Input() toggleAllCheckboxTooltipMessage = '';
 
   /** Define the position of the tooltip on the toggle-all checkbox. */
