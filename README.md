@@ -148,7 +148,7 @@ Furthermore, it provides the following inputs:
   @Input() toggleAllCheckboxTooltipMessage = '';
 
   /** Define the position of the tooltip. Available options: 'left' | 'right' | 'above' | 'below' | 'before' | 'after'. */
-  @Input() toogleAllCheckboxTooltipPosition = 'below';
+  @Input() toogleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
 
   /**
   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total
