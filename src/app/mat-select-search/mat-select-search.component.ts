@@ -171,7 +171,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** select all checkbox indeterminate state */
   @Input() toggleAllCheckboxIndeterminate = false;
 
-  /** Display a message in a tooltip on the checkbox */
+  /** Display a message in a tooltip on the toggle-all checkbox */
   @Input() toggleAllCheckboxTooltipMessage = '';
 
   /** Define the position of the tooltip. Available options: 'left' | 'right' | 'above' | 'below' | 'before' | 'after'. Default: 'below' */
