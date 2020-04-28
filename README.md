@@ -179,6 +179,9 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
 </ngx-mat-select-search>
 ```
 
+#### Custom tooltip of the toggle-all checkbox
+Custom tooltip with the CSS class `ngx-mat-select-search-toggle-all-tooltip`
+
 ## Known Problems / Solutions
 * The search input is placed outside of the visible screen if the select element is at the top of the screen 
     (in the stackblitz example, remove the header 
