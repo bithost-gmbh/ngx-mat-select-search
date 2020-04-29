@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.0
+* Enhancement: add tooltip message to select-all checkbox [#227](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/227)
+
+  Thanks to @arucar
+  
 ## 2.1.2
 * Fix: fix selection of different instances of same object when using `multiple` [#215](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/215)
 
