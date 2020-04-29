@@ -144,6 +144,12 @@ Furthermore, it provides the following inputs:
   /** select all checkbox indeterminate state */
   @Input() toggleAllCheckboxIndeterminate = false;
 
+  /** Display a message in a tooltip on the toggle-all checkbox */
+  @Input() toggleAllCheckboxTooltipMessage = '';
+
+  /** Define the position of the tooltip on the toggle-all checkbox. */
+  @Input() toogleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
+
   /**
   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total
   *  options.
@@ -172,6 +178,9 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
    <div class="mat-select-search-custom-header-content">something special</div>
 </ngx-mat-select-search>
 ```
+
+#### Custom tooltip of the toggle-all checkbox
+Custom tooltip with the CSS class `ngx-mat-select-search-toggle-all-tooltip`
 
 ## Known Problems / Solutions
 * The search input is placed outside of the visible screen if the select element is at the top of the screen 
