@@ -26,7 +26,7 @@ import {
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
-import { delay, take, takeUntil, startWith } from 'rxjs/operators';
+import { delay, take, takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
@@ -271,13 +271,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       });
 
 
-    // Closure variable for tracking
-    // the first available option in our list
-    // used for comparision later.
-    // TODO: This could be moved into a behavior subject
-    // paired with a pairwise operator or something
-    // but this works well enough.
-    let previousFirstOption = null;
 
     // set the first item active after the options changed
     this.matSelect.openedChange
@@ -291,11 +284,23 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           console.log('_keyManager was not initialized.');
         }
 
-
         this._options = this.matSelect.options;
+
+
+        // Closure variable for tracking the most recent first option.
+        // In order to avoid avoid causing the list to
+        // scroll to the top when options are added to the bottom of
+        // the list (eg: infinite scroll), we compare only
+        // the changes to the first options to determine if we
+        // should set the first item as active.
+        // This prevents unncessary scrolling to the top of the list
+        // when options are appended, but allows the first item
+        // in the list to be set as active by default when there
+        // is no active selection
+        let previousFirstOption = this._options.toArray()[this.matOption ? 1 : 0];
+
         this._options.changes
           .pipe(
-            startWith(this._options),
             takeUntil(this._onDestroy)
           )
           .subscribe((optionChanges: QueryList<MatOption>) => {
@@ -310,21 +315,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               setTimeout(() => {
                 // set first item active and input width
 
-                // The Options queryList will return the input text box
-                // as the first item, we don't consider that the 'first'
-                // item as it's not a selectable option for the user.
+                // The true first item is offset by 1
                 const currentFirstOption = options[this.matOption ? 1 : 0];
 
-                // Only set the first item as active when the first item in the
-                // option list has changed. This prevents the keymanager
-                // from scrolling back up to the top of list when new options
-                // are being added dynamically from server or via infinite scroll
-                // logic.
+                // Check to see if the first option in these changes is different from the previous.
                 const firstOptionIsChanged = !this.matSelect.compareWith(previousFirstOption, currentFirstOption);
 
-                // The first option is different now, so we will want to select it
-                // as it indicates the options have substaintally changed versus
-                // having options appened
+                // CASE: The first option is different now.
+                // Indiciates we should set it as active and scroll to the top.
                 if (firstOptionIsChanged) {
                   keyManager.setFirstItemActive();
                 }
