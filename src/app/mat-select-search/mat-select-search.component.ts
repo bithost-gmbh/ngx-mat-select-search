@@ -26,7 +26,7 @@ import {
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
-import { delay, take, takeUntil, pairwise } from 'rxjs/operators';
+import { delay, take, takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 import { OptionGroupsExampleComponent } from '../examples/04-option-groups-example/option-groups-example.component';
@@ -227,8 +227,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     private liveAnnouncer: LiveAnnouncer,
     @Optional() @Inject(MatFormField) public matFormField: MatFormField = null
   ) {
-    console.log(this);
-
   }
 
   ngOnInit() {
