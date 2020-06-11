@@ -311,16 +311,16 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
               setTimeout(() => {
                 // set first item active and input width
 
+                // The Options queryList will return the input text box
+                // as the first item, we don't consider that the 'first'
+                // item as it's not a selectable option for the user.
                 const currentFirstOption = options[1];
+
                 // Only set the first item as active when the first item in the
                 // option list has changed. This prevents the keymanager
                 // from scrolling back up to the top of list when new options
                 // are being added dynamically from server or via infinite scroll
                 // logic.
-
-                // The Options queryList will return the input text box
-                // as the first item, we don't consider that the 'first'
-                // item as it's not a selectable option for the user.
                 const firstOptionIsChanged = !this.matSelect.compareWith(previousFirstOption, currentFirstOption);
 
                 // The first option is different now, so we will want to select it
