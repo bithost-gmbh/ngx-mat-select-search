@@ -26,9 +26,10 @@ import {
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
-import { delay, take, takeUntil } from 'rxjs/operators';
+import { delay, take, takeUntil, pairwise } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
+import { OptionGroupsExampleComponent } from '../examples/04-option-groups-example/option-groups-example.component';
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -187,7 +188,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @ViewChild('innerSelectSearch', { read: ElementRef, static: true }) innerSelectSearch: ElementRef;
 
   /** Reference to custom search input clear icon */
-  @ContentChild(MatSelectSearchClearDirective, {static: false}) clearIcon: MatSelectSearchClearDirective;
+  @ContentChild(MatSelectSearchClearDirective, { static: false }) clearIcon: MatSelectSearchClearDirective;
 
   @HostBinding('class.mat-select-search-inside-mat-option')
   get isInsideMatOption(): boolean {
@@ -200,8 +201,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   }
   private _value: string;
 
-  onChange: Function = (_: any) => {};
-  onTouched: Function = (_: any) => {};
+  onChange: Function = (_: any) => { };
+  onTouched: Function = (_: any) => { };
 
   /** Reference to the MatSelect options */
   public _options: QueryList<MatOption>;
@@ -226,7 +227,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     private liveAnnouncer: LiveAnnouncer,
     @Optional() @Inject(MatFormField) public matFormField: MatFormField = null
   ) {
-
+    console.log(this);
 
   }
 
@@ -284,17 +285,59 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           console.log('_keyManager was not initialized.');
         }
 
+        // Closure variable for tracking
+        // the first available option in our list
+        // used for comparision later.
+        // TODO: This could be moved into a behavior subject
+        // paired with a pairwise operator or something
+        // but this works well enough.
+        let previousFirstOption = null;
+
         this._options = this.matSelect.options;
         this._options.changes
-          .pipe(takeUntil(this._onDestroy))
-          .subscribe(() => {
+          .pipe(
+            takeUntil(this._onDestroy),
+          )
+          .subscribe((optionChanges: QueryList<MatOption>) => {
+
+            // Convert the QueryList to an array
+            const options = optionChanges.toArray();
+
             const keyManager = this.matSelect._keyManager;
             if (keyManager && this.matSelect.panelOpen) {
 
               // avoid "expression has been changed" error
               setTimeout(() => {
                 // set first item active and input width
-                keyManager.setFirstItemActive();
+
+
+                // Only set the first item as active when the first item in the
+                // option list has changed. This prevents the keymanager
+                // from scrolling back up to the top of list when new options
+                // are being added dynamically from server or via infinite scroll
+                // logic.
+
+                // The Options queryList will return the input text box
+                // as the first item, we don't consider that the 'first'
+                // item as it's not a selectable option for the user.
+                const currentFirstOption = options[1];
+
+                // If previous first option is null, as it will be on the first option changes
+                // set it to the current first option.
+                // Probably a nicer way of doing this using an Observable startWith
+                previousFirstOption = previousFirstOption || currentFirstOption;
+
+                const firstOptionIsChanged = !this.matSelect.compareWith(previousFirstOption, currentFirstOption);
+
+                // The first option is different now, so we will want to select it
+                // as it indicates the options have substaintally changed versus
+                // having options appened
+                if (firstOptionIsChanged) {
+                  keyManager.setFirstItemActive();
+                }
+                // Update our reference
+                previousFirstOption = currentFirstOption;
+
                 // wait for panel width changes
                 setTimeout(() => {
                   this.updateInputWidth();
