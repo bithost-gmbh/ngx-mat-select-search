@@ -68,7 +68,7 @@ export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this._onDestroy)
       ).
-      subscribe((val) => console.log(`New view array contains ${val.length} items`))
+      subscribe((val) => console.log(`New view array contains ${val.length} items`));
   }
 
   ngOnDestroy(): void {
