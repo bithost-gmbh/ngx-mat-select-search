@@ -29,7 +29,6 @@ import { Subject } from 'rxjs';
 import { delay, take, takeUntil, startWith } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
-import { OptionGroupsExampleComponent } from '../examples/04-option-groups-example/option-groups-example.component';
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -314,7 +313,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
                 // The Options queryList will return the input text box
                 // as the first item, we don't consider that the 'first'
                 // item as it's not a selectable option for the user.
-                const currentFirstOption = options[1];
+                const currentFirstOption = options[this.matOption ? 1 : 0];
 
                 // Only set the first item as active when the first item in the
                 // option list has changed. This prevents the keymanager
