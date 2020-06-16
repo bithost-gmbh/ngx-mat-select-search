@@ -12,6 +12,9 @@
                 class="mat-select-search-toggle-all-checkbox"
                 [checked]="toggleAllCheckboxChecked"
                 [indeterminate]="toggleAllCheckboxIndeterminate"
+                [matTooltip]="toggleAllCheckboxTooltipMessage"
+                matTooltipClass="ngx-mat-select-search-toggle-all-tooltip"
+                [matTooltipPosition]="toogleAllCheckboxTooltipPosition"
                 (change)="_emitSelectAllBooleanToParent($event.checked)"
   ></mat-checkbox>
 

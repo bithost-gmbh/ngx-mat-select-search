@@ -1,13 +1,15 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
+
 
 import { NgxMatSelectSearchModule } from './mat-select-search/ngx-mat-select-search.module';
 
@@ -17,7 +19,12 @@ import { MultipleSelectionExampleComponent } from './examples/02-multiple-select
 import { CustomClearIconExampleComponent } from './examples/03-custom-clear-icon-example/custom-clear-icon-example.component';
 import { OptionGroupsExampleComponent } from './examples/04-option-groups-example/option-groups-example.component';
 import { ServerSideSearchExampleComponent } from './examples/05-server-side-search-example/server-side-search-example.component';
-import { MultipleSelectionSelectAllExampleComponent } from './examples/06-multiple-selection-select-all-example/multiple-selection-select-all-example.component';
+import {
+  MultipleSelectionSelectAllExampleComponent
+} from './examples/06-multiple-selection-select-all-example/multiple-selection-select-all-example.component';
+import { TooltipSelectAllExampleComponent } from './examples/07-tooltip-select-all-example/tooltip-select-all-example.component';
+import { InfiniteScrollExampleComponent } from './examples/08-infinite-scroll-example/infinite-scroll-example.component';
+
 
 /**
  * NgModule that includes all Material modules that are required to serve the app.
@@ -41,7 +48,8 @@ export class MaterialModule {}
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatSelectInfiniteScrollModule
   ],
   declarations: [
     AppComponent,
@@ -50,7 +58,9 @@ export class MaterialModule {}
     CustomClearIconExampleComponent,
     OptionGroupsExampleComponent,
     ServerSideSearchExampleComponent,
-    MultipleSelectionSelectAllExampleComponent
+    MultipleSelectionSelectAllExampleComponent,
+    TooltipSelectAllExampleComponent,
+    InfiniteScrollExampleComponent
   ],
   bootstrap: [AppComponent],
   providers: []

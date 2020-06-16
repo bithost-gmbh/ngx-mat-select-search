@@ -123,6 +123,9 @@ Furthermore, it provides the following inputs:
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
 
+  /** Enable clear input on escape pressed */
+  @Input() enableClearOnEscapePressed = false;
+
   /**
    * Prevents home / end key being propagated to mat-select,
    * allowing to move the cursor within the search input instead of navigating the options
@@ -143,6 +146,12 @@ Furthermore, it provides the following inputs:
 
   /** select all checkbox indeterminate state */
   @Input() toggleAllCheckboxIndeterminate = false;
+
+  /** Display a message in a tooltip on the toggle-all checkbox */
+  @Input() toggleAllCheckboxTooltipMessage = '';
+
+  /** Define the position of the tooltip on the toggle-all checkbox. */
+  @Input() toogleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
 
   /**
   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total

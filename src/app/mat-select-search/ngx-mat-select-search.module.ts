@@ -12,11 +12,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
-export const MatSelectSearchVersion = '2.1.1';
+export const MatSelectSearchVersion = '2.2.0';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ export const MatSelectSearchVersion = '2.1.1';
     MatCheckboxModule,
     MatIconModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   declarations: [
     MatSelectSearchComponent,
