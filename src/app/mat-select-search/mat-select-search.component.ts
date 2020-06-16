@@ -21,7 +21,7 @@ import {
   Z,
   ZERO,
   NINE,
-  SPACE, END, HOME, UP_ARROW, DOWN_ARROW,
+  SPACE, END, HOME, UP_ARROW, DOWN_ARROW, ESCAPE,
 } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
@@ -150,6 +150,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
 
+  /** Enable clear input on escape pressed */
+  @Input() enableClearOnEscapePressed = false;
+
   /**
    * Prevents home / end key being propagated to mat-select,
    * allowing to move the cursor within the search input instead of navigating the options
@@ -187,7 +190,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   @ViewChild('innerSelectSearch', { read: ElementRef, static: true }) innerSelectSearch: ElementRef;
 
   /** Reference to custom search input clear icon */
-  @ContentChild(MatSelectSearchClearDirective, {static: false}) clearIcon: MatSelectSearchClearDirective;
+  @ContentChild(MatSelectSearchClearDirective, { static: false }) clearIcon: MatSelectSearchClearDirective;
 
   @HostBinding('class.mat-select-search-inside-mat-option')
   get isInsideMatOption(): boolean {
@@ -200,8 +203,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   }
   private _value: string;
 
-  onChange: Function = (_: any) => {};
-  onTouched: Function = (_: any) => {};
+  onChange: Function = (_: any) => { };
+  onTouched: Function = (_: any) => { };
 
   /** Reference to the MatSelect options */
   public _options: QueryList<MatOption>;
@@ -383,6 +386,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       (event.keyCode === SPACE)
       || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
     ) {
+      event.stopPropagation();
+    }
+
+    // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
+    if (this.enableClearOnEscapePressed === true && event.keyCode === ESCAPE && this.value) {
+      this._reset(true);
       event.stopPropagation();
     }
   }
