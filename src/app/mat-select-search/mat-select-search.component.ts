@@ -26,7 +26,7 @@ import {
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
-import { delay, take, takeUntil } from 'rxjs/operators';
+import { delay, take, takeUntil, filter } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
@@ -557,8 +557,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       overlayClasses.push('cdk-overlay-pane-select-search-with-offset');
     }
 
-    this.matSelect.overlayDir.attach
-      .pipe(takeUntil(this._onDestroy))
+    this.matSelect.openedChange
+      .pipe(
+        filter(opened => opened),
+        takeUntil(this._onDestroy)
+      )
       .subscribe(() => {
         // note: this is hacky, but currently there is no better way to do this
         let element: HTMLElement = this.searchSelectInput.nativeElement;
