@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
+
 
 import { NgxMatSelectSearchModule } from './mat-select-search/ngx-mat-select-search.module';
 
@@ -20,7 +22,9 @@ import { ServerSideSearchExampleComponent } from './examples/05-server-side-sear
 import {
   MultipleSelectionSelectAllExampleComponent
 } from './examples/06-multiple-selection-select-all-example/multiple-selection-select-all-example.component';
-import { TooltipSelectAllExampleComponent } from './examples/07-tooltip-select-all-exemple/tooltip-select-all-example.component';
+import { TooltipSelectAllExampleComponent } from './examples/07-tooltip-select-all-example/tooltip-select-all-example.component';
+import { InfiniteScrollExampleComponent } from './examples/08-infinite-scroll-example/infinite-scroll-example.component';
+
 
 /**
  * NgModule that includes all Material modules that are required to serve the app.
@@ -44,7 +48,8 @@ export class MaterialModule {}
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatSelectInfiniteScrollModule
   ],
   declarations: [
     AppComponent,
@@ -54,7 +59,8 @@ export class MaterialModule {}
     OptionGroupsExampleComponent,
     ServerSideSearchExampleComponent,
     MultipleSelectionSelectAllExampleComponent,
-    TooltipSelectAllExampleComponent
+    TooltipSelectAllExampleComponent,
+    InfiniteScrollExampleComponent
   ],
   bootstrap: [AppComponent],
   providers: []

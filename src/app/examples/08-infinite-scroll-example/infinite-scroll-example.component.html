@@ -1,0 +1,25 @@
+<h3>Integration with <a href="https://github.com/orizens/ngx-infinite-scroll" target="_blank">ngx-infinite-scroll</a></h3>
+
+<p>
+  Selected Bank: {{ctrl?.value}}
+</p>
+
+<mat-form-field>
+  <mat-select  msInfiniteScroll (infiniteScroll)="getNextBatch()"
+    [formControl]="ctrl"
+    placeholder="Select Something"
+    (valueChange)="onChange($event)">
+      <mat-option>
+        <!--disableScrollToActiveOnOptionsChanged should be set to true-->
+          <ngx-mat-select-search
+              [formControl]="searchCtrl"
+              placeholderLabel="search"
+              [disableScrollToActiveOnOptionsChanged]="true"
+              noEntriesFoundLabel="No entry matches">
+          </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let option of options$ | async" [value]="option">
+          {{option}}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
