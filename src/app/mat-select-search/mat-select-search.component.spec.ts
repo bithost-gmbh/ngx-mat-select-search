@@ -46,7 +46,7 @@ interface Bank {
     <p>
       Selected Bank: {{bankCtrl.value?.name}}
     </p>
-    
+
     <h3>Single selection inside mat-option</h3>
     <p>
       <mat-form-field>
@@ -63,7 +63,7 @@ interface Bank {
     <p>
       Selected Bank: {{bankCtrlMatOption.value?.name}}
     </p>
-    
+
     <h3>Multiple selection</h3>
     <p>
       <mat-form-field>
@@ -312,14 +312,14 @@ describe('MatSelectSearchComponent', () => {
             )
             .subscribe((opened) => {
               expect(opened).toBe(true);
-              const searchField = document.querySelector('.cdk-overlay-pane-select-search .mat-select-search-inner .mat-select-search-input');
-              const searchInner = document.querySelector('.cdk-overlay-pane-select-search .mat-select-search-inner');
+              const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input');
+              const searchInner = document.querySelector('.mat-select-search-inner');
               expect(searchInner).toBeTruthy();
               expect(searchField).toBeTruthy();
               // check focus
               expect(searchField).toBe(document.activeElement);
 
-              const optionElements = document.querySelectorAll('.cdk-overlay-pane-select-search mat-option');
+              const optionElements = document.querySelectorAll('mat-option');
               expect(component.matSelect.options.length).toBe(4);
               expect(optionElements.length).toBe(4);
 
@@ -349,7 +349,7 @@ describe('MatSelectSearchComponent', () => {
             .pipe(take(1))
             .subscribe((opened) => {
               expect(opened).toBe(true);
-              const searchField = document.querySelector('.cdk-overlay-pane-select-search .mat-select-search-inner .mat-select-search-input');
+              const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input');
               expect(searchField).toBeTruthy();
 
               expect(component.matSelect.options.length).toBe(4);
@@ -462,14 +462,14 @@ describe('MatSelectSearchComponent', () => {
               )
               .subscribe((opened) => {
                 expect(opened).toBe(true);
-                const searchField = document.querySelector('.cdk-overlay-pane-select-search .mat-select-search-inner .mat-select-search-input');
-                const searchInner = document.querySelector('.cdk-overlay-pane-select-search .mat-select-search-inner');
+                const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input');
+                const searchInner = document.querySelector('.mat-select-search-inner');
                 expect(searchInner).toBeTruthy();
                 expect(searchField).toBeTruthy();
                 // check focus
                 expect(searchField).toBe(document.activeElement);
 
-                const optionElements = document.querySelectorAll('.cdk-overlay-pane-select-search mat-option');
+                const optionElements = document.querySelectorAll('mat-option');
                 expect(component.matSelectMatOption.options.length).toBe(5);
                 expect(optionElements.length).toBe(5);
 
@@ -499,7 +499,7 @@ describe('MatSelectSearchComponent', () => {
               .pipe(take(1))
               .subscribe((opened) => {
                 expect(opened).toBe(true);
-                const searchField = document.querySelector('.cdk-overlay-pane-select-search .mat-select-search-inner .mat-select-search-input');
+                const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input');
                 expect(searchField).toBeTruthy();
 
                 expect(component.matSelectMatOption.options.length).toBe(5);
@@ -621,7 +621,7 @@ describe('MatSelectSearchComponent', () => {
                     expect(component.matSelectMulti.value).toEqual([component.banks[1]]);
                     expect(component.bankMultiCtrl.value).toEqual([component.banks[1]]);
 
-                    const searchField = document.querySelector('.cdk-overlay-pane-select-search .mat-select-search-inner .mat-select-search-input');
+                    const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input');
                     expect(searchField).toBeTruthy();
 
                     expect(component.matSelectMulti.options.length).toBe(4);

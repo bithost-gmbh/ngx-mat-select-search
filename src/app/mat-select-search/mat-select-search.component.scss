@@ -90,12 +90,6 @@ $mat-option-height: 3em;
   }
 }
 
-::ng-deep .cdk-overlay-pane-select-search {
-  &.cdk-overlay-pane-select-search-with-offset{
-    /* correct offsetY so that the selected option is at the position of the select box when opening */
-    margin-top: -50px;
-  }
-}
 ::ng-deep .mat-option[aria-disabled=true].contains-mat-select-search {
   /* let move mat-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
   position: static;

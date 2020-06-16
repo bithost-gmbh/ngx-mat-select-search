@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.0.0
+* Fix: prevent scrolling to first option if option does not change (e.g. with infinity scrolling) [#200](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/200)
+
+  Thanks to @raysuelzer
+* Enhancement: Add option to clear input when pressing escape with `[enableClearOnEscapePressed]="true"`
+  [#231](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/231)
+
+  Thanks to @nischi
+* Enhancement: Add compatibility with `@angular/core`: `^10.0.0`, `@angular/material`: `^10.0.0`
+* Chore: (**Breaking Change**) The possibility to place the `<ngx-mat-select-search>` element directly inside `<mat-select>`
+                       without wrapping it in an `<mat-option>` element was removed due to changes of the public API of `mat-select`. [#208](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/208)
+         
+  To fix this, simply place the `<ngx-mat-select-search>` inside a `<mat-option>` element.
+  Thanks to @evoltafreak
+
 ## 2.2.0
 * Enhancement: add tooltip message to select-all checkbox [#227](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/227)
 

@@ -2,7 +2,9 @@
 <p>
   <mat-form-field>
     <mat-select [formControl]="bankGroupsCtrl" placeholder="Bank" #singleSelect>
-      <ngx-mat-select-search [formControl]="bankGroupsFilterCtrl"></ngx-mat-select-search>
+      <mat-option>
+        <ngx-mat-select-search [formControl]="bankGroupsFilterCtrl"></ngx-mat-select-search>
+      </mat-option>
       <mat-optgroup *ngFor="let group of filteredBankGroups | async" [label]="group.name">
         <mat-option *ngFor="let bank of group.banks" [value]="bank">
           {{bank.name}}

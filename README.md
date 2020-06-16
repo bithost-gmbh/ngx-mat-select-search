@@ -61,10 +61,6 @@ and [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/a
 how to wire the `ngx-mat-select-search` and filter the options available.
 Or have a look at [https://github.com/bithost-gmbh/ngx-mat-select-search-example](https://github.com/bithost-gmbh/ngx-mat-select-search-example) to see it in a standalone app.
 
-Note: it is also possible to place the `<ngx-mat-select-search>` element directly inside `<mat-select>` 
-without wrapping it in an `<mat-option>` element. However, the search field might be outside of the visible viewport. 
-See [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1) and [Known Problems / Solutions](#known-problems--solutions)
-
 ### Template driven forms
 You can alternatively use it with template driven forms as follows:
 ```html
@@ -182,29 +178,10 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
 </ngx-mat-select-search>
 ```
 
-## Known Problems / Solutions
-* The search input is placed outside of the visible screen if the select element is at the top of the screen 
-    (in the stackblitz example, remove the header 
-     or add some content above the select and scroll the select to the top edge). 
-     See [#1](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/1)
-  
-  **Workaround 1**:  place the `<ngx-mat-select-search>` inside a `<mat-option>`
-   ```html
-      <mat-select>
-        <mat-option>
-          <ngx-mat-select-search></ngx-mat-select-search>
-        </mat-option>
-        <mat-option *ngFor="let bank of ...">...</mat-option>
-      </mat-select>
-   ```
-   Caveat: the currently selected option might be hidden under the search input field when opening the options panel.
+## Known Problems
+* The currently selected option might be hidden under the search input field when opening the options panel 
+  and the panel is at the screen border.
    
-  **Workaround 2**: use the disableOptionCentering option on the `<mat-select>` 
-   [https://material.angular.io/components/select/api](https://material.angular.io/components/select/api)
-   while placing the `<ngx-mat-select-search>` element directly inside `<mat-select>` 
-   without wrapping it in an `<mat-option>` element.
-  
-
 ## Support Development
 
 We aim at providing the best service possible by constantly improving `NgxMatSelectSearch` and responding fast to bug reports. We do this fully free of cost.

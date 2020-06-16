@@ -46,7 +46,9 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
  *   template: `
  *     <mat-form-field>
  *       <mat-select [formControl]="bankCtrl" placeholder="Bank">
- *         <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+ *         <mat-option>
+ *           <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+ *         </mat-option>
  *         <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank.id">
  *           {{bank.name}}
  *         </mat-option>
@@ -212,9 +214,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   /** Previously selected values when using <mat-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
-  /** Whether the backdrop class has been set */
-  private overlayClassSet = false;
-
   /** Event that emits when the current value changes */
   private change = new EventEmitter<string>();
 
@@ -250,6 +249,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (this.matOption) {
       this.matOption.disabled = true;
       this.matOption._getHostElement().classList.add('contains-mat-select-search');
+    } else {
+      console.error('<ngx-mat-select-search> must be placed inside a <mat-option> element');
     }
 
     // when the select dropdown panel is opened or closed
@@ -300,7 +301,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
         // when options are appended, but allows the first item
         // in the list to be set as active by default when there
         // is no active selection
-        let previousFirstOption = this._options.toArray()[this.matOption ? 1 : 0];
+        let previousFirstOption = this._options.toArray()[this.getOptionsLengthOffset()];
 
         this._options.changes
           .pipe(
@@ -319,7 +320,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
                 // set first item active and input width
 
                 // The true first item is offset by 1
-                const currentFirstOption = options[this.matOption ? 1 : 0];
+                const currentFirstOption = options[this.getOptionsLengthOffset()];
 
                 // Check to see if the first option in these changes is different from the previous.
                 const firstOptionIsChanged = !this.matSelect.compareWith(previousFirstOption, currentFirstOption);
@@ -386,10 +387,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.setOverlayClass();
-    });
-
     // update view when available options change
     this.matSelect.openedChange
       .pipe(
@@ -540,46 +537,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
     if (focus) {
       this._focus();
     }
-  }
-
-  /**
-   * Sets the overlay class  to correct offsetY
-   * so that the selected option is at the position of the select box when opening
-   */
-  private setOverlayClass() {
-    if (this.overlayClassSet) {
-      return;
-    }
-    const overlayClasses: string[] = ['cdk-overlay-pane-select-search'];
-
-    if (!this.matOption) {
-      // add offset to panel if component is not placed inside mat-option
-      overlayClasses.push('cdk-overlay-pane-select-search-with-offset');
-    }
-
-    this.matSelect.openedChange
-      .pipe(
-        filter(opened => opened),
-        takeUntil(this._onDestroy)
-      )
-      .subscribe(() => {
-        // note: this is hacky, but currently there is no better way to do this
-        let element: HTMLElement = this.searchSelectInput.nativeElement;
-        let overlayElement: HTMLElement;
-        while (element = element.parentElement) {
-          if (element.classList.contains('cdk-overlay-pane')) {
-            overlayElement = element;
-            break;
-          }
-        }
-        if (overlayElement) {
-          overlayClasses.forEach(overlayClass => {
-            overlayElement.classList.add(overlayClass);
-          });
-        }
-      });
-
-    this.overlayClassSet = true;
   }
 
 
