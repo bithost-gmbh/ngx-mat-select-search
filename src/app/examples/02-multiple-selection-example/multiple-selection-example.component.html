@@ -3,7 +3,9 @@
 <p>
   <mat-form-field>
     <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
-      <ngx-mat-select-search [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
+      <mat-option>
+        <ngx-mat-select-search [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
+      </mat-option>
       <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
         {{bank.name}}
       </mat-option>
