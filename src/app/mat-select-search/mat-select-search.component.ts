@@ -21,7 +21,7 @@ import {
   Z,
   ZERO,
   NINE,
-  SPACE, END, HOME, UP_ARROW, DOWN_ARROW,
+  SPACE, END, HOME, UP_ARROW, DOWN_ARROW, ESCAPE,
 } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
@@ -149,6 +149,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   /** Disables initial focusing of the input field */
   @Input() disableInitialFocus = false;
+
+  /** Enable clear input on escape pressed */
+  @Input() enableClearOnEscapePressed = false;
 
   /**
    * Prevents home / end key being propagated to mat-select,
@@ -418,6 +421,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       (event.keyCode === SPACE)
       || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
     ) {
+      event.stopPropagation();
+    }
+
+    // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
+    if (this.enableClearOnEscapePressed === true && event.keyCode === ESCAPE && this.value) {
+      this._reset(true);
       event.stopPropagation();
     }
   }
