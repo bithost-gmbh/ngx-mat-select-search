@@ -6,27 +6,32 @@
  */
 
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy, ChangeDetectorRef,
-  Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnDestroy, OnInit, QueryList,
-  ViewChild,
-  ContentChild, Optional, HostBinding, Output
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Output,
+  QueryList,
+  ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatOption, _countGroupLabelsBeforeOption } from '@angular/material/core';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { _countGroupLabelsBeforeOption, MatOption } from '@angular/material/core';
 import { MatSelect, SELECT_PANEL_MAX_HEIGHT } from '@angular/material/select';
 import { MatFormField } from '@angular/material/form-field';
-import {
-  A,
-  Z,
-  ZERO,
-  NINE,
-  SPACE, END, HOME, UP_ARROW, DOWN_ARROW, ESCAPE,
-} from '@angular/cdk/keycodes';
+import { A, DOWN_ARROW, END, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Subject } from 'rxjs';
-import { delay, take, takeUntil, filter } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
@@ -122,7 +127,7 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   /** Label of the search placeholder */
   @Input() placeholderLabel = 'Suche';
@@ -201,21 +206,39 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
   /** Current search value */
   get value(): string {
-    return this._value;
+    return this._formControl.value;
   }
-  private _value: string;
+  private _lastExternalInputValue: string;
 
-  onChange: Function = (_: any) => { };
   onTouched: Function = (_: any) => { };
 
   /** Reference to the MatSelect options */
-  public _options: QueryList<MatOption>;
+  public set _options(_options: QueryList<MatOption>) {
+    this._options$.next(_options);
+  }
+  public get _options(): QueryList<MatOption> {
+    return this._options$.getValue();
+  }
+  public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null);
 
   /** Previously selected values when using <mat-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
-  /** Event that emits when the current value changes */
-  private change = new EventEmitter<string>();
+  public _formControl: FormControl = new FormControl('');
+
+  /** whether to show the no entries found message */
+  public _showNoEntriesFound$: Observable<boolean> = combineLatest([
+    this._formControl.valueChanges,
+    this._options$.pipe(
+      filter(_options => !!_options),
+      switchMap(_options => _options.changes),
+      map(options => options.length),
+      startWith(this.getOptionsLengthOffset())
+    )
+  ]).pipe(
+    map(([value, optionsLength]) => this.noEntriesFoundLabel && value
+      && optionsLength === this.getOptionsLengthOffset())
+  );
 
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
@@ -290,14 +313,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
 
         this._options = this.matSelect.options;
 
-
         // Closure variable for tracking the most recent first option.
         // In order to avoid avoid causing the list to
         // scroll to the top when options are added to the bottom of
         // the list (eg: infinite scroll), we compare only
         // the changes to the first options to determine if we
         // should set the first item as active.
-        // This prevents unncessary scrolling to the top of the list
+        // This prevents unnecessary scrolling to the top of the list
         // when options are appended, but allows the first item
         // in the list to be set as active by default when there
         // is no active selection
@@ -307,10 +329,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           .pipe(
             takeUntil(this._onDestroy)
           )
-          .subscribe((optionChanges: QueryList<MatOption>) => {
+          .subscribe(() => {
 
             // Convert the QueryList to an array
-            const options = optionChanges.toArray();
+            const options = this._options.toArray();
 
             const keyManager = this.matSelect._keyManager;
             if (keyManager && this.matSelect.panelOpen) {
@@ -339,15 +361,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
                   this.updateInputWidth();
                 });
 
-                // set no entries found class on mat option
-                if (this.matOption) {
-                  if (this._noEntriesFound()) {
-                    this.matOption._getHostElement().classList.add('mat-select-search-no-entries-found');
-                  } else {
-                    this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
-                  }
-                }
-
                 if (!this.disableScrollToActiveOnOptionsChanged) {
                   this.adjustScrollTopToFitActiveOptionIntoView();
                 }
@@ -358,12 +371,20 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           });
       });
 
-    // detect changes when the input changes
-    this.change
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.changeDetectorRef.detectChanges();
-      });
+    // add or remove css class depending on whether to show the no entries found message
+    // note: this is hacky
+    this._showNoEntriesFound$.pipe(
+      takeUntil(this._onDestroy)
+    ).subscribe(showNoEntriesFound => {
+      // set no entries found class on mat option
+      if (this.matOption) {
+        if (showNoEntriesFound) {
+          this.matOption._getHostElement().classList.add('mat-select-search-no-entries-found');
+        } else {
+          this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
+        }
+      }
+    });
 
     // resize the input width when the viewport is resized, i.e. the trigger width could potentially be resized
     this._viewportRuler.change()
@@ -375,6 +396,15 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       });
 
     this.initMultipleHandling();
+
+    this._options$.pipe(
+      filter(options => !!options),
+      switchMap(options => options.changes),
+      takeUntil(this._onDestroy)
+    ).subscribe(() => {
+      // update view when available options change
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   _emitSelectAllBooleanToParent(state: boolean) {
@@ -384,21 +414,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
-  }
-
-  ngAfterViewInit() {
-    // update view when available options change
-    this.matSelect.openedChange
-      .pipe(
-        take(1),
-        takeUntil(this._onDestroy)
-      ).subscribe(() => {
-        this.matSelect.options.changes
-          .pipe(takeUntil(this._onDestroy))
-          .subscribe(() => {
-            this.changeDetectorRef.markForCheck();
-          });
-      });
   }
 
   _isToggleAllCheckboxVisible(): boolean {
@@ -472,30 +487,20 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   writeValue(value: string) {
-    const valueChanged = value !== this._value;
-    if (valueChanged) {
-      this._value = value;
-      this.change.emit(value);
-    }
+    this._lastExternalInputValue = value;
+    this._formControl.setValue(value);
   }
 
-  onInputChange(value) {
-    const valueChanged = value !== this._value;
-    if (valueChanged) {
-      this.initMultiSelectedValues();
-      this._value = value;
-      this.onChange(value);
-      this.change.emit(value);
-    }
-  }
-
-  onBlur(value: string) {
-    this.writeValue(value);
+  onBlur() {
     this.onTouched();
   }
 
-  registerOnChange(fn: Function) {
-    this.onChange = fn;
+  registerOnChange(fn: (value: string) => void) {
+    this._formControl.valueChanges.pipe(
+      filter(value => value !== this._lastExternalInputValue),
+      tap(() => this._lastExternalInputValue = undefined),
+      takeUntil(this._onDestroy)
+    ).subscribe(fn);
   }
 
   registerOnTouched(fn: Function) {
@@ -525,15 +530,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    * @param focus whether to focus after resetting
    */
   public _reset(focus?: boolean) {
-    if (!this.searchSelectInput) {
-      return;
-    }
-    this.searchSelectInput.nativeElement.value = '';
-    this.onInputChange('');
-    if (this.matOption && !focus) {
-      // remove no entries found class on mat option
-      this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
-    }
+    this._formControl.setValue('');
     if (focus) {
       this._focus();
     }
@@ -553,7 +550,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
       .subscribe((values) => {
         if (this.matSelect.multiple) {
           let restoreSelectedValues = false;
-          if (this._value && this._value.length
+          if (this._formControl.value && this._formControl.value.length
             && this.previousSelectedValues && Array.isArray(this.previousSelectedValues)) {
             if (!values || !Array.isArray(values)) {
               values = [];
@@ -577,6 +574,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
           this.previousSelectedValues = values;
         }
       });
+
+    this.initMultiSelectedValues();
   }
 
   /**
@@ -638,22 +637,18 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, AfterViewIni
    *  Initialize this.previousSelectedValues once the first filtering occurs.
    */
   initMultiSelectedValues() {
-    if (this.matSelect.multiple && !this._value) {
-      this.previousSelectedValues = this.matSelect.options
-        .filter(option => option.selected)
-        .map(option => option.value);
-    }
-  }
-
-  /**
-   * Returns whether the "no entries found" message should be displayed
-   */
-  public _noEntriesFound(): boolean {
-    if (!this._options) {
-      return;
-    }
-
-    return this.noEntriesFoundLabel && this.value && this._options.length === this.getOptionsLengthOffset();
+    combineLatest([
+      this._formControl.valueChanges.pipe(startWith<string, string>(this._formControl.value)),
+      this._options$.pipe(filter(options => !!options))
+    ]).pipe(
+      takeUntil(this._onDestroy)
+    ).subscribe(([value, options]) => {
+      if (this.matSelect.multiple && !value) {
+        this.previousSelectedValues = options
+          .filter(option => option.selected)
+          .map(option => option.value);
+      }
+    });
   }
 
   /**

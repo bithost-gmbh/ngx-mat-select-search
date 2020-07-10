@@ -22,12 +22,11 @@
          class="mat-select-search-input"
          autocomplete="off"
          [type]="type"
-         [value]="value"
+         [formControl]="_formControl"
          #searchSelectInput
          (keydown)="_handleKeydown($event)"
          (keyup)="_handleKeyup($event)"
-         (input)="onInputChange($event.target.value)"
-         (blur)="onBlur($event.target.value)"
+         (blur)="onBlur()"
          [placeholder]="placeholderLabel"
          [attr.aria-label]="ariaLabel"
   />
@@ -51,7 +50,7 @@
 
 </div>
 
-<div *ngIf="_noEntriesFound()"
+<div *ngIf="_showNoEntriesFound$ | async"
      class="mat-select-search-no-entries-found">
   {{noEntriesFoundLabel}}
 </div>
