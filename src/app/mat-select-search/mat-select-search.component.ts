@@ -489,6 +489,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   writeValue(value: string) {
     this._lastExternalInputValue = value;
     this._formControl.setValue(value);
+    this.changeDetectorRef.markForCheck();
   }
 
   onBlur() {
