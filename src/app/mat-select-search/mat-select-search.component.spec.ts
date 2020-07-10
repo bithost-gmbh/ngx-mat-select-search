@@ -355,7 +355,7 @@ describe('MatSelectSearchComponent', () => {
               expect(component.matSelect.options.length).toBe(4);
 
               // search for "c"
-              component.matSelectSearch.onInputChange('c');
+              component.matSelectSearch._formControl.setValue('c');
               fixture.detectChanges();
 
               expect(component.bankFilterCtrl.value).toBe('c');
@@ -419,7 +419,7 @@ describe('MatSelectSearchComponent', () => {
             .subscribe((opened) => {
 
               // search for "something definitely not in the list"
-              component.matSelectSearch.onInputChange('something definitely not in the list');
+              component.matSelectSearch._formControl.setValue('something definitely not in the list');
               fixture.detectChanges();
 
               component.filteredBanks
@@ -505,7 +505,7 @@ describe('MatSelectSearchComponent', () => {
                 expect(component.matSelectMatOption.options.length).toBe(5);
 
                 // search for "c"
-                component.matSelectSearchMatOption.onInputChange('c');
+                component.matSelectSearchMatOption._formControl.setValue('c');
                 fixture.detectChanges();
 
                 expect(component.bankFilterCtrlMatOption.value).toBe('c');
@@ -627,7 +627,7 @@ describe('MatSelectSearchComponent', () => {
                     expect(component.matSelectMulti.options.length).toBe(4);
 
                     // search for "c"
-                    component.matSelectSearchMulti.onInputChange('c');
+                    component.matSelectSearchMulti._formControl.setValue('c');
                     fixture.detectChanges();
 
                     expect(component.bankFilterCtrl.value).toBe('c');
@@ -656,7 +656,7 @@ describe('MatSelectSearchComponent', () => {
                             expect(component.bankMultiCtrl.value).toEqual([component.banks[1], component.banks[2]]);
 
                             // search for "d"
-                            component.matSelectSearchMulti.onInputChange('d');
+                            component.matSelectSearchMulti._formControl.setValue('d');
                             fixture.detectChanges();
 
                             expect(component.bankFilterCtrl.value).toBe('d');
