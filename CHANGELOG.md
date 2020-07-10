@@ -1,5 +1,12 @@
 # Changelog
 
+
+## 3.0.1
+* Fix: correctly show no entries found message when no options are available initially (e.g. in server-side search) 
+  [#239](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/239)
+
+  Thanks to @Arjun-1r for reporting
+
 ## 3.0.0
 * Fix: prevent scrolling to first option if option does not change (e.g. with infinity scrolling) [#200](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/200)
 
