@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.2
+* Fix: hide no entries found message when options don't change initially
+  [#245](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/245)
+
+  Thanks to @PabloPerezAguilo for reporting
 
 ## 3.0.1
 * Fix: correctly show no entries found message when no options are available initially (e.g. in server-side search) 
