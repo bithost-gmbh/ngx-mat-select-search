@@ -231,9 +231,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     this._formControl.valueChanges,
     this._options$.pipe(
       filter(_options => !!_options),
-      switchMap(_options => _options.changes),
-      map(options => options.length),
-      startWith(this.getOptionsLengthOffset())
+      switchMap(_options => _options.changes.pipe(
+        startWith<MatOption[]>(_options.toArray()),
+        map(options => options.length),
+      )),
     )
   ]).pipe(
     map(([value, optionsLength]) => this.noEntriesFoundLabel && value
