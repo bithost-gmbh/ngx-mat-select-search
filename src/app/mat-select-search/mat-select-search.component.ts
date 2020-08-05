@@ -30,8 +30,8 @@ import { MatFormField } from '@angular/material/form-field';
 import { A, DOWN_ARROW, END, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, concat, Observable, of, Subject } from 'rxjs';
+import { delay, filter, first, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
@@ -221,6 +221,19 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
   public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null);
 
+  private optionsList$: Observable<MatOption[]> = this._options$.pipe(
+    switchMap(_options => _options ?
+      _options.changes.pipe(
+        map(options => options.toArray()),
+        startWith<MatOption[]>(_options.toArray()),
+      ) : of(null)
+    )
+  );
+
+  private optionsLength$: Observable<number> = this.optionsList$.pipe(
+    map(options => options ? options.length : 0)
+  );
+
   /** Previously selected values when using <mat-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
@@ -229,13 +242,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([
     this._formControl.valueChanges,
-    this._options$.pipe(
-      filter(_options => !!_options),
-      switchMap(_options => _options.changes.pipe(
-        startWith<MatOption[]>(_options.toArray()),
-        map(options => options.length),
-      )),
-    )
+    this.optionsLength$
   ]).pipe(
     map(([value, optionsLength]) => this.noEntriesFoundLabel && value
       && optionsLength === this.getOptionsLengthOffset())
@@ -398,9 +405,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
     this.initMultipleHandling();
 
-    this._options$.pipe(
-      filter(options => !!options),
-      switchMap(options => options.changes),
+    this.optionsList$.pipe(
       takeUntil(this._onDestroy)
     ).subscribe(() => {
       // update view when available options change
@@ -636,15 +641,18 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   /**
-   *  Initialize this.previousSelectedValues once the first filtering occurs.
+   *  Initialize this.previousSelectedValues whenever the selection changes and the search is empty
+   *  Wait for initial option list to capture initial selection
    */
-  initMultiSelectedValues() {
-    combineLatest([
-      this._formControl.valueChanges.pipe(startWith<string, string>(this._formControl.value)),
-      this._options$.pipe(filter(options => !!options))
-    ]).pipe(
+  private initMultiSelectedValues() {
+    concat(
+      this.optionsList$.pipe(filter(options => options && options.length > 0), first()),
+      this.matSelect.valueChange.pipe(startWith<void, void>(null))
+    ).pipe(
       takeUntil(this._onDestroy)
-    ).subscribe(([value, options]) => {
+    ).subscribe(() => {
+      const value = this._formControl.value;
+      const options = this._options ? this._options.toArray() : [];
       if (this.matSelect.multiple && !value) {
         this.previousSelectedValues = options
           .filter(option => option.selected)
