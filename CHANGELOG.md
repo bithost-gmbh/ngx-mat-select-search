@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.3
+* Fix: properly restore selection when using `[multiple]="true"`
+  [#249](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/249)
+
+  Thanks to @croy618 for reporting
+  
 ## 3.0.2
 * Fix: hide no entries found message when options don't change initially
   [#245](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/245)
