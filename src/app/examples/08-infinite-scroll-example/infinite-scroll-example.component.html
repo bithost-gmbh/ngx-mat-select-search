@@ -5,7 +5,7 @@
 </p>
 
 <mat-form-field>
-  <mat-select  msInfiniteScroll (infiniteScroll)="getNextBatch()"
+  <mat-select #matSelectInfiniteScroll msInfiniteScroll (infiniteScroll)="getNextBatch()"
     [formControl]="ctrl"
     placeholder="Select Something"
     (valueChange)="onChange($event)">
