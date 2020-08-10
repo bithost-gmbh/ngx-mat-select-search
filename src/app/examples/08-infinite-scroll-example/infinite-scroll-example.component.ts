@@ -13,7 +13,7 @@ import { MatSelect } from '@angular/material/select';
   styleUrls: ['./infinite-scroll-example.component.scss']
 })
 export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
-  @ViewChild("matSelectInfiniteScroll", { static: true } )
+  @ViewChild('matSelectInfiniteScroll', { static: true } )
   infiniteScrollSelect: MatSelect;
 
   // Mocks some sort of backend data source
