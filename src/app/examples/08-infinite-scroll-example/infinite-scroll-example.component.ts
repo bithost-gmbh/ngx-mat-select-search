@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Subject, Subscription } from 'rxjs';
 import { filter, scan, takeUntil } from 'rxjs/operators';
-import { MatSelect } from "@angular/material/select";
+import { MatSelect } from '@angular/material/select';
 
 /**
  * Based upon: https://stackblitz.com/edit/mat-select-search-with-infinity-scroll
@@ -14,7 +14,7 @@ import { MatSelect } from "@angular/material/select";
 })
 export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
   @ViewChild("matSelectInfiniteScroll", { static: true } )
-  infiniteScrollSelect:MatSelect;
+  infiniteScrollSelect: MatSelect;
 
   // Mocks some sort of backend data source
   mockBankList = Array.from({ length: 1000 }).map((_, i) => `Bank ${i}`);
@@ -61,14 +61,14 @@ export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
       }
     });
 
-    const searchValueChange$ = this.searchCtrl.valueChanges
-    const selectOpenChange$ = this.infiniteScrollSelect.openedChange
+    const searchValueChange$ = this.searchCtrl.valueChanges;
+    const selectOpenChange$ = this.infiniteScrollSelect.openedChange;
     combineLatest([selectOpenChange$, searchValueChange$])
       .pipe(
-        filter(([isOpen,]) => isOpen === true),
+        filter(([isOpen, _]) => isOpen === true),
         takeUntil(this._onDestroy)
       )
-      .subscribe(([, value]) => this.onSearchChange(value));
+      .subscribe(([_, value]) => this.onSearchChange(value));
 
     this.options$
       .pipe(
