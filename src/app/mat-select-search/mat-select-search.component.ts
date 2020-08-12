@@ -342,15 +342,15 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
             // Convert the QueryList to an array
             const options = this._options.toArray();
 
+            // The true first item is offset by 1
+            const currentFirstOption = options[this.getOptionsLengthOffset()];
+
             const keyManager = this.matSelect._keyManager;
             if (keyManager && this.matSelect.panelOpen) {
 
               // avoid "expression has been changed" error
               setTimeout(() => {
                 // set first item active and input width
-
-                // The true first item is offset by 1
-                const currentFirstOption = options[this.getOptionsLengthOffset()];
 
                 // Check to see if the first option in these changes is different from the previous.
                 const firstOptionIsChanged = !this.matSelect.compareWith(previousFirstOption, currentFirstOption);
@@ -360,9 +360,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                 if (firstOptionIsChanged) {
                   keyManager.setFirstItemActive();
                 }
-
-                // Update our reference
-                previousFirstOption = currentFirstOption;
 
                 // wait for panel width changes
                 setTimeout(() => {
@@ -374,8 +371,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                 }
 
               }, 1);
-
             }
+
+            // Update our reference
+            previousFirstOption = currentFirstOption;
           });
       });
 
