@@ -61,6 +61,7 @@ $mat-option-height: 3em;
   padding: $mat-menu-side-padding;
   padding-right: $mat-menu-side-padding + $clear-button-width;
   box-sizing: border-box;
+  width: 100%;
 }
 .mat-select-search-no-entries-found {
   padding: $mat-menu-side-padding;
