@@ -1,5 +1,24 @@
 # Changelog
 
+## 3.1.0
+* Feature: Support Right-To-Left
+  [#258](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/258)
+
+  Thanks to @framasev
+* Fix: ensure the placeholder is displayed
+  [#256](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/256)
+
+  Thanks to @aminsmartsenese for reporting
+* Fix: Refactor infinity scrolling example
+  [#253](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/253)
+
+  Thanks to @NitinMagdum for reporting
+* Fix: properly restore selection when using `[multiple]="true"`
+  [#260](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/260)
+
+  Thanks to @begandroide for reporting
+  
+
 ## 3.0.3
 * Fix: properly restore selection when using `[multiple]="true"`
   [#249](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/249)
