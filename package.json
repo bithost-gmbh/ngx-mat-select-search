@@ -2,7 +2,7 @@
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "ngx-mat-select-search",
   "description": "Angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -43,7 +43,7 @@
     }
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.27",
+    "@angular-devkit/build-angular": "^0.803.29",
     "@angular-extensions/lint-rules": "^1.2.0",
     "@angular/animations": "^8.2.14",
     "@angular/cdk": "^8.2.3",
@@ -70,6 +70,7 @@
     "karma-coverage-istanbul-reporter": "^2.0.4",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "ng-mat-select-infinite-scroll": "^2.0.0",
     "ng-packagr": "^5.4.0",
     "protractor": "~5.4.2",
     "rxjs": "^6.5.4",
@@ -77,7 +78,6 @@
     "tsickle": "^0.37.0",
     "tslint": "~5.12.0",
     "typescript": "~3.5.3",
-    "zone.js": "~0.9.1",
-    "ng-mat-select-infinite-scroll": "^2.0.0"
+    "zone.js": "~0.9.1"
   }
 }
