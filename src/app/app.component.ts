@@ -6,7 +6,8 @@ import { MatSelectSearchVersion } from './mat-select-search/ngx-mat-select-searc
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent {
 
