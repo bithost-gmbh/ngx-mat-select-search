@@ -637,7 +637,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   /**
-   *  Initialize this.previousSelectedValues whenever the selection changes and the search is empty
+   *  Initialize this.previousSelectedValues whenever the search value changes and the previous search value was empty (i.e. the unfiltered selected options)
    *  Wait for initial option list to capture initial selection
    */
   private initMultiSelectedValuesTracking() {
