@@ -6,9 +6,12 @@
  */
 
 $mat-menu-side-padding: 16px !default;
-$clear-button-width: 20px;
+$clear-button-width: 40px;
 $multiple-check-width: 33px;
 $mat-option-height: 3em;
+$mat-select-search-clear-x: 4px;
+$mat-select-search-spinner-x: 16px;
+$mat-select-search-toggle-all-checkbox-x: 16px;
 
 .mat-select-search-hidden {
   visibility: hidden;
@@ -59,23 +62,38 @@ $mat-option-height: 3em;
 
 .mat-select-search-input {
   padding: $mat-menu-side-padding;
-  padding-right: $mat-menu-side-padding + $clear-button-width;
+  padding-right: $clear-button-width + $mat-select-search-clear-x;
   box-sizing: border-box;
   width: 100%;
+
+  :host-context([dir="rtl"]) & {
+    padding-right: $mat-menu-side-padding;
+    padding-left: $clear-button-width + $mat-select-search-clear-x;
+  }
 }
 .mat-select-search-no-entries-found {
   padding: $mat-menu-side-padding;
 }
 .mat-select-search-clear {
   position: absolute;
-  right: 4px;
+  right: $mat-select-search-clear-x;
   top: 5px;
+
+  :host-context([dir="rtl"]) & {
+    right: auto;
+    left: $mat-select-search-clear-x;
+  }
 }
 
 .mat-select-search-spinner {
   position: absolute;
-  right: 16px;
+  right: $mat-select-search-spinner-x;
   top: calc(50% - 8px);
+
+  :host-context([dir="rtl"]) & {
+    right: auto;
+    left: $mat-select-search-spinner-x;
+  }
 }
 
 /** override styling when inside a mat-option */
@@ -98,6 +116,7 @@ $mat-option-height: 3em;
 
   .mat-icon {
     margin-right: 0px;
+    margin-left: 0px;
   }
   .mat-option-pseudo-checkbox {
     display: none;
@@ -108,6 +127,11 @@ $mat-option-height: 3em;
 }
 
 .mat-select-search-toggle-all-checkbox {
-  padding-left: 16px;
+  padding-left: $mat-select-search-toggle-all-checkbox-x;
   padding-bottom: 2px;
+
+  :host-context([dir="rtl"]) & {
+    padding-left: 0px;
+    padding-right: $mat-select-search-toggle-all-checkbox-x;
+  }
 }
