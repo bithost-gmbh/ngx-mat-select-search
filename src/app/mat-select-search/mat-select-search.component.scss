@@ -6,7 +6,7 @@
  */
 
 $mat-menu-side-padding: 16px !default;
-$clear-button-width: 20px;
+$clear-button-width: 40px;
 $multiple-check-width: 33px;
 $mat-option-height: 3em;
 $mat-select-search-clear-x: 4px;
@@ -62,12 +62,12 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
 
 .mat-select-search-input {
   padding: $mat-menu-side-padding;
-  padding-right: $mat-menu-side-padding + $clear-button-width;
+  padding-right: $clear-button-width + $mat-select-search-clear-x;
   box-sizing: border-box;
 
   :host-context([dir="rtl"]) & {
     padding-right: $mat-menu-side-padding;
-    padding-left: $mat-menu-side-padding + $clear-button-width;
+    padding-left: $clear-button-width + $mat-select-search-clear-x;
   }
 }
 .mat-select-search-no-entries-found {
