@@ -10,7 +10,6 @@ import { MatSelectSearchComponent } from './mat-select-search.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
@@ -28,7 +27,6 @@ export const MatSelectSearchVersion = '3.0.3';
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
-    MatInputModule,
     MatProgressSpinnerModule,
     MatTooltipModule
   ],

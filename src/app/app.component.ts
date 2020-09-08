@@ -15,4 +15,11 @@ export class AppComponent {
 
   matSelectSearchVersion = MatSelectSearchVersion;
 
+  private rightToLeft = false;
+
+  toggleRightToLeft() {
+    this.rightToLeft = !this.rightToLeft;
+    document.body.dir = this.rightToLeft ? 'rtl' : '';
+  }
+
 }
