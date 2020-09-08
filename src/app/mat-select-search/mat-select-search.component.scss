@@ -64,6 +64,7 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   padding: $mat-menu-side-padding;
   padding-right: $clear-button-width + $mat-select-search-clear-x;
   box-sizing: border-box;
+  width: 100%;
 
   :host-context([dir="rtl"]) & {
     padding-right: $mat-menu-side-padding;
