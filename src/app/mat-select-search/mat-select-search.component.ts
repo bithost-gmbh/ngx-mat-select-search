@@ -643,7 +643,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   private initMultiSelectedValuesTracking() {
     this._formControl.valueChanges.pipe(
       startWith<string, string>(undefined),
-      scan((acc, currentValue) => ({currentValue, previousValue: acc.currentValue}), ({currentValue: undefined, previousValue: undefined})),
+      scan(
+        (acc, currentValue) => ({currentValue, previousValue: acc.currentValue}),
+        ({currentValue: undefined, previousValue: undefined})
+      ),
       takeUntil(this._onDestroy)
     ).subscribe((value) => {
       const options = this._options ? this._options.toArray() : [];
