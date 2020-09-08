@@ -27,11 +27,16 @@
 
   <app-infinite-scroll-example></app-infinite-scroll-example>
 
+  <div>
+    <mat-slide-toggle ngModel (ngModelChange)="toggleRightToLeft()">Right-to-left</mat-slide-toggle>
+  </div>
 
-  <span class="version-info">
+
+
+  <div class="version-info">
     ngx-mat-select-search Version: {{matSelectSearchVersion}} <br/>
     Material Version: {{version.full}}
-  </span>
+  </div>
 
 
 </div>
