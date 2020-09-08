@@ -30,8 +30,8 @@ import { MatFormField } from '@angular/material/form-field';
 import { A, DOWN_ARROW, END, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { BehaviorSubject, combineLatest, concat, Observable, of, Subject } from 'rxjs';
-import { delay, filter, first, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
+import { delay, filter, map, scan, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
@@ -283,6 +283,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     } else {
       console.error('<ngx-mat-select-search> must be placed inside a <mat-option> element');
     }
+
+    this.initMultiSelectedValuesTracking();
 
     // when the select dropdown panel is opened or closed
     this.matSelect.openedChange
@@ -573,13 +575,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
           if (restoreSelectedValues) {
             this.matSelect._onChange(values);
+            this.previousSelectedValues = values;
           }
-
-          this.previousSelectedValues = values;
         }
       });
-
-    this.initMultiSelectedValues();
   }
 
   /**
@@ -638,19 +637,21 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   /**
-   *  Initialize this.previousSelectedValues whenever the selection changes and the search is empty
+   *  Initialize this.previousSelectedValues whenever the search value changes and the previous search value was empty
+   *  (i.e. the unfiltered selected options)
    *  Wait for initial option list to capture initial selection
    */
-  private initMultiSelectedValues() {
-    concat(
-      this.optionsList$.pipe(filter(options => options && options.length > 0), first()),
-      this.matSelect.valueChange.pipe(startWith<void, void>(null))
-    ).pipe(
+  private initMultiSelectedValuesTracking() {
+    this._formControl.valueChanges.pipe(
+      startWith<string, string>(undefined),
+      scan(
+        (acc, currentValue) => ({currentValue, previousValue: acc.currentValue}),
+        ({currentValue: undefined, previousValue: undefined})
+      ),
       takeUntil(this._onDestroy)
-    ).subscribe(() => {
-      const value = this._formControl.value;
+    ).subscribe((value) => {
       const options = this._options ? this._options.toArray() : [];
-      if (this.matSelect.multiple && !value) {
+      if (this.matSelect.multiple && !value.previousValue) {
         this.previousSelectedValues = options
           .filter(option => option.selected)
           .map(option => option.value);
