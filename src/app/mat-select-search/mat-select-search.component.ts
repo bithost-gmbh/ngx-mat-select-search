@@ -358,7 +358,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
                 // CASE: The first option is different now.
                 // Indiciates we should set it as active and scroll to the top.
-                if (firstOptionIsChanged) {
+                if (firstOptionIsChanged
+                  || !keyManager.activeItem
+                  || !options.find(option => this.matSelect.compareWith(option, keyManager.activeItem))) {
                   keyManager.setFirstItemActive();
                 }
 
