@@ -27,7 +27,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 import { _countGroupLabelsBeforeOption, MatOption } from '@angular/material/core';
 import { MatSelect, SELECT_PANEL_MAX_HEIGHT } from '@angular/material/select';
 import { MatFormField } from '@angular/material/form-field';
-import { A, DOWN_ARROW, END, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
+import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
@@ -439,6 +439,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
     ) {
       event.stopPropagation();
+    }
+
+    if (this.matSelect.multiple && event.key && event.keyCode === ENTER) {
+      // Regain focus after multiselect, so we can further type
+      setTimeout(() => this._focus());
     }
 
     // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
