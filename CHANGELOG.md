@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.1.1
+* Enhancement: Add compatibility with `@angular/core`: `^11.0.0`, `@angular/material`: `^11.0.0`
+* Fix: set first item active if no item is active after filtering
+  [#263](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/263)
+
+  Thanks to @Ayoubane for reporting
+* Fix: in multi select mode after enter the search is not focused
+  [#265](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/265)
+
+  Thanks to @bulldog98
+
 ## 3.1.0
 * Feature: Support Right-To-Left
   [#258](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/258)
