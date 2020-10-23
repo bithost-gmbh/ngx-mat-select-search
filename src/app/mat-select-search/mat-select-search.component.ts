@@ -658,7 +658,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       takeUntil(this._onDestroy)
     ).subscribe((value) => {
       const options = this._options ? this._options.toArray() : [];
-      if (this.matSelect.multiple && !value.previousValue) {
+      if (this.matSelect.multiple) {
         this.previousSelectedValues = options
           .filter(option => option.selected)
           .map(option => option.value);
