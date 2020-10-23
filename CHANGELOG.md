@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.2
+* Fix: incorrect restoration of selection when using `[multiple]="true"` and no initial selection prior to filtering
+  [#260](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/270)
+
+  Thanks to @pranavneeraj for reporting
+
 ## 3.1.1
 * Enhancement: Add compatibility with `@angular/core`: `^11.0.0`, `@angular/material`: `^11.0.0`
 * Fix: set first item active if no item is active after filtering
