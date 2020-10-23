@@ -579,10 +579,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
               }
             });
           }
+          this.previousSelectedValues = values;
 
           if (restoreSelectedValues) {
             this.matSelect._onChange(values);
-            this.previousSelectedValues = values;
           }
         }
       });
