@@ -187,6 +187,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Define the position of the tooltip on the toggle-all checkbox. */
   @Input() toogleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
 
+  /** Required only for multiselect value tracking */
+  @Input()  bankMultiCtrl: FormControl;
+
   /** Output emitter to send to parent component with the toggle all boolean */
   @Output() toggleAll = new EventEmitter<boolean>();
 
@@ -284,7 +287,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       console.error('<ngx-mat-select-search> must be placed inside a <mat-option> element');
     }
 
-    this.initMultiSelectedValuesTracking();
+    if (this.matSelect.multiple) {
+      this.initMultiSelectedValuesTracking();
+      this.previousSelectedValues = this.matSelect.ngControl.value;
+    }
 
     // when the select dropdown panel is opened or closed
     this.matSelect.openedChange
@@ -644,25 +650,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   /**
-   *  Initialize this.previousSelectedValues whenever the search value changes and the previous search value was empty
-   *  (i.e. the unfiltered selected options)
-   *  Wait for initial option list to capture initial selection
+   *  this.previousSelectedValues whenever selected values for multiselect changes.
    */
   private initMultiSelectedValuesTracking() {
-    this._formControl.valueChanges.pipe(
-      startWith<string, string>(undefined),
-      scan(
-        (acc, currentValue) => ({currentValue, previousValue: acc.currentValue}),
-        ({currentValue: undefined, previousValue: undefined})
-      ),
+    this.matSelect.ngControl.valueChanges.pipe(
       takeUntil(this._onDestroy)
-    ).subscribe((value) => {
-      const options = this._options ? this._options.toArray() : [];
-      if (this.matSelect.multiple && !value.previousValue) {
-        this.previousSelectedValues = options
-          .filter(option => option.selected)
-          .map(option => option.value);
-      }
+    ).subscribe((values) => {
+      this.previousSelectedValues = values;
     });
   }
 
