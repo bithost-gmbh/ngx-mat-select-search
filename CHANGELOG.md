@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.3
+* Fix: incorrect restoration of selection when using `[multiple]="true"`
+  [#279](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/279)
+
+  Thanks to @broekema41
+  
 ## 3.1.2
 * Fix: incorrect restoration of selection when using `[multiple]="true"` and no initial selection prior to filtering
   [#270](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/270)
