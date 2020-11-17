@@ -140,7 +140,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   /** Label of the search placeholder */
-  @Input() public placeholder = 'Suche';
+  @Input() placeholder = 'Suche';
 
   /** Type of the search input field */
   @Input() type = 'text';
