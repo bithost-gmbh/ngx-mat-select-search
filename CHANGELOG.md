@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.4
+* Fix: null-pointer exception if no form control directive on `mat-select`
+  [#281](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/281)
+
+  Thanks to @Daishy for reporting
+
 ## 3.1.3
 * Fix: incorrect restoration of selection when using `[multiple]="true"`
   [#279](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/279)
