@@ -31,7 +31,7 @@ import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { delay, filter, map, scan, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
@@ -553,6 +553,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    * Note: to improve this code, mat-select should be extended to allow disabling resetting the selection while filtering.
    */
   private initMultipleHandling() {
+    if (!this.matSelect.ngControl) {
+      if (this.matSelect.multiple) {
+        // note: the access to matSelect.ngControl (instead of matSelect.value / matSelect.valueChanges)
+        // is necessary to properly work in multi-selection mode.
+        console.error('the mat-select containing ngx-mat-select-search must have a ngModel or formControl directive when multiple=true');
+      }
+      return;
+    }
     // if <mat-select [multiple]="true">
     // store previously selected values and restore them when they are deselected
     // because the option is not available while we are currently filtering
