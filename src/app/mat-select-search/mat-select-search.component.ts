@@ -130,7 +130,13 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
 export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   /** Label of the search placeholder */
-  @Input() placeholderLabel = 'Suche';
+  @Input() set placeholderLabel(placeholder: string) {
+    this.placeholder = placeholder;
+  }
+
+  /** Label of the search placeholder */
+  @Input()
+  public placeholder = 'Suche';
 
   /** Type of the search input field */
   @Input() type = 'text';
