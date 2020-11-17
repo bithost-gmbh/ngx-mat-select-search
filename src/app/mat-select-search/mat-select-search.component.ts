@@ -555,6 +555,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   private initMultipleHandling() {
     if (!this.matSelect.ngControl) {
       if (this.matSelect.multiple) {
+        // note: the access to matSelect.ngControl (instead of matSelect.value / matSelect.valueChanges)
+        // is necessary to properly work in multi-selection mode.
         console.error('the mat-select containing ngx-mat-select-search must have a ngModel or formControl directive when multiple=true');
       }
       return;
