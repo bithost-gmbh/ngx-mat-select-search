@@ -129,8 +129,13 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
 })
 export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
-  /** Label of the search placeholder */
+  /**
+   * Label of the search placeholder
+   *
+   * @deprecated use 'placeholder' instead.
+   */
   @Input() set placeholderLabel(placeholder: string) {
+    console.warn(`'placeholderLabel' attribute is deprecated; use 'placeholder' instead.`);
     this.placeholder = placeholder;
   }
 
