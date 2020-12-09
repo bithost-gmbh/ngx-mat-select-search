@@ -34,7 +34,7 @@
           diameter="16"></mat-spinner>
 
   <button mat-button
-          *ngIf="showClearSearchButton && value && !searching"
+          *ngIf="hideClearSearchButton && value && !searching"
           mat-icon-button
           aria-label="Clear"
           (click)="_reset(true)"

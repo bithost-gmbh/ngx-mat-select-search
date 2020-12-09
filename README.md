@@ -149,7 +149,7 @@ Furthermore, it provides the following inputs:
   @Input() toogleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
 
   /** Show/Hide the search clear button of the search input */
-  @Input() showClearSearchButton = true;
+  @Input() hideClearSearchButton = false;
 
   /**
   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total
