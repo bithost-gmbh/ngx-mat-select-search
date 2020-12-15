@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.0
+* Feature: allow disabling the clear search button with `[hideClearSearchButton]="true"`
+  [#290](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/290)
+
+  Thanks to @vlio20
+
 ## 3.1.4
 * Fix: null-pointer exception if no form control directive on `mat-select`
   [#281](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/281)
