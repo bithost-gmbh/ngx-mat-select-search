@@ -4,7 +4,11 @@
   <mat-form-field color="accent">
     <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
       <mat-option>
-        <ngx-mat-select-search [showToggleAllCheckbox]="true" (toggleAll)="toggleSelectAll($event)" [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
+        <ngx-mat-select-search [showToggleAllCheckbox]="true"
+                               [toggleAllCheckboxIndeterminate]="bankMultiCtrl.value.length > 0 && bankMultiCtrl.value.length < allBanksSize"
+                               [toggleAllCheckboxChecked]="bankMultiCtrl.value.length === allBanksSize"
+                               (toggleAll)="toggleSelectAll($event)"
+                               [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
       </mat-option>
       <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
         {{bank.name}}
