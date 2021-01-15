@@ -16,6 +16,9 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
   /** list of banks */
   protected banks: Bank[] = BANKS;
 
+  /** total number of available entries */
+  public allBanksSize = BANKS.length;
+
   /** control for the selected bank for multi-selection */
   public bankMultiCtrl: FormControl = new FormControl();
 
