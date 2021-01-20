@@ -5,8 +5,8 @@
     <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
       <mat-option>
         <ngx-mat-select-search [showToggleAllCheckbox]="true"
-                               [toggleAllCheckboxIndeterminate]="bankMultiCtrl.value.length > 0 && bankMultiCtrl.value.length < allBanksSize"
-                               [toggleAllCheckboxChecked]="bankMultiCtrl.value.length === allBanksSize"
+                               [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                               [toggleAllCheckboxChecked]="isChecked"
                                (toggleAll)="toggleSelectAll($event)"
                                [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
       </mat-option>

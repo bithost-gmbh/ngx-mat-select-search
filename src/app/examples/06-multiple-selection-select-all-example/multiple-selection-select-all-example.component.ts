@@ -28,6 +28,13 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
   /** list of banks filtered by search keyword */
   public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
+  /** local copy of filtered banks to help set the toggle all checkbox state */
+  protected filteredBanksCache: Bank[] = [];
+
+  /** flags to set the toggle all checkbox state */
+  isIndeterminate = false;
+  isChecked = false;
+
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
   /** Subject that emits when the component has been destroyed. */
@@ -48,7 +55,14 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         this.filterBanksMulti();
+        this.setToggleAllCheckboxState();
       });
+
+      // listen for multi select field value changes
+    this.bankMultiCtrl.valueChanges
+    .pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this.setToggleAllCheckboxState();
+    });
   }
 
   ngAfterViewInit() {
@@ -94,15 +108,28 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
     // get the search keyword
     let search = this.bankMultiFilterCtrl.value;
     if (!search) {
-      this.filteredBanksMulti.next(this.banks.slice());
+      this.filteredBanksCache = this.banks.slice();
+      this.filteredBanksMulti.next(this.filteredBanksCache);
       return;
     } else {
       search = search.toLowerCase();
     }
     // filter the banks
-    this.filteredBanksMulti.next(
-      this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
-    );
+    this.filteredBanksCache = this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
+    this.filteredBanksMulti.next(this.filteredBanksCache);
+  }
+
+  protected setToggleAllCheckboxState() {
+    let filteredLength = 0;
+    if (this.bankMultiCtrl && this.bankMultiCtrl.value) {
+      this.filteredBanksCache.forEach(el => {
+        if (this.bankMultiCtrl.value.indexOf(el) > -1) {
+          filteredLength++;
+        }
+      });
+      this.isIndeterminate = filteredLength > 0 && filteredLength < this.filteredBanksCache.length;
+      this.isChecked = filteredLength > 0 && filteredLength === this.filteredBanksCache.length;
+    }
   }
 
 }

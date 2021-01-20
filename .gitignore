@@ -34,6 +34,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+.history
 
 # e2e
 /e2e/*.js
