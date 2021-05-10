@@ -247,6 +247,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     this._formControl.valueChanges,
     this.optionsLength$
   ]).pipe(
+    // avoid "expression has been changed" error
     debounceTime(0),
     map(([value, optionsLength]) => this.noEntriesFoundLabel && value
       && optionsLength === this.getOptionsLengthOffset())
