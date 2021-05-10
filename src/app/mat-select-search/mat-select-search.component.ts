@@ -31,7 +31,7 @@ import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 
@@ -247,6 +247,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     this._formControl.valueChanges,
     this.optionsLength$
   ]).pipe(
+    // avoid "expression has been changed" error
+    debounceTime(0),
     map(([value, optionsLength]) => this.noEntriesFoundLabel && value
       && optionsLength === this.getOptionsLengthOffset())
   );
