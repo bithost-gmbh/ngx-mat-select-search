@@ -30,7 +30,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { BehaviorSubject, combineLatest, Observable, of, Subject, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
