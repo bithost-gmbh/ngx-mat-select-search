@@ -580,8 +580,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       .subscribe((values) => {
         let restoreSelectedValues = false;
         if (this.matSelect.multiple) {
-          if (this.alwaysRestoreMissingValues || (this._formControl.value && this._formControl.value.length
-            && this.previousSelectedValues && Array.isArray(this.previousSelectedValues))) {
+          if ((this.alwaysRestoreMissingValues || (this._formControl.value && this._formControl.value.length))
+            && this.previousSelectedValues && Array.isArray(this.previousSelectedValues)) {
             if (!values || !Array.isArray(values)) {
               values = [];
             }
