@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.1
+* Enhancement: Add compatibility with `@angular/core`: `^12.0.0`, `@angular/material`: `^12.0.0`
+* Enhancement: Improve select all example
+  
+  Thanks to @achilehero
+  
 ## 3.2.0
 * Feature: allow disabling the clear search button with `[hideClearSearchButton]="true"`
   [#290](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/290)

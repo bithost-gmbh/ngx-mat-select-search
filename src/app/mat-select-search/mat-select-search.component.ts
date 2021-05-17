@@ -25,15 +25,18 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { _countGroupLabelsBeforeOption, MatOption } from '@angular/material/core';
-import { MatSelect, SELECT_PANEL_MAX_HEIGHT } from '@angular/material/select';
+import { MatSelect } from '@angular/material/select';
 import { MatFormField } from '@angular/material/form-field';
 import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { debounceTime, delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
+
+/** The max height of the select's overlay panel. */
+const SELECT_PANEL_MAX_HEIGHT = 256;
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -247,8 +250,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     this._formControl.valueChanges,
     this.optionsLength$
   ]).pipe(
-    // avoid "expression has been changed" error
-    debounceTime(0),
     map(([value, optionsLength]) => this.noEntriesFoundLabel && value
       && optionsLength === this.getOptionsLengthOffset())
   );
