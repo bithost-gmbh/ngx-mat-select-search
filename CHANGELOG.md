@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.2.2
+* Enhancement: Update `peerDependencies` in `package.json` for compatibility with `@angular/core`: `^12.0.0`, `@angular/material`: `^12.0.0`
+  
 ## 3.2.1
 * Enhancement: Add compatibility with `@angular/core`: `^12.0.0`, `@angular/material`: `^12.0.0`
 * Enhancement: Improve select all example
