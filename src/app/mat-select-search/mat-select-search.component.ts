@@ -193,7 +193,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Show/Hide the search clear button of the search input */
   @Input() hideClearSearchButton = false;
 
-  /** Always restore mission values on selectionChange (e.g. because it wasn't available due to lazy loading) */
+  /** 
+   * Always restore selected options on selectionChange for mode multi (e.g. for lazy loading/infinity scrolling). 
+   * Defaults to false, so selected options are only restored while filtering is active. 
+   */
   @Input() alwaysRestoreSelectedOptionsMulti = false;
 
   /** Output emitter to send to parent component with the toggle all boolean */
