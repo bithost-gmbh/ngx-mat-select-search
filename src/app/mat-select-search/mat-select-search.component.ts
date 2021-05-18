@@ -194,7 +194,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Input() hideClearSearchButton = false;
 
   /** Always restore mission values on selectionChange (e.g. because it wasn't available due to lazy loading) */
-  @Input() alwaysRestoreMissingValues = false;
+  @Input() alwaysRestoreSelectedOptionsMulti = false;
 
   /** Output emitter to send to parent component with the toggle all boolean */
   @Output() toggleAll = new EventEmitter<boolean>();
