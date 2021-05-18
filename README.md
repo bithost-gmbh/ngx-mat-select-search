@@ -151,6 +151,12 @@ Furthermore, it provides the following inputs:
   /** Show/Hide the search clear button of the search input */
   @Input() hideClearSearchButton = false;
 
+  /** 
+   * Always restore selected options on selectionChange for mode multi (e.g. for lazy loading/infinity scrolling). 
+   * Defaults to false, so selected options are only restored while filtering is active. 
+   */
+  @Input() alwaysRestoreSelectedOptionsMulti = false;
+
   /**
   *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total
   *  options.
