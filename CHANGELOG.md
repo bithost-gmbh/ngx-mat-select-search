@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.0
+* Enhancement: Add option to restore selected items using infinity-scroll
+  [#320](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/320)
+  
+  Thanks to @angelaki
+  
 ## 3.2.2
 * Enhancement: Update `peerDependencies` in `package.json` for compatibility with `@angular/core`: `^12.0.0`, `@angular/material`: `^12.0.0`
   
