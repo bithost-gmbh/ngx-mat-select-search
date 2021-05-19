@@ -194,8 +194,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Input() hideClearSearchButton = false;
 
   /** 
-   * Always restore selected options on selectionChange for mode multi (e.g. for lazy loading/infinity scrolling). 
-   * Defaults to false, so selected options are only restored while filtering is active. 
+   * Always restore selected options on selectionChange for mode multi (e.g. for lazy loading/infinity scrolling).
+   * Defaults to false, so selected options are only restored while filtering is active.
    */
   @Input() alwaysRestoreSelectedOptionsMulti = false;
 
