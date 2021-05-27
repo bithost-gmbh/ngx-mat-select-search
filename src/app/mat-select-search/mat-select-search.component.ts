@@ -132,8 +132,18 @@ const SELECT_PANEL_MAX_HEIGHT = 256;
 })
 export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
+  /**
+   * Label of the search placeholder
+   *
+   * @deprecated use 'placeholder' instead.
+   */
+  @Input() set placeholderLabel(placeholder: string) {
+    console.warn(`'placeholderLabel' attribute is deprecated; use 'placeholder' instead.`);
+    this.placeholder = placeholder;
+  }
+
   /** Label of the search placeholder */
-  @Input() placeholderLabel = 'Suche';
+  @Input() placeholder = 'Suche';
 
   /** Type of the search input field */
   @Input() type = 'text';
