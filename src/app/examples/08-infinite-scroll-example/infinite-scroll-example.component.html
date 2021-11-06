@@ -5,6 +5,8 @@
   Selected Bank: {{bankCtrl?.value}}
 </p>
 
+<!-- Disabled due to incompatibility of ng-mat-select-infinite-scroll with Angular 13. -->
+<!--
 <mat-form-field>
   <mat-select #matSelectInfiniteScroll
               msInfiniteScroll
@@ -12,7 +14,7 @@
               [formControl]="bankCtrl"
               placeholder="Select Something">
     <mat-option>
-      <!--disableScrollToActiveOnOptionsChanged should be set to true-->
+      // disableScrollToActiveOnOptionsChanged should be set to true
       <ngx-mat-select-search
         [formControl]="searchCtrl"
         placeholderLabel="search"
@@ -26,3 +28,4 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
+-->

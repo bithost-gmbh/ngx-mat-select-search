@@ -1,4 +1,7 @@
 # Changelog
+  
+## 3.3.1
+* Enhancement: Add compatibility with `@angular/core`: `^13.0.0`, `@angular/material`: `^13.0.0`
 
 ## 3.3.0
 * Enhancement: Add option to restore selected items using infinity-scroll

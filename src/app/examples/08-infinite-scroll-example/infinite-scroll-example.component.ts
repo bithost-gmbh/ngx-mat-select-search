@@ -96,12 +96,12 @@ export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-    this.infiniteScrollSelect.openedChange.pipe(takeUntil(this.destroy$)).subscribe(opened => {
+    /*this.infiniteScrollSelect.openedChange.pipe(takeUntil(this.destroy$)).subscribe(opened => {
       // after opening, reset the batch offset
       if (opened) {
         this.resetBatchOffset$.next();
       }
-    });
+    });*/
   }
 
   ngOnDestroy() {
