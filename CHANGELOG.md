@@ -1,5 +1,8 @@
 # Changelog
-  
+    
+## 3.3.2
+* Fix: Add compatibility with `@angular/core`: `^13.0.0`, `@angular/material`: `^13.0.0` in `package.json`
+
 ## 3.3.1
 * Enhancement: Add compatibility with `@angular/core`: `^13.0.0`, `@angular/material`: `^13.0.0`
 
