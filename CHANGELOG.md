@@ -1,4 +1,9 @@
 # Changelog
+
+## 3.3.3
+* Enhancement: Document compatibility with `@angular/core`: `^13.0.0`, `@angular/material`: `^13.0.0` in `README.md`
+
+  Thanks to @meta72
     
 ## 3.3.2
 * Fix: Add compatibility with `@angular/core`: `^13.0.0`, `@angular/material`: `^13.0.0` in `package.json`
