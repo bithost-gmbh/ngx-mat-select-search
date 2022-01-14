@@ -85,12 +85,12 @@ interface Bank {
 })
 export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild('selectSingle', {static: false}) matSelect: MatSelect;
-  @ViewChild('selectSingleMatOption', {static: false}) matSelectMatOption: MatSelect;
-  @ViewChild('selectMulti', {static: false}) matSelectMulti: MatSelect;
-  @ViewChild('selectSearchSingle', {static: false}) matSelectSearch: MatSelectSearchComponent;
-  @ViewChild('selectSearchSingleMatOption', {static: false}) matSelectSearchMatOption: MatSelectSearchComponent;
-  @ViewChild('selectSearchMulti', {static: false}) matSelectSearchMulti: MatSelectSearchComponent;
+  @ViewChild('selectSingle') matSelect: MatSelect;
+  @ViewChild('selectSingleMatOption') matSelectMatOption: MatSelect;
+  @ViewChild('selectMulti') matSelectMulti: MatSelect;
+  @ViewChild('selectSearchSingle') matSelectSearch: MatSelectSearchComponent;
+  @ViewChild('selectSearchSingleMatOption') matSelectSearchMatOption: MatSelectSearchComponent;
+  @ViewChild('selectSearchMulti') matSelectSearchMulti: MatSelectSearchComponent;
 
   // control for the selected bank
   public bankCtrl: FormControl = new FormControl();
