@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSelectInfiniteScrollModule } from 'ng-mat-select-infinite-scroll';
 
 
 import { NgxMatSelectSearchModule } from './mat-select-search/ngx-mat-select-search.module';
@@ -50,7 +49,6 @@ export class MaterialModule {}
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxMatSelectSearchModule,
-    MatSelectInfiniteScrollModule,
     MatSlideToggleModule
   ],
   declarations: [

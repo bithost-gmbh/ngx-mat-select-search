@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.0
+* Enhancement: Build and package using `@angular/core@13` in Ivy format.
+  [#347](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/347)
+  
+  **Breaking Change**:  `@angular/core`: `<= 11.0.0` is not supported anymore, please use version `3.3.3`.
+
+  Thanks to @nseni for reporting
+
 ## 3.3.3
 * Enhancement: Document compatibility with `@angular/core`: `^13.0.0`, `@angular/material`: `^13.0.0` in `README.md`
 
