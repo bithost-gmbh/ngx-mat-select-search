@@ -6,7 +6,7 @@
  */
 
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -85,12 +85,12 @@ interface Bank {
 })
 export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild('selectSingle', {static: false}) matSelect: MatSelect;
-  @ViewChild('selectSingleMatOption', {static: false}) matSelectMatOption: MatSelect;
-  @ViewChild('selectMulti', {static: false}) matSelectMulti: MatSelect;
-  @ViewChild('selectSearchSingle', {static: false}) matSelectSearch: MatSelectSearchComponent;
-  @ViewChild('selectSearchSingleMatOption', {static: false}) matSelectSearchMatOption: MatSelectSearchComponent;
-  @ViewChild('selectSearchMulti', {static: false}) matSelectSearchMulti: MatSelectSearchComponent;
+  @ViewChild('selectSingle') matSelect: MatSelect;
+  @ViewChild('selectSingleMatOption') matSelectMatOption: MatSelect;
+  @ViewChild('selectMulti') matSelectMulti: MatSelect;
+  @ViewChild('selectSearchSingle') matSelectSearch: MatSelectSearchComponent;
+  @ViewChild('selectSearchSingleMatOption') matSelectSearchMatOption: MatSelectSearchComponent;
+  @ViewChild('selectSearchMulti') matSelectSearchMulti: MatSelectSearchComponent;
 
   // control for the selected bank
   public bankCtrl: FormControl = new FormControl();
@@ -253,7 +253,7 @@ describe('MatSelectSearchComponent', () => {
   let component: MatSelectSearchTestComponent;
   let fixture: ComponentFixture<MatSelectSearchTestComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
@@ -552,7 +552,7 @@ describe('MatSelectSearchComponent', () => {
 
   describe('with initial selection', () => {
 
-    it('should set the initial selection of MatSelect', async((done) => {
+    it('should set the initial selection of MatSelect', waitForAsync((done) => {
       component.initialSingleSelection = component.banks[3];
       fixture.detectChanges();
 
@@ -593,7 +593,7 @@ describe('MatSelectSearchComponent', () => {
 
     }));
 
-    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', async((done) => {
+    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', waitForAsync((done) => {
       component.initialMultiSelection = [component.banks[1]];
       fixture.detectChanges();
 
