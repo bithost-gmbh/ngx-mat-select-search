@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.1
+* Fix: Remove incompatible angular versions from `Readme.md` and `package.json`
+
 ## 4.0.0
 * Enhancement: Build and package using `@angular/core@13` in Ivy format.
   [#347](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/347)
