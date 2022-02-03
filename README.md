@@ -87,12 +87,12 @@ To use the [i18n](https://angular.io/guide/i18n) API for translation of the labe
 
 #### Current release
 
-* `@angular/core`: `^12.0.0 || ^13.0.0`,
-* `@angular/material`: `^12.0.0 || ^13.0.0`
+* `@angular/core`: `^12.0.0 || ^13.0.0 || ^14.0.0`
+* `@angular/material`: `^12.0.0 || ^13.0.0 || ^14.0.0`
 
 #### Version [`3.3.3`](https://github.com/bithost-gmbh/ngx-mat-select-search/tree/3.3.3)
 
-* `@angular/core`: `^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0`,
+* `@angular/core`: `^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0`
 * `@angular/material`: `^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0`
 
 #### Version [`1.8.0`](https://github.com/bithost-gmbh/ngx-mat-select-search/tree/1.8.0)
