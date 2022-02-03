@@ -2,7 +2,7 @@
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "ngx-mat-select-search",
   "description": "Angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -33,7 +33,7 @@
   ],
   "homepage": "https://github.com/bithost-gmbh/ngx-mat-select-search",
   "peerDependencies": {
-    "@angular/material": "^12.0.0 || ^13.0.0"
+    "@angular/material": "^12.0.0 || ^13.0.0 || ^14.0.0"
   },
   "ngPackage": {
     "dest": "dist-lib",

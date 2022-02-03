@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.2
+* Enhancement: Add compatibility with `@angular/core`: `^14.0.0`, `@angular/material`: `^14.0.0`
+
 ## 4.0.1
 * Fix: Remove incompatible angular versions from `Readme.md` and `package.json`
 
