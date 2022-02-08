@@ -573,6 +573,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       }
       return;
     }
+
     // if <mat-select [multiple]="true">
     // store previously selected values and restore them when they are deselected
     // because the option is not available while we are currently filtering
@@ -580,30 +581,42 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
     this.matSelect.ngControl.valueChanges
       .pipe(takeUntil(this._onDestroy))
-      .subscribe((values) => {
-        let restoreSelectedValues = false;
-        if (this.matSelect.multiple) {
-          if ((this.alwaysRestoreSelectedOptionsMulti || (this._formControl.value && this._formControl.value.length))
-            && this.previousSelectedValues && Array.isArray(this.previousSelectedValues)) {
-            if (!values || !Array.isArray(values)) {
-              values = [];
-            }
-            const optionValues = this.matSelect.options.map(option => option.value);
-            this.previousSelectedValues.forEach(previousValue => {
-              if (!values.some(v => this.matSelect.compareWith(v, previousValue))
-                && !optionValues.some(v => this.matSelect.compareWith(v, previousValue))) {
-                // if a value that was selected before is deselected and not found in the options, it was deselected
-                // due to the filtering, so we restore it.
-                values.push(previousValue);
-                restoreSelectedValues = true;
-              }
-            });
-          }
+      .subscribe((currentSelectedValues) => {
+        if (!this.matSelect.multiple) {
+          this.previousSelectedValues = currentSelectedValues;
+          return;
         }
-        this.previousSelectedValues = values;
+
+        if (!this.alwaysRestoreSelectedOptionsMulti) {
+          this.previousSelectedValues = currentSelectedValues;
+          return;
+        }
+
+        const filteringInProgress = (this._formControl.value && this._formControl.value.length);
+
+        let restoreSelectedValues = false;
+
+        if (filteringInProgress && this.previousSelectedValues && Array.isArray(this.previousSelectedValues)) {
+            if (!currentSelectedValues || !Array.isArray(currentSelectedValues)) {
+                currentSelectedValues = [];
+            }
+
+            const optionValues = this.matSelect.options.map(option => option.value);
+
+            this.previousSelectedValues.forEach(previousValue => {
+                const previousValueDeselectedDuringFiltering = !currentSelectedValues.some(v => this.matSelect.compareWith(v, previousValue)) && !optionValues.some(v => this.matSelect.compareWith(v, previousValue));
+
+                if (previousValueDeselectedDuringFiltering) {
+                    currentSelectedValues.push(previousValue);
+                    restoreSelectedValues = true;
+                }
+            });
+        }
+
+        this.previousSelectedValues = currentSelectedValues;
 
         if (restoreSelectedValues) {
-          this.matSelect._onChange(values);
+            this.matSelect._onChange(currentSelectedValues);
         }
       });
   }
