@@ -26,17 +26,15 @@ Install `ngx-mat-select-search` in your project:
 npm install ngx-mat-select-search
 ```
 
-Import the `NgxMatSelectSearchModule` in your `app.module.ts`:
+Import the `NgxMatSelectSearchModule` e.g. in your `app.module.ts`:
 ```typescript
-import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   imports: [
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
+    ...
     MatSelectModule,
-    MatFormFieldModule,
     NgxMatSelectSearchModule
   ],
 })
@@ -56,8 +54,7 @@ Use the `ngx-mat-select-search` component inside a `mat-select` element by placi
   </mat-select>
 </mat-form-field>
 ```
-See the example in [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/app.component.html](https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/app.component.html)
-and [https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/app.component.ts](https://github.com/bithost-gmbh/ngx-mat-select-search/blob/master/src/app/app.component.ts)
+See the examples in [https://github.com/bithost-gmbh/ngx-mat-select-search/tree/master/src/app/examples](https://github.com/bithost-gmbh/ngx-mat-select-search/tree/master/src/app/examples)
 how to wire the `ngx-mat-select-search` and filter the options available.
 Or have a look at [https://github.com/bithost-gmbh/ngx-mat-select-search-example](https://github.com/bithost-gmbh/ngx-mat-select-search-example) to see it in a standalone app.
 
