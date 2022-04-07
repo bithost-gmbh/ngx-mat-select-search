@@ -138,6 +138,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Type of the search input field */
   @Input() type = 'text';
 
+  /** Icon / svg used for displaying Close-Icon */
+  @Input() closeSvgIcon?: string;
+  @Input() closeIcon = 'close';
+
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
