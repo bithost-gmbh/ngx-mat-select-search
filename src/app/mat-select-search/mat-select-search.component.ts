@@ -299,8 +299,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     @Optional() @Inject(MATSELECTSEARCH_GLOBAL_OPTIONS) globalOptions?: MatSelectSearchOptions
   ) {
     if (globalOptions) {
-      // Assign all set properties of globalOptions
-      Object.assign(this, Object.fromEntries(Object.entries(globalOptions).filter(([_, v]) => typeof v !== 'undefined')));
+      // Assign all set properties of globalOptions; != null: ignore both null / undefined
+      Object.assign(this, Object.fromEntries(Object.entries(globalOptions).filter(([_, v]) => v != null)));
     }
   }
 
