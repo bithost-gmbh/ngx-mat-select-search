@@ -41,7 +41,9 @@
           class="mat-select-search-clear">
     <ng-content *ngIf="clearIcon; else defaultIcon" select="[ngxMatSelectSearchClear]"></ng-content>
     <ng-template #defaultIcon>
-      <mat-icon [svgIcon]="closeSvgIcon">{{!closeSvgIcon?closeIcon:null}}</mat-icon>
+      <mat-icon [svgIcon]="closeSvgIcon">
+        {{!closeSvgIcon?closeIcon:null}}
+      </mat-icon>
     </ng-template>
   </button>
 

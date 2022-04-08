@@ -109,6 +109,12 @@ Furthermore, it provides the following inputs:
   /** Type of the search input field */
   @Input() type = 'text';
 
+  /** Font-based icon used for displaying Close-Icon */
+  @Input() closeIcon = 'close';
+
+  /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
+  @Input() closeSvgIcon?: string;
+
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
@@ -183,6 +189,7 @@ In order to customize the search icon, add the `ngxMatSelectSearchClear` to your
    <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
 </ngx-mat-select-search>
 ```
+If just the icon should be changed the properties `closeIcon` & `closeSvgIcon` can be used.
 
 #### Custom content
 Custom content with the CSS class `mat-select-search-custom-header-content` can be transcluded as follows:
@@ -191,6 +198,9 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
    <div class="mat-select-search-custom-header-content">something special</div>
 </ngx-mat-select-search>
 ```
+
+#### Global options
+Providing the `MATSELECTSEARCH_GLOBAL_OPTIONS` InjectionToken, several options can be set globally.
 
 ## Known Problems
 * The currently selected option might be hidden under the search input field when opening the options panel 

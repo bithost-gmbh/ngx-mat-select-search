@@ -15,6 +15,7 @@ import {
   forwardRef,
   HostBinding,
   Inject,
+  InjectionToken,
   Input,
   OnDestroy,
   OnInit,
@@ -37,6 +38,25 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
 
 /** The max height of the select's overlay panel. */
 const SELECT_PANEL_MAX_HEIGHT = 256;
+
+/** InjectionToken that can be used to specify global options. */
+export const MATSELECTSEARCH_GLOBAL_OPTIONS = new InjectionToken<MatSelectSearchOptions>('MATSELECTSEARCH_GLOBAL_OPTIONS');
+
+/** Configurable options for MatSelectSearch. */
+export interface MatSelectSearchOptions {
+  closeIcon?: string;
+  closeSvgIcon?: string;
+  noEntriesFoundLabel?: string;
+  ariaLabel?: string;
+  clearSearchInput?: boolean;
+  searching?: boolean;
+  disableInitialFocus?: boolean;
+  enableClearOnEscapePressed?: boolean;
+  preventHomeEndKeyPropagation?: boolean;
+  disableScrollToActiveOnOptionsChanged?: boolean;
+  hideClearSearchButton?: boolean;
+  indexAndLengthScreenReaderText?: string;
+}
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -138,9 +158,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Type of the search input field */
   @Input() type = 'text';
 
-  /** Icon / svg used for displaying Close-Icon */
-  @Input() closeSvgIcon?: string;
+  /** Font-based icon used for displaying Close-Icon */
   @Input() closeIcon = 'close';
+
+  /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
+  @Input() closeSvgIcon?: string;
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
@@ -273,8 +295,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     private _viewportRuler: ViewportRuler,
     @Optional() @Inject(MatOption) public matOption: MatOption = null,
     private liveAnnouncer: LiveAnnouncer,
-    @Optional() @Inject(MatFormField) public matFormField: MatFormField = null
+    @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
+    @Optional() @Inject(MATSELECTSEARCH_GLOBAL_OPTIONS) globalOptions?: MatSelectSearchOptions
   ) {
+    if (globalOptions) {
+      // Assign all set properties of globalOptions
+      Object.assign(this, Object.fromEntries(Object.entries(globalOptions).filter(([_, v]) => typeof v !== 'undefined')));
+    }
   }
 
   ngOnInit() {
