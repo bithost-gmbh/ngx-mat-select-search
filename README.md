@@ -201,6 +201,7 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
 
 #### Global options
 Providing the `MATSELECTSEARCH_GLOBAL_OPTIONS` InjectionToken, several options can be set globally.
+See the documentation of the corresponding @Input() properties of MatSelectSearchComponent.
 
 ## Known Problems
 * The currently selected option might be hidden under the search input field when opening the options panel 

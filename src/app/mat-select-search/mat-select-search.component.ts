@@ -5,6 +5,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -25,38 +28,46 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { _countGroupLabelsBeforeOption, MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
+import { MatOption, _countGroupLabelsBeforeOption } from '@angular/material/core';
 import { MatFormField } from '@angular/material/form-field';
-import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
-import { ViewportRuler } from '@angular/cdk/scrolling';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatSelect } from '@angular/material/select';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
+
 
 /** The max height of the select's overlay panel. */
 const SELECT_PANEL_MAX_HEIGHT = 256;
 
-/** InjectionToken that can be used to specify global options. */
+/**
+ * InjectionToken that can be used to specify global options. e.g.
+ * 
+ * providers: [
+ *   {
+ *     provide: MATSELECTSEARCH_GLOBAL_OPTIONS,
+ *     useValue: {
+ *       closeIcon: 'delete',
+ *       noEntriesFoundLabel: 'No options found'
+ *     }
+ *   }
+ */
 export const MATSELECTSEARCH_GLOBAL_OPTIONS = new InjectionToken<MatSelectSearchOptions>('MATSELECTSEARCH_GLOBAL_OPTIONS');
 
-/** Configurable options for MatSelectSearch. */
-export interface MatSelectSearchOptions {
-  closeIcon?: string;
-  closeSvgIcon?: string;
-  noEntriesFoundLabel?: string;
-  ariaLabel?: string;
-  clearSearchInput?: boolean;
-  searching?: boolean;
-  disableInitialFocus?: boolean;
-  enableClearOnEscapePressed?: boolean;
-  preventHomeEndKeyPropagation?: boolean;
-  disableScrollToActiveOnOptionsChanged?: boolean;
-  hideClearSearchButton?: boolean;
-  indexAndLengthScreenReaderText?: string;
-}
+/** Global configurable options for MatSelectSearch. */
+type MatSelectSearchOptions = Partial<Pick<MatSelectSearchComponent,
+  'closeIcon' |
+  'closeSvgIcon' |
+  'noEntriesFoundLabel' |
+  'ariaLabel' |
+  'clearSearchInput' |
+  'searching' |
+  'disableInitialFocus' |
+  'enableClearOnEscapePressed' |
+  'preventHomeEndKeyPropagation' |
+  'disableScrollToActiveOnOptionsChanged' |
+  'hideClearSearchButton' |
+  'indexAndLengthScreenReaderText'
+>>;
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -299,8 +310,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     @Optional() @Inject(MATSELECTSEARCH_GLOBAL_OPTIONS) globalOptions?: MatSelectSearchOptions
   ) {
     if (globalOptions) {
-      // Assign all set properties of globalOptions; != null: ignore both null / undefined
-      Object.assign(this, Object.fromEntries(Object.entries(globalOptions).filter(([_, v]) => v != null)));
+      // Assign all set properties of globalOptions; == null: ignore both null / undefined
+      for (let key of Object.keys(globalOptions) as Array<keyof MatSelectSearchOptions>) {
+        let value = globalOptions[key];
+        if (value == null) { continue; }
+        throw new Error('Not implemented');
+      }
     }
   }
 
