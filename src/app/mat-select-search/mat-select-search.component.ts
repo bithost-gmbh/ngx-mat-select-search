@@ -5,6 +5,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -15,6 +18,7 @@ import {
   forwardRef,
   HostBinding,
   Inject,
+  InjectionToken,
   Input,
   OnDestroy,
   OnInit,
@@ -24,16 +28,14 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { _countGroupLabelsBeforeOption, MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
+import { MatOption, _countGroupLabelsBeforeOption } from '@angular/material/core';
 import { MatFormField } from '@angular/material/form-field';
-import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO, } from '@angular/cdk/keycodes';
-import { ViewportRuler } from '@angular/cdk/scrolling';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatSelect } from '@angular/material/select';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
+import { configurableGlobalOptions, MATSELECTSEARCH_GLOBAL_OPTIONS, MatSelectSearchOptions } from './global-options';
+
 
 /** The max height of the select's overlay panel. */
 const SELECT_PANEL_MAX_HEIGHT = 256;
@@ -137,6 +139,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
   /** Type of the search input field */
   @Input() type = 'text';
+
+  /** Font-based icon used for displaying Close-Icon */
+  @Input() closeIcon = 'close';
+
+  /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
+  @Input() closeSvgIcon?: string;
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
@@ -269,8 +277,21 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     private _viewportRuler: ViewportRuler,
     @Optional() @Inject(MatOption) public matOption: MatOption = null,
     private liveAnnouncer: LiveAnnouncer,
-    @Optional() @Inject(MatFormField) public matFormField: MatFormField = null
+    @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
+    @Optional() @Inject(MATSELECTSEARCH_GLOBAL_OPTIONS) globalOptions?: MatSelectSearchOptions
   ) {
+    this.applyGlobalOptions(globalOptions);
+  }
+
+  private applyGlobalOptions(globalOptions: MatSelectSearchOptions) {
+    if (!globalOptions) {
+      return;
+    }
+    for (let key of configurableGlobalOptions) {
+      if (globalOptions.hasOwnProperty(key)) {
+        (this[key] as any) = globalOptions[key];
+      }
+    }
   }
 
   ngOnInit() {
