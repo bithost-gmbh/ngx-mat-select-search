@@ -41,3 +41,10 @@ export const MAT_SELECTSEARCH_DEFAULT_OPTIONS = new InjectionToken<MatSelectSear
 
 /** Global configurable options for MatSelectSearch. */
 export type MatSelectSearchOptions = Readonly<Partial<Pick<MatSelectSearchComponent, ConfigurableDefaultOptions>>>;
+
+/** @deprecated */
+export const configurableGlobalOptions = configurableDefaultOptions;
+/** @deprecated */
+export type ConfigurableGlobalOptions = ConfigurableDefaultOptions;
+/** @deprecated */
+export const MATSELECTSEARCH_GLOBAL_OPTIONS = MAT_SELECTSEARCH_DEFAULT_OPTIONS;
