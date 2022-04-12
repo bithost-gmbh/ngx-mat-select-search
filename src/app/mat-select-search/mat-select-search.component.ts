@@ -34,7 +34,7 @@ import { MatSelect } from '@angular/material/select';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
-import { configurableGlobalOptions, MATSELECTSEARCH_GLOBAL_OPTIONS, MatSelectSearchOptions } from './global-options';
+import { configurableDefaultOptions, MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
 
 
 /** The max height of the select's overlay panel. */
@@ -278,18 +278,18 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     @Optional() @Inject(MatOption) public matOption: MatOption = null,
     private liveAnnouncer: LiveAnnouncer,
     @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
-    @Optional() @Inject(MATSELECTSEARCH_GLOBAL_OPTIONS) globalOptions?: MatSelectSearchOptions
+    @Optional() @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS) defaultOptions?: MatSelectSearchOptions
   ) {
-    this.applyGlobalOptions(globalOptions);
+    this.applyDefaultOptions(defaultOptions);
   }
 
-  private applyGlobalOptions(globalOptions: MatSelectSearchOptions) {
-    if (!globalOptions) {
+  private applyDefaultOptions(defaultOptions: MatSelectSearchOptions) {
+    if (!defaultOptions) {
       return;
     }
-    for (let key of configurableGlobalOptions) {
-      if (globalOptions.hasOwnProperty(key)) {
-        (this[key] as any) = globalOptions[key];
+    for (let key of configurableDefaultOptions) {
+      if (defaultOptions.hasOwnProperty(key)) {
+        (this[key] as any) = defaultOptions[key];
       }
     }
   }

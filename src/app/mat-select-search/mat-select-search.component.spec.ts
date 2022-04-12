@@ -21,7 +21,7 @@ import { MatSelectSearchComponent } from './mat-select-search.component';
 import { NgxMatSelectSearchModule } from './ngx-mat-select-search.module';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
-import { MATSELECTSEARCH_GLOBAL_OPTIONS, MatSelectSearchOptions } from './global-options';
+import { MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
 
 /* tslint:disable:component-selector */
 
@@ -712,7 +712,7 @@ describe('MatSelectSearchComponent', () => {
 });
 
 
-describe('MatSelectSearchComponent with global options', () => {
+describe('MatSelectSearchComponent with default options', () => {
   let component: MatSelectSearchTestComponent;
   let fixture: ComponentFixture<MatSelectSearchTestComponent>;
 
@@ -735,7 +735,7 @@ describe('MatSelectSearchComponent with global options', () => {
           }
         },
         {
-          provide: MATSELECTSEARCH_GLOBAL_OPTIONS,
+          provide: MAT_SELECTSEARCH_DEFAULT_OPTIONS,
           useValue: <MatSelectSearchOptions>{
             placeholderLabel: 'Mega bla',
           },
