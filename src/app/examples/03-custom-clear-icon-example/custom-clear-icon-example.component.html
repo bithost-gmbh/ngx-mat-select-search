@@ -1,18 +1,18 @@
 <h3>Single selection with custom clear icon</h3>
 <p>
   <mat-form-field>
-    <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
+    <mat-select [formControl]="banks.selectedCtrl" placeholder="Bank" #singleSelect>
       <mat-option>
-        <ngx-mat-select-search *ngIf="true" [formControl]="bankFilterCtrl" [preventHomeEndKeyPropagation]="true">
+        <ngx-mat-select-search *ngIf="true" [formControl]="banks.searchCtrl" [preventHomeEndKeyPropagation]="true">
           <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
         </ngx-mat-select-search>
       </mat-option>
-      <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
+      <mat-option *ngFor="let bank of banks.filtered | async" [value]="bank">
         {{bank.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 </p>
 <p>
-  Selected Bank: {{bankCtrl.value?.name}}
+  Selected Bank: {{banks.selectedCtrl.value?.name}}
 </p>
