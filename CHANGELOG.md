@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.1
+* Enhancement: Rename `MATSELECTSEARCH_GLOBAL_OPTIONS` to `MAT_SELECTSEARCH_DEFAULT_OPTIONS`
+  [#369](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/369)
+  
+  Thanks to @angelaki
+
 ## 4.1.0
 * Feature: Default `@Input()` values can be configured globally using `MATSELECTSEARCH_GLOBAL_OPTIONS`
   [#364](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/364)
