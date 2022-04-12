@@ -34,40 +34,11 @@ import { MatSelect } from '@angular/material/select';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
+import { configurableGlobalOptions, MATSELECTSEARCH_GLOBAL_OPTIONS, MatSelectSearchOptions } from './global-options';
 
 
 /** The max height of the select's overlay panel. */
 const SELECT_PANEL_MAX_HEIGHT = 256;
-
-/**
- * InjectionToken that can be used to specify global options. e.g.
- * 
- * providers: [
- *   {
- *     provide: MATSELECTSEARCH_GLOBAL_OPTIONS,
- *     useValue: {
- *       closeIcon: 'delete',
- *       noEntriesFoundLabel: 'No options found'
- *     }
- *   }
- */
-export const MATSELECTSEARCH_GLOBAL_OPTIONS = new InjectionToken<MatSelectSearchOptions>('MATSELECTSEARCH_GLOBAL_OPTIONS');
-
-/** Global configurable options for MatSelectSearch. */
-type MatSelectSearchOptions = Partial<Pick<MatSelectSearchComponent,
-  'closeIcon' |
-  'closeSvgIcon' |
-  'noEntriesFoundLabel' |
-  'ariaLabel' |
-  'clearSearchInput' |
-  'searching' |
-  'disableInitialFocus' |
-  'enableClearOnEscapePressed' |
-  'preventHomeEndKeyPropagation' |
-  'disableScrollToActiveOnOptionsChanged' |
-  'hideClearSearchButton' |
-  'indexAndLengthScreenReaderText'
->>;
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -309,12 +280,16 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
     @Optional() @Inject(MATSELECTSEARCH_GLOBAL_OPTIONS) globalOptions?: MatSelectSearchOptions
   ) {
-    if (globalOptions) {
-      // Assign all set properties of globalOptions; == null: ignore both null / undefined
-      for (let key of Object.keys(globalOptions) as Array<keyof MatSelectSearchOptions>) {
-        let value = globalOptions[key];
-        if (value == null) { continue; }
-        throw new Error('Not implemented');
+    this.applyGlobalOptions(globalOptions);
+  }
+
+  private applyGlobalOptions(globalOptions: MatSelectSearchOptions) {
+    if (!globalOptions) {
+      return;
+    }
+    for (let key of configurableGlobalOptions) {
+      if (globalOptions.hasOwnProperty(key)) {
+        (this[key] as any) = globalOptions[key];
       }
     }
   }

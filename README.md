@@ -189,7 +189,7 @@ In order to customize the search icon, add the `ngxMatSelectSearchClear` to your
    <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
 </ngx-mat-select-search>
 ```
-If just the icon should be changed the properties `closeIcon` & `closeSvgIcon` can be used.
+If just the icon should be changed the inputs `closeIcon` and `closeSvgIcon` can be used.
 
 #### Custom content
 Custom content with the CSS class `mat-select-search-custom-header-content` can be transcluded as follows:
@@ -200,8 +200,28 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
 ```
 
 #### Global options
-Providing the `MATSELECTSEARCH_GLOBAL_OPTIONS` InjectionToken, several options can be set globally.
-See the documentation of the corresponding @Input() properties of MatSelectSearchComponent.
+Providing the [`MATSELECTSEARCH_GLOBAL_OPTIONS`](src/app/mat-select-search/global-options.ts) 
+InjectionToken, the default values of several `@Input()` properties can be set globally.
+See the documentation of the corresponding `@Input()` properties of `MatSelectSearchComponent`.
+
+Example:
+```typescript
+import { MATSELECTSEARCH_GLOBAL_OPTIONS, MatSelectSearchOptions } from 'ngx-mat-select-search';
+
+@NgModule({
+  ...
+  providers: [
+    {
+      provide: MATSELECTSEARCH_GLOBAL_OPTIONS,
+      useValue: <MatSelectSearchOptions>{
+        closeIcon: 'delete',
+        noEntriesFoundLabel: 'No options found',
+      }
+    }
+  ]
+})
+class AppModule {}
+```
 
 ## Known Problems
 * The currently selected option might be hidden under the search input field when opening the options panel 
