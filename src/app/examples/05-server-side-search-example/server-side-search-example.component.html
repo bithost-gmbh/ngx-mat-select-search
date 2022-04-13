@@ -1,17 +1,17 @@
 <h3>Server Side Search</h3>
 <p>
   <mat-form-field>
-    <mat-select [formControl]="bankServerSideCtrl" placeholder="Bank">
+    <mat-select [formControl]="banks.selectedCtrl" placeholder="Bank" #select>
       <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
       <mat-option>
-        <ngx-mat-select-search [formControl]="bankServerSideFilteringCtrl" [searching]="searching"></ngx-mat-select-search>
+        <ngx-mat-select-search [formControl]="banks.searchCtrl" [searching]="banks.searching"></ngx-mat-select-search>
       </mat-option>
-      <mat-option *ngFor="let bank of filteredServerSideBanks | async" [value]="bank">
+      <mat-option *ngFor="let bank of banks.filtered | async" [value]="bank">
         {{bank.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 </p>
 <p>
-  Selected Bank: {{bankServerSideCtrl.value?.name}}
+  Selected Bank: {{banks.selectedCtrl.value?.name}}
 </p>

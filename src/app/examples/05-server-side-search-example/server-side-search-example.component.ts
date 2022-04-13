@@ -1,9 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
+import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import {debounceTime, delay, tap, filter, map, takeUntil} from 'rxjs/operators';
 
 import { Bank, BANKS } from '../demo-data';
+import { MatSelectSearchData } from '../../mat-select-search/mat-select-search-data';
+import { MatSelect } from '@angular/material/select';
+import { MatSelectSearchServerData } from '../../mat-select-search/mat-select-search-server-data';
 
 
 @Component({
@@ -13,59 +16,19 @@ import { Bank, BANKS } from '../demo-data';
 })
 export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
 
-  /** list of banks */
-  protected banks: Bank[] = BANKS;
+  protected banks = new MatSelectSearchServerData<Bank>();
 
-  /** control for the selected bank for server side filtering */
-  public bankServerSideCtrl: FormControl = new FormControl();
-
-  /** control for filter for server side. */
-  public bankServerSideFilteringCtrl: FormControl = new FormControl();
-
-  /** indicate search operation is in progress */
-  public searching = false;
-
-  /** list of banks filtered after simulating server side search */
-  public  filteredServerSideBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
-
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
+  @ViewChild('select', { static: true }) select: MatSelect;
 
   ngOnInit() {
-
-    // listen for search field value changes
-    this.bankServerSideFilteringCtrl.valueChanges
-      .pipe(
-        filter(search => !!search),
-        tap(() => this.searching = true),
-        takeUntil(this._onDestroy),
-        debounceTime(200),
-        map(search => {
-          if (!this.banks) {
-            return [];
-          }
-
-          // simulate server fetching and filtering data
-          return this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
-        }),
-        delay(500),
-        takeUntil(this._onDestroy)
-      )
-      .subscribe(filteredBanks => {
-        this.searching = false;
-        this.filteredServerSideBanks.next(filteredBanks);
-      },
-        error => {
-          // no errors in our simulated example
-          this.searching = false;
-          // handle error...
-        });
-
+    this.banks.initSearch(this.select, BANKS,
+      (search: string) => of(BANKS.filter(bank => this.banks.transformWith(bank.name).indexOf(search) > -1)).pipe(delay(1000)).toPromise(),
+      (reason) => window.alert(reason),
+      (a: Bank, b: Bank) => a && b && a.id === b.id);
   }
 
   ngOnDestroy() {
-    this._onDestroy.next();
-    this._onDestroy.complete();
+    this.banks.destroy();
   }
 
 }

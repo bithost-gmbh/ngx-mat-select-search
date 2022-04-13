@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { debounceTime, take, takeUntil, tap } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
 
 export class MatSelectSearchData<T> {
@@ -25,6 +25,8 @@ export class MatSelectSearchData<T> {
   protected destroySubject = new Subject<void>();
 
   protected filterWith: (o: T, search?: string) => string | boolean;
+
+  protected debounceTime = 100;
 
   /**
    * transformation to apply before filter.
@@ -53,27 +55,23 @@ export class MatSelectSearchData<T> {
    * @param compareWith do the equality comparison. usually using ids
    */
   public init(select: MatSelect, source: T[],
-              filterWith: (item: T) => string, compareWith: (o1: T, o2: T) => boolean) {
+              filterWith: (item: T) => string, compareWith?: (o1: T, o2: T) => boolean) {
     this.doInit(select, source, filterWith, compareWith);
   }
 
   protected doInit(select: MatSelect, source: T[],
-                   filterWith: (item: T, search: string) => string| boolean, compareWith: (o1: T, o2: T) => boolean) {
-   this.setSource(source);
-   if (select.multiple && !this.selectedCtrl.value) {
+                   filterWith: (item: T, search: string) => string| boolean, compareWith?: (o1: T, o2: T) => boolean) {
+    this.setSource(source);
+    if (select.multiple && !this.selectedCtrl.value) {
      this.selectedCtrl.setValue([]);
-   }
-   this.filterWith = filterWith;
+    }
+    this.filterWith = filterWith;
     this.searchCtrl.valueChanges
-      .pipe(takeUntil(this.destroySubject))
+      .pipe(takeUntil(this.destroySubject), debounceTime(this.debounceTime))
       .subscribe(() => {
         this.filter();
       });
-    this.filtered
-      .pipe(take(1), takeUntil(this.destroySubject))
-      .subscribe(() => {
-        select.compareWith = compareWith;
-      });
+    select.compareWith = compareWith || select.compareWith;
   }
 
   /**
@@ -84,17 +82,21 @@ export class MatSelectSearchData<T> {
     this.destroySubject.complete();
   }
 
-  protected filter() {
+  private filter() {
     if (this.source) {
       let search = this.searchCtrl.value;
       if (!search) {
         this.filtered.next(this.source.slice());
       } else {
         search = this.transformWith(search);
-        this.filtered.next(
-          this.source.filter(option => this.transformWith(this.filterWith(option) as string).indexOf(search) > -1)
-        );
+        this.doFilter(search);
       }
     }
+  }
+
+  protected doFilter(search: string) {
+    this.filtered.next(
+      this.source.filter(option => this.transformWith(this.filterWith(option) as string).indexOf(search) > -1)
+    );
   }
 }
