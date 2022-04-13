@@ -2,7 +2,7 @@
 </h3>
 
 <p>
-  Selected Bank: {{bankCtrl?.value}}
+  Selected Bank: {{data.selectedCtrl?.value?.name}}
 </p>
 
 <!-- Disabled due to incompatibility of ng-mat-select-infinite-scroll with Angular 13. -->
@@ -10,20 +10,20 @@
 <mat-form-field>
   <mat-select #matSelectInfiniteScroll
               msInfiniteScroll
-              (infiniteScroll)="getNextBatch()"
-              [formControl]="bankCtrl"
+              (infiniteScroll)="data.getNextBatch()"
+              [formControl]="data.selectedCtrl"
               placeholder="Select Something">
     <mat-option>
       // disableScrollToActiveOnOptionsChanged should be set to true
       <ngx-mat-select-search
-        [formControl]="searchCtrl"
+        [formControl]="data.searchCtrl"
         placeholderLabel="search"
         [disableScrollToActiveOnOptionsChanged]="true"
         noEntriesFoundLabel="No entry matches">
       </ngx-mat-select-search>
     </mat-option>
-    <mat-option *ngFor="let bank of filteredBatchedData$ | async"
-                [value]="bank.id">
+    <mat-option *ngFor="let bank of data.filteredBatchedData$ | async"
+                [value]="bank">
       {{bank.name}}
     </mat-option>
   </mat-select>

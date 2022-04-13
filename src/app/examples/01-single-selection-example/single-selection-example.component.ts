@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSelect } from '@angular/material/select';
-import { Subject } from 'rxjs';
 
 import { Bank, BANKS } from '../demo-data';
 import { MatSelectSearchData } from '../../mat-select-search/mat-select-search-data';

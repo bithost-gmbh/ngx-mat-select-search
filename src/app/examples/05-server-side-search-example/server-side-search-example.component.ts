@@ -1,10 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable, of, ReplaySubject, Subject } from 'rxjs';
-import {debounceTime, delay, tap, filter, map, takeUntil} from 'rxjs/operators';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { Bank, BANKS } from '../demo-data';
-import { MatSelectSearchData } from '../../mat-select-search/mat-select-search-data';
 import { MatSelect } from '@angular/material/select';
 import { MatSelectSearchServerData } from '../../mat-select-search/mat-select-search-server-data';
 

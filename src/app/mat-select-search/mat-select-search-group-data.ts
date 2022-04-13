@@ -1,6 +1,3 @@
-import { FormControl } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
 import { MatSelectSearchData } from './mat-select-search-data';
 
