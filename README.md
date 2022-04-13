@@ -109,6 +109,12 @@ Furthermore, it provides the following inputs:
   /** Type of the search input field */
   @Input() type = 'text';
 
+  /** Font-based icon used for displaying Close-Icon */
+  @Input() closeIcon = 'close';
+
+  /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
+  @Input() closeSvgIcon?: string;
+
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
@@ -183,6 +189,7 @@ In order to customize the search icon, add the `ngxMatSelectSearchClear` to your
    <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
 </ngx-mat-select-search>
 ```
+If just the icon should be changed the inputs `closeIcon` and `closeSvgIcon` can be used.
 
 #### Custom content
 Custom content with the CSS class `mat-select-search-custom-header-content` can be transcluded as follows:
@@ -190,6 +197,30 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
 <ngx-mat-select-search>
    <div class="mat-select-search-custom-header-content">something special</div>
 </ngx-mat-select-search>
+```
+
+#### Global default options
+Providing the [`MAT_SELECTSEARCH_DEFAULT_OPTIONS`](src/app/mat-select-search/default-options.ts) 
+InjectionToken, the default values of several `@Input()` properties can be set globally.
+See the documentation of the corresponding `@Input()` properties of `MatSelectSearchComponent`.
+
+Example:
+```typescript
+import { MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from 'ngx-mat-select-search';
+
+@NgModule({
+  ...
+  providers: [
+    {
+      provide: MAT_SELECTSEARCH_DEFAULT_OPTIONS,
+      useValue: <MatSelectSearchOptions>{
+        closeIcon: 'delete',
+        noEntriesFoundLabel: 'No options found',
+      }
+    }
+  ]
+})
+class AppModule {}
 ```
 
 ## Known Problems

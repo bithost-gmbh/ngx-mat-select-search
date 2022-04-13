@@ -14,13 +14,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { ReplaySubject } from 'rxjs';
 import { Subject } from 'rxjs';
-import {delay, take} from 'rxjs/operators';
+import { delay, take } from 'rxjs/operators';
 import { takeUntil } from 'rxjs/operators';
 
 import { MatSelectSearchComponent } from './mat-select-search.component';
 import { NgxMatSelectSearchModule } from './ngx-mat-select-search.module';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
+import { MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
 
 /* tslint:disable:component-selector */
 
@@ -52,7 +53,8 @@ interface Bank {
       <mat-form-field>
         <mat-select [formControl]="bankCtrlMatOption" placeholder="Bank" #selectSingleMatOption>
           <mat-option>
-            <ngx-mat-select-search [formControl]="bankFilterCtrlMatOption" #selectSearchSingleMatOption></ngx-mat-select-search>
+            <ngx-mat-select-search [formControl]="bankFilterCtrlMatOption"
+                                   #selectSearchSingleMatOption></ngx-mat-select-search>
           </mat-option>
           <mat-option *ngFor="let bank of filteredBanksMatOption | async" [value]="bank">
             {{bank.name}}
@@ -109,7 +111,10 @@ export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterVie
 
 
   // list of banks
-  public banks: Bank[] = [{name: 'Bank A', id: 'A'}, {name: 'Bank B', id: 'B'}, {name: 'Bank C', id: 'C'}, {name: 'Bank DC', id: 'DC'}];
+  public banks: Bank[] = [{name: 'Bank A', id: 'A'}, {name: 'Bank B', id: 'B'}, {
+    name: 'Bank C',
+    id: 'C'
+  }, {name: 'Bank DC', id: 'DC'}];
 
   public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
   public filteredBanksMatOption: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
@@ -136,7 +141,6 @@ export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterVie
     if (this.initialMultiSelection) {
       this.bankMultiCtrl.setValue(this.initialMultiSelection);
     }
-
 
 
     // load the initial bank list
@@ -265,11 +269,11 @@ describe('MatSelectSearchComponent', () => {
       ],
       declarations: [MatSelectSearchTestComponent],
       providers: [{
-          provide: LiveAnnouncer,
-          useValue: {
-            announce: jasmine.createSpy('announce')
-          }
+        provide: LiveAnnouncer,
+        useValue: {
+          announce: jasmine.createSpy('announce')
         }
+      }
       ]
     })
       .compileComponents();
@@ -430,7 +434,7 @@ describe('MatSelectSearchComponent', () => {
                   setTimeout(() => {
                     expect(component.matSelect.options.length).toBe(0);
 
-                    component.matSelectSearch._handleKeyup(<KeyboardEvent>{ keyCode: DOWN_ARROW });
+                    component.matSelectSearch._handleKeyup(<KeyboardEvent>{keyCode: DOWN_ARROW});
                     expect(announcer.announce).not.toHaveBeenCalled();
                     done();
                   });
@@ -704,5 +708,83 @@ describe('MatSelectSearchComponent', () => {
     }));
 
   });
+
+});
+
+
+describe('MatSelectSearchComponent with default options', () => {
+  let component: MatSelectSearchTestComponent;
+  let fixture: ComponentFixture<MatSelectSearchTestComponent>;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        CommonModule,
+        NoopAnimationsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        NgxMatSelectSearchModule
+      ],
+      declarations: [MatSelectSearchTestComponent],
+      providers: [
+        {
+          provide: LiveAnnouncer,
+          useValue: {
+            announce: jasmine.createSpy('announce')
+          }
+        },
+        {
+          provide: MAT_SELECTSEARCH_DEFAULT_OPTIONS,
+          useValue: <MatSelectSearchOptions>{
+            placeholderLabel: 'Mega bla',
+          },
+        },
+      ]
+    })
+      .compileComponents();
+  }));
+
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(MatSelectSearchTestComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('should show a search field and focus it when opening the select', (done) => {
+
+      component.filteredBanks
+        .pipe(
+          take(1),
+          delay(1)
+        )
+        .subscribe(() => {
+          // when the filtered banks are initialized
+          fixture.detectChanges();
+
+          component.matSelect.open();
+          fixture.detectChanges();
+
+          component.matSelect.openedChange
+            .pipe(
+              take(1),
+              delay(1)
+            )
+            .subscribe((opened) => {
+              const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input') as HTMLInputElement;
+
+              expect(searchField.placeholder).toBe('Mega bla');
+              done();
+            });
+
+        });
+
+    });
 
 });
