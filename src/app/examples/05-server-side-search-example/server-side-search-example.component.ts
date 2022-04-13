@@ -14,7 +14,7 @@ import { MatSelectSearchServerData } from '../../mat-select-search/mat-select-se
 })
 export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
 
-  protected banks = new MatSelectSearchServerData<Bank>();
+  public banks = new MatSelectSearchServerData<Bank>();
 
   @ViewChild('select', { static: true }) select: MatSelect;
 

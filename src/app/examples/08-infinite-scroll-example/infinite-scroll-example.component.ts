@@ -13,7 +13,7 @@ import { MatSelectSearchInfiniteScrollData } from '../../mat-select-search/mat-s
 })
 export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
 
-  data = new MatSelectSearchInfiniteScrollData<Bank>();
+  public data = new MatSelectSearchInfiniteScrollData<Bank>();
 
   @ViewChild('matSelectInfiniteScroll', { static: true } )
   infiniteScrollSelect: MatSelect;

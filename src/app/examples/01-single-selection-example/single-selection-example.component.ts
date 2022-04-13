@@ -12,7 +12,7 @@ import { MatSelectSearchData } from '../../mat-select-search/mat-select-search-d
 })
 export class SingleSelectionExampleComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  protected banks = new MatSelectSearchData<Bank>();
+  public banks = new MatSelectSearchData<Bank>();
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 

@@ -10,7 +10,7 @@ import { MatSelectSearchData } from '../../mat-select-search/mat-select-search-d
 })
 export class MultipleSelectionExampleComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  protected banks = new MatSelectSearchData<Bank>();
+  public banks = new MatSelectSearchData<Bank>();
 
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 

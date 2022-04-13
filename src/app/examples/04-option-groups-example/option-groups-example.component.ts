@@ -11,7 +11,7 @@ import { MatSelectSearchGroupData } from '../../mat-select-search/mat-select-sea
 })
 export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
 
-  protected bankGroups = new MatSelectSearchGroupData<BankGroup>();
+  public bankGroups = new MatSelectSearchGroupData<BankGroup>();
 
   @ViewChild('singleSelect', { static: true }) select: MatSelect;
 
