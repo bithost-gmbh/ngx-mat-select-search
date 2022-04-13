@@ -28,6 +28,11 @@ export class MatSelectSearchData<T> {
 
   protected debounceTime = 100;
 
+  /** flag to set the toggle all checkbox state */
+  public isIndeterminate = false;
+  /** flag to set the toggle all checkbox state */
+  public isChecked = false;
+
   /**
    * transformation to apply before filter.
    * Applied to both filter and options.
@@ -63,14 +68,23 @@ export class MatSelectSearchData<T> {
                    filterWith: (item: T, search: string) => string| boolean, compareWith?: (o1: T, o2: T) => boolean) {
     this.setSource(source);
     if (select.multiple && !this.selectedCtrl.value) {
-     this.selectedCtrl.setValue([]);
+      this.selectedCtrl.setValue([]);
     }
     this.filterWith = filterWith;
     this.searchCtrl.valueChanges
       .pipe(takeUntil(this.destroySubject), debounceTime(this.debounceTime))
       .subscribe(() => {
         this.filter();
+        if (select.multiple) {
+          this.setToggleAllCheckboxState();
+        }
       });
+    if (select.multiple) {
+      this.selectedCtrl.valueChanges
+        .pipe(takeUntil(this.destroySubject)).subscribe(() => {
+        this.setToggleAllCheckboxState();
+      });
+    }
     select.compareWith = compareWith || select.compareWith;
   }
 
@@ -98,5 +112,25 @@ export class MatSelectSearchData<T> {
     this.filtered.next(
       this.source.filter(option => this.transformWith(this.filterWith(option) as string).indexOf(search) > -1)
     );
+  }
+
+  toggleSelectAll(selectAllValue: boolean) {
+    this.filtered.pipe(take(1), takeUntil(this.destroySubject))
+      .subscribe(val => {
+          this.selectedCtrl.patchValue(selectAllValue ? val : []);
+      });
+  }
+
+  private setToggleAllCheckboxState() {
+    let filteredLength = 0;
+    if (this.selectedCtrl && this.selectedCtrl.value) {
+      this.filtered.forEach(el => {
+        if (this.selectedCtrl.value.indexOf(el) > -1) {
+          filteredLength++;
+        }
+      });
+      this.isIndeterminate = filteredLength > 0 && filteredLength < this.source.length;
+      this.isChecked = filteredLength > 0 && filteredLength === this.source.length;
+    }
   }
 }
