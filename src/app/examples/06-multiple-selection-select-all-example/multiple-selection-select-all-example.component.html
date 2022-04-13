@@ -5,10 +5,10 @@
     <mat-select [formControl]="banks.selectedCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
       <mat-option>
         <ngx-mat-select-search [showToggleAllCheckbox]="true"
-                               [toggleAllCheckboxIndeterminate]="banks.isIndeterminate"
-                               [toggleAllCheckboxChecked]="banks.isChecked"
+                               [formControl]="banks.searchCtrl"
                                (toggleAll)="banks.toggleSelectAll($event)"
-                               [formControl]="banks.searchCtrl"></ngx-mat-select-search>
+                               [toggleAllCheckboxIndeterminate]="banks.isIndeterminate"
+                               [toggleAllCheckboxChecked]="banks.isChecked"></ngx-mat-select-search>
       </mat-option>
       <mat-option *ngFor="let bank of banks.filtered | async" [value]="bank">
         {{bank.name}}

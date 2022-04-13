@@ -94,6 +94,7 @@ export class MatSelectSearchData<T> {
   destroy() {
     this.destroySubject.next();
     this.destroySubject.complete();
+    this.filtered.unsubscribe();
   }
 
   private filter() {
