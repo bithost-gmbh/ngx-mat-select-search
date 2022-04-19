@@ -34,17 +34,21 @@ export class MatSelectSearchData<T> {
   public isChecked = false;
 
   /**
-   * transformation to apply before filter.
+   * Transformation to apply before filter.
    * Applied to both filter and options.
    * Default value is lowerCase.
    * Can be enriched to handle accents or spaces.
-   * @param s
    */
-  public transformWith = (s: String) => s.toLowerCase();
+  public transformWith = (s: string) => s.toLowerCase();
 
   /**
-   * Define the unfiltered source
-   * @param source
+   * Search to use to match to the search. Default is a contains (indexOf).
+   * Can be overriden to handle wildcard searches (% or *) or any custom search
+   */
+  public searchWith = (item: string, search: string) => item.indexOf(search) > -1;
+
+  /**
+   * @param source unfiltered data source
    */
   setSource(source: T[]) {
     this.source = source;
@@ -67,6 +71,9 @@ export class MatSelectSearchData<T> {
   protected doInit(select: MatSelect, source: T[],
                    filterWith: (item: T, search: string) => string| boolean, compareWith?: (o1: T, o2: T) => boolean) {
     this.setSource(source);
+    if (select == null) {
+      throw new Error('select is null. Incorrect binding');
+    }
     if (select.multiple && !this.selectedCtrl.value) {
       this.selectedCtrl.setValue([]);
     }
@@ -111,14 +118,14 @@ export class MatSelectSearchData<T> {
 
   protected doFilter(search: string) {
     this.filtered.next(
-      this.source.filter(option => this.transformWith(this.filterWith(option) as string).indexOf(search) > -1)
+      this.source.filter(option => this.searchWith( this.transformWith(this.filterWith(option) as string), search))
     );
   }
 
   toggleSelectAll(selectAllValue: boolean) {
     this.filtered.pipe(take(1), takeUntil(this.destroySubject))
       .subscribe(val => {
-          this.selectedCtrl.patchValue(selectAllValue ? val : []);
+        this.selectedCtrl.patchValue(selectAllValue ? val : []);
       });
   }
 
@@ -133,5 +140,9 @@ export class MatSelectSearchData<T> {
       this.isIndeterminate = filteredLength > 0 && filteredLength < this.source.length;
       this.isChecked = filteredLength > 0 && filteredLength === this.source.length;
     }
+  }
+
+  public getSourceSize() {
+    return this.source.length;
   }
 }
