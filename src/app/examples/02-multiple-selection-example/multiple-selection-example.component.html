@@ -2,11 +2,11 @@
 <h3>Multiple selection</h3>
 <p>
   <mat-form-field>
-    <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
+    <mat-select [formControl]="banks.selectedCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
       <mat-option>
-        <ngx-mat-select-search [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
+        <ngx-mat-select-search [formControl]="banks.searchCtrl"></ngx-mat-select-search>
       </mat-option>
-      <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
+      <mat-option *ngFor="let bank of banks.filtered | async" [value]="bank">
         {{bank.name}}
       </mat-option>
     </mat-select>
@@ -15,6 +15,6 @@
 <p>
   Selected Banks:
 </p>
-<ul *ngFor="let bank of bankMultiCtrl?.value">
-  <li>{{bank.name}}</li>
+<ul *ngFor="let bank of banks.selectedCtrl?.value">
+  <li>{{bank?.name}}</li>
 </ul>

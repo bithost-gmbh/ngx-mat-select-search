@@ -1,13 +1,15 @@
 <h3>Tooltip on the Select All Checkbox</h3>
 <p>
   <mat-form-field color="accent">
-    <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
+    <mat-select [formControl]="banks.selectedCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
       <mat-option>
-        <ngx-mat-select-search [showToggleAllCheckbox]="true" (toggleAll)="toggleSelectAll($event)"
-          [formControl]="bankMultiFilterCtrl" [toggleAllCheckboxTooltipMessage]="tooltipMessage"
-          [toogleAllCheckboxTooltipPosition]="'above'"></ngx-mat-select-search>
+        <ngx-mat-select-search [showToggleAllCheckbox]="true"
+                               [formControl]="banks.searchCtrl"
+                               (toggleAll)="banks.toggleSelectAll($event)"
+                               toggleAllCheckboxTooltipMessage="Select All / Unselect All"
+                               [toogleAllCheckboxTooltipPosition]="'above'"></ngx-mat-select-search>
       </mat-option>
-      <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
+      <mat-option *ngFor="let bank of banks.filtered | async" [value]="bank">
         {{bank.name}}
       </mat-option>
     </mat-select>

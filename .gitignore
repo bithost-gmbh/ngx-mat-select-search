@@ -47,3 +47,5 @@ Thumbs.db
 
 /.ng_build
 /dist-lib
+.angular/
+package-lock.json
