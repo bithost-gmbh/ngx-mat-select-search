@@ -287,7 +287,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     if (!defaultOptions) {
       return;
     }
-    for (let key of configurableDefaultOptions) {
+    for (const key of configurableDefaultOptions) {
       if (defaultOptions.hasOwnProperty(key)) {
         (this[key] as any) = defaultOptions[key];
       }
