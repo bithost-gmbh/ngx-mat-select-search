@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.1.2
+* Bugfix: Restoring selected values in mode multi throws error
+  [#376](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/376)
+  
+  Thanks to @qstiegler
+* Chore: Update npm packages
+
 ## 4.1.1
 * Enhancement: Rename `MATSELECTSEARCH_GLOBAL_OPTIONS` to `MAT_SELECTSEARCH_DEFAULT_OPTIONS`
   [#369](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/369)
