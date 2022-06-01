@@ -27,7 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: DISABLE_OPENCOLLECTIVE=true
-      - run: npm install
+      - run: npm ci
 
       - save_cache:
           paths:
