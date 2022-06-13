@@ -53,7 +53,8 @@
 
 <div *ngIf="_showNoEntriesFound$ | async"
      class="mat-select-search-no-entries-found">
-  {{noEntriesFoundLabel}}
+  <ng-content *ngIf="noEntriesFound; else defaultNoEntriesFound" select="[ngxMatSelectNoEntriesFound]"></ng-content>
+  <ng-template #defaultNoEntriesFound>{{noEntriesFoundLabel}}</ng-template>
 </div>
 <!--
 Copyright (c) 2018 Bithost GmbH All Rights Reserved.
