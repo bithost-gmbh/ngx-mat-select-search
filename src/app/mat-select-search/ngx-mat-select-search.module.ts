@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.directive';
 
 export const MatSelectSearchVersion = '4.1.2';
 export { MatSelectSearchClearDirective };
@@ -32,11 +33,13 @@ export { MatSelectSearchClearDirective };
   ],
   declarations: [
     MatSelectSearchComponent,
-    MatSelectSearchClearDirective
+    MatSelectSearchClearDirective,
+    MatSelectNoEntriesFoundDirective
   ],
   exports: [
     MatSelectSearchComponent,
-    MatSelectSearchClearDirective
+    MatSelectSearchClearDirective,
+    MatSelectNoEntriesFoundDirective
   ]
 })
 export class NgxMatSelectSearchModule {
