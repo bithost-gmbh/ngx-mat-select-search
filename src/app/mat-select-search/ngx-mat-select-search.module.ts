@@ -20,6 +20,7 @@ import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.
 
 export const MatSelectSearchVersion = '4.1.2';
 export { MatSelectSearchClearDirective };
+export { MatSelectNoEntriesFoundDirective };
 
 @NgModule({
   imports: [
