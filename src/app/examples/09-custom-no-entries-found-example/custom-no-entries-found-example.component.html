@@ -1,0 +1,23 @@
+<h3>Single selection with custom no entries found element</h3>
+<p>
+  <mat-form-field>
+    <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
+      <mat-option>
+        <ngx-mat-select-search *ngIf="true" [formControl]="bankFilterCtrl" [preventHomeEndKeyPropagation]="true">
+          <span ngxMatSelectNoEntriesFound>
+            No entries found
+            <button mat-button color="primary">
+              Add <mat-icon>add</mat-icon>
+            </button>
+          </span>
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
+        {{bank.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</p>
+<p>
+  Selected Bank: {{bankCtrl.value?.name}}
+</p>
