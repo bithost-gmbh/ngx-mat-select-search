@@ -220,7 +220,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Reference to custom search input clear icon */
   @ContentChild(MatSelectSearchClearDirective) clearIcon: MatSelectSearchClearDirective;
 
-  /** Reference to custom sno entries found element */
+  /** Reference to custom no entries found element */
   @ContentChild(MatSelectNoEntriesFoundDirective) noEntriesFound: MatSelectNoEntriesFoundDirective;
 
   @HostBinding('class.mat-select-search-inside-mat-option')
