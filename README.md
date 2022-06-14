@@ -191,6 +191,19 @@ In order to customize the search icon, add the `ngxMatSelectSearchClear` to your
 ```
 If just the icon should be changed the inputs `closeIcon` and `closeSvgIcon` can be used.
 
+#### Customize no entries found element
+In order to customize the no entries found element, add the `ngxMatSelectNoEntriesFound` to your custom item (a `mat-icon, span, button` or any other element) and place it inside the `ngx-mat-select-search` component:
+```html
+<ngx-mat-select-search>
+  <span ngxMatSelectNoEntriesFound>
+    No entries found
+    <button mat-button color="primary">
+      Add <mat-icon>add</mat-icon>
+    </button>
+</span>
+</ngx-mat-select-search>
+```
+
 #### Custom content
 Custom content with the CSS class `mat-select-search-custom-header-content` can be transcluded as follows:
 ```html
