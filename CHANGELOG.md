@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.2.0
+* Enhancement: Enable the use of a custom template for notFoundEntries
+  [#381](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/381)
+  
+  Thanks to @ruekart
+
 ## 4.1.2
 * Bugfix: Restoring selected values in mode multi throws error
   [#376](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/376)
