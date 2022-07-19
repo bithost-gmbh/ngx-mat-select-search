@@ -605,31 +605,30 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
     this.matSelect.ngControl.valueChanges
       .pipe(takeUntil(this._onDestroy))
-      .subscribe((selectedValues) => {
+      .subscribe((values) => {
         let restoreSelectedValues = false;
-        const updatedSelectedValues = selectedValues && Array.isArray(selectedValues)
-          ? [...selectedValues]
-          : [];
-
         if (this.matSelect.multiple) {
           if ((this.alwaysRestoreSelectedOptionsMulti || (this._formControl.value && this._formControl.value.length))
             && this.previousSelectedValues && Array.isArray(this.previousSelectedValues)) {
+            if (!values || !Array.isArray(values)) {
+              values = [];
+            }
             const optionValues = this.matSelect.options.map(option => option.value);
             this.previousSelectedValues.forEach(previousValue => {
-              if (!updatedSelectedValues.some(v => this.matSelect.compareWith(v, previousValue))
+              if (!values.some(v => this.matSelect.compareWith(v, previousValue))
                 && !optionValues.some(v => this.matSelect.compareWith(v, previousValue))) {
                 // if a value that was selected before is deselected and not found in the options, it was deselected
                 // due to the filtering, so we restore it.
-                updatedSelectedValues.push(previousValue);
+                values.push(previousValue);
                 restoreSelectedValues = true;
               }
             });
           }
         }
-        this.previousSelectedValues = updatedSelectedValues;
+        this.previousSelectedValues = values;
 
         if (restoreSelectedValues) {
-          this.matSelect._onChange(updatedSelectedValues);
+          this.matSelect._onChange(values);
         }
       });
   }
