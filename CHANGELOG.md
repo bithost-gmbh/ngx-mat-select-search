@@ -1,5 +1,10 @@
 # Changelog
-
+## 4.2.1
+* Bugfix: Revert copying in mode multi so `(selectionChange)` works properly.
+  [#387](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/387)
+  
+  Thanks to @angelaki for reporting
+  
 ## 4.2.0
 * Enhancement: Enable the use of a custom template for notFoundEntries
   [#381](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/381)
