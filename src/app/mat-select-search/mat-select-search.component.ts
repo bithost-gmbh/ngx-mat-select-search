@@ -500,12 +500,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
       if (index !== -1) {
         const activeDescendant = this._options.toArray()[index];
-        this.liveAnnouncer.announce(
-          activeDescendant.viewValue + ' '
-          + this.getAriaIndex(index)
-          + this.indexAndLengthScreenReaderText
-          + this.getAriaLength()
-        );
+        activeDescendant.focus();
+        this.matSelect.focus();
       }
     }
   }
