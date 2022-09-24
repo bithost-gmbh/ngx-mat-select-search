@@ -501,29 +501,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     }
   }
 
-  /**
-   * Calculate the index of the current option, taking the offset to length into account.
-   * examples:
-   *    Case 1 [Search, 1, 2, 3] will have offset of 1, due to search and will read index of total.
-   *    Case 2 [1, 2, 3] will have offset of 0 and will read index +1 of total.
-   */
-  getAriaIndex(optionIndex: number): number {
-    if (this.getOptionsLengthOffset() === 0) {
-      return optionIndex + 1;
-    }
-    return optionIndex;
-  }
-
-  /**
-   * Calculate the length of the options, taking the offset to length into account.
-   * examples:
-   *    Case 1 [Search, 1, 2, 3] will have length of options.length -1, due to search.
-   *    Case 2 [1, 2, 3] will have length of options.length.
-   */
-  getAriaLength(): number {
-    return this._options.toArray().length - this.getOptionsLengthOffset();
-  }
-
   writeValue(value: string) {
     this._lastExternalInputValue = value;
     this._formControl.setValue(value);
