@@ -11,7 +11,6 @@ export const configurableDefaultOptions = [
   'disableScrollToActiveOnOptionsChanged',
   'enableClearOnEscapePressed',
   'hideClearSearchButton',
-  'indexAndLengthScreenReaderText',
   'noEntriesFoundLabel',
   'placeholderLabel',
   'preventHomeEndKeyPropagation',

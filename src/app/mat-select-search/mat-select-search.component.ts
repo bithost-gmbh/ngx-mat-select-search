@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
@@ -151,13 +150,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
-   *  Text that is appended to the currently active item label announced by screen readers,
-   *  informing the user of the current index, value and total options.
-   *  eg: Bank R (Germany) 1 of 6
-  */
-  @Input() indexAndLengthScreenReaderText = ' of ';
-
-  /**
     * Whether or not the search field should be cleared after the dropdown menu is closed.
     * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
     */
@@ -275,12 +267,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
 
+  /** Active descendant for ARIA Support. */
+  private activeDescendant: HTMLElement;
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
     @Optional() @Inject(MatOption) public matOption: MatOption = null,
-    private liveAnnouncer: LiveAnnouncer,
     @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
     @Optional() @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS) defaultOptions?: MatSelectSearchOptions
   ) {
@@ -317,6 +310,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     if (this.matOption) {
       this.matOption.disabled = true;
       this.matOption._getHostElement().classList.add('contains-mat-select-search');
+      this.matOption._getHostElement().setAttribute('aria-hidden', 'true');
     } else {
       console.error('<ngx-mat-select-search> must be placed inside a <mat-option> element');
     }
@@ -499,9 +493,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
       if (index !== -1) {
-        const activeDescendant = this._options.toArray()[index];
-        activeDescendant.focus();
-        this.matSelect.focus();
+        this.activeDescendant?.removeAttribute('aria-selected');
+        this.activeDescendant = this._options.toArray()[index]._getHostElement();
+        this.activeDescendant.setAttribute('aria-selected', 'true');
+        this.searchSelectInput.nativeElement.setAttribute('aria-activedescendant', ariaActiveDescendantId);
       }
     }
   }
