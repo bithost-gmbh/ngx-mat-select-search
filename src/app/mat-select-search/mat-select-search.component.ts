@@ -670,7 +670,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   private unselectActiveDescendant() {
-    if(this.activeDescendantRef) {
+    if (this.activeDescendantRef) {
       this.activeDescendantRef.deref()?.removeAttribute('aria-selected');
     }
     this.searchSelectInput.nativeElement.removeAttribute('aria-activedescendant');
