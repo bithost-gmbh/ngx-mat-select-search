@@ -267,8 +267,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
 
-  /** Weak reference to active descendant for ARIA Support. */
-  private activeDescendantRef: WeakRef<HTMLElement>;
+  /** Reference to active descendant for ARIA Support. */
+  private activeDescendant: HTMLElement;
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
     public changeDetectorRef: ChangeDetectorRef,
@@ -494,9 +494,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
       if (index !== -1) {
         this.unselectActiveDescendant();
-        const activeDescendant = this._options.toArray()[index]._getHostElement();
-        activeDescendant.setAttribute('aria-selected', 'true');
-        this.activeDescendantRef = new WeakRef(activeDescendant);
+        this.activeDescendant = this._options.toArray()[index]._getHostElement();
+        this.activeDescendant.setAttribute('aria-selected', 'true');
         this.searchSelectInput.nativeElement.setAttribute('aria-activedescendant', ariaActiveDescendantId);
       }
     }
@@ -670,9 +669,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   private unselectActiveDescendant() {
-    if (this.activeDescendantRef) {
-      this.activeDescendantRef.deref()?.removeAttribute('aria-selected');
-    }
+    this.activeDescendant?.removeAttribute('aria-selected');
     this.searchSelectInput.nativeElement.removeAttribute('aria-activedescendant');
   }
 
