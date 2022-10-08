@@ -189,7 +189,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Input() toggleAllCheckboxTooltipMessage = '';
 
   /** Define the position of the tooltip on the toggle-all checkbox. */
-  @Input() toogleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
+  @Input() toggleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
 
   /** Show/Hide the search clear button of the search input */
   @Input() hideClearSearchButton = false;

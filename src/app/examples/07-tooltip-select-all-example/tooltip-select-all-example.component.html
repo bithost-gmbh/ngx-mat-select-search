@@ -5,7 +5,7 @@
       <mat-option>
         <ngx-mat-select-search [showToggleAllCheckbox]="true" (toggleAll)="toggleSelectAll($event)"
           [formControl]="bankMultiFilterCtrl" [toggleAllCheckboxTooltipMessage]="tooltipMessage"
-          [toogleAllCheckboxTooltipPosition]="'above'"></ngx-mat-select-search>
+          [toggleAllCheckboxTooltipPosition]="'above'"></ngx-mat-select-search>
       </mat-option>
       <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
         {{bank.name}}

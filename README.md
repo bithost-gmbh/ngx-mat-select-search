@@ -158,7 +158,7 @@ Furthermore, it provides the following inputs:
   @Input() toggleAllCheckboxTooltipMessage = '';
 
   /** Define the position of the tooltip on the toggle-all checkbox. */
-  @Input() toogleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
+  @Input() toggleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
 
   /** Show/Hide the search clear button of the search input */
   @Input() hideClearSearchButton = false;
@@ -168,13 +168,6 @@ Furthermore, it provides the following inputs:
    * Defaults to false, so selected options are only restored while filtering is active. 
    */
   @Input() alwaysRestoreSelectedOptionsMulti = false;
-
-  /**
-  *  Text that is appended to the currently active item label announced by screen readers, informing the user of the current index, value and total
-  *  options.
-  *  eg: Bank R (Germany) 1 of 6
-  */
-  @Input() indexAndLengthScreenReaderText = ' of ';
   
   /** Output emitter to send to parent component with the toggle all boolean */
   @Output() toggleAll = new EventEmitter<boolean>();
