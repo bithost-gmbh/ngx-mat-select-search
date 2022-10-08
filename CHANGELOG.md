@@ -1,4 +1,18 @@
 # Changelog
+
+## 5.0.0
+* Enhancement: Accessibility Issue: screenreaders reading blank before each option.
+  [#349](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/349)
+
+  **Breaking Change**:  The `@Input() indexAndLengthScreenReaderText` became obsolete and was removed.
+
+  Thanks to @escheiermann
+* Enhancement: **Breaking Change** Renamed misspelled `@Input() toogleAllCheckboxTooltipPosition` 
+  to `@Input() toggleAllCheckboxTooltipPosition`.
+  [#266](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/266)
+
+  Thanks to @bulldog98 for reporting
+
 ## 4.2.1
 * Bugfix: Revert copying in mode multi so `(selectionChange)` works properly.
   [#387](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/387)
