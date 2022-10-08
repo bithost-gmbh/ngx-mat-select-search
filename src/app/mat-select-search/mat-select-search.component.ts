@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
@@ -151,13 +150,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
-   *  Text that is appended to the currently active item label announced by screen readers,
-   *  informing the user of the current index, value and total options.
-   *  eg: Bank R (Germany) 1 of 6
-  */
-  @Input() indexAndLengthScreenReaderText = ' of ';
-
-  /**
     * Whether or not the search field should be cleared after the dropdown menu is closed.
     * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
     */
@@ -275,12 +267,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Subject that emits when the component has been destroyed. */
   private _onDestroy = new Subject<void>();
 
+  /** Reference to active descendant for ARIA Support. */
+  private activeDescendant: HTMLElement;
 
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
     @Optional() @Inject(MatOption) public matOption: MatOption = null,
-    private liveAnnouncer: LiveAnnouncer,
     @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
     @Optional() @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS) defaultOptions?: MatSelectSearchOptions
   ) {
@@ -317,6 +310,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     if (this.matOption) {
       this.matOption.disabled = true;
       this.matOption._getHostElement().classList.add('contains-mat-select-search');
+      this.matOption._getHostElement().setAttribute('aria-hidden', 'true');
     } else {
       console.error('<ngx-mat-select-search> must be placed inside a <mat-option> element');
     }
@@ -499,38 +493,12 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
       if (index !== -1) {
-        const activeDescendant = this._options.toArray()[index];
-        this.liveAnnouncer.announce(
-          activeDescendant.viewValue + ' '
-          + this.getAriaIndex(index)
-          + this.indexAndLengthScreenReaderText
-          + this.getAriaLength()
-        );
+        this.unselectActiveDescendant();
+        this.activeDescendant = this._options.toArray()[index]._getHostElement();
+        this.activeDescendant.setAttribute('aria-selected', 'true');
+        this.searchSelectInput.nativeElement.setAttribute('aria-activedescendant', ariaActiveDescendantId);
       }
     }
-  }
-
-  /**
-   * Calculate the index of the current option, taking the offset to length into account.
-   * examples:
-   *    Case 1 [Search, 1, 2, 3] will have offset of 1, due to search and will read index of total.
-   *    Case 2 [1, 2, 3] will have offset of 0 and will read index +1 of total.
-   */
-  getAriaIndex(optionIndex: number): number {
-    if (this.getOptionsLengthOffset() === 0) {
-      return optionIndex + 1;
-    }
-    return optionIndex;
-  }
-
-  /**
-   * Calculate the length of the options, taking the offset to length into account.
-   * examples:
-   *    Case 1 [Search, 1, 2, 3] will have length of options.length -1, due to search.
-   *    Case 2 [1, 2, 3] will have length of options.length.
-   */
-  getAriaLength(): number {
-    return this._options.toArray().length - this.getOptionsLengthOffset();
   }
 
   writeValue(value: string) {
@@ -540,6 +508,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   onBlur() {
+    this.unselectActiveDescendant();
     this.onTouched();
   }
 
@@ -697,6 +666,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     } else {
       return 0;
     }
+  }
+
+  private unselectActiveDescendant() {
+    this.activeDescendant?.removeAttribute('aria-selected');
+    this.searchSelectInput.nativeElement.removeAttribute('aria-activedescendant');
   }
 
 }
