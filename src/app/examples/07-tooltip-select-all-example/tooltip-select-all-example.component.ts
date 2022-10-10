@@ -60,10 +60,11 @@ export class TooltipSelectAllExampleComponent implements OnInit, AfterViewInit, 
   }
 
   toggleSelectAll(selectAllValue: boolean) {
-    this.filteredBanksMulti.pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(val => {
+    this.filteredBanksMulti
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
         if (selectAllValue) {
-          this.bankMultiCtrl.patchValue(val);
+          this.bankMultiCtrl.patchValue([...this.banks]);
         } else {
           this.bankMultiCtrl.patchValue([]);
         }
