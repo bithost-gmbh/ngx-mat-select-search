@@ -163,9 +163,7 @@ const SELECT_PANEL_MAX_HEIGHT = 256;
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatSelectSearchComponent
-  implements OnInit, OnDestroy, ControlValueAccessor
-{
+export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
   /** Label of the search placeholder */
   @Input() placeholderLabel = "Suche";
 
