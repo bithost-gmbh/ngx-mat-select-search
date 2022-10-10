@@ -1,23 +1,24 @@
-import { InjectionToken } from '@angular/core';
-import { MatSelectSearchComponent } from './mat-select-search.component';
+import { InjectionToken } from "@angular/core";
+import { MatSelectSearchComponent } from "./mat-select-search.component";
 
 /** List of inputs of NgxMatSelectSearchComponent that can be configured with a global default. */
 export const configurableDefaultOptions = [
-  'ariaLabel',
-  'clearSearchInput',
-  'closeIcon',
-  'closeSvgIcon',
-  'disableInitialFocus',
-  'disableScrollToActiveOnOptionsChanged',
-  'enableClearOnEscapePressed',
-  'hideClearSearchButton',
-  'noEntriesFoundLabel',
-  'placeholderLabel',
-  'preventHomeEndKeyPropagation',
-  'searching',
+  "ariaLabel",
+  "clearSearchInput",
+  "closeIcon",
+  "closeSvgIcon",
+  "disableInitialFocus",
+  "disableScrollToActiveOnOptionsChanged",
+  "enableClearOnEscapePressed",
+  "hideClearSearchButton",
+  "noEntriesFoundLabel",
+  "placeholderLabel",
+  "preventHomeEndKeyPropagation",
+  "searching",
 ] as const;
 
-export type ConfigurableDefaultOptions = typeof configurableDefaultOptions[number];
+export type ConfigurableDefaultOptions =
+  typeof configurableDefaultOptions[number];
 
 /**
  * InjectionToken that can be used to specify global options. e.g.
@@ -36,10 +37,15 @@ export type ConfigurableDefaultOptions = typeof configurableDefaultOptions[numbe
  *
  * See the corresponding inputs of `MatSelectSearchComponent` for documentation.
  */
-export const MAT_SELECTSEARCH_DEFAULT_OPTIONS = new InjectionToken<MatSelectSearchOptions>('mat-selectsearch-default-options');
+export const MAT_SELECTSEARCH_DEFAULT_OPTIONS =
+  new InjectionToken<MatSelectSearchOptions>(
+    "mat-selectsearch-default-options"
+  );
 
 /** Global configurable options for MatSelectSearch. */
-export type MatSelectSearchOptions = Readonly<Partial<Pick<MatSelectSearchComponent, ConfigurableDefaultOptions>>>;
+export type MatSelectSearchOptions = Readonly<
+  Partial<Pick<MatSelectSearchComponent, ConfigurableDefaultOptions>>
+>;
 
 /** @deprecated */
 export const configurableGlobalOptions = configurableDefaultOptions;

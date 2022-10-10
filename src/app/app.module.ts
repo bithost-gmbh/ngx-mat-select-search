@@ -1,31 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatSelectModule } from "@angular/material/select";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
+import { NgxMatSelectSearchModule } from "./mat-select-search/ngx-mat-select-search.module";
 
-import { NgxMatSelectSearchModule } from './mat-select-search/ngx-mat-select-search.module';
-
-import { AppComponent } from './app.component';
-import { SingleSelectionExampleComponent } from './examples/01-single-selection-example/single-selection-example.component';
-import { MultipleSelectionExampleComponent } from './examples/02-multiple-selection-example/multiple-selection-example.component';
-import { CustomClearIconExampleComponent } from './examples/03-custom-clear-icon-example/custom-clear-icon-example.component';
-import { OptionGroupsExampleComponent } from './examples/04-option-groups-example/option-groups-example.component';
-import { ServerSideSearchExampleComponent } from './examples/05-server-side-search-example/server-side-search-example.component';
-import {
-  MultipleSelectionSelectAllExampleComponent
-} from './examples/06-multiple-selection-select-all-example/multiple-selection-select-all-example.component';
-import { TooltipSelectAllExampleComponent } from './examples/07-tooltip-select-all-example/tooltip-select-all-example.component';
-import { InfiniteScrollExampleComponent } from './examples/08-infinite-scroll-example/infinite-scroll-example.component';
-import { CustomNoEntriesFoundExampleComponent } from './examples/09-custom-no-entries-found-example/custom-no-entries-found-example.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import { AppComponent } from "./app.component";
+import { SingleSelectionExampleComponent } from "./examples/01-single-selection-example/single-selection-example.component";
+import { MultipleSelectionExampleComponent } from "./examples/02-multiple-selection-example/multiple-selection-example.component";
+import { CustomClearIconExampleComponent } from "./examples/03-custom-clear-icon-example/custom-clear-icon-example.component";
+import { OptionGroupsExampleComponent } from "./examples/04-option-groups-example/option-groups-example.component";
+import { ServerSideSearchExampleComponent } from "./examples/05-server-side-search-example/server-side-search-example.component";
+import { MultipleSelectionSelectAllExampleComponent } from "./examples/06-multiple-selection-select-all-example/multiple-selection-select-all-example.component";
+import { TooltipSelectAllExampleComponent } from "./examples/07-tooltip-select-all-example/tooltip-select-all-example.component";
+import { InfiniteScrollExampleComponent } from "./examples/08-infinite-scroll-example/infinite-scroll-example.component";
+import { CustomNoEntriesFoundExampleComponent } from "./examples/09-custom-no-entries-found-example/custom-no-entries-found-example.component";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 /**
  * NgModule that includes all Material modules that are required to serve the app.
@@ -36,8 +32,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
-    MatToolbarModule
-  ]
+    MatToolbarModule,
+  ],
 })
 export class MaterialModule {}
 
@@ -50,7 +46,7 @@ export class MaterialModule {}
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxMatSelectSearchModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   declarations: [
     AppComponent,
@@ -62,9 +58,9 @@ export class MaterialModule {}
     ServerSideSearchExampleComponent,
     MultipleSelectionSelectAllExampleComponent,
     TooltipSelectAllExampleComponent,
-    InfiniteScrollExampleComponent
+    InfiniteScrollExampleComponent,
   ],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [],
 })
 export class AppModule {}

@@ -1,18 +1,25 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { MatSelect } from '@angular/material/select';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { FormControl } from "@angular/forms";
+import { ReplaySubject, Subject } from "rxjs";
+import { take, takeUntil } from "rxjs/operators";
+import { MatSelect } from "@angular/material/select";
 
-import { Bank, BANKS } from '../demo-data';
+import { Bank, BANKS } from "../demo-data";
 
 @Component({
-  selector: 'app-multiple-selection-select-all-example',
-  templateUrl: './multiple-selection-select-all-example.component.html',
-  styleUrls: ['./multiple-selection-select-all-example.component.scss']
+  selector: "app-multiple-selection-select-all-example",
+  templateUrl: "./multiple-selection-select-all-example.component.html",
+  styleUrls: ["./multiple-selection-select-all-example.component.scss"],
 })
-export class MultipleSelectionSelectAllExampleComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class MultipleSelectionSelectAllExampleComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   /** list of banks */
   protected banks: Bank[] = BANKS;
 
@@ -26,7 +33,9 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
   public bankMultiFilterCtrl: FormControl = new FormControl();
 
   /** list of banks filtered by search keyword */
-  public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
+  public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(
+    1
+  );
 
   /** local copy of filtered banks to help set the toggle all checkbox state */
   protected filteredBanksCache: Bank[] = [];
@@ -35,17 +44,20 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
   isIndeterminate = false;
   isChecked = false;
 
-  @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
+  @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
 
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     // set initial selection
-    this.bankMultiCtrl.setValue([this.banks[10], this.banks[11], this.banks[12]]);
+    this.bankMultiCtrl.setValue([
+      this.banks[10],
+      this.banks[11],
+      this.banks[12],
+    ]);
 
     // load the initial bank list
     this.filteredBanksMulti.next(this.banks.slice());
@@ -58,11 +70,12 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
         this.setToggleAllCheckboxState();
       });
 
-      // listen for multi select field value changes
+    // listen for multi select field value changes
     this.bankMultiCtrl.valueChanges
-    .pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.setToggleAllCheckboxState();
-    });
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.setToggleAllCheckboxState();
+      });
   }
 
   ngAfterViewInit() {
@@ -75,8 +88,9 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
   }
 
   toggleSelectAll(selectAllValue: boolean) {
-    this.filteredBanksMulti.pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(val => {
+    this.filteredBanksMulti
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe((val) => {
         if (selectAllValue) {
           this.bankMultiCtrl.patchValue(val);
         } else {
@@ -97,7 +111,8 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        this.multiSelect.compareWith = (a: Bank, b: Bank) => a && b && a.id === b.id;
+        this.multiSelect.compareWith = (a: Bank, b: Bank) =>
+          a && b && a.id === b.id;
       });
   }
 
@@ -115,21 +130,24 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
       search = search.toLowerCase();
     }
     // filter the banks
-    this.filteredBanksCache = this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
+    this.filteredBanksCache = this.banks.filter(
+      (bank) => bank.name.toLowerCase().indexOf(search) > -1
+    );
     this.filteredBanksMulti.next(this.filteredBanksCache);
   }
 
   protected setToggleAllCheckboxState() {
     let filteredLength = 0;
     if (this.bankMultiCtrl && this.bankMultiCtrl.value) {
-      this.filteredBanksCache.forEach(el => {
+      this.filteredBanksCache.forEach((el) => {
         if (this.bankMultiCtrl.value.indexOf(el) > -1) {
           filteredLength++;
         }
       });
-      this.isIndeterminate = filteredLength > 0 && filteredLength < this.filteredBanksCache.length;
-      this.isChecked = filteredLength > 0 && filteredLength === this.filteredBanksCache.length;
+      this.isIndeterminate =
+        filteredLength > 0 && filteredLength < this.filteredBanksCache.length;
+      this.isChecked =
+        filteredLength > 0 && filteredLength === this.filteredBanksCache.length;
     }
   }
-
 }

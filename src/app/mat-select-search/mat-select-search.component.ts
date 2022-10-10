@@ -5,8 +5,20 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
-import { ViewportRuler } from '@angular/cdk/scrolling';
+import {
+  A,
+  DOWN_ARROW,
+  END,
+  ENTER,
+  ESCAPE,
+  HOME,
+  NINE,
+  SPACE,
+  UP_ARROW,
+  Z,
+  ZERO,
+} from "@angular/cdk/keycodes";
+import { ViewportRuler } from "@angular/cdk/scrolling";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -24,18 +36,37 @@ import {
   Optional,
   Output,
   QueryList,
-  ViewChild
-} from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatOption, _countGroupLabelsBeforeOption } from '@angular/material/core';
-import { MatFormField } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
-import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
-import { configurableDefaultOptions, MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
-import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.directive';
-
+  ViewChild,
+} from "@angular/core";
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from "@angular/forms";
+import {
+  MatOption,
+  _countGroupLabelsBeforeOption,
+} from "@angular/material/core";
+import { MatFormField } from "@angular/material/form-field";
+import { MatSelect } from "@angular/material/select";
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from "rxjs";
+import {
+  delay,
+  filter,
+  map,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+} from "rxjs/operators";
+import { MatSelectSearchClearDirective } from "./mat-select-search-clear.directive";
+import {
+  configurableDefaultOptions,
+  MAT_SELECTSEARCH_DEFAULT_OPTIONS,
+  MatSelectSearchOptions,
+} from "./default-options";
+import { MatSelectNoEntriesFoundDirective } from "./mat-select-no-entries-found.directive";
 
 /** The max height of the select's overlay panel. */
 const SELECT_PANEL_MAX_HEIGHT = 256;
@@ -120,39 +151,40 @@ const SELECT_PANEL_MAX_HEIGHT = 256;
  * }
  */
 @Component({
-  selector: 'ngx-mat-select-search',
-  templateUrl: './mat-select-search.component.html',
-  styleUrls: ['./mat-select-search.component.scss'],
+  selector: "ngx-mat-select-search",
+  templateUrl: "./mat-select-search.component.html",
+  styleUrls: ["./mat-select-search.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => MatSelectSearchComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValueAccessor {
-
+export class MatSelectSearchComponent
+  implements OnInit, OnDestroy, ControlValueAccessor
+{
   /** Label of the search placeholder */
-  @Input() placeholderLabel = 'Suche';
+  @Input() placeholderLabel = "Suche";
 
   /** Type of the search input field */
-  @Input() type = 'text';
+  @Input() type = "text";
 
   /** Font-based icon used for displaying Close-Icon */
-  @Input() closeIcon = 'close';
+  @Input() closeIcon = "close";
 
   /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
   @Input() closeSvgIcon?: string;
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
-  @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
+  @Input() noEntriesFoundLabel = "Keine Optionen gefunden";
 
   /**
-    * Whether or not the search field should be cleared after the dropdown menu is closed.
-    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
-    */
+   * Whether or not the search field should be cleared after the dropdown menu is closed.
+   * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
+   */
   @Input() clearSearchInput = true;
 
   /** Whether to show the search-in-progress indicator */
@@ -174,7 +206,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Input() disableScrollToActiveOnOptionsChanged = false;
 
   /** Adds 508 screen reader support for search box */
-  @Input() ariaLabel = 'dropdown search';
+  @Input() ariaLabel = "dropdown search";
 
   /** Whether to show Select All Checkbox (for mat-select[multi=true]) */
   @Input() showToggleAllCheckbox = false;
@@ -186,10 +218,16 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Input() toggleAllCheckboxIndeterminate = false;
 
   /** Display a message in a tooltip on the toggle-all checkbox */
-  @Input() toggleAllCheckboxTooltipMessage = '';
+  @Input() toggleAllCheckboxTooltipMessage = "";
 
   /** Define the position of the tooltip on the toggle-all checkbox. */
-  @Input() toggleAllCheckboxTooltipPosition: 'left' | 'right' | 'above' | 'below' | 'before' | 'after' = 'below';
+  @Input() toggleAllCheckboxTooltipPosition:
+    | "left"
+    | "right"
+    | "above"
+    | "below"
+    | "before"
+    | "after" = "below";
 
   /** Show/Hide the search clear button of the search input */
   @Input() hideClearSearchButton = false;
@@ -204,18 +242,22 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Output() toggleAll = new EventEmitter<boolean>();
 
   /** Reference to the search input field */
-  @ViewChild('searchSelectInput', { read: ElementRef, static: true }) searchSelectInput: ElementRef;
+  @ViewChild("searchSelectInput", { read: ElementRef, static: true })
+  searchSelectInput: ElementRef;
 
   /** Reference to the search input field */
-  @ViewChild('innerSelectSearch', { read: ElementRef, static: true }) innerSelectSearch: ElementRef;
+  @ViewChild("innerSelectSearch", { read: ElementRef, static: true })
+  innerSelectSearch: ElementRef;
 
   /** Reference to custom search input clear icon */
-  @ContentChild(MatSelectSearchClearDirective) clearIcon: MatSelectSearchClearDirective;
+  @ContentChild(MatSelectSearchClearDirective)
+  clearIcon: MatSelectSearchClearDirective;
 
   /** Reference to custom no entries found element */
-  @ContentChild(MatSelectNoEntriesFoundDirective) noEntriesFound: MatSelectNoEntriesFoundDirective;
+  @ContentChild(MatSelectNoEntriesFoundDirective)
+  noEntriesFound: MatSelectNoEntriesFoundDirective;
 
-  @HostBinding('class.mat-select-search-inside-mat-option')
+  @HostBinding("class.mat-select-search-inside-mat-option")
   get isInsideMatOption(): boolean {
     return !!this.matOption;
   }
@@ -226,7 +268,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
   private _lastExternalInputValue: string;
 
-  onTouched: Function = (_: any) => { };
+  onTouched: Function = (_: any) => {};
 
   /** Reference to the MatSelect options */
   public set _options(_options: QueryList<MatOption>) {
@@ -235,33 +277,41 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   public get _options(): QueryList<MatOption> {
     return this._options$.getValue();
   }
-  public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null);
+  public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<
+    QueryList<MatOption>
+  >(null);
 
   private optionsList$: Observable<MatOption[]> = this._options$.pipe(
-    switchMap(_options => _options ?
-      _options.changes.pipe(
-        map(options => options.toArray()),
-        startWith<MatOption[]>(_options.toArray()),
-      ) : of(null)
+    switchMap((_options) =>
+      _options
+        ? _options.changes.pipe(
+            map((options) => options.toArray()),
+            startWith<MatOption[]>(_options.toArray())
+          )
+        : of(null)
     )
   );
 
   private optionsLength$: Observable<number> = this.optionsList$.pipe(
-    map(options => options ? options.length : 0)
+    map((options) => (options ? options.length : 0))
   );
 
   /** Previously selected values when using <mat-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
-  public _formControl: FormControl = new FormControl('');
+  public _formControl: FormControl = new FormControl("");
 
   /** whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([
     this._formControl.valueChanges,
-    this.optionsLength$
+    this.optionsLength$,
   ]).pipe(
-    map(([value, optionsLength]) => this.noEntriesFoundLabel && value
-      && optionsLength === this.getOptionsLengthOffset())
+    map(
+      ([value, optionsLength]) =>
+        this.noEntriesFoundLabel &&
+        value &&
+        optionsLength === this.getOptionsLengthOffset()
+    )
   );
 
   /** Subject that emits when the component has been destroyed. */
@@ -270,12 +320,15 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Reference to active descendant for ARIA Support. */
   private activeDescendant: HTMLElement;
 
-  constructor(@Inject(MatSelect) public matSelect: MatSelect,
+  constructor(
+    @Inject(MatSelect) public matSelect: MatSelect,
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
     @Optional() @Inject(MatOption) public matOption: MatOption = null,
     @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
-    @Optional() @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS) defaultOptions?: MatSelectSearchOptions
+    @Optional()
+    @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS)
+    defaultOptions?: MatSelectSearchOptions
   ) {
     this.applyDefaultOptions(defaultOptions);
   }
@@ -293,13 +346,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
   ngOnInit() {
     // set custom panel class
-    const panelClass = 'mat-select-search-panel';
+    const panelClass = "mat-select-search-panel";
     if (this.matSelect.panelClass) {
       if (Array.isArray(this.matSelect.panelClass)) {
         (<string[]>this.matSelect.panelClass).push(panelClass);
-      } else if (typeof this.matSelect.panelClass === 'string') {
+      } else if (typeof this.matSelect.panelClass === "string") {
         this.matSelect.panelClass = [this.matSelect.panelClass, panelClass];
-      } else if (typeof this.matSelect.panelClass === 'object') {
+      } else if (typeof this.matSelect.panelClass === "object") {
         this.matSelect.panelClass[panelClass] = true;
       }
     } else {
@@ -309,18 +362,19 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     // set custom mat-option class if the component was placed inside a mat-option
     if (this.matOption) {
       this.matOption.disabled = true;
-      this.matOption._getHostElement().classList.add('contains-mat-select-search');
-      this.matOption._getHostElement().setAttribute('aria-hidden', 'true');
+      this.matOption
+        ._getHostElement()
+        .classList.add("contains-mat-select-search");
+      this.matOption._getHostElement().setAttribute("aria-hidden", "true");
     } else {
-      console.error('<ngx-mat-select-search> must be placed inside a <mat-option> element');
+      console.error(
+        "<ngx-mat-select-search> must be placed inside a <mat-option> element"
+      );
     }
 
     // when the select dropdown panel is opened or closed
     this.matSelect.openedChange
-      .pipe(
-        delay(1),
-        takeUntil(this._onDestroy)
-      )
+      .pipe(delay(1), takeUntil(this._onDestroy))
       .subscribe((opened) => {
         if (opened) {
           this.updateInputWidth();
@@ -336,18 +390,17 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
         }
       });
 
-
-
     // set the first item active after the options changed
     this.matSelect.openedChange
       .pipe(take(1))
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         if (this.matSelect._keyManager) {
-          this.matSelect._keyManager.change.pipe(takeUntil(this._onDestroy))
+          this.matSelect._keyManager.change
+            .pipe(takeUntil(this._onDestroy))
             .subscribe(() => this.adjustScrollTopToFitActiveOptionIntoView());
         } else {
-          console.log('_keyManager was not initialized.');
+          console.log("_keyManager was not initialized.");
         }
 
         this._options = this.matSelect.options;
@@ -362,70 +415,78 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
         // when options are appended, but allows the first item
         // in the list to be set as active by default when there
         // is no active selection
-        let previousFirstOption = this._options.toArray()[this.getOptionsLengthOffset()];
+        let previousFirstOption =
+          this._options.toArray()[this.getOptionsLengthOffset()];
 
-        this._options.changes
-          .pipe(
-            takeUntil(this._onDestroy)
-          )
-          .subscribe(() => {
-            // avoid "expression has been changed" error
-            setTimeout(() => {
-              // Convert the QueryList to an array
-              const options = this._options.toArray();
+        this._options.changes.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+          // avoid "expression has been changed" error
+          setTimeout(() => {
+            // Convert the QueryList to an array
+            const options = this._options.toArray();
 
-              // The true first item is offset by 1
-              const currentFirstOption = options[this.getOptionsLengthOffset()];
+            // The true first item is offset by 1
+            const currentFirstOption = options[this.getOptionsLengthOffset()];
 
-              const keyManager = this.matSelect._keyManager;
-              if (keyManager && this.matSelect.panelOpen) {
+            const keyManager = this.matSelect._keyManager;
+            if (keyManager && this.matSelect.panelOpen) {
+              // set first item active and input width
 
-                // set first item active and input width
+              // Check to see if the first option in these changes is different from the previous.
+              const firstOptionIsChanged = !this.matSelect.compareWith(
+                previousFirstOption,
+                currentFirstOption
+              );
 
-                // Check to see if the first option in these changes is different from the previous.
-                const firstOptionIsChanged = !this.matSelect.compareWith(previousFirstOption, currentFirstOption);
-
-                // CASE: The first option is different now.
-                // Indiciates we should set it as active and scroll to the top.
-                if (firstOptionIsChanged
-                  || !keyManager.activeItem
-                  || !options.find(option => this.matSelect.compareWith(option, keyManager.activeItem))) {
-                  keyManager.setFirstItemActive();
-                }
-
-                // wait for panel width changes
-                setTimeout(() => {
-                  this.updateInputWidth();
-                });
-
-                if (!this.disableScrollToActiveOnOptionsChanged) {
-                  this.adjustScrollTopToFitActiveOptionIntoView();
-                }
+              // CASE: The first option is different now.
+              // Indiciates we should set it as active and scroll to the top.
+              if (
+                firstOptionIsChanged ||
+                !keyManager.activeItem ||
+                !options.find((option) =>
+                  this.matSelect.compareWith(option, keyManager.activeItem)
+                )
+              ) {
+                keyManager.setFirstItemActive();
               }
 
-              // Update our reference
-              previousFirstOption = currentFirstOption;
-            });
+              // wait for panel width changes
+              setTimeout(() => {
+                this.updateInputWidth();
+              });
+
+              if (!this.disableScrollToActiveOnOptionsChanged) {
+                this.adjustScrollTopToFitActiveOptionIntoView();
+              }
+            }
+
+            // Update our reference
+            previousFirstOption = currentFirstOption;
           });
+        });
       });
 
     // add or remove css class depending on whether to show the no entries found message
     // note: this is hacky
-    this._showNoEntriesFound$.pipe(
-      takeUntil(this._onDestroy)
-    ).subscribe(showNoEntriesFound => {
-      // set no entries found class on mat option
-      if (this.matOption) {
-        if (showNoEntriesFound) {
-          this.matOption._getHostElement().classList.add('mat-select-search-no-entries-found');
-        } else {
-          this.matOption._getHostElement().classList.remove('mat-select-search-no-entries-found');
+    this._showNoEntriesFound$
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe((showNoEntriesFound) => {
+        // set no entries found class on mat option
+        if (this.matOption) {
+          if (showNoEntriesFound) {
+            this.matOption
+              ._getHostElement()
+              .classList.add("mat-select-search-no-entries-found");
+          } else {
+            this.matOption
+              ._getHostElement()
+              .classList.remove("mat-select-search-no-entries-found");
+          }
         }
-      }
-    });
+      });
 
     // resize the input width when the viewport is resized, i.e. the trigger width could potentially be resized
-    this._viewportRuler.change()
+    this._viewportRuler
+      .change()
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         if (this.matSelect.panelOpen) {
@@ -435,9 +496,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
     this.initMultipleHandling();
 
-    this.optionsList$.pipe(
-      takeUntil(this._onDestroy)
-    ).subscribe(() => {
+    this.optionsList$.pipe(takeUntil(this._onDestroy)).subscribe(() => {
       // update view when available options change
       this.changeDetectorRef.markForCheck();
     });
@@ -463,11 +522,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    */
   _handleKeydown(event: KeyboardEvent) {
     // Prevent propagation for all alphanumeric characters in order to avoid selection issues
-    if ((event.key && event.key.length === 1) ||
+    if (
+      (event.key && event.key.length === 1) ||
       (event.keyCode >= A && event.keyCode <= Z) ||
       (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-      (event.keyCode === SPACE)
-      || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
+      event.keyCode === SPACE ||
+      (this.preventHomeEndKeyPropagation &&
+        (event.keyCode === HOME || event.keyCode === END))
     ) {
       event.stopPropagation();
     }
@@ -478,7 +539,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     }
 
     // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
-    if (this.enableClearOnEscapePressed === true && event.keyCode === ESCAPE && this.value) {
+    if (
+      this.enableClearOnEscapePressed === true &&
+      event.keyCode === ESCAPE &&
+      this.value
+    ) {
       this._reset(true);
       event.stopPropagation();
     }
@@ -491,12 +556,19 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   _handleKeyup(event: KeyboardEvent) {
     if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
       const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
-      const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
+      const index = this._options
+        .toArray()
+        .findIndex((item) => item.id === ariaActiveDescendantId);
       if (index !== -1) {
         this.unselectActiveDescendant();
-        this.activeDescendant = this._options.toArray()[index]._getHostElement();
-        this.activeDescendant.setAttribute('aria-selected', 'true');
-        this.searchSelectInput.nativeElement.setAttribute('aria-activedescendant', ariaActiveDescendantId);
+        this.activeDescendant = this._options
+          .toArray()
+          [index]._getHostElement();
+        this.activeDescendant.setAttribute("aria-selected", "true");
+        this.searchSelectInput.nativeElement.setAttribute(
+          "aria-activedescendant",
+          ariaActiveDescendantId
+        );
       }
     }
   }
@@ -513,11 +585,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   registerOnChange(fn: (value: string) => void) {
-    this._formControl.valueChanges.pipe(
-      filter(value => value !== this._lastExternalInputValue),
-      tap(() => this._lastExternalInputValue = undefined),
-      takeUntil(this._onDestroy)
-    ).subscribe(fn);
+    this._formControl.valueChanges
+      .pipe(
+        filter((value) => value !== this._lastExternalInputValue),
+        tap(() => (this._lastExternalInputValue = undefined)),
+        takeUntil(this._onDestroy)
+      )
+      .subscribe(fn);
   }
 
   registerOnTouched(fn: Function) {
@@ -547,12 +621,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    * @param focus whether to focus after resetting
    */
   public _reset(focus?: boolean) {
-    this._formControl.setValue('');
+    this._formControl.setValue("");
     if (focus) {
       this._focus();
     }
   }
-
 
   /**
    * Initializes handling <mat-select [multiple]="true">
@@ -563,7 +636,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       if (this.matSelect.multiple) {
         // note: the access to matSelect.ngControl (instead of matSelect.value / matSelect.valueChanges)
         // is necessary to properly work in multi-selection mode.
-        console.error('the mat-select containing ngx-mat-select-search must have a ngModel or formControl directive when multiple=true');
+        console.error(
+          "the mat-select containing ngx-mat-select-search must have a ngModel or formControl directive when multiple=true"
+        );
       }
       return;
     }
@@ -577,15 +652,27 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       .subscribe((values) => {
         let restoreSelectedValues = false;
         if (this.matSelect.multiple) {
-          if ((this.alwaysRestoreSelectedOptionsMulti || (this._formControl.value && this._formControl.value.length))
-            && this.previousSelectedValues && Array.isArray(this.previousSelectedValues)) {
+          if (
+            (this.alwaysRestoreSelectedOptionsMulti ||
+              (this._formControl.value && this._formControl.value.length)) &&
+            this.previousSelectedValues &&
+            Array.isArray(this.previousSelectedValues)
+          ) {
             if (!values || !Array.isArray(values)) {
               values = [];
             }
-            const optionValues = this.matSelect.options.map(option => option.value);
-            this.previousSelectedValues.forEach(previousValue => {
-              if (!values.some(v => this.matSelect.compareWith(v, previousValue))
-                && !optionValues.some(v => this.matSelect.compareWith(v, previousValue))) {
+            const optionValues = this.matSelect.options.map(
+              (option) => option.value
+            );
+            this.previousSelectedValues.forEach((previousValue) => {
+              if (
+                !values.some((v) =>
+                  this.matSelect.compareWith(v, previousValue)
+                ) &&
+                !optionValues.some((v) =>
+                  this.matSelect.compareWith(v, previousValue)
+                )
+              ) {
                 // if a value that was selected before is deselected and not found in the options, it was deselected
                 // due to the filtering, so we restore it.
                 values.push(previousValue);
@@ -609,21 +696,36 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     if (this.matSelect.panel && this.matSelect.options.length > 0) {
       const matOptionHeight = this.getMatOptionHeight();
       const activeOptionIndex = this.matSelect._keyManager.activeItemIndex || 0;
-      const labelCount = _countGroupLabelsBeforeOption(activeOptionIndex, this.matSelect.options, this.matSelect.optionGroups);
+      const labelCount = _countGroupLabelsBeforeOption(
+        activeOptionIndex,
+        this.matSelect.options,
+        this.matSelect.optionGroups
+      );
       // If the component is in a MatOption, the activeItemIndex will be offset by one.
-      const indexOfOptionToFitIntoView = (this.matOption ? -1 : 0) + labelCount + activeOptionIndex;
+      const indexOfOptionToFitIntoView =
+        (this.matOption ? -1 : 0) + labelCount + activeOptionIndex;
       const currentScrollTop = this.matSelect.panel.nativeElement.scrollTop;
 
-      const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight;
-      const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / matOptionHeight);
+      const searchInputHeight =
+        this.innerSelectSearch.nativeElement.offsetHeight;
+      const amountOfVisibleOptions = Math.floor(
+        (SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / matOptionHeight
+      );
 
-      const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / matOptionHeight) - 1;
+      const indexOfFirstVisibleOption =
+        Math.round((currentScrollTop + searchInputHeight) / matOptionHeight) -
+        1;
 
       if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
-        this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * matOptionHeight;
-      } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
-        this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * matOptionHeight
-          - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
+        this.matSelect.panel.nativeElement.scrollTop =
+          indexOfOptionToFitIntoView * matOptionHeight;
+      } else if (
+        indexOfFirstVisibleOption + amountOfVisibleOptions <=
+        indexOfOptionToFitIntoView
+      ) {
+        this.matSelect.panel.nativeElement.scrollTop =
+          (indexOfOptionToFitIntoView + 1) * matOptionHeight -
+          (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
       }
     }
   }
@@ -638,20 +740,23 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     }
     let element: HTMLElement = this.innerSelectSearch.nativeElement;
     let panelElement: HTMLElement;
-    while (element = element.parentElement) {
-      if (element.classList.contains('mat-select-panel')) {
+    while ((element = element.parentElement)) {
+      if (element.classList.contains("mat-select-panel")) {
         panelElement = element;
         break;
       }
     }
     if (panelElement) {
-      this.innerSelectSearch.nativeElement.style.width = panelElement.clientWidth + 'px';
+      this.innerSelectSearch.nativeElement.style.width =
+        panelElement.clientWidth + "px";
     }
   }
 
   private getMatOptionHeight(): number {
     if (this.matSelect.options.length > 0) {
-      return this.matSelect.options.first._getHostElement().getBoundingClientRect().height;
+      return this.matSelect.options.first
+        ._getHostElement()
+        .getBoundingClientRect().height;
     }
 
     return 0;
@@ -669,8 +774,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   private unselectActiveDescendant() {
-    this.activeDescendant?.removeAttribute('aria-selected');
-    this.searchSelectInput.nativeElement.removeAttribute('aria-activedescendant');
+    this.activeDescendant?.removeAttribute("aria-selected");
+    this.searchSelectInput.nativeElement.removeAttribute(
+      "aria-activedescendant"
+    );
   }
-
 }

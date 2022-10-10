@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive } from "@angular/core";
 
 /**
  * Directive for providing a custom no entries found element.
@@ -10,6 +10,6 @@ import { Directive } from '@angular/core';
  * </ngx-mat-select-search>
  */
 @Directive({
-  selector: '[ngxMatSelectNoEntriesFound]'
+  selector: "[ngxMatSelectNoEntriesFound]",
 })
 export class MatSelectNoEntriesFoundDirective {}

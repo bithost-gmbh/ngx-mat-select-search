@@ -1,18 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ReplaySubject, Subject } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ReplaySubject, Subject } from "rxjs";
+import { FormControl } from "@angular/forms";
+import { takeUntil } from "rxjs/operators";
 
-import { BankGroup, BANKGROUPS } from '../demo-data';
-
+import { BankGroup, BANKGROUPS } from "../demo-data";
 
 @Component({
-  selector: 'app-option-groups-example',
-  templateUrl: './option-groups-example.component.html',
-  styleUrls: ['./option-groups-example.component.scss']
+  selector: "app-option-groups-example",
+  templateUrl: "./option-groups-example.component.html",
+  styleUrls: ["./option-groups-example.component.scss"],
 })
 export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
-
   /** list of bank groups */
   protected bankGroups: BankGroup[] = BANKGROUPS;
 
@@ -23,13 +21,14 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
   public bankGroupsFilterCtrl: FormControl = new FormControl();
 
   /** list of bank groups filtered by search keyword for option groups */
-  public filteredBankGroups: ReplaySubject<BankGroup[]> = new ReplaySubject<BankGroup[]>(1);
+  public filteredBankGroups: ReplaySubject<BankGroup[]> = new ReplaySubject<
+    BankGroup[]
+  >(1);
 
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     // load the initial bank list
@@ -48,7 +47,6 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
     this._onDestroy.complete();
   }
 
-
   protected filterBankGroups() {
     if (!this.bankGroups) {
       return;
@@ -64,10 +62,12 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
     }
     // filter the banks
     this.filteredBankGroups.next(
-      bankGroupsCopy.filter(bankGroup => {
+      bankGroupsCopy.filter((bankGroup) => {
         const showBankGroup = bankGroup.name.toLowerCase().indexOf(search) > -1;
         if (!showBankGroup) {
-          bankGroup.banks = bankGroup.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
+          bankGroup.banks = bankGroup.banks.filter(
+            (bank) => bank.name.toLowerCase().indexOf(search) > -1
+          );
         }
         return bankGroup.banks.length > 0;
       })
@@ -76,10 +76,10 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
 
   protected copyBankGroups(bankGroups: BankGroup[]) {
     const bankGroupsCopy = [];
-    bankGroups.forEach(bankGroup => {
+    bankGroups.forEach((bankGroup) => {
       bankGroupsCopy.push({
         name: bankGroup.name,
-        banks: bankGroup.banks.slice()
+        banks: bankGroup.banks.slice(),
       });
     });
     return bankGroupsCopy;

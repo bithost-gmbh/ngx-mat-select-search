@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive } from "@angular/core";
 
 /**
  * Directive for providing a custom clear-icon.
@@ -8,6 +8,6 @@ import { Directive } from '@angular/core';
  * </ngx-mat-select-search>
  */
 @Directive({
-    selector: '[ngxMatSelectSearchClear]'
+  selector: "[ngxMatSelectSearchClear]",
 })
 export class MatSelectSearchClearDirective {}

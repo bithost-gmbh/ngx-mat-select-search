@@ -1,19 +1,25 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatSelect } from '@angular/material/select';
-import { ReplaySubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { FormControl } from "@angular/forms";
+import { MatSelect } from "@angular/material/select";
+import { ReplaySubject, Subject } from "rxjs";
+import { take, takeUntil } from "rxjs/operators";
 
-import { Bank, BANKS } from '../demo-data';
-
+import { Bank, BANKS } from "../demo-data";
 
 @Component({
-  selector: 'app-single-selection-example',
-  templateUrl: './single-selection-example.component.html',
-  styleUrls: ['./single-selection-example.component.scss']
+  selector: "app-single-selection-example",
+  templateUrl: "./single-selection-example.component.html",
+  styleUrls: ["./single-selection-example.component.scss"],
 })
-export class SingleSelectionExampleComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class SingleSelectionExampleComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   /** list of banks */
   protected banks: Bank[] = BANKS;
 
@@ -26,13 +32,12 @@ export class SingleSelectionExampleComponent implements OnInit, AfterViewInit, O
   /** list of banks filtered by search keyword */
   public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
-  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+  @ViewChild("singleSelect", { static: true }) singleSelect: MatSelect;
 
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     // set initial selection
@@ -70,7 +75,8 @@ export class SingleSelectionExampleComponent implements OnInit, AfterViewInit, O
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        this.singleSelect.compareWith = (a: Bank, b: Bank) => a && b && a.id === b.id;
+        this.singleSelect.compareWith = (a: Bank, b: Bank) =>
+          a && b && a.id === b.id;
       });
   }
 
@@ -88,8 +94,7 @@ export class SingleSelectionExampleComponent implements OnInit, AfterViewInit, O
     }
     // filter the banks
     this.filteredBanks.next(
-      this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
+      this.banks.filter((bank) => bank.name.toLowerCase().indexOf(search) > -1)
     );
   }
-
 }
