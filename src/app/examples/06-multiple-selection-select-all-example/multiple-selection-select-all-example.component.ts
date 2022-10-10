@@ -17,9 +17,7 @@ import { Bank, BANKS } from "../demo-data";
   templateUrl: "./multiple-selection-select-all-example.component.html",
   styleUrls: ["./multiple-selection-select-all-example.component.scss"],
 })
-export class MultipleSelectionSelectAllExampleComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class MultipleSelectionSelectAllExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   /** list of banks */
   protected banks: Bank[] = BANKS;
 

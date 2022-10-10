@@ -16,9 +16,7 @@ import { take, takeUntil } from "rxjs/operators";
   templateUrl: "./custom-no-entries-found-example.component.html",
   styleUrls: ["./custom-no-entries-found-example.component.scss"],
 })
-export class CustomNoEntriesFoundExampleComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class CustomNoEntriesFoundExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   /** list of banks */
   protected banks: Bank[] = BANKS;
 

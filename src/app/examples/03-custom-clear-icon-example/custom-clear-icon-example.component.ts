@@ -7,10 +7,7 @@ import { SingleSelectionExampleComponent } from "../01-single-selection-example/
   templateUrl: "./custom-clear-icon-example.component.html",
   styleUrls: ["./custom-clear-icon-example.component.scss"],
 })
-export class CustomClearIconExampleComponent
-  extends SingleSelectionExampleComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class CustomClearIconExampleComponent extends SingleSelectionExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   // reuse all code of SingleSelectionComponent
 
   ngOnInit() {

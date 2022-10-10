@@ -17,9 +17,7 @@ import { Bank, BANKS } from "../demo-data";
   templateUrl: "./single-selection-example.component.html",
   styleUrls: ["./single-selection-example.component.scss"],
 })
-export class SingleSelectionExampleComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class SingleSelectionExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   /** list of banks */
   protected banks: Bank[] = BANKS;
 

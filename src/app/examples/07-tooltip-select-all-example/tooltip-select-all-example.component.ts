@@ -17,9 +17,7 @@ import { Bank, BANKS } from "../demo-data";
   templateUrl: "./tooltip-select-all-example.component.html",
   styleUrls: ["./tooltip-select-all-example.component.scss"],
 })
-export class TooltipSelectAllExampleComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class TooltipSelectAllExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   /** list of banks */
   protected banks: Bank[] = BANKS;
 
