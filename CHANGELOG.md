@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.1
+- Add Angular Material 15 as a peer dependency \
+  Issue: [#408](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/408)
+
 ## 5.0.0
 * Enhancement: Accessibility Issue: screenreaders reading blank before each option.
   [#349](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/349)
