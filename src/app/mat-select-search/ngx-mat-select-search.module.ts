@@ -18,7 +18,7 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.directive';
 
-export const MatSelectSearchVersion = '5.0.0';
+export const MatSelectSearchVersion = '6.0.0';
 export { MatSelectSearchClearDirective };
 export { MatSelectNoEntriesFoundDirective };
 
