@@ -1,5 +1,4 @@
 {
-  "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "ngx-mat-select-search",
   "description": "Angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
   "version": "6.0.0",
@@ -12,7 +11,7 @@
     "test": "ng test --watch=false",
     "test.ci": "npm run test -- --progress=false --watch=false",
     "lint": "tslint --project src/tsconfig.app.json",
-    "build-lib": "ng-packagr -p package.json"
+    "build-lib": "ng-packagr -p ng-package.json"
   },
   "author": "Esteban Gehring, Bithost GmbH",
   "bugs": {
@@ -34,12 +33,6 @@
   "homepage": "https://github.com/bithost-gmbh/ngx-mat-select-search",
   "peerDependencies": {
     "@angular/material": "^15.0.0"
-  },
-  "ngPackage": {
-    "dest": "dist-lib",
-    "lib": {
-      "entryFile": "src/app/mat-select-search/public_api.ts"
-    }
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.0.1",
