@@ -33,7 +33,7 @@
   ],
   "homepage": "https://github.com/bithost-gmbh/ngx-mat-select-search",
   "peerDependencies": {
-    "@angular/material": "^12.0.0 || ^13.0.0 || ^14.0.0"
+    "@angular/material": "^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0"
   },
   "ngPackage": {
     "dest": "dist-lib",
