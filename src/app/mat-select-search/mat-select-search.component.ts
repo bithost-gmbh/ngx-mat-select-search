@@ -253,7 +253,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Previously selected values when using <mat-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
-  public _formControl: FormControl = new FormControl('');
+  public _formControl: FormControl<string> = new FormControl<string>('');
 
   /** whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([

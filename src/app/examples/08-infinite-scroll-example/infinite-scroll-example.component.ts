@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
-import { map, mapTo, scan, startWith, takeUntil } from 'rxjs/operators';
+import { map, mapTo, scan, startWith } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
 import { Bank } from '../demo-data';
 
@@ -24,14 +24,14 @@ export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
     name: `Bank ${i}`
   }));
 
-  /** control for the selected bank */
-  bankCtrl: FormControl = new FormControl();
+  /** control for the selected bank id */
+  public bankCtrl: FormControl<string> = new FormControl<string>(null);
 
-  /** control for the search input value */
-  searchCtrl: FormControl = new FormControl();
+  /** control for the MatSelect filter keyword */
+  public bankFilterCtrl: FormControl<string> = new FormControl<string>('');
 
   /** list of data corresponding to the search input */
-  private filteredData$: Observable<Bank[]> = this.searchCtrl.valueChanges.pipe(
+  private filteredData$: Observable<Bank[]> = this.bankFilterCtrl.valueChanges.pipe(
     startWith(''),
     map(searchKeyword => {
       if (!searchKeyword) {
@@ -52,10 +52,10 @@ export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
   /** minimum offset needed for the batch to ensure the selected option is displayed */
   private minimumBatchOffset$: Observable<number> = combineLatest([
     this.filteredData$,
-    this.searchCtrl.valueChanges
+    this.bankFilterCtrl.valueChanges
   ]).pipe(
     map(([filteredData, searchValue]) => {
-      if (!this.searchCtrl.value && this.bankCtrl.value) {
+      if (!this.bankFilterCtrl.value && this.bankCtrl.value) {
         const index = filteredData.findIndex(bank => bank.id === this.bankCtrl.value);
         return index + this.batchSize;
       } else {

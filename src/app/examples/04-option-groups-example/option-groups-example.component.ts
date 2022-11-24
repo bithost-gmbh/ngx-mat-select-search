@@ -17,10 +17,10 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
   protected bankGroups: BankGroup[] = BANKGROUPS;
 
   /** control for the selected bank for option groups */
-  public bankGroupsCtrl: FormControl = new FormControl();
+  public bankGroupsCtrl: FormControl<BankGroup[]> = new FormControl<BankGroup[]>([]);
 
   /** control for the MatSelect filter keyword for option groups */
-  public bankGroupsFilterCtrl: FormControl = new FormControl();
+  public bankGroupsFilterCtrl: FormControl<string> = new FormControl<string>('');
 
   /** list of bank groups filtered by search keyword for option groups */
   public filteredBankGroups: ReplaySubject<BankGroup[]> = new ReplaySubject<BankGroup[]>(1);

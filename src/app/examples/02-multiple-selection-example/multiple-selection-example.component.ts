@@ -17,10 +17,10 @@ export class MultipleSelectionExampleComponent implements OnInit, AfterViewInit,
   protected banks: Bank[] = BANKS;
 
   /** control for the selected bank for multi-selection */
-  public bankMultiCtrl: FormControl = new FormControl();
+  public bankMultiCtrl: FormControl<Bank[]> = new FormControl<Bank[]>([]);
 
   /** control for the MatSelect filter keyword multi-selection */
-  public bankMultiFilterCtrl: FormControl = new FormControl();
+  public bankMultiFilterCtrl: FormControl<string> = new FormControl<string>('');
 
   /** list of banks filtered by search keyword */
   public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);

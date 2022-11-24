@@ -18,10 +18,10 @@ export class SingleSelectionExampleComponent implements OnInit, AfterViewInit, O
   protected banks: Bank[] = BANKS;
 
   /** control for the selected bank */
-  public bankCtrl: FormControl = new FormControl();
+  public bankCtrl: FormControl<Bank> = new FormControl<Bank>(null);
 
   /** control for the MatSelect filter keyword */
-  public bankFilterCtrl: FormControl = new FormControl();
+  public bankFilterCtrl: FormControl<string> = new FormControl<string>('');
 
   /** list of banks filtered by search keyword */
   public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);

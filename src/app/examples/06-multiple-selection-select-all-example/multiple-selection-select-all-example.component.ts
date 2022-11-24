@@ -16,14 +16,11 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
   /** list of banks */
   protected banks: Bank[] = BANKS;
 
-  /** total number of available entries */
-  public allBanksSize = BANKS.length;
-
   /** control for the selected bank for multi-selection */
-  public bankMultiCtrl: FormControl = new FormControl();
+  public bankMultiCtrl: FormControl<Bank[]> = new FormControl<Bank[]>([]);
 
   /** control for the MatSelect filter keyword multi-selection */
-  public bankMultiFilterCtrl: FormControl = new FormControl();
+  public bankMultiFilterCtrl: FormControl<string> = new FormControl<string>('');
 
   /** list of banks filtered by search keyword */
   public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
