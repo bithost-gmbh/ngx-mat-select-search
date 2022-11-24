@@ -1,8 +1,7 @@
 {
-  "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "ngx-mat-select-search",
   "description": "Angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -12,7 +11,7 @@
     "test": "ng test --watch=false",
     "test.ci": "npm run test -- --progress=false --watch=false",
     "lint": "tslint --project src/tsconfig.app.json",
-    "build-lib": "ng-packagr -p package.json"
+    "build-lib": "ng-packagr -p ng-package.json"
   },
   "author": "Esteban Gehring, Bithost GmbH",
   "bugs": {
@@ -33,30 +32,24 @@
   ],
   "homepage": "https://github.com/bithost-gmbh/ngx-mat-select-search",
   "peerDependencies": {
-    "@angular/material": "^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0"
-  },
-  "ngPackage": {
-    "dest": "dist-lib",
-    "lib": {
-      "entryFile": "src/app/mat-select-search/public_api.ts"
-    }
+    "@angular/material": "^15.0.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.3.7",
+    "@angular-devkit/build-angular": "^15.0.1",
     "@angular-extensions/lint-rules": "^1.2.1",
-    "@angular/animations": "^13.3.10",
-    "@angular/cdk": "^13.3.8",
-    "@angular/cli": "^13.3.7",
-    "@angular/common": "^13.3.10",
-    "@angular/compiler": "^13.3.10",
-    "@angular/compiler-cli": "^13.3.10",
-    "@angular/core": "^13.3.10",
-    "@angular/forms": "^13.3.10",
-    "@angular/language-service": "^13.3.10",
-    "@angular/material": "^13.3.8",
-    "@angular/platform-browser": "^13.3.10",
-    "@angular/platform-browser-dynamic": "^13.3.10",
-    "@angular/router": "^13.3.10",
+    "@angular/animations": "^15.0.1",
+    "@angular/cdk": "^15.0.0",
+    "@angular/cli": "^15.0.1",
+    "@angular/common": "^15.0.1",
+    "@angular/compiler": "^15.0.1",
+    "@angular/compiler-cli": "^15.0.1",
+    "@angular/core": "^15.0.1",
+    "@angular/forms": "^15.0.1",
+    "@angular/language-service": "^15.0.1",
+    "@angular/material": "^15.0.0",
+    "@angular/platform-browser": "^15.0.1",
+    "@angular/platform-browser-dynamic": "^15.0.1",
+    "@angular/router": "^15.0.1",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^12.20.52",
@@ -69,11 +62,11 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "^4.0.2",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "ng-packagr": "^13.3.1",
+    "ng-packagr": "^15.0.1",
     "rxjs": "^6.6.7",
     "ts-node": "~7.0.1",
     "tslint": "~6.1.0",
-    "typescript": "^4.5.5",
+    "typescript": "^4.8.4",
     "zone.js": "^0.11.5"
   },
   "dependencies": {

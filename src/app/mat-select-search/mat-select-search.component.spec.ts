@@ -7,11 +7,11 @@
 
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatLegacySelect as MatSelect, MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { ReplaySubject } from 'rxjs';
 import { Subject } from 'rxjs';
 import { delay, take } from 'rxjs/operators';
@@ -95,19 +95,19 @@ export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterVie
   @ViewChild('selectSearchMulti') matSelectSearchMulti: MatSelectSearchComponent;
 
   // control for the selected bank
-  public bankCtrl: FormControl = new FormControl();
+  public bankCtrl: UntypedFormControl = new UntypedFormControl();
   // control for the selected bank
-  public bankCtrlMatOption: FormControl = new FormControl();
+  public bankCtrlMatOption: UntypedFormControl = new UntypedFormControl();
   // control for the MatSelect filter keyword
-  public bankFilterCtrl: FormControl = new FormControl();
+  public bankFilterCtrl: UntypedFormControl = new UntypedFormControl();
   // control for the MatSelect filter keyword
-  public bankFilterCtrlMatOption: FormControl = new FormControl();
+  public bankFilterCtrlMatOption: UntypedFormControl = new UntypedFormControl();
 
   /** control for the selected bank for multi-selection */
-  public bankMultiCtrl: FormControl = new FormControl();
+  public bankMultiCtrl: UntypedFormControl = new UntypedFormControl();
 
   /** control for the MatSelect filter keyword multi-selection */
-  public bankMultiFilterCtrl: FormControl = new FormControl();
+  public bankMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
 
 
   // list of banks

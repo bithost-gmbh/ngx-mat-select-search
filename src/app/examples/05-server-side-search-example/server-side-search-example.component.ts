@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import {debounceTime, delay, tap, filter, map, takeUntil} from 'rxjs/operators';
+import { debounceTime, delay, tap, filter, map, takeUntil } from 'rxjs/operators';
 
 import { Bank, BANKS } from '../demo-data';
 
@@ -17,10 +17,10 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
   protected banks: Bank[] = BANKS;
 
   /** control for the selected bank for server side filtering */
-  public bankServerSideCtrl: FormControl = new FormControl();
+  public bankServerSideCtrl: FormControl<Bank> = new FormControl<Bank>(null);
 
   /** control for filter for server side. */
-  public bankServerSideFilteringCtrl: FormControl = new FormControl();
+  public bankServerSideFilteringCtrl: FormControl<string> = new FormControl<string>('');
 
   /** indicate search operation is in progress */
   public searching = false;

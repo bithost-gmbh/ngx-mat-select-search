@@ -3,7 +3,7 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 
-import { BankGroup, BANKGROUPS } from '../demo-data';
+import { Bank, BankGroup, BANKGROUPS } from '../demo-data';
 
 
 @Component({
@@ -17,10 +17,10 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
   protected bankGroups: BankGroup[] = BANKGROUPS;
 
   /** control for the selected bank for option groups */
-  public bankGroupsCtrl: FormControl = new FormControl();
+  public bankGroupsCtrl: FormControl<Bank> = new FormControl<Bank>(null);
 
   /** control for the MatSelect filter keyword for option groups */
-  public bankGroupsFilterCtrl: FormControl = new FormControl();
+  public bankGroupsFilterCtrl: FormControl<string> = new FormControl<string>('');
 
   /** list of bank groups filtered by search keyword for option groups */
   public filteredBankGroups: ReplaySubject<BankGroup[]> = new ReplaySubject<BankGroup[]>(1);

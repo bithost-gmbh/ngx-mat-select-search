@@ -27,9 +27,9 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatOption, _countGroupLabelsBeforeOption } from '@angular/material/core';
-import { MatFormField } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
+import { MatLegacyOption as MatOption, _countGroupLabelsBeforeLegacyOption as _countGroupLabelsBeforeOption } from '@angular/material/legacy-core';
+import { MatLegacyFormField as MatFormField } from '@angular/material/legacy-form-field';
+import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
@@ -253,7 +253,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Previously selected values when using <mat-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
-  public _formControl: FormControl = new FormControl('');
+  public _formControl: FormControl<string> = new FormControl<string>('');
 
   /** whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([

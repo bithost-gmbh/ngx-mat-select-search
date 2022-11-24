@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { Bank, BANKS } from '../demo-data';
 import { FormControl } from '@angular/forms';
 import { ReplaySubject, Subject } from 'rxjs';
-import { MatSelect } from '@angular/material/select';
+import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select';
 import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -16,10 +16,10 @@ export class CustomNoEntriesFoundExampleComponent implements OnInit, AfterViewIn
   protected banks: Bank[] = BANKS;
 
   /** control for the selected bank */
-  public bankCtrl: FormControl = new FormControl();
+  public bankCtrl: FormControl<Bank> = new FormControl<Bank>(null);
 
   /** control for the MatSelect filter keyword */
-  public bankFilterCtrl: FormControl = new FormControl();
+  public bankFilterCtrl: FormControl<string> = new FormControl<string>('');
 
   /** list of banks filtered by search keyword */
   public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);

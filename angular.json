@@ -93,7 +93,6 @@
       }
     }
   },
-  "defaultProject": "ngx-mat-select-search",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

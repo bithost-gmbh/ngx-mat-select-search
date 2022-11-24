@@ -82,7 +82,12 @@ To use the [i18n](https://angular.io/guide/i18n) API for translation of the labe
 
 ### Compatibility
 
-#### Current release
+#### Version [`6.0.0`](https://github.com/bithost-gmbh/ngx-mat-select-search/tree/6.0.0)
+
+* `@angular/core`: `^15.0.0`
+* `@angular/material`: `^15.0.0` with `MatLegacySelectModule` (`@angular/material/legacy-select`)
+
+#### Version [`5.0.0`](https://github.com/bithost-gmbh/ngx-mat-select-search/tree/5.0.0)
 
 * `@angular/core`: `^12.0.0 || ^13.0.0 || ^14.0.0`
 * `@angular/material`: `^12.0.0 || ^13.0.0 || ^14.0.0`

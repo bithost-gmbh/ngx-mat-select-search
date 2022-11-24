@@ -1,8 +1,13 @@
 # Changelog
 
-## 5.0.1
-- Add Angular Material 15 as a peer dependency \
-  Issue: [#408](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/408)
+## 6.0.0
+* Add Angular Material 15 as a peer dependency \
+  [#408](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/408)
+* Update compatibility to `@angular/material@15` with `MatLegacySelectModule` (`@angular/material/legacy-select`).
+  [#395](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/395)
+
+  **Breaking Change**:  `@angular/material`: `<= 14` is not supported anymore, please use version `5.0.0`.
+                        See [README.md#compatibility](README.md#compatibility)
 
 ## 5.0.0
 * Enhancement: Accessibility Issue: screenreaders reading blank before each option.
