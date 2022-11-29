@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.0.0
+* Update compatibility to `@angular/material@15` with the MDC-based `MatSelectModule` (`@angular/material/select`).
+  [#412](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/412)
+
+  **Breaking Change**:  The `MatLegacySelectModule` (`@angular/material/legacy-select`) of `@angular/material@15` is not supported anymore, please use version `6.0.0`.
+                        See [README.md#compatibility](README.md#compatibility)
+                        
 ## 6.0.0
 * Add Angular Material 15 as a peer dependency \
   [#408](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/408)
