@@ -33,8 +33,7 @@
           class="mat-select-search-spinner"
           diameter="16"></mat-spinner>
 
-  <button mat-button
-          *ngIf="!hideClearSearchButton && value && !searching"
+  <button *ngIf="!hideClearSearchButton && value && !searching"
           mat-icon-button
           aria-label="Clear"
           (click)="_reset(true)"
