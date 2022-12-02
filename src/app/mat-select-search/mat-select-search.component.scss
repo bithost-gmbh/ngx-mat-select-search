@@ -16,6 +16,7 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
 .mat-select-search-hidden {
   visibility: hidden;
 }
+
 .mat-select-search-inner {
   position: absolute;
   top: 0;
@@ -109,7 +110,7 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   }
 }
 
-::ng-deep .mat-option[aria-disabled=true].contains-mat-select-search {
+::ng-deep .mat-mdc-option[aria-disabled=true].contains-mat-select-search {
   /* let move mat-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
   position: static;
   padding: 0;
@@ -118,7 +119,7 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
     margin-right: 0px;
     margin-left: 0px;
   }
-  .mat-option-pseudo-checkbox {
+  .mat-mdc-option-pseudo-checkbox {
     display: none;
   }
   &.mat-select-search-no-entries-found {
