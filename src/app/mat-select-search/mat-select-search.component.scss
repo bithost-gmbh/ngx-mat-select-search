@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-$mat-menu-side-padding: 16px !default;
 $clear-button-width: 40px;
 $multiple-check-width: 33px;
 $mat-option-height: 3em;
@@ -31,10 +30,6 @@ $mat-select-panel-padding: 8px;
     TODO: implement proper theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
   */
   box-shadow: none;
-  border-radius: 4px 4px 0 0;
-
-  /* Prevent iOS scroll issue (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/70)*/
-  -webkit-transform: translate3d(0,0,0);
 
   &.mat-select-search-inner-multiple {
     width: 100%;
@@ -45,15 +40,7 @@ $mat-select-panel-padding: 8px;
   }
 }
 
-::ng-deep .mat-select-search-panel {
-  /* allow absolute positioning relative to outer options container */
-  transform: none !important;
-  overflow-x: hidden;
-}
-
 .mat-select-search-input {
-  padding: 16px;
-  padding-right: $clear-button-width + $mat-select-search-clear-x;
   box-sizing: border-box;
   width: 100%;
   border: none;
@@ -61,19 +48,24 @@ $mat-select-panel-padding: 8px;
   font-size: inherit;
   color: currentColor;
   outline: none;
+  padding: 0 $clear-button-width + $mat-select-search-clear-x 0 16px;
+  height: calc($mat-option-height - 1px);
+  line-height: calc($mat-option-height - 1px);
 
   :host-context([dir="rtl"]) & {
     padding-right: 16px;
     padding-left: $clear-button-width + $mat-select-search-clear-x;
   }
 }
+
 .mat-select-search-no-entries-found {
   padding-top: 8px;
 }
+
 .mat-select-search-clear {
   position: absolute;
   right: $mat-select-search-clear-x;
-  top: 5px;
+  top: 0;
 
   :host-context([dir="rtl"]) & {
     right: auto;
@@ -92,19 +84,6 @@ $mat-select-panel-padding: 8px;
   }
 }
 
-/** override styling when inside a mat-option */
-:host.mat-select-search-inside-mat-option {
-  .mat-select-search-input {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    height: calc($mat-option-height - 1px);
-    line-height: calc($mat-option-height - 1px);
-  }
-  .mat-select-search-clear {
-    top: 0px;
-  }
-}
-
 ::ng-deep .mat-mdc-option[aria-disabled=true].contains-mat-select-search {
   /* let move mat-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
   position: sticky;
@@ -114,10 +93,10 @@ $mat-select-panel-padding: 8px;
   margin-top: -$mat-select-panel-padding;
 
   .mat-icon {
-    margin-right: 0px;
-    margin-left: 0px;
+    margin-right: 0;
+    margin-left: 0;
   }
-  .mat-mdc-option-pseudo-checkbox {
+  mat-pseudo-checkbox {
     display: none;
   }
 }
@@ -127,7 +106,7 @@ $mat-select-panel-padding: 8px;
   padding-bottom: 2px;
 
   :host-context([dir="rtl"]) & {
-    padding-left: 0px;
+    padding-left: 0;
     padding-right: $mat-select-search-toggle-all-checkbox-x;
   }
 }
