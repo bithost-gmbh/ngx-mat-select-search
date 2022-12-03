@@ -12,6 +12,7 @@ $mat-option-height: 3em;
 $mat-select-search-clear-x: 4px;
 $mat-select-search-spinner-x: 16px;
 $mat-select-search-toggle-all-checkbox-x: 16px;
+$mat-select-panel-padding: 8px;
 
 .mat-select-search-hidden {
   visibility: hidden;
@@ -22,8 +23,6 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   top: 0;
   left: 0;
   width: 100%;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
   z-index: 100;
   font-size: inherit;
   /*
@@ -44,16 +43,6 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
       align-items: center;
     }
   }
-
-  .mat-mdc-input-element {
-    flex-basis: auto;
-    &:-ms-input-placeholder {
-      // fix IE11 not able to focus programmatically with css style -ms-user-select: none
-      // see https://github.com/angular/material2/issues/15093
-      // needed for angular material ^7.0.0 < 8.0.0
-      -ms-user-select: text;
-    }
-  }
 }
 
 ::ng-deep .mat-select-search-panel {
@@ -67,6 +56,11 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   padding-right: $clear-button-width + $mat-select-search-clear-x;
   box-sizing: border-box;
   width: 100%;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: currentColor;
+  outline: none;
 
   :host-context([dir="rtl"]) & {
     padding-right: 16px;
@@ -74,7 +68,7 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   }
 }
 .mat-select-search-no-entries-found {
-  padding: 16px;
+  padding-top: 8px;
 }
 .mat-select-search-clear {
   position: absolute;
@@ -103,20 +97,21 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   .mat-select-search-input {
     padding-top: 0px;
     padding-bottom: 0px;
-    height: $mat-option-height;
-    line-height: $mat-option-height;
+    height: calc($mat-option-height - 1px);
+    line-height: calc($mat-option-height - 1px);
   }
   .mat-select-search-clear {
-    top: 3px;
+    top: 0px;
   }
 }
 
 ::ng-deep .mat-mdc-option[aria-disabled=true].contains-mat-select-search {
   /* let move mat-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
   position: sticky;
-  top: 0;
+  top: -$mat-select-panel-padding;
   z-index: 1;
   opacity: 1;
+  margin-top: -$mat-select-panel-padding;
 
   .mat-icon {
     margin-right: 0px;
@@ -124,9 +119,6 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   }
   .mat-mdc-option-pseudo-checkbox {
     display: none;
-  }
-  &.mat-select-search-no-entries-found {
-    height: 2 * $mat-option-height;
   }
 }
 
