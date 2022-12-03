@@ -32,7 +32,6 @@ $mat-select-panel-padding: 8px;
   box-shadow: none;
 
   &.mat-select-search-inner-multiple {
-    width: 100%;
     &.mat-select-search-inner-toggle-all {
       display: flex;
       align-items: center;
@@ -48,6 +47,7 @@ $mat-select-panel-padding: 8px;
   font-size: inherit;
   color: currentColor;
   outline: none;
+  background: none;
   padding: 0 $clear-button-width + $mat-select-search-clear-x 0 16px;
   height: calc($mat-option-height - 1px);
   line-height: calc($mat-option-height - 1px);
@@ -55,6 +55,12 @@ $mat-select-panel-padding: 8px;
   :host-context([dir="rtl"]) & {
     padding-right: 16px;
     padding-left: $clear-button-width + $mat-select-search-clear-x;
+  }
+}
+
+.mat-select-search-inner-toggle-all {
+  .mat-select-search-input {
+    padding-left: 5px;
   }
 }
 
