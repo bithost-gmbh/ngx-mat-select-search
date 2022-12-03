@@ -10,7 +10,7 @@ $multiple-check-width: 33px;
 $mat-option-height: 3em;
 $mat-select-search-clear-x: 4px;
 $mat-select-search-spinner-x: 16px;
-$mat-select-search-toggle-all-checkbox-x: 16px;
+$mat-select-search-toggle-all-checkbox-x: 5px;
 $mat-select-panel-padding: 8px;
 
 .mat-select-search-hidden {
@@ -103,7 +103,6 @@ $mat-select-panel-padding: 8px;
 
 .mat-select-search-toggle-all-checkbox {
   padding-left: $mat-select-search-toggle-all-checkbox-x;
-  padding-bottom: 2px;
 
   :host-context([dir="rtl"]) & {
     padding-left: 0;
