@@ -19,6 +19,7 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
 .mat-select-search-inner {
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -43,7 +44,7 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
     }
   }
 
-  .mat-input-element {
+  .mat-mdc-input-element {
     flex-basis: auto;
     &:-ms-input-placeholder {
       // fix IE11 not able to focus programmatically with css style -ms-user-select: none
@@ -109,16 +110,18 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   }
 }
 
-::ng-deep .mat-option[aria-disabled=true].contains-mat-select-search {
+::ng-deep .mat-mdc-option[aria-disabled=true].contains-mat-select-search {
   /* let move mat-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
-  position: static;
-  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  opacity: 1;
 
   .mat-icon {
     margin-right: 0px;
     margin-left: 0px;
   }
-  .mat-option-pseudo-checkbox {
+  .mat-mdc-option-pseudo-checkbox {
     display: none;
   }
   &.mat-select-search-no-entries-found {
