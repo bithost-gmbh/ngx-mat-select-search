@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { map, mapTo, scan, startWith } from 'rxjs/operators';
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select';
+import { MatSelect } from '@angular/material/select';
 import { Bank } from '../demo-data';
 
 /**

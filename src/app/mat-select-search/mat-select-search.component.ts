@@ -15,9 +15,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
-  HostBinding,
   Inject,
-  InjectionToken,
   Input,
   OnDestroy,
   OnInit,
@@ -27,18 +25,14 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatLegacyOption as MatOption, _countGroupLabelsBeforeLegacyOption as _countGroupLabelsBeforeOption } from '@angular/material/legacy-core';
-import { MatLegacyFormField as MatFormField } from '@angular/material/legacy-form-field';
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select';
+import { MatOption } from '@angular/material/core';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 import { configurableDefaultOptions, MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
 import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.directive';
-
-
-/** The max height of the select's overlay panel. */
-const SELECT_PANEL_MAX_HEIGHT = 256;
 
 /* tslint:disable:member-ordering component-selector */
 /**
@@ -215,11 +209,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Reference to custom no entries found element */
   @ContentChild(MatSelectNoEntriesFoundDirective) noEntriesFound: MatSelectNoEntriesFoundDirective;
 
-  @HostBinding('class.mat-select-search-inside-mat-option')
-  get isInsideMatOption(): boolean {
-    return !!this.matOption;
-  }
-
   /** Current search value */
   get value(): string {
     return this._formControl.value;
@@ -292,20 +281,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   ngOnInit() {
-    // set custom panel class
-    const panelClass = 'mat-select-search-panel';
-    if (this.matSelect.panelClass) {
-      if (Array.isArray(this.matSelect.panelClass)) {
-        (<string[]>this.matSelect.panelClass).push(panelClass);
-      } else if (typeof this.matSelect.panelClass === 'string') {
-        this.matSelect.panelClass = [this.matSelect.panelClass, panelClass];
-      } else if (typeof this.matSelect.panelClass === 'object') {
-        this.matSelect.panelClass[panelClass] = true;
-      }
-    } else {
-      this.matSelect.panelClass = panelClass;
-    }
-
     // set custom mat-option class if the component was placed inside a mat-option
     if (this.matOption) {
       this.matOption.disabled = true;
@@ -340,16 +315,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
     // set the first item active after the options changed
     this.matSelect.openedChange
-      .pipe(take(1))
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        if (this.matSelect._keyManager) {
-          this.matSelect._keyManager.change.pipe(takeUntil(this._onDestroy))
-            .subscribe(() => this.adjustScrollTopToFitActiveOptionIntoView());
-        } else {
-          console.log('_keyManager was not initialized.');
-        }
-
+      .pipe(
+        take(1),
+        switchMap((_) => {
         this._options = this.matSelect.options;
 
         // Closure variable for tracking the most recent first option.
@@ -364,11 +332,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
         // is no active selection
         let previousFirstOption = this._options.toArray()[this.getOptionsLengthOffset()];
 
-        this._options.changes
-          .pipe(
-            takeUntil(this._onDestroy)
-          )
-          .subscribe(() => {
+        return this._options.changes
+          .pipe(tap(() => {
             // avoid "expression has been changed" error
             setTimeout(() => {
               // Convert the QueryList to an array
@@ -397,17 +362,16 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                 setTimeout(() => {
                   this.updateInputWidth();
                 });
-
-                if (!this.disableScrollToActiveOnOptionsChanged) {
-                  this.adjustScrollTopToFitActiveOptionIntoView();
-                }
               }
 
               // Update our reference
               previousFirstOption = currentFirstOption;
             });
-          });
-      });
+          }));
+        })
+      )
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe();
 
     // add or remove css class depending on whether to show the no entries found message
     // note: this is hacky
@@ -603,32 +567,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   /**
-   * Scrolls the currently active option into the view if it is not yet visible.
-   */
-  private adjustScrollTopToFitActiveOptionIntoView(): void {
-    if (this.matSelect.panel && this.matSelect.options.length > 0) {
-      const matOptionHeight = this.getMatOptionHeight();
-      const activeOptionIndex = this.matSelect._keyManager.activeItemIndex || 0;
-      const labelCount = _countGroupLabelsBeforeOption(activeOptionIndex, this.matSelect.options, this.matSelect.optionGroups);
-      // If the component is in a MatOption, the activeItemIndex will be offset by one.
-      const indexOfOptionToFitIntoView = (this.matOption ? -1 : 0) + labelCount + activeOptionIndex;
-      const currentScrollTop = this.matSelect.panel.nativeElement.scrollTop;
-
-      const searchInputHeight = this.innerSelectSearch.nativeElement.offsetHeight;
-      const amountOfVisibleOptions = Math.floor((SELECT_PANEL_MAX_HEIGHT - searchInputHeight) / matOptionHeight);
-
-      const indexOfFirstVisibleOption = Math.round((currentScrollTop + searchInputHeight) / matOptionHeight) - 1;
-
-      if (indexOfFirstVisibleOption >= indexOfOptionToFitIntoView) {
-        this.matSelect.panel.nativeElement.scrollTop = indexOfOptionToFitIntoView * matOptionHeight;
-      } else if (indexOfFirstVisibleOption + amountOfVisibleOptions <= indexOfOptionToFitIntoView) {
-        this.matSelect.panel.nativeElement.scrollTop = (indexOfOptionToFitIntoView + 1) * matOptionHeight
-          - (SELECT_PANEL_MAX_HEIGHT - searchInputHeight);
-      }
-    }
-  }
-
-  /**
    *  Set the width of the innerSelectSearch to fit even custom scrollbars
    *  And support all Operation Systems
    */
@@ -647,14 +585,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     if (panelElement) {
       this.innerSelectSearch.nativeElement.style.width = panelElement.clientWidth + 'px';
     }
-  }
-
-  private getMatOptionHeight(): number {
-    if (this.matSelect.options.length > 0) {
-      return this.matSelect.options.first._getHostElement().getBoundingClientRect().height;
-    }
-
-    return 0;
   }
 
   /**

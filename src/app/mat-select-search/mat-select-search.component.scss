@@ -5,23 +5,23 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-$mat-menu-side-padding: 16px !default;
 $clear-button-width: 40px;
 $multiple-check-width: 33px;
 $mat-option-height: 3em;
 $mat-select-search-clear-x: 4px;
 $mat-select-search-spinner-x: 16px;
-$mat-select-search-toggle-all-checkbox-x: 16px;
+$mat-select-search-toggle-all-checkbox-x: 5px;
+$mat-select-panel-padding: 8px;
 
 .mat-select-search-hidden {
   visibility: hidden;
 }
+
 .mat-select-search-inner {
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
   z-index: 100;
   font-size: inherit;
   /*
@@ -30,54 +30,48 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
     TODO: implement proper theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
   */
   box-shadow: none;
-  border-radius: 4px 4px 0 0;
-
-  /* Prevent iOS scroll issue (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/70)*/
-  -webkit-transform: translate3d(0,0,0);
 
   &.mat-select-search-inner-multiple {
-    width: 100%;
     &.mat-select-search-inner-toggle-all {
       display: flex;
       align-items: center;
     }
   }
-
-  .mat-input-element {
-    flex-basis: auto;
-    &:-ms-input-placeholder {
-      // fix IE11 not able to focus programmatically with css style -ms-user-select: none
-      // see https://github.com/angular/material2/issues/15093
-      // needed for angular material ^7.0.0 < 8.0.0
-      -ms-user-select: text;
-    }
-  }
-}
-
-::ng-deep .mat-select-search-panel {
-  /* allow absolute positioning relative to outer options container */
-  transform: none !important;
-  overflow-x: hidden;
 }
 
 .mat-select-search-input {
-  padding: 16px;
-  padding-right: $clear-button-width + $mat-select-search-clear-x;
   box-sizing: border-box;
   width: 100%;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: currentColor;
+  outline: none;
+  background: none;
+  padding: 0 $clear-button-width + $mat-select-search-clear-x 0 16px;
+  height: calc($mat-option-height - 1px);
+  line-height: calc($mat-option-height - 1px);
 
   :host-context([dir="rtl"]) & {
     padding-right: 16px;
     padding-left: $clear-button-width + $mat-select-search-clear-x;
   }
 }
-.mat-select-search-no-entries-found {
-  padding: 16px;
+
+.mat-select-search-inner-toggle-all {
+  .mat-select-search-input {
+    padding-left: 5px;
+  }
 }
+
+.mat-select-search-no-entries-found {
+  padding-top: 8px;
+}
+
 .mat-select-search-clear {
   position: absolute;
   right: $mat-select-search-clear-x;
-  top: 5px;
+  top: 0;
 
   :host-context([dir="rtl"]) & {
     right: auto;
@@ -96,42 +90,28 @@ $mat-select-search-toggle-all-checkbox-x: 16px;
   }
 }
 
-/** override styling when inside a mat-option */
-:host.mat-select-search-inside-mat-option {
-  .mat-select-search-input {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    height: $mat-option-height;
-    line-height: $mat-option-height;
-  }
-  .mat-select-search-clear {
-    top: 3px;
-  }
-}
-
-::ng-deep .mat-option[aria-disabled=true].contains-mat-select-search {
+::ng-deep .mat-mdc-option[aria-disabled=true].contains-mat-select-search {
   /* let move mat-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
-  position: static;
-  padding: 0;
+  position: sticky;
+  top: -$mat-select-panel-padding;
+  z-index: 1;
+  opacity: 1;
+  margin-top: -$mat-select-panel-padding;
 
   .mat-icon {
-    margin-right: 0px;
-    margin-left: 0px;
+    margin-right: 0;
+    margin-left: 0;
   }
-  .mat-option-pseudo-checkbox {
+  mat-pseudo-checkbox {
     display: none;
-  }
-  &.mat-select-search-no-entries-found {
-    height: 2 * $mat-option-height;
   }
 }
 
 .mat-select-search-toggle-all-checkbox {
   padding-left: $mat-select-search-toggle-all-checkbox-x;
-  padding-bottom: 2px;
 
   :host-context([dir="rtl"]) & {
-    padding-left: 0px;
+    padding-left: 0;
     padding-right: $mat-select-search-toggle-all-checkbox-x;
   }
 }
