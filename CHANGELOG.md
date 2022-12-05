@@ -3,6 +3,8 @@
 ## 7.0.0
 * Update compatibility to `@angular/material@15` with the MDC-based `MatSelectModule` (`@angular/material/select`).
   [#412](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/412)
+  
+  Thanks to @pureyoy and @swierzbicki
 
   **Breaking Change**:  The `MatLegacySelectModule` (`@angular/material/legacy-select`) of `@angular/material@15` is not supported anymore, please use version `6.0.0`.
                         See [README.md#compatibility](README.md#compatibility)
@@ -10,9 +12,14 @@
 ## 6.0.0
 * Add Angular Material 15 as a peer dependency \
   [#408](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/408)
+  
+  Thanks to @swierzbicki
+* Fix select all example [#336](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/336)
+
+  Thanks to @AhsanAyaz
 * Update compatibility to `@angular/material@15` with `MatLegacySelectModule` (`@angular/material/legacy-select`).
   [#395](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/395)
-
+  
   **Breaking Change**:  `@angular/material`: `<= 14` is not supported anymore, please use version `5.0.0`.
                         See [README.md#compatibility](README.md#compatibility)
 
