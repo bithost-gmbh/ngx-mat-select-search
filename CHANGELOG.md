@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.0.1
+* Enhancement: Add compatibility with `@angular/material`: `^16.0.0`
+
 ## 7.0.0
 * Update compatibility to `@angular/material@15` with the MDC-based `MatSelectModule` (`@angular/material/select`).
   [#412](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/412)
