@@ -97,6 +97,7 @@ $mat-select-panel-padding: 8px;
   z-index: 1;
   opacity: 1;
   margin-top: -$mat-select-panel-padding;
+  pointer-events: all;
 
   .mat-icon {
     margin-right: 0;
@@ -104,6 +105,9 @@ $mat-select-panel-padding: 8px;
   }
   mat-pseudo-checkbox {
     display: none;
+  }
+  .mdc-list-item__primary-text {
+    opacity: 1;
   }
 }
 

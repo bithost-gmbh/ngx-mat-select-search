@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.0.2
+* Fix compatibility with `@angular/material`: `^16.0.0`
+  [#425](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/425)
+
+  Thanks to @GipHub123 for reporting
+
 ## 7.0.1
 * Enhancement: Add compatibility with `@angular/material`: `^16.0.0`
 
