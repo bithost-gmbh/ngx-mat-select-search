@@ -305,7 +305,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
           }
         } else {
           // clear it when closing
-          if (this.clearSearchInput) {
+          if (this.clearSearchInput && this.value) {
             this._reset();
           }
         }
