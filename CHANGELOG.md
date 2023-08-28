@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.0.3
+* Fix background issue with `@angular/material`: `^16.2.0`
+  [#431](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/431)
+
+  Thanks to @chutzemischt and @akaNightmare 
+  
 ## 7.0.2
 * Fix compatibility with `@angular/material`: `^16.0.0`
   [#425](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/425)

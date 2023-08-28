@@ -47,7 +47,7 @@ $mat-select-panel-padding: 8px;
   font-size: inherit;
   color: currentColor;
   outline: none;
-  background: none;
+  background-color: var(--mat-select-panel-background-color);
   padding: 0 $clear-button-width + $mat-select-search-clear-x 0 16px;
   height: calc($mat-option-height - 1px);
   line-height: calc($mat-option-height - 1px);
