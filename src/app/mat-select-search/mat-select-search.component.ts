@@ -355,7 +355,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                 if (firstOptionIsChanged
                   || !keyManager.activeItem
                   || !options.find(option => this.matSelect.compareWith(option, keyManager.activeItem))) {
-                  keyManager.setFirstItemActive();
+                  keyManager.setActiveItem(this.getOptionsLengthOffset());
                 }
 
                 // wait for panel width changes
