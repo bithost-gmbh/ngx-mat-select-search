@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.0.4
+* Fix background issue with `@angular/material`: `^16.2.0` with toggle-all button
+  [#435](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/435)
+
+  Thanks to @ioanbin
+* Fix issue with setting the first active item 
+  [#436](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/436)
+
+  Thanks to @Danevandy99
+
 ## 7.0.3
 * Fix background issue with `@angular/material`: `^16.2.0`
   [#431](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/431)

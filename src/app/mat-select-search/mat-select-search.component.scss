@@ -30,9 +30,10 @@ $mat-select-panel-padding: 8px;
     TODO: implement proper theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
   */
   box-shadow: none;
+  background-color: var(--mat-select-panel-background-color);
 
-  &.mat-select-search-inner-multiple {
-    &.mat-select-search-inner-toggle-all {
+  &.mat-select-search-inner-multiple.mat-select-search-inner-toggle-all {
+    .mat-select-search-inner-row {
       display: flex;
       align-items: center;
     }
