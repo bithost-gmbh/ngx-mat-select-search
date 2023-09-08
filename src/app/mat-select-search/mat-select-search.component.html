@@ -13,46 +13,48 @@ found in the LICENSE file at https://angular.io/license
       class="mat-select-search-inner mat-typography mat-datepicker-content mat-tab-header"
       [ngClass]="{'mat-select-search-inner-multiple': matSelect.multiple, 'mat-select-search-inner-toggle-all': _isToggleAllCheckboxVisible() }">
 
-  <mat-checkbox *ngIf="_isToggleAllCheckboxVisible()"
-                [color]="matFormField?.color"
-                class="mat-select-search-toggle-all-checkbox"
-                [checked]="toggleAllCheckboxChecked"
-                [indeterminate]="toggleAllCheckboxIndeterminate"
-                [matTooltip]="toggleAllCheckboxTooltipMessage"
-                matTooltipClass="ngx-mat-select-search-toggle-all-tooltip"
-                [matTooltipPosition]="toggleAllCheckboxTooltipPosition"
-                (change)="_emitSelectAllBooleanToParent($event.checked)"
-  ></mat-checkbox>
+  <div class="mat-select-search-inner-row">
+    <mat-checkbox *ngIf="_isToggleAllCheckboxVisible()"
+                  [color]="matFormField?.color"
+                  class="mat-select-search-toggle-all-checkbox"
+                  [checked]="toggleAllCheckboxChecked"
+                  [indeterminate]="toggleAllCheckboxIndeterminate"
+                  [matTooltip]="toggleAllCheckboxTooltipMessage"
+                  matTooltipClass="ngx-mat-select-search-toggle-all-tooltip"
+                  [matTooltipPosition]="toggleAllCheckboxTooltipPosition"
+                  (change)="_emitSelectAllBooleanToParent($event.checked)"
+    ></mat-checkbox>
 
-  <input class="mat-select-search-input"
-         autocomplete="off"
-         [type]="type"
-         [formControl]="_formControl"
-         #searchSelectInput
-         (keydown)="_handleKeydown($event)"
-         (keyup)="_handleKeyup($event)"
-         (blur)="onBlur()"
-         [placeholder]="placeholderLabel"
-         [attr.aria-label]="ariaLabel"
-  />
-  <mat-spinner *ngIf="searching"
-          class="mat-select-search-spinner"
-          diameter="16"></mat-spinner>
+    <input class="mat-select-search-input"
+           autocomplete="off"
+           [type]="type"
+           [formControl]="_formControl"
+           #searchSelectInput
+           (keydown)="_handleKeydown($event)"
+           (keyup)="_handleKeyup($event)"
+           (blur)="onBlur()"
+           [placeholder]="placeholderLabel"
+           [attr.aria-label]="ariaLabel"
+    />
+    <mat-spinner *ngIf="searching"
+            class="mat-select-search-spinner"
+            diameter="16"></mat-spinner>
 
-  <button *ngIf="!hideClearSearchButton && value && !searching"
-          mat-icon-button
-          aria-label="Clear"
-          (click)="_reset(true)"
-          class="mat-select-search-clear">
-    <ng-content *ngIf="clearIcon; else defaultIcon" select="[ngxMatSelectSearchClear]"></ng-content>
-    <ng-template #defaultIcon>
-      <mat-icon [svgIcon]="closeSvgIcon">
-        {{!closeSvgIcon ? closeIcon : null}}
-      </mat-icon>
-    </ng-template>
-  </button>
+    <button *ngIf="!hideClearSearchButton && value && !searching"
+            mat-icon-button
+            aria-label="Clear"
+            (click)="_reset(true)"
+            class="mat-select-search-clear">
+      <ng-content *ngIf="clearIcon; else defaultIcon" select="[ngxMatSelectSearchClear]"></ng-content>
+      <ng-template #defaultIcon>
+        <mat-icon [svgIcon]="closeSvgIcon">
+          {{!closeSvgIcon ? closeIcon : null}}
+        </mat-icon>
+      </ng-template>
+    </button>
 
-  <ng-content select=".mat-select-search-custom-header-content"></ng-content>
+    <ng-content select=".mat-select-search-custom-header-content"></ng-content>
+  </div>
 
   <mat-divider></mat-divider>
 </div>
