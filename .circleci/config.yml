@@ -40,6 +40,8 @@ jobs:
       - run: npm run build.ci --prod
       - run: npm run build-lib
   deploy:
+    docker:
+      - image: circleci/node:16
     working_directory: ~/repo
     steps:
       - run:
