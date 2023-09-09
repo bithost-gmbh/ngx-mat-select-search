@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
-    "build.ci": "npm run build -- --progress=false --base-href=/ngx-mat-select-search",
+    "build.ci": "npm run build -- --progress=false --base-href=/ngx-mat-select-search/",
     "test": "ng test --watch=false",
     "test.ci": "npm run test -- --progress=false --watch=false",
     "lint": "tslint --project src/tsconfig.app.json",
