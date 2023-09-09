@@ -39,12 +39,17 @@ jobs:
       - run: npm run lint
       - run: npm run build.ci --prod
       - run: npm run build-lib
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
   deploy:
     # see https://circleci.com/blog/deploying-documentation-to-github-pages-with-continuous-integration
     docker:
       - image: circleci/node:16
-    working_directory: ~/repo
     steps:
+      - attach_workspace:
+          at: artifacts
       - run:
           name: Install and configure dependencies
           command: |
