@@ -45,11 +45,11 @@ jobs:
     working_directory: ~/repo
     steps:
       - run:
-        name: Install and configure dependencies
-        command: |
-            npm install -g --silent gh-pages@6.0.0
-            git config user.email "ci-build@bithost.ch"
-            git config user.name "ci-build"
+          name: Install and configure dependencies
+          command: |
+              npm install -g --silent gh-pages@6.0.0
+              git config user.email "ci-build@bithost.ch"
+              git config user.name "ci-build"
       - run: gh-pages --dist dist
 workflows:
   version: 2
@@ -59,6 +59,6 @@ workflows:
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              only: master
+          #filters:
+          #  branches:
+          #    only: master
