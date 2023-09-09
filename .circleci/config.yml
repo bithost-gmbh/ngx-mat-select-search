@@ -37,7 +37,7 @@ jobs:
       # run tests!
       - run: npm run test.ci
       - run: npm run lint
-      - run: npm run build.ci --prod --base-href=/ngx-mat-select-search
+      - run: npm run build.ci --prod
       - run: npm run build-lib
       - persist_to_workspace:
           root: ./
@@ -60,7 +60,7 @@ jobs:
       - add_ssh_keys:
           fingerprints: 
             - "9a:12:bb:95:c2:8b:7a:be:29:42:99:34:06:4f:68:cd"
-      - run: node_modules/.bin/gh-pages --message "[skip ci] Updates" --dist artifacts/dist
+      - run: node_modules/.bin/gh-pages --message "[ci skip] Updates" --dist artifacts/dist
 workflows:
   version: 2
   build-and-deploy:
