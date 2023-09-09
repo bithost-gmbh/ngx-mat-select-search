@@ -48,6 +48,7 @@ jobs:
     docker:
       - image: circleci/node:16
     steps:
+      - checkout
       - attach_workspace:
           at: artifacts
       - run:
