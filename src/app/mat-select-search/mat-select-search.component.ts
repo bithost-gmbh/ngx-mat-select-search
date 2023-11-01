@@ -348,7 +348,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                 // set first item active and input width
 
                 // Check to see if the first option in these changes is different from the previous.
-                const firstOptionIsChanged = !previousFirstOption || !this.matSelect.compareWith(previousFirstOption.value, currentFirstOption.value);
+                const firstOptionIsChanged = !previousFirstOption
+                  || !this.matSelect.compareWith(previousFirstOption.value, currentFirstOption.value);
 
                 // CASE: The first option is different now.
                 // Indiciates we should set it as active and scroll to the top.
