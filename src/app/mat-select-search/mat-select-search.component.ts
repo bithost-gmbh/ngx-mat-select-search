@@ -337,7 +337,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
             // avoid "expression has been changed" error
             setTimeout(() => {
               // Convert the QueryList to an array
-              const options = this._options.toArray() as MatOption[];
+              const options = this._options.toArray();
 
               // The true first item is offset by 1
               const currentFirstOption = options[this.getOptionsLengthOffset()];
