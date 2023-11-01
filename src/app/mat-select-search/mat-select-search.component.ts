@@ -343,18 +343,19 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
               const currentFirstOption = options[this.getOptionsLengthOffset()];
 
               const keyManager = this.matSelect._keyManager;
-              if (keyManager && this.matSelect.panelOpen) {
+              if (keyManager && this.matSelect.panelOpen && currentFirstOption) {
 
                 // set first item active and input width
 
                 // Check to see if the first option in these changes is different from the previous.
-                const firstOptionIsChanged = !this.matSelect.compareWith(previousFirstOption, currentFirstOption);
+                const firstOptionIsChanged = !previousFirstOption
+                  || !this.matSelect.compareWith(previousFirstOption.value, currentFirstOption.value);
 
                 // CASE: The first option is different now.
                 // Indiciates we should set it as active and scroll to the top.
                 if (firstOptionIsChanged
                   || !keyManager.activeItem
-                  || !options.find(option => this.matSelect.compareWith(option, keyManager.activeItem))) {
+                  || !options.find(option => this.matSelect.compareWith(option.value, keyManager.activeItem.value))) {
                   keyManager.setActiveItem(this.getOptionsLengthOffset());
                 }
 
