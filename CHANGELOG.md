@@ -1,5 +1,12 @@
 # Changelog
 
+## 7.0.5
+* Fix select search should compare values of options for first item 
+  [#445](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/445)
+
+  Thanks to @lorenzbaier
+* Enhancement: Add compatibility with `@angular/material`: `^17.0.0`
+
 ## 7.0.4
 * Fix background issue with `@angular/material`: `^16.2.0` with toggle-all button
   [#435](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/435)
