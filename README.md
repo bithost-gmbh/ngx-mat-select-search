@@ -20,6 +20,35 @@ The goal is to have an implementation in the official Angular Material repositor
 once [https://github.com/angular/material2/pull/7835](https://github.com/angular/material2/pull/7835)
 is merged.
 
+## Contributions
+Contributions are welcome, please open an issue and preferably file a pull request.
+
+### Support Development
+
+We aim at providing the best service possible by constantly improving `NgxMatSelectSearch` and responding fast to bug reports. We do this fully free of cost.
+If you feel like this library was useful to you and saved you and your business some precious time, please consider making a donation to support its maintenance and further development.
+
+[![PayPal](https://www.paypalobjects.com/en_US/CH/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NAX558HVGAX8Q)
+
+### Financial Supporters
+
+Thank you very much to our financial supporters!
+
+<!-- readme: pschulzk,sponsors -start -->
+<!-- readme: pschulzk,sponsors -end -->
+
+### Collaborators
+
+<!-- readme: collaborators -start -->
+<!-- readme: collaborators -end -->
+
+### Contributors
+
+Thank you very much to all our community contributors!
+
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->
+
 ## How to use it?
 Install `ngx-mat-select-search` in your project:
 ```
@@ -242,16 +271,6 @@ class AppModule {}
 ## Known Problems
 * The currently selected option might be hidden under the search input field when opening the options panel 
   and the panel is at the screen border.
-   
-## Support Development
-
-We aim at providing the best service possible by constantly improving `NgxMatSelectSearch` and responding fast to bug reports. We do this fully free of cost.
-If you feel like this library was useful to you and saved you and your business some precious time, please consider making a donation to support its maintenance and further development.
-
-[![PayPal](https://www.paypalobjects.com/en_US/CH/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NAX558HVGAX8Q)
-
-### Contributions
-Contributions are welcome, please open an issue and preferrably file a pull request.
 
 ## Development
 
