@@ -13,7 +13,14 @@ Angular component providing an input field for searching / filtering [MatSelect]
 <img src="src/assets/example-new.png" alt="Example" width="293"/>
 
 ## Try it
-See it in action at [https://stackblitz.com/github/bithost-gmbh/ngx-mat-select-search-example](https://stackblitz.com/github/bithost-gmbh/ngx-mat-select-search-example?file=src%2Fapp%2Fapp.component.html)
+See it in action at 
+
+* [https://stackblitz.com/github/bithost-gmbh/ngx-mat-select-search-example](https://stackblitz.com/github/bithost-gmbh/ngx-mat-select-search-example?file=src%2Fapp%2Fapp.component.html)
+
+  see example code, builds in browser, latest version, latest material version
+* [https://bithost-gmbh.github.io/ngx-mat-select-search/](https://bithost-gmbh.github.io/ngx-mat-select-search/)
+
+  pre-built, latest version, older material version, works on mobile
 
 **Important Note**: This project is meant as a temporary implementation of [https://github.com/angular/material2/issues/5697](https://github.com/angular/material2/issues/5697).
 The goal is to have an implementation in the official Angular Material repository, 
