@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.0.6
+* Enhancement: Add compatibility with `@angular/material`: `^18.0.0`
+
 ## 7.0.5
 * Fix select search should compare values of options for first item 
   [#445](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/445)
