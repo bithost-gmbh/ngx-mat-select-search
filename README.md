@@ -23,9 +23,7 @@ See it in action at
   pre-built, latest version, older material version, works on mobile
 
 **Important Note**: This project is meant as a temporary implementation of [https://github.com/angular/material2/issues/5697](https://github.com/angular/material2/issues/5697).
-The goal is to have an implementation in the official Angular Material repository, 
-once [https://github.com/angular/material2/pull/7835](https://github.com/angular/material2/pull/7835)
-is merged.
+The goal is to have an implementation in the official Angular Material repository, a new PR will be created.
 
 ## Contributions
 Contributions are welcome, please open an issue and preferably file a pull request.
