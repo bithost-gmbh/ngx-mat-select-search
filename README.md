@@ -196,6 +196,13 @@ Thank you very much to all our community contributors!
     </td></tr>
 <tr>
     <td align="center">
+        <a href="https://github.com/melroy89">
+            <img src="https://avatars.githubusercontent.com/u/628926?v=4" width="100;" alt="melroy89"/>
+            <br />
+            <sub><b>Melroy Van Den Berg</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/AhsanAyaz">
             <img src="https://avatars.githubusercontent.com/u/9844254?v=4" width="100;" alt="AhsanAyaz"/>
             <br />
@@ -229,15 +236,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Robert Pattis</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/broekema41">
             <img src="https://avatars.githubusercontent.com/u/4007585?v=4" width="100;" alt="broekema41"/>
             <br />
             <sub><b>Roland Broekema</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/swierzbicki">
             <img src="https://avatars.githubusercontent.com/u/7196324?v=4" width="100;" alt="swierzbicki"/>
@@ -272,15 +279,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Vlad Ioffe</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/WX9yMOXWId">
             <img src="https://avatars.githubusercontent.com/u/30053114?v=4" width="100;" alt="WX9yMOXWId"/>
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/ZacaryPaynter">
             <img src="https://avatars.githubusercontent.com/u/29746771?v=4" width="100;" alt="ZacaryPaynter"/>
