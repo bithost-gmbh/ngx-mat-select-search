@@ -17,10 +17,10 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
   protected banks: Bank[] = BANKS;
 
   /** control for the selected bank for server side filtering */
-  public bankServerSideCtrl: FormControl<Bank> = new FormControl<Bank>(null);
+  public bankServerSideCtrl: FormControl<Bank | null> = new FormControl<Bank | null>(null);
 
   /** control for filter for server side. */
-  public bankServerSideFilteringCtrl: FormControl<string> = new FormControl<string>('');
+  public bankServerSideFilteringCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
   /** indicate search operation is in progress */
   public searching = false;
