@@ -285,7 +285,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     if (this.matOption) {
       this.matOption.disabled = true;
       this.matOption._getHostElement().classList.add('contains-mat-select-search');
-      this.matOption._getHostElement().setAttribute('aria-hidden', 'true');
+      this.matOption._getHostElement().setAttribute('role', 'presentation');
     } else {
       console.error('<ngx-mat-select-search> must be placed inside a <mat-option> element');
     }
