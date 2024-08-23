@@ -102,13 +102,20 @@ Thank you very much to all our community contributors!
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/AleixFerreCP">
+            <img src="https://avatars.githubusercontent.com/u/93319700?v=4" width="100;" alt="AleixFerreCP"/>
+            <br />
+            <sub><b>Aleix Ferré</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/alexandrupaul7">
             <img src="https://avatars.githubusercontent.com/u/28051061?v=4" width="100;" alt="alexandrupaul7"/>
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/blazewalker59">
             <img src="https://avatars.githubusercontent.com/u/21110755?v=4" width="100;" alt="blazewalker59"/>
@@ -143,15 +150,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Edgar Scheiermann</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/arucar">
             <img src="https://avatars.githubusercontent.com/u/37804893?v=4" width="100;" alt="arucar"/>
             <br />
             <sub><b>Erendis</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/gustavovitor">
             <img src="https://avatars.githubusercontent.com/u/37344068?v=4" width="100;" alt="gustavovitor"/>
@@ -186,15 +193,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Joe DeCock</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/JomalJohny">
             <img src="https://avatars.githubusercontent.com/u/43292719?v=4" width="100;" alt="JomalJohny"/>
             <br />
             <sub><b>Jomal Johny</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/bulldog98">
             <img src="https://avatars.githubusercontent.com/u/314259?v=4" width="100;" alt="bulldog98"/>
@@ -221,13 +228,6 @@ Thank you very much to all our community contributors!
             <img src="https://avatars.githubusercontent.com/u/9720553?v=4" width="100;" alt="OvidijusStukas"/>
             <br />
             <sub><b>Ovidijus Stukas</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/qstiegler">
-            <img src="https://avatars.githubusercontent.com/u/2858579?v=4" width="100;" alt="qstiegler"/>
-            <br />
-            <sub><b>Quirin Stiegler</b></sub>
         </a>
     </td>
     <td align="center">
