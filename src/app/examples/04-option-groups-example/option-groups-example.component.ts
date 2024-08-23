@@ -17,10 +17,10 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
   protected bankGroups: BankGroup[] = BANKGROUPS;
 
   /** control for the selected bank for option groups */
-  public bankGroupsCtrl: FormControl<Bank> = new FormControl<Bank>(null);
+  public bankGroupsCtrl: FormControl<Bank | null> = new FormControl<Bank | null>(null);
 
   /** control for the MatSelect filter keyword for option groups */
-  public bankGroupsFilterCtrl: FormControl<string> = new FormControl<string>('');
+  public bankGroupsFilterCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
   /** list of bank groups filtered by search keyword for option groups */
   public filteredBankGroups: ReplaySubject<BankGroup[]> = new ReplaySubject<BankGroup[]>(1);
@@ -75,7 +75,7 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
   }
 
   protected copyBankGroups(bankGroups: BankGroup[]) {
-    const bankGroupsCopy = [];
+    const bankGroupsCopy: BankGroup[] = [];
     bankGroups.forEach(bankGroup => {
       bankGroupsCopy.push({
         name: bankGroup.name,

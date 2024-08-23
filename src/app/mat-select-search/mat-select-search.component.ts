@@ -213,7 +213,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   get value(): string {
     return this._formControl.value;
   }
-  private _lastExternalInputValue: string;
+  private _lastExternalInputValue?: string;
 
   onTouched: Function = (_: any) => { };
 
@@ -224,9 +224,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   public get _options(): QueryList<MatOption> {
     return this._options$.getValue();
   }
-  public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null);
+  public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null as any);
 
-  private optionsList$: Observable<MatOption[]> = this._options$.pipe(
+  private optionsList$: Observable<MatOption[] | null> = this._options$.pipe(
     switchMap(_options => _options ?
       _options.changes.pipe(
         map(options => options.toArray()),
@@ -242,15 +242,15 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Previously selected values when using <mat-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
-  public _formControl: FormControl<string> = new FormControl<string>('');
+  public _formControl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
   /** whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([
     this._formControl.valueChanges,
     this.optionsLength$
   ]).pipe(
-    map(([value, optionsLength]) => this.noEntriesFoundLabel && value
-      && optionsLength === this.getOptionsLengthOffset())
+    map(([value, optionsLength]) => !!(this.noEntriesFoundLabel && value
+      && optionsLength === this.getOptionsLengthOffset()))
   );
 
   /** Subject that emits when the component has been destroyed. */
@@ -262,14 +262,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
-    @Optional() @Inject(MatOption) public matOption: MatOption = null,
-    @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
+    @Optional() @Inject(MatOption) public matOption: MatOption,
+    @Optional() @Inject(MatFormField) public matFormField: MatFormField,
     @Optional() @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS) defaultOptions?: MatSelectSearchOptions
   ) {
     this.applyDefaultOptions(defaultOptions);
   }
 
-  private applyDefaultOptions(defaultOptions: MatSelectSearchOptions) {
+  private applyDefaultOptions(defaultOptions?: MatSelectSearchOptions) {
     if (!defaultOptions) {
       return;
     }
@@ -355,7 +355,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                 // Indiciates we should set it as active and scroll to the top.
                 if (firstOptionIsChanged
                   || !keyManager.activeItem
-                  || !options.find(option => this.matSelect.compareWith(option.value, keyManager.activeItem.value))) {
+                  || !options.find(option => this.matSelect.compareWith(option.value, keyManager.activeItem?.value))) {
                   keyManager.setActiveItem(this.getOptionsLengthOffset());
                 }
 
@@ -537,6 +537,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     // because the option is not available while we are currently filtering
     this.previousSelectedValues = this.matSelect.ngControl.value;
 
+    if (!this.matSelect.ngControl.valueChanges) {
+      return;
+    }
+
     this.matSelect.ngControl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe((values) => {
@@ -575,9 +579,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     if (!this.innerSelectSearch || !this.innerSelectSearch.nativeElement) {
       return;
     }
-    let element: HTMLElement = this.innerSelectSearch.nativeElement;
-    let panelElement: HTMLElement;
-    while (element = element.parentElement) {
+    let element: HTMLElement | null = this.innerSelectSearch.nativeElement;
+    let panelElement: HTMLElement | null = null;
+    while (element && element.parentElement) {
+      element = element.parentElement;
       if (element.classList.contains('mat-select-panel')) {
         panelElement = element;
         break;
