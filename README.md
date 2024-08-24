@@ -145,13 +145,20 @@ Thank you very much to all our community contributors!
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/davidsansome">
+            <img src="https://avatars.githubusercontent.com/u/314463?v=4" width="100;" alt="davidsansome"/>
+            <br />
+            <sub><b>David Sansome</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/escheiermann">
             <img src="https://avatars.githubusercontent.com/u/39056343?v=4" width="100;" alt="escheiermann"/>
             <br />
             <sub><b>Edgar Scheiermann</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/arucar">
             <img src="https://avatars.githubusercontent.com/u/37804893?v=4" width="100;" alt="arucar"/>
@@ -186,15 +193,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Jean-Francois Cere</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/josephdecock">
             <img src="https://avatars.githubusercontent.com/u/1145533?v=4" width="100;" alt="josephdecock"/>
             <br />
             <sub><b>Joe DeCock</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/JomalJohny">
             <img src="https://avatars.githubusercontent.com/u/43292719?v=4" width="100;" alt="JomalJohny"/>
@@ -229,15 +236,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Ovidijus Stukas</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/raysuelzer">
             <img src="https://avatars.githubusercontent.com/u/1176341?v=4" width="100;" alt="raysuelzer"/>
             <br />
             <sub><b>Ray Suelzer</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/probert94">
             <img src="https://avatars.githubusercontent.com/u/18258317?v=4" width="100;" alt="probert94"/>
@@ -272,15 +279,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Stas Amasev</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/nischi">
             <img src="https://avatars.githubusercontent.com/u/2036054?v=4" width="100;" alt="nischi"/>
             <br />
             <sub><b>Thierry Nischelwitzer</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/vlio20">
             <img src="https://avatars.githubusercontent.com/u/4542641?v=4" width="100;" alt="vlio20"/>
@@ -315,7 +322,8 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/ruekart">
             <img src="https://avatars.githubusercontent.com/u/9154610?v=4" width="100;" alt="ruekart"/>
