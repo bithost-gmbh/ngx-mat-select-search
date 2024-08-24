@@ -1,7 +1,7 @@
 {
   "name": "ngx-mat-select-search",
   "description": "Angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
-  "version": "7.0.6",
+  "version": "7.0.7",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
