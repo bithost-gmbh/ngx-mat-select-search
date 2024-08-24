@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.0.7
+* Fix blocked aria-hidden when opening the dropdown for the first time
+  [#474](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/474)
+
+  Thanks to @AleixFerreCP
+* Enhancement: Enable `strictNullChecks`
+  [#476](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/476)
+
+  Thanks to @davidsansome
+
 ## 7.0.6
 * Enhancement: Add compatibility with `@angular/material`: `^18.0.0`
 
