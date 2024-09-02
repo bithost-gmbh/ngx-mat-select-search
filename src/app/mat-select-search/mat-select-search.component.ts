@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { DOWN_ARROW, UP_ARROW, } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
   ChangeDetectionStrategy,
@@ -454,7 +453,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    * Allows e.g. the announcing of the currently activeDescendant by screen readers.
    */
   _handleKeyup(event: KeyboardEvent) {
-    if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
       const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
       if (index !== -1) {
