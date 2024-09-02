@@ -443,7 +443,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     }
 
     // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
-    if (this.enableClearOnEscapePressed === true && event.key === 'Escape' && this.value) {
+    if (this.enableClearOnEscapePressed && event.key === 'Escape' && this.value) {
       this._reset(true);
       event.stopPropagation();
     }
