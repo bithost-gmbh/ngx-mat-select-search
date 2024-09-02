@@ -137,14 +137,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Font-based icon used for displaying Close-Icon */
   @Input() closeIcon = 'close';
 
-  /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
+  /** SVG-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
   @Input() closeSvgIcon?: string;
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
-    * Whether or not the search field should be cleared after the dropdown menu is closed.
+    * Whether the search field should be cleared after the dropdown menu is closed.
     * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
     */
   @Input() clearSearchInput = true;
@@ -173,7 +173,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Whether to show Select All Checkbox (for mat-select[multi=true]) */
   @Input() showToggleAllCheckbox = false;
 
-  /** select all checkbox checked state */
+  /** Select all checkbox checked state */
   @Input() toggleAllCheckboxChecked = false;
 
   /** select all checkbox indeterminate state */
@@ -244,7 +244,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
   public _formControl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
-  /** whether to show the no entries found message */
+  /** Whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([
     this._formControl.valueChanges,
     this.optionsLength$
@@ -321,7 +321,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
         this._options = this.matSelect.options;
 
         // Closure variable for tracking the most recent first option.
-        // In order to avoid avoid causing the list to
+        // In order to avoid causing the list to
         // scroll to the top when options are added to the bottom of
         // the list (eg: infinite scroll), we compare only
         // the changes to the first options to determine if we
@@ -352,7 +352,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                   || !this.matSelect.compareWith(previousFirstOption.value, currentFirstOption.value);
 
                 // CASE: The first option is different now.
-                // Indiciates we should set it as active and scroll to the top.
+                // Indicates we should set it as active and scroll to the top.
                 if (firstOptionIsChanged
                   || !keyManager.activeItem
                   || !options.find(option => this.matSelect.compareWith(option.value, keyManager.activeItem?.value))) {
@@ -573,7 +573,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
   /**
    *  Set the width of the innerSelectSearch to fit even custom scrollbars
-   *  And support all Operation Systems
+   *  And support all Operating Systems
    */
   public updateInputWidth() {
     if (!this.innerSelectSearch || !this.innerSelectSearch.nativeElement) {
