@@ -432,18 +432,18 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       || (event.key >= 'A' && event.key <= 'Z')
       || (event.key >= '0' && event.key <= '9')
       || (event.key === ' ')
-      || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
+      || (this.preventHomeEndKeyPropagation && (event.key === 'Home' || event.key === 'End'))
     ) {
       event.stopPropagation();
     }
 
-    if (this.matSelect.multiple && event.key && event.keyCode === ENTER) {
+    if (this.matSelect.multiple && event.key && event.key === 'Enter') {
       // Regain focus after multiselect, so we can further type
       setTimeout(() => this._focus());
     }
 
     // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
-    if (this.enableClearOnEscapePressed === true && event.keyCode === ESCAPE && this.value) {
+    if (this.enableClearOnEscapePressed === true && event.key === 'Escape' && this.value) {
       this._reset(true);
       event.stopPropagation();
     }
