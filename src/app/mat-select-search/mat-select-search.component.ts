@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, UP_ARROW, } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
   ChangeDetectionStrategy,
