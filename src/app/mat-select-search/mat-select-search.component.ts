@@ -428,10 +428,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    */
   _handleKeydown(event: KeyboardEvent) {
     // Prevent propagation for all alphanumeric characters in order to avoid selection issues
-    if ((event.key && event.key.length === 1) ||
-      (event.keyCode >= A && event.keyCode <= Z) ||
-      (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-      (event.keyCode === SPACE)
+    if ((event.key && event.key.length === 1)
+      || (event.key >= 'A' && event.key <= 'Z')
+      || (event.key >= '0' && event.key <= '9')
+      || (event.key === ' ')
       || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
     ) {
       event.stopPropagation();
