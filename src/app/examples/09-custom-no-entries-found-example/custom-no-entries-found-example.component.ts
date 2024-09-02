@@ -12,16 +12,16 @@ import { take, takeUntil } from 'rxjs/operators';
 })
 export class CustomNoEntriesFoundExampleComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  /** list of banks */
+  /** List of banks */
   protected banks: Bank[] = BANKS;
 
-  /** control for the selected bank */
+  /** Control for the selected bank */
   public bankCtrl: FormControl<Bank | null> = new FormControl<Bank | null>(null);
 
-  /** control for the MatSelect filter keyword */
+  /** Control for the MatSelect filter keyword */
   public bankFilterCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
-  /** list of banks filtered by search keyword */
+  /** List of banks filtered by search keyword */
   public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
