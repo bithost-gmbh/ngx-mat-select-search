@@ -429,7 +429,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     // Prevent propagation for all alphanumeric characters in order to avoid selection issues
 
     // Needed to avoid handling in https://github.com/angular/components/blob/5439460d1fe166f8ec34ab7d48f05e0dd7f6a946/src/material/select/select.ts#L965
-    // Reference for Keyboard_event_key_values: https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values
     if ((event.key && event.key.length === 1)
       || (this.preventHomeEndKeyPropagation && (event.key === 'Home' || event.key === 'End'))
     ) {
