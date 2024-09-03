@@ -428,6 +428,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   _handleKeydown(event: KeyboardEvent) {
     // Prevent propagation for all alphanumeric characters in order to avoid selection issues
 
+    // tslint:disable-next-line:max-line-length
     // Needed to avoid handling in https://github.com/angular/components/blob/5439460d1fe166f8ec34ab7d48f05e0dd7f6a946/src/material/select/select.ts#L965
     if ((event.key && event.key.length === 1)
       || (this.preventHomeEndKeyPropagation && (event.key === 'Home' || event.key === 'End'))
