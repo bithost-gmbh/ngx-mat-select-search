@@ -102,13 +102,20 @@ Thank you very much to all our community contributors!
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/sirh3e">
+            <img src="https://avatars.githubusercontent.com/u/24867927?v=4" width="100;" alt="sirh3e"/>
+            <br />
+            <sub><b>Sirh3e</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/AleixFerreCP">
             <img src="https://avatars.githubusercontent.com/u/93319700?v=4" width="100;" alt="AleixFerreCP"/>
             <br />
             <sub><b>Aleix Ferré</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/alexandrupaul7">
             <img src="https://avatars.githubusercontent.com/u/28051061?v=4" width="100;" alt="alexandrupaul7"/>
@@ -143,15 +150,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Dane Vanderbilt</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/davidsansome">
             <img src="https://avatars.githubusercontent.com/u/314463?v=4" width="100;" alt="davidsansome"/>
             <br />
             <sub><b>David Sansome</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/escheiermann">
             <img src="https://avatars.githubusercontent.com/u/39056343?v=4" width="100;" alt="escheiermann"/>
@@ -186,15 +193,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/jfcere">
             <img src="https://avatars.githubusercontent.com/u/6987084?v=4" width="100;" alt="jfcere"/>
             <br />
             <sub><b>Jean-Francois Cere</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/josephdecock">
             <img src="https://avatars.githubusercontent.com/u/1145533?v=4" width="100;" alt="josephdecock"/>
@@ -229,15 +236,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Muhammad Ahsan Ayaz</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/OvidijusStukas">
             <img src="https://avatars.githubusercontent.com/u/9720553?v=4" width="100;" alt="OvidijusStukas"/>
             <br />
             <sub><b>Ovidijus Stukas</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/raysuelzer">
             <img src="https://avatars.githubusercontent.com/u/1176341?v=4" width="100;" alt="raysuelzer"/>
@@ -272,15 +279,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/framasev">
             <img src="https://avatars.githubusercontent.com/u/41595972?v=4" width="100;" alt="framasev"/>
             <br />
             <sub><b>Stas Amasev</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/nischi">
             <img src="https://avatars.githubusercontent.com/u/2036054?v=4" width="100;" alt="nischi"/>
@@ -315,27 +322,20 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Joshua</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/lorenzbaier">
             <img src="https://avatars.githubusercontent.com/u/64407215?v=4" width="100;" alt="lorenzbaier"/>
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/ruekart">
             <img src="https://avatars.githubusercontent.com/u/9154610?v=4" width="100;" alt="ruekart"/>
             <br />
             <sub><b>Null</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/sirh3e">
-            <img src="https://avatars.githubusercontent.com/u/24867927?v=4" width="100;" alt="sirh3e"/>
-            <br />
-            <sub><b>Sirh3e</b></sub>
         </a>
     </td></tr>
 </table>
