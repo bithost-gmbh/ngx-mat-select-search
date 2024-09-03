@@ -330,6 +330,13 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Null</b></sub>
         </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/sirh3e">
+            <img src="https://avatars.githubusercontent.com/u/24867927?v=4" width="100;" alt="sirh3e"/>
+            <br />
+            <sub><b>Sirh3e</b></sub>
+        </a>
     </td></tr>
 </table>
 <!-- readme: contributors -end -->
