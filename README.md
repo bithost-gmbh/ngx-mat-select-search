@@ -436,16 +436,16 @@ Furthermore, it provides the following inputs:
   /** Font-based icon used for displaying Close-Icon */
   @Input() closeIcon = 'close';
 
-  /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
+  /** SVG-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
   @Input() closeSvgIcon?: string;
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
-    * Whether or not the search field should be cleared after the dropdown menu is closed.
-    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
-    */
+   * Whether the search field should be cleared after the dropdown menu is closed.
+   * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
+   */
   @Input() clearSearchInput = true;
 
   /** Whether to show the search-in-progress indicator */
@@ -472,7 +472,7 @@ Furthermore, it provides the following inputs:
   /** Whether to show Select All Checkbox (for mat-select[multi=true]) */
   @Input() showToggleAllCheckbox = false;
 
-  /** select all checkbox checked state */
+  /** Select all checkbox checked state */
   @Input() toggleAllCheckboxChecked = false;
 
   /** select all checkbox indeterminate state */
@@ -487,9 +487,9 @@ Furthermore, it provides the following inputs:
   /** Show/Hide the search clear button of the search input */
   @Input() hideClearSearchButton = false;
 
-  /** 
-   * Always restore selected options on selectionChange for mode multi (e.g. for lazy loading/infinity scrolling). 
-   * Defaults to false, so selected options are only restored while filtering is active. 
+  /**
+   * Always restore selected options on selectionChange for mode multi (e.g. for lazy loading/infinity scrolling).
+   * Defaults to false, so selected options are only restored while filtering is active.
    */
   @Input() alwaysRestoreSelectedOptionsMulti = false;
   
