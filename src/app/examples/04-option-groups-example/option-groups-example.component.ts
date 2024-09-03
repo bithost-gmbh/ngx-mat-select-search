@@ -13,16 +13,16 @@ import { Bank, BankGroup, BANKGROUPS } from '../demo-data';
 })
 export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
 
-  /** list of bank groups */
+  /** List of bank groups */
   protected bankGroups: BankGroup[] = BANKGROUPS;
 
-  /** control for the selected bank for option groups */
+  /** Control for the selected bank for option groups */
   public bankGroupsCtrl: FormControl<Bank | null> = new FormControl<Bank | null>(null);
 
-  /** control for the MatSelect filter keyword for option groups */
+  /** Control for the MatSelect filter keyword for option groups */
   public bankGroupsFilterCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
-  /** list of bank groups filtered by search keyword for option groups */
+  /** List of bank groups filtered by search keyword for option groups */
   public filteredBankGroups: ReplaySubject<BankGroup[]> = new ReplaySubject<BankGroup[]>(1);
 
   /** Subject that emits when the component has been destroyed. */

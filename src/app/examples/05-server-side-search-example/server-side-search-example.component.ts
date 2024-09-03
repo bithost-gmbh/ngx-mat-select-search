@@ -13,19 +13,19 @@ import { Bank, BANKS } from '../demo-data';
 })
 export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
 
-  /** list of banks */
+  /** List of banks */
   protected banks: Bank[] = BANKS;
 
-  /** control for the selected bank for server side filtering */
+  /** Control for the selected bank for server side filtering */
   public bankServerSideCtrl: FormControl<Bank | null> = new FormControl<Bank | null>(null);
 
-  /** control for filter for server side. */
+  /** Control for filter for server side. */
   public bankServerSideFilteringCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
-  /** indicate search operation is in progress */
+  /** Indicate search operation is in progress */
   public searching = false;
 
-  /** list of banks filtered after simulating server side search */
+  /** List of banks filtered after simulating server side search */
   public  filteredServerSideBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
   /** Subject that emits when the component has been destroyed. */
