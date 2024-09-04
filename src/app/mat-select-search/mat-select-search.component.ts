@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
   ChangeDetectionStrategy,
@@ -428,22 +427,22 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    */
   _handleKeydown(event: KeyboardEvent) {
     // Prevent propagation for all alphanumeric characters in order to avoid selection issues
-    if ((event.key && event.key.length === 1) ||
-      (event.keyCode >= A && event.keyCode <= Z) ||
-      (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-      (event.keyCode === SPACE)
-      || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
+
+    // tslint:disable-next-line:max-line-length
+    // Needed to avoid handling in https://github.com/angular/components/blob/5439460d1fe166f8ec34ab7d48f05e0dd7f6a946/src/material/select/select.ts#L965
+    if ((event.key && event.key.length === 1)
+      || (this.preventHomeEndKeyPropagation && (event.key === 'Home' || event.key === 'End'))
     ) {
       event.stopPropagation();
     }
 
-    if (this.matSelect.multiple && event.key && event.keyCode === ENTER) {
+    if (this.matSelect.multiple && event.key && event.key === 'Enter') {
       // Regain focus after multiselect, so we can further type
       setTimeout(() => this._focus());
     }
 
     // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
-    if (this.enableClearOnEscapePressed === true && event.keyCode === ESCAPE && this.value) {
+    if (this.enableClearOnEscapePressed && event.key === 'Escape' && this.value) {
       this._reset(true);
       event.stopPropagation();
     }
@@ -454,7 +453,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    * Allows e.g. the announcing of the currently activeDescendant by screen readers.
    */
   _handleKeyup(event: KeyboardEvent) {
-    if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
       const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
       if (index !== -1) {
