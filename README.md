@@ -88,6 +88,13 @@ Thank you very much to all our community contributors!
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/sirh3e">
+            <img src="https://avatars.githubusercontent.com/u/24867927?v=4" width="100;" alt="sirh3e"/>
+            <br />
+            <sub><b>Sirh3e</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/tonyholt">
             <img src="https://avatars.githubusercontent.com/u/893926?v=4" width="100;" alt="tonyholt"/>
             <br />
@@ -99,13 +106,6 @@ Thank you very much to all our community contributors!
             <img src="https://avatars.githubusercontent.com/u/1216844?v=4" width="100;" alt="mstawick"/>
             <br />
             <sub><b>Michał Stawicki</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/sirh3e">
-            <img src="https://avatars.githubusercontent.com/u/24867927?v=4" width="100;" alt="sirh3e"/>
-            <br />
-            <sub><b>Sirh3e</b></sub>
         </a>
     </td></tr>
 <tr>
