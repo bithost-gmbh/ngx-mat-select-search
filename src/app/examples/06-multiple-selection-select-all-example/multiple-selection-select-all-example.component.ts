@@ -13,22 +13,22 @@ import { Bank, BANKS } from '../demo-data';
 })
 export class MultipleSelectionSelectAllExampleComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  /** list of banks */
+  /** List of banks */
   protected banks: Bank[] = BANKS;
 
-  /** control for the selected bank for multi-selection */
-  public bankMultiCtrl: FormControl<Bank[]> = new FormControl<Bank[]>([]);
+  /** Control for the selected bank for multi-selection */
+  public bankMultiCtrl: FormControl<Bank[]> = new FormControl<Bank[]>([], {nonNullable: true});
 
-  /** control for the MatSelect filter keyword multi-selection */
-  public bankMultiFilterCtrl: FormControl<string> = new FormControl<string>('');
+  /** Control for the MatSelect filter keyword multi-selection */
+  public bankMultiFilterCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
-  /** list of banks filtered by search keyword */
+  /** List of banks filtered by search keyword */
   public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
-  /** local copy of filtered banks to help set the toggle all checkbox state */
+  /** Local copy of filtered banks to help set the toggle all checkbox state */
   protected filteredBanksCache: Bank[] = [];
 
-  /** flags to set the toggle all checkbox state */
+  /** Flags to set the toggle all checkbox state */
   isIndeterminate = false;
   isChecked = false;
 

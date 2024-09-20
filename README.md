@@ -88,6 +88,13 @@ Thank you very much to all our community contributors!
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/sirh3e">
+            <img src="https://avatars.githubusercontent.com/u/24867927?v=4" width="100;" alt="sirh3e"/>
+            <br />
+            <sub><b>Sirh3e</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/tonyholt">
             <img src="https://avatars.githubusercontent.com/u/893926?v=4" width="100;" alt="tonyholt"/>
             <br />
@@ -100,6 +107,14 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Michał Stawicki</b></sub>
         </a>
+    </td></tr>
+<tr>
+    <td align="center">
+        <a href="https://github.com/AleixFerreCP">
+            <img src="https://avatars.githubusercontent.com/u/93319700?v=4" width="100;" alt="AleixFerreCP"/>
+            <br />
+            <sub><b>Aleix Ferré</b></sub>
+        </a>
     </td>
     <td align="center">
         <a href="https://github.com/alexandrupaul7">
@@ -107,8 +122,7 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/blazewalker59">
             <img src="https://avatars.githubusercontent.com/u/21110755?v=4" width="100;" alt="blazewalker59"/>
@@ -136,6 +150,14 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Dane Vanderbilt</b></sub>
         </a>
+    </td></tr>
+<tr>
+    <td align="center">
+        <a href="https://github.com/davidsansome">
+            <img src="https://avatars.githubusercontent.com/u/314463?v=4" width="100;" alt="davidsansome"/>
+            <br />
+            <sub><b>David Sansome</b></sub>
+        </a>
     </td>
     <td align="center">
         <a href="https://github.com/escheiermann">
@@ -150,8 +172,7 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Erendis</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/gustavovitor">
             <img src="https://avatars.githubusercontent.com/u/37344068?v=4" width="100;" alt="gustavovitor"/>
@@ -172,7 +193,8 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/jfcere">
             <img src="https://avatars.githubusercontent.com/u/6987084?v=4" width="100;" alt="jfcere"/>
@@ -193,8 +215,7 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Jomal Johny</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/bulldog98">
             <img src="https://avatars.githubusercontent.com/u/314259?v=4" width="100;" alt="bulldog98"/>
@@ -215,7 +236,8 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Muhammad Ahsan Ayaz</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/OvidijusStukas">
             <img src="https://avatars.githubusercontent.com/u/9720553?v=4" width="100;" alt="OvidijusStukas"/>
@@ -224,20 +246,12 @@ Thank you very much to all our community contributors!
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/qstiegler">
-            <img src="https://avatars.githubusercontent.com/u/2858579?v=4" width="100;" alt="qstiegler"/>
-            <br />
-            <sub><b>Quirin Stiegler</b></sub>
-        </a>
-    </td>
-    <td align="center">
         <a href="https://github.com/raysuelzer">
             <img src="https://avatars.githubusercontent.com/u/1176341?v=4" width="100;" alt="raysuelzer"/>
             <br />
             <sub><b>Ray Suelzer</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/probert94">
             <img src="https://avatars.githubusercontent.com/u/18258317?v=4" width="100;" alt="probert94"/>
@@ -265,7 +279,8 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/framasev">
             <img src="https://avatars.githubusercontent.com/u/41595972?v=4" width="100;" alt="framasev"/>
@@ -279,8 +294,7 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Thierry Nischelwitzer</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/vlio20">
             <img src="https://avatars.githubusercontent.com/u/4542641?v=4" width="100;" alt="vlio20"/>
@@ -308,7 +322,8 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Joshua</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/lorenzbaier">
             <img src="https://avatars.githubusercontent.com/u/64407215?v=4" width="100;" alt="lorenzbaier"/>
@@ -428,16 +443,16 @@ Furthermore, it provides the following inputs:
   /** Font-based icon used for displaying Close-Icon */
   @Input() closeIcon = 'close';
 
-  /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
+  /** SVG-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
   @Input() closeSvgIcon?: string;
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
-    * Whether or not the search field should be cleared after the dropdown menu is closed.
-    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
-    */
+   * Whether the search field should be cleared after the dropdown menu is closed.
+   * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
+   */
   @Input() clearSearchInput = true;
 
   /** Whether to show the search-in-progress indicator */
@@ -464,7 +479,7 @@ Furthermore, it provides the following inputs:
   /** Whether to show Select All Checkbox (for mat-select[multi=true]) */
   @Input() showToggleAllCheckbox = false;
 
-  /** select all checkbox checked state */
+  /** Select all checkbox checked state */
   @Input() toggleAllCheckboxChecked = false;
 
   /** select all checkbox indeterminate state */
@@ -479,9 +494,9 @@ Furthermore, it provides the following inputs:
   /** Show/Hide the search clear button of the search input */
   @Input() hideClearSearchButton = false;
 
-  /** 
-   * Always restore selected options on selectionChange for mode multi (e.g. for lazy loading/infinity scrolling). 
-   * Defaults to false, so selected options are only restored while filtering is active. 
+  /**
+   * Always restore selected options on selectionChange for mode multi (e.g. for lazy loading/infinity scrolling).
+   * Defaults to false, so selected options are only restored while filtering is active.
    */
   @Input() alwaysRestoreSelectedOptionsMulti = false;
   
@@ -564,6 +579,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ### Library Build / NPM Package
 Run `npm run build-lib` to build the library and generate an NPM package. 
 The build artifacts will be stored in the `dist-lib/` folder.
+
+To release, run `cd dist-lib/ && npm publish`.
 
 ### Running unit tests
 

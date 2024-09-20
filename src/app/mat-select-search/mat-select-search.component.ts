@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
   ChangeDetectionStrategy,
@@ -137,14 +136,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Font-based icon used for displaying Close-Icon */
   @Input() closeIcon = 'close';
 
-  /** Svg-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
+  /** SVG-based icon used for displaying Close-Icon. If set, closeIcon is overridden */
   @Input() closeSvgIcon?: string;
 
   /** Label to be shown when no entries are found. Set to null if no message should be shown. */
   @Input() noEntriesFoundLabel = 'Keine Optionen gefunden';
 
   /**
-    * Whether or not the search field should be cleared after the dropdown menu is closed.
+    * Whether the search field should be cleared after the dropdown menu is closed.
     * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
     */
   @Input() clearSearchInput = true;
@@ -173,7 +172,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Whether to show Select All Checkbox (for mat-select[multi=true]) */
   @Input() showToggleAllCheckbox = false;
 
-  /** select all checkbox checked state */
+  /** Select all checkbox checked state */
   @Input() toggleAllCheckboxChecked = false;
 
   /** select all checkbox indeterminate state */
@@ -213,7 +212,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   get value(): string {
     return this._formControl.value;
   }
-  private _lastExternalInputValue: string;
+  private _lastExternalInputValue?: string;
 
   onTouched: Function = (_: any) => { };
 
@@ -224,9 +223,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   public get _options(): QueryList<MatOption> {
     return this._options$.getValue();
   }
-  public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null);
+  public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null as any);
 
-  private optionsList$: Observable<MatOption[]> = this._options$.pipe(
+  private optionsList$: Observable<MatOption[] | null> = this._options$.pipe(
     switchMap(_options => _options ?
       _options.changes.pipe(
         map(options => options.toArray()),
@@ -242,15 +241,15 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Previously selected values when using <mat-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
-  public _formControl: FormControl<string> = new FormControl<string>('');
+  public _formControl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
-  /** whether to show the no entries found message */
+  /** Whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([
     this._formControl.valueChanges,
     this.optionsLength$
   ]).pipe(
-    map(([value, optionsLength]) => this.noEntriesFoundLabel && value
-      && optionsLength === this.getOptionsLengthOffset())
+    map(([value, optionsLength]) => !!(this.noEntriesFoundLabel && value
+      && optionsLength === this.getOptionsLengthOffset()))
   );
 
   /** Subject that emits when the component has been destroyed. */
@@ -262,14 +261,14 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
-    @Optional() @Inject(MatOption) public matOption: MatOption = null,
-    @Optional() @Inject(MatFormField) public matFormField: MatFormField = null,
+    @Optional() @Inject(MatOption) public matOption: MatOption,
+    @Optional() @Inject(MatFormField) public matFormField: MatFormField,
     @Optional() @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS) defaultOptions?: MatSelectSearchOptions
   ) {
     this.applyDefaultOptions(defaultOptions);
   }
 
-  private applyDefaultOptions(defaultOptions: MatSelectSearchOptions) {
+  private applyDefaultOptions(defaultOptions?: MatSelectSearchOptions) {
     if (!defaultOptions) {
       return;
     }
@@ -285,7 +284,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     if (this.matOption) {
       this.matOption.disabled = true;
       this.matOption._getHostElement().classList.add('contains-mat-select-search');
-      this.matOption._getHostElement().setAttribute('aria-hidden', 'true');
+      this.matOption._getHostElement().setAttribute('role', 'presentation');
     } else {
       console.error('<ngx-mat-select-search> must be placed inside a <mat-option> element');
     }
@@ -321,7 +320,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
         this._options = this.matSelect.options;
 
         // Closure variable for tracking the most recent first option.
-        // In order to avoid avoid causing the list to
+        // In order to avoid causing the list to
         // scroll to the top when options are added to the bottom of
         // the list (eg: infinite scroll), we compare only
         // the changes to the first options to determine if we
@@ -352,10 +351,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                   || !this.matSelect.compareWith(previousFirstOption.value, currentFirstOption.value);
 
                 // CASE: The first option is different now.
-                // Indiciates we should set it as active and scroll to the top.
+                // Indicates we should set it as active and scroll to the top.
                 if (firstOptionIsChanged
                   || !keyManager.activeItem
-                  || !options.find(option => this.matSelect.compareWith(option.value, keyManager.activeItem.value))) {
+                  || !options.find(option => this.matSelect.compareWith(option.value, keyManager.activeItem?.value))) {
                   keyManager.setActiveItem(this.getOptionsLengthOffset());
                 }
 
@@ -428,22 +427,22 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    */
   _handleKeydown(event: KeyboardEvent) {
     // Prevent propagation for all alphanumeric characters in order to avoid selection issues
-    if ((event.key && event.key.length === 1) ||
-      (event.keyCode >= A && event.keyCode <= Z) ||
-      (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-      (event.keyCode === SPACE)
-      || (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
+
+    // tslint:disable-next-line:max-line-length
+    // Needed to avoid handling in https://github.com/angular/components/blob/5439460d1fe166f8ec34ab7d48f05e0dd7f6a946/src/material/select/select.ts#L965
+    if ((event.key && event.key.length === 1)
+      || (this.preventHomeEndKeyPropagation && (event.key === 'Home' || event.key === 'End'))
     ) {
       event.stopPropagation();
     }
 
-    if (this.matSelect.multiple && event.key && event.keyCode === ENTER) {
+    if (this.matSelect.multiple && event.key && event.key === 'Enter') {
       // Regain focus after multiselect, so we can further type
       setTimeout(() => this._focus());
     }
 
     // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
-    if (this.enableClearOnEscapePressed === true && event.keyCode === ESCAPE && this.value) {
+    if (this.enableClearOnEscapePressed && event.key === 'Escape' && this.value) {
       this._reset(true);
       event.stopPropagation();
     }
@@ -454,7 +453,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    * Allows e.g. the announcing of the currently activeDescendant by screen readers.
    */
   _handleKeyup(event: KeyboardEvent) {
-    if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
       const ariaActiveDescendantId = this.matSelect._getAriaActiveDescendant();
       const index = this._options.toArray().findIndex(item => item.id === ariaActiveDescendantId);
       if (index !== -1) {
@@ -537,6 +536,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     // because the option is not available while we are currently filtering
     this.previousSelectedValues = this.matSelect.ngControl.value;
 
+    if (!this.matSelect.ngControl.valueChanges) {
+      return;
+    }
+
     this.matSelect.ngControl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe((values) => {
@@ -569,15 +572,16 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
 
   /**
    *  Set the width of the innerSelectSearch to fit even custom scrollbars
-   *  And support all Operation Systems
+   *  And support all Operating Systems
    */
   public updateInputWidth() {
     if (!this.innerSelectSearch || !this.innerSelectSearch.nativeElement) {
       return;
     }
-    let element: HTMLElement = this.innerSelectSearch.nativeElement;
-    let panelElement: HTMLElement;
-    while (element = element.parentElement) {
+    let element: HTMLElement | null = this.innerSelectSearch.nativeElement;
+    let panelElement: HTMLElement | null = null;
+    while (element && element.parentElement) {
+      element = element.parentElement;
       if (element.classList.contains('mat-select-panel')) {
         panelElement = element;
         break;

@@ -125,8 +125,8 @@ export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterVie
   /** list of banks filtered by search keyword for multi-selection */
   public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
-  public initialSingleSelection: Bank = null;
-  public initialSingleSelectionMatOption: Bank = null;
+  public initialSingleSelection: Bank;
+  public initialSingleSelectionMatOption: Bank;
   public initialMultiSelection: Bank[] = [];
 
 
