@@ -161,9 +161,9 @@ export class MatSelectSearchComponent
   @Input() noEntriesFoundLabel = "Keine Optionen gefunden";
 
   /**
-   * Whether the search field should be cleared after the dropdown menu is closed.
-   * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
-   */
+    * Whether the search field should be cleared after the dropdown menu is closed.
+    * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
+    */
   @Input() clearSearchInput = true;
 
   /** Whether to show the search-in-progress indicator */
@@ -364,41 +364,41 @@ export class MatSelectSearchComponent
       .pipe(
         take(1),
         switchMap((_) => {
-          this._options = this.matSelect.options;
+        this._options = this.matSelect.options;
 
-          // Closure variable for tracking the most recent first option.
-          // In order to avoid causing the list to
-          // scroll to the top when options are added to the bottom of
-          // the list (eg: infinite scroll), we compare only
-          // the changes to the first options to determine if we
-          // should set the first item as active.
-          // This prevents unnecessary scrolling to the top of the list
-          // when options are appended, but allows the first item
-          // in the list to be set as active by default when there
-          // is no active selection
+        // Closure variable for tracking the most recent first option.
+        // In order to avoid causing the list to
+        // scroll to the top when options are added to the bottom of
+        // the list (eg: infinite scroll), we compare only
+        // the changes to the first options to determine if we
+        // should set the first item as active.
+        // This prevents unnecessary scrolling to the top of the list
+        // when options are appended, but allows the first item
+        // in the list to be set as active by default when there
+        // is no active selection
           let previousFirstOption =
             this._options.toArray()[this.getOptionsLengthOffset()];
 
           return this._options.changes.pipe(
             tap(() => {
-              // avoid "expression has been changed" error
-              setTimeout(() => {
-                // Convert the QueryList to an array
-                const options = this._options.toArray();
+            // avoid "expression has been changed" error
+            setTimeout(() => {
+              // Convert the QueryList to an array
+              const options = this._options.toArray();
 
-                // The true first item is offset by 1
+              // The true first item is offset by 1
                 const currentFirstOption =
                   options[this.getOptionsLengthOffset()];
 
-                const keyManager = this.matSelect._keyManager;
+              const keyManager = this.matSelect._keyManager;
                 if (
                   keyManager &&
                   this.matSelect.panelOpen &&
                   currentFirstOption
                 ) {
-                  // set first item active and input width
+                // set first item active and input width
 
-                  // Check to see if the first option in these changes is different from the previous.
+                // Check to see if the first option in these changes is different from the previous.
                   const firstOptionIsChanged =
                     !previousFirstOption ||
                     !this.matSelect.compareWith(
@@ -406,8 +406,8 @@ export class MatSelectSearchComponent
                       currentFirstOption.value
                     );
 
-                  // CASE: The first option is different now.
-                  // Indicates we should set it as active and scroll to the top.
+                // CASE: The first option is different now.
+                // Indicates we should set it as active and scroll to the top.
                   if (
                     firstOptionIsChanged ||
                     !keyManager.activeItem ||
@@ -418,18 +418,18 @@ export class MatSelectSearchComponent
                       )
                     )
                   ) {
-                    keyManager.setActiveItem(this.getOptionsLengthOffset());
-                  }
-
-                  // wait for panel width changes
-                  setTimeout(() => {
-                    this.updateInputWidth();
-                  });
+                  keyManager.setActiveItem(this.getOptionsLengthOffset());
                 }
 
-                // Update our reference
-                previousFirstOption = currentFirstOption;
-              });
+                // wait for panel width changes
+                setTimeout(() => {
+                  this.updateInputWidth();
+                });
+              }
+
+              // Update our reference
+              previousFirstOption = currentFirstOption;
+            });
             })
           );
         })
@@ -442,19 +442,19 @@ export class MatSelectSearchComponent
     this._showNoEntriesFound$
       .pipe(takeUntil(this._onDestroy))
       .subscribe((showNoEntriesFound) => {
-        // set no entries found class on mat option
-        if (this.matOption) {
-          if (showNoEntriesFound) {
+      // set no entries found class on mat option
+      if (this.matOption) {
+        if (showNoEntriesFound) {
             this.matOption
               ._getHostElement()
               .classList.add("mat-select-search-no-entries-found");
-          } else {
+        } else {
             this.matOption
               ._getHostElement()
               .classList.remove("mat-select-search-no-entries-found");
-          }
         }
-      });
+      }
+    });
 
     // resize the input width when the viewport is resized, i.e. the trigger width could potentially be resized
     this._viewportRuler
@@ -561,7 +561,7 @@ export class MatSelectSearchComponent
       .pipe(
         filter((value) => value !== this._lastExternalInputValue),
         tap(() => (this._lastExternalInputValue = undefined)),
-        takeUntil(this._onDestroy)
+      takeUntil(this._onDestroy)
       )
       .subscribe(fn);
   }
