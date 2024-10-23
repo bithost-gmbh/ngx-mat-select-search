@@ -1,5 +1,22 @@
 # Changelog
 
+
+## 7.0.8
+* Enhancement: Add option `recreateValuesArray` to support immutable data structures in multi-selects.
+  [#376](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/376)
+  
+  Thanks to @KristofGilis
+  
+* Enhancement: Add compatibility with `@angular/material`: `^19.0.0`
+* Enhancement: Remove use of deprecated `event.keyCode`
+  [#485](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/485)
+  
+  Thanks to @sirh3e
+* Documentation: Improved example doc strings
+  [#489](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/489)
+  
+  Thanks to @sirh3e
+
 ## 7.0.7
 * Fix blocked aria-hidden when opening the dropdown for the first time
   [#474](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/474)
