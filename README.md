@@ -500,7 +500,7 @@ Furthermore, it provides the following inputs:
    */
   @Input() alwaysRestoreSelectedOptionsMulti = false;
 
-    /**
+  /**
    * Recreate array of selected values
    * Recreate array of selected values for multi-selects.
    *
