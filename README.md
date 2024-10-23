@@ -499,6 +499,14 @@ Furthermore, it provides the following inputs:
    * Defaults to false, so selected options are only restored while filtering is active.
    */
   @Input() alwaysRestoreSelectedOptionsMulti = false;
+
+    /**
+   * Recreate array of selected values
+   * Recreate array of selected values for multi-selects.
+   *
+   * This is useful if the selected values are stored in an immutable data structure.
+   */
+  @Input() recreateValuesArray = false;
   
   /** Output emitter to send to parent component with the toggle all boolean */
   @Output() toggleAll = new EventEmitter<boolean>();
