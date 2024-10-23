@@ -224,20 +224,27 @@ Thank you very much to all our community contributors!
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/KristofGilis">
+            <img src="https://avatars.githubusercontent.com/u/2454275?v=4" width="100;" alt="KristofGilis"/>
+            <br />
+            <sub><b>Kristof Gilis</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/melroy89">
             <img src="https://avatars.githubusercontent.com/u/628926?v=4" width="100;" alt="melroy89"/>
             <br />
             <sub><b>Melroy Van Den Berg</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/AhsanAyaz">
             <img src="https://avatars.githubusercontent.com/u/9844254?v=4" width="100;" alt="AhsanAyaz"/>
             <br />
             <sub><b>Muhammad Ahsan Ayaz</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/OvidijusStukas">
             <img src="https://avatars.githubusercontent.com/u/9720553?v=4" width="100;" alt="OvidijusStukas"/>
@@ -272,15 +279,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Sebastian Wierzbicki </b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/shenay-aydan">
             <img src="https://avatars.githubusercontent.com/u/38660036?v=4" width="100;" alt="shenay-aydan"/>
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/framasev">
             <img src="https://avatars.githubusercontent.com/u/41595972?v=4" width="100;" alt="framasev"/>
@@ -315,15 +322,15 @@ Thank you very much to all our community contributors!
             <br />
             <sub><b>Null</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/evoltafreak">
             <img src="https://avatars.githubusercontent.com/u/11610680?v=4" width="100;" alt="evoltafreak"/>
             <br />
             <sub><b>Joshua</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/lorenzbaier">
             <img src="https://avatars.githubusercontent.com/u/64407215?v=4" width="100;" alt="lorenzbaier"/>
