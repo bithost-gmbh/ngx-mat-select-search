@@ -194,7 +194,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   @Input() alwaysRestoreSelectedOptionsMulti = false;
 
   /**
-   * Recreate array of selected values
+   * Recreate array of selected values for multi-selects.
+   *
+   * This is useful if the selected values are stored in an immutable data structure.
    */
   @Input() recreateValuesArray = false;
 
