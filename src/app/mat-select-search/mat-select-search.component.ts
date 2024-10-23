@@ -193,6 +193,13 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    */
   @Input() alwaysRestoreSelectedOptionsMulti = false;
 
+  /**
+   * Recreate array of selected values for multi-selects.
+   *
+   * This is useful if the selected values are stored in an immutable data structure.
+   */
+  @Input() recreateValuesArray = false;
+
   /** Output emitter to send to parent component with the toggle all boolean */
   @Output() toggleAll = new EventEmitter<boolean>();
 
@@ -556,7 +563,11 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
                 && !optionValues.some(v => this.matSelect.compareWith(v, previousValue))) {
                 // if a value that was selected before is deselected and not found in the options, it was deselected
                 // due to the filtering, so we restore it.
-                values.push(previousValue);
+                if (this.recreateValuesArray) {
+                  values = [...values, previousValue];
+                } else {
+                  values.push(previousValue);
+                }
                 restoreSelectedValues = true;
               }
             });
