@@ -23,7 +23,6 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
 
-/* tslint:disable:component-selector */
 
 interface Bank {
   id: string;
@@ -423,7 +422,7 @@ describe('MatSelectSearchComponent', () => {
 
           component.matSelect.openedChange
             .pipe(take(1))
-            .subscribe((opened) => {
+            .subscribe(() => {
 
               // search for "something definitely not in the list"
               component.matSelectSearch._formControl.setValue('something definitely not in the list');
@@ -437,7 +436,7 @@ describe('MatSelectSearchComponent', () => {
                   setTimeout(() => {
                     expect(component.matSelect.options.length).toBe(0);
 
-                    component.matSelectSearch._handleKeyup(<KeyboardEvent>{keyCode: DOWN_ARROW});
+                    component.matSelectSearch._handleKeyup({keyCode: DOWN_ARROW} as KeyboardEvent);
                     expect(announcer.announce).not.toHaveBeenCalled();
                     done();
                   });
@@ -554,7 +553,7 @@ describe('MatSelectSearchComponent', () => {
       });
 
       it('should compare first option changed by value of "bic"', (done) => {
-        component.matSelectMatOption.compareWith = (b1: Bank, b2: Bank) => b1.bic.value === b2.bic.value;
+        component.matSelectMatOption.compareWith = (b1: Bank, b2: Bank) => b1?.bic.value === b2?.bic.value;
 
         component.filteredBanksMatOption
           .pipe(
@@ -806,9 +805,9 @@ describe('MatSelectSearchComponent with default options', () => {
         },
         {
           provide: MAT_SELECTSEARCH_DEFAULT_OPTIONS,
-          useValue: <MatSelectSearchOptions>{
+          useValue: {
             placeholderLabel: 'Mega bla',
-          },
+          } as MatSelectSearchOptions,
         },
       ]
     })
@@ -846,7 +845,7 @@ describe('MatSelectSearchComponent with default options', () => {
               take(1),
               delay(1)
             )
-            .subscribe((opened) => {
+            .subscribe(() => {
               const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input') as HTMLInputElement;
 
               expect(searchField.placeholder).toBe('Mega bla');

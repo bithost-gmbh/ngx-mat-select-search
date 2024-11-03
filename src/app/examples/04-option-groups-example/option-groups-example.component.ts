@@ -28,9 +28,6 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-
-  constructor() { }
-
   ngOnInit() {
     // load the initial bank list
     this.filteredBankGroups.next(this.copyBankGroups(this.bankGroups));

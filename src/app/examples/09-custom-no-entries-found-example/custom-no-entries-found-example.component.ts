@@ -29,9 +29,6 @@ export class CustomNoEntriesFoundExampleComponent implements OnInit, AfterViewIn
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-
-  constructor() { }
-
   ngOnInit() {
     // set initial selection
     this.bankCtrl.setValue(this.banks[10]);

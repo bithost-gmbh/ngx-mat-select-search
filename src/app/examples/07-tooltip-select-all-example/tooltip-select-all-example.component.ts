@@ -32,9 +32,6 @@ export class TooltipSelectAllExampleComponent implements OnInit, AfterViewInit, 
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-
-  constructor() { }
-
   ngOnInit() {
     // set initial selection
     this.bankMultiCtrl.setValue([this.banks[10], this.banks[11], this.banks[12]]);

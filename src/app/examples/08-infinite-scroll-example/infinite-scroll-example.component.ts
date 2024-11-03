@@ -54,7 +54,7 @@ export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
     this.filteredData$,
     this.bankFilterCtrl.valueChanges
   ]).pipe(
-    map(([filteredData, searchValue]) => {
+    map(([filteredData]) => {
       if (!this.bankFilterCtrl.value && this.bankCtrl.value) {
         const index = filteredData.findIndex(bank => bank.id === this.bankCtrl.value);
         return index + this.batchSize;
@@ -93,8 +93,7 @@ export class InfiniteScrollExampleComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor() { }
-
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {
     /*this.infiniteScrollSelect.openedChange.pipe(takeUntil(this.destroy$)).subscribe(opened => {
       // after opening, reset the batch offset
