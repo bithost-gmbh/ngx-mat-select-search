@@ -59,6 +59,10 @@ $mat-select-panel-padding: 8px;
   }
 }
 
+.mat-select-search-input::placeholder {
+  color: var(--mdc-filled-text-field-input-text-placeholder-color);
+}
+
 .mat-select-search-inner-toggle-all {
   .mat-select-search-input {
     padding-left: 5px;
