@@ -31,9 +31,6 @@ export class SingleSelectionExampleComponent implements OnInit, AfterViewInit, O
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-
-  constructor() { }
-
   ngOnInit() {
     // set initial selection
     this.bankCtrl.setValue(this.banks[10]);

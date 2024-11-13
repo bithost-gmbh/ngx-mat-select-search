@@ -38,8 +38,6 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
   protected _onDestroy = new Subject<void>();
 
 
-  constructor() { }
-
   ngOnInit() {
     // set initial selection
     this.bankMultiCtrl.setValue([this.banks[10], this.banks[11], this.banks[12]]);
