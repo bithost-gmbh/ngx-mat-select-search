@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 7.0.9
+* Enhancement: Make Placeholder color tunable.
+  [#506](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/506)
+  
+  Thanks to @iblislin
+
 ## 7.0.8
 * Enhancement: Add option `recreateValuesArray` to support immutable data structures in multi-selects.
   [#376](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/376)
