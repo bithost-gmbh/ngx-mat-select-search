@@ -8,6 +8,7 @@ import { Bank, BANKS } from '../demo-data';
 
 @Component({
   selector: 'app-multiple-selection-select-all-example',
+  standalone: false,
   templateUrl: './multiple-selection-select-all-example.component.html',
   styleUrls: ['./multiple-selection-select-all-example.component.scss']
 })

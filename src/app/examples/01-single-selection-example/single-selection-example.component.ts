@@ -9,6 +9,7 @@ import { Bank, BANKS } from '../demo-data';
 
 @Component({
   selector: 'app-single-selection-example',
+  standalone: false,
   templateUrl: './single-selection-example.component.html',
   styleUrls: ['./single-selection-example.component.scss']
 })

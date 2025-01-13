@@ -10,6 +10,7 @@ import { Bank } from '../demo-data';
  */
 @Component({
   selector: 'app-infinite-scroll-example',
+  standalone: false,
   templateUrl: './infinite-scroll-example.component.html',
   styleUrls: ['./infinite-scroll-example.component.scss']
 })
