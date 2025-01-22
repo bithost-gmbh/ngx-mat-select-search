@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 7.0.10
+* Fix: Explicitly set `standalone: false` for Angular 19 compatibility
+  [#512](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/512)
+  
+  Thanks to @GipHub123
+
 ## 7.0.9
 * Enhancement: Make Placeholder color tunable.
   [#506](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/506)
