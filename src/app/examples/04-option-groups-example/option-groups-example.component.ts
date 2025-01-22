@@ -8,6 +8,7 @@ import { Bank, BankGroup, BANKGROUPS } from '../demo-data';
 
 @Component({
   selector: 'app-option-groups-example',
+  standalone: false,
   templateUrl: './option-groups-example.component.html',
   styleUrls: ['./option-groups-example.component.scss']
 })

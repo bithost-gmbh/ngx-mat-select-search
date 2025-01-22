@@ -8,6 +8,7 @@ import { Bank, BANKS } from '../demo-data';
 
 @Component({
   selector: 'app-server-side-search-example',
+  standalone: false,
   templateUrl: './server-side-search-example.component.html',
   styleUrls: ['./server-side-search-example.component.scss']
 })

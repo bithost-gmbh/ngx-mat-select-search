@@ -8,6 +8,7 @@ import { Bank, BANKS } from '../demo-data';
 
 @Component({
   selector: 'app-tooltip-select-all-example',
+  standalone: false,
   templateUrl: './tooltip-select-all-example.component.html',
   styleUrls: ['./tooltip-select-all-example.component.scss']
 })

@@ -114,6 +114,7 @@ import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.
  */
 @Component({
   selector: 'ngx-mat-select-search',
+  standalone: false,
   templateUrl: './mat-select-search.component.html',
   styleUrls: ['./mat-select-search.component.scss'],
   providers: [

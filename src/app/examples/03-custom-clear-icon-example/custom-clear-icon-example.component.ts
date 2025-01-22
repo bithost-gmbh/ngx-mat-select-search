@@ -5,6 +5,7 @@ import { SingleSelectionExampleComponent } from '../01-single-selection-example/
 
 @Component({
   selector: 'app-custom-clear-icon-example',
+  standalone: false,
   templateUrl: './custom-clear-icon-example.component.html',
   styleUrls: ['./custom-clear-icon-example.component.scss']
 })

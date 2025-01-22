@@ -7,6 +7,7 @@ import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-custom-no-entries-found-example',
+  standalone: false,
   templateUrl: './custom-no-entries-found-example.component.html',
   styleUrls: ['./custom-no-entries-found-example.component.scss']
 })

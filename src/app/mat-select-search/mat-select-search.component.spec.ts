@@ -33,6 +33,7 @@ interface Bank {
 
 @Component({
   selector: 'mat-select-search-test',
+  standalone: false,
   template: `
     <h3>Single selection</h3>
     <p>
