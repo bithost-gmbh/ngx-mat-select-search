@@ -56,6 +56,14 @@ Thank you very much to our financial supporters!
 
 <!-- readme: collaborators -start -->
 <table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/swierzbicki">
+            <img src="https://avatars.githubusercontent.com/u/7196324?v=4" width="100;" alt="swierzbicki"/>
+            <br />
+            <sub><b>Sebastian Wierzbicki </b></sub>
+        </a>
+    </td></tr>
 </table>
 <!-- readme: collaborators -end -->
 
