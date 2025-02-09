@@ -81,7 +81,13 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
           this.bankMultiCtrl.patchValue([]);
         }
       });
+    this.checkAllIfAllOptionSelected();
   }
+
+  onToggleSingleOption() {
+    this.checkAllIfAllOptionSelected();
+  }
+
 
   /**
    * Sets the initial value after the filteredBanks are loaded initially
@@ -116,7 +122,6 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
     this.filteredBanksCache = this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
     this.filteredBanksMulti.next(this.filteredBanksCache);
   }
-
   protected setToggleAllCheckboxState() {
     let filteredLength = 0;
     if (this.bankMultiCtrl && this.bankMultiCtrl.value) {
@@ -129,5 +134,11 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
       this.isChecked = filteredLength > 0 && filteredLength === this.filteredBanksCache.length;
     }
   }
-
+  private checkAllIfAllOptionSelected() {
+    if (this.banks.length === this.bankMultiCtrl.value.length) {
+      this.isChecked = true;
+    } else {
+      this.isChecked = false;
+    }
+  }
 }
