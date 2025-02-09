@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 7.1.0
+* Upgrade: Upgrade project to Angular 16
+  [#520](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/520)
+
+  Thanks to @swierzbicki
+
 ## 7.0.10
 * Fix: Explicitly set `standalone: false` for Angular 19 compatibility
   [#512](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/512)
