@@ -11,7 +11,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cimg/node:18.13.0-browsers
+      - image: cimg/node:20.18.3-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -51,7 +51,7 @@ jobs:
   deploy:
     # see https://circleci.com/blog/deploying-documentation-to-github-pages-with-continuous-integration
     docker:
-      - image: cimg/node:cimg/node:18.13.0
+      - image: cimg/node:20.18.3
     steps:
       - checkout
       - attach_workspace:
