@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 7.1.0
+## Next Release
 * Upgrade: Upgrade project to Angular 16
   [#520](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/520)
 
