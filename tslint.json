@@ -2,7 +2,7 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
-  "extends": ["@angular-extensions/lint-rules"],
+  "extends": [],
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,
