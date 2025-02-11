@@ -10,7 +10,7 @@
                                (toggleAll)="toggleSelectAll($event)"
                                [formControl]="bankMultiFilterCtrl"></ngx-mat-select-search>
       </mat-option>
-      <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
+      <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank" (onSelectionChange)="onToggleSingleOption()">
         {{bank.name}}
       </mat-option>
     </mat-select>
