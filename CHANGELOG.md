@@ -1,11 +1,15 @@
 # Changelog
 
 
-## Next Release
-* Upgrade: Upgrade project to Angular 16
+## 8.0.0
+* Upgrade: Upgrade project to Angular 19
   [#520](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/520)
 
   Thanks to @swierzbicki
+
+> [!CAUTION]
+> **Breaking Change**:  `@angular/material`: `<= 15` is not supported anymore, please use version `16.0.0`.
+See [README.md#compatibility](README.md#compatibility)
 
 ## 7.0.10
 * Fix: Explicitly set `standalone: false` for Angular 19 compatibility
