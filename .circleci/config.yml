@@ -2,12 +2,16 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.5.2
+
 jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:16-browsers
+      - image: cimg/node:20.18.3-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -18,6 +22,7 @@ jobs:
 
     steps:
       - checkout
+      - browser-tools/install-browser-tools
 
       # Download and cache dependencies
       - restore_cache:
@@ -27,7 +32,7 @@ jobs:
           - v1-dependencies-
 
       - run: DISABLE_OPENCOLLECTIVE=true
-      - run: npm install
+      - run: npm ci
 
       - save_cache:
           paths:
@@ -46,7 +51,7 @@ jobs:
   deploy:
     # see https://circleci.com/blog/deploying-documentation-to-github-pages-with-continuous-integration
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:20.18.3
     steps:
       - checkout
       - attach_workspace:
@@ -58,7 +63,7 @@ jobs:
               git config user.email "ci-build@bithost.ch"
               git config user.name "ci-build"
       - add_ssh_keys:
-          fingerprints: 
+          fingerprints:
             - "9a:12:bb:95:c2:8b:7a:be:29:42:99:34:06:4f:68:cd"
       - run: node_modules/.bin/gh-pages --message "[ci skip] Updates" --dist artifacts/dist
 workflows:
