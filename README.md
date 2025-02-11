@@ -277,12 +277,21 @@ Thank you very much to all our community contributors!
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/OvidijusStukas">
+                    <img src="https://avatars.githubusercontent.com/u/9720553?v=4" width="100;" alt="OvidijusStukas"/>
+                    <br />
+                    <sub><b>Ovidijus Stukas</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/raysuelzer">
                     <img src="https://avatars.githubusercontent.com/u/1176341?v=4" width="100;" alt="raysuelzer"/>
                     <br />
                     <sub><b>Ray Suelzer</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/probert94">
                     <img src="https://avatars.githubusercontent.com/u/18258317?v=4" width="100;" alt="probert94"/>
@@ -290,8 +299,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Robert Pattis</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/broekema41">
                     <img src="https://avatars.githubusercontent.com/u/4007585?v=4" width="100;" alt="broekema41"/>
@@ -327,6 +334,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Vlad Ioffe</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/WX9yMOXWId">
                     <img src="https://avatars.githubusercontent.com/u/30053114?v=4" width="100;" alt="WX9yMOXWId"/>
@@ -334,8 +343,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Null</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/zpaynter">
                     <img src="https://avatars.githubusercontent.com/u/29746771?v=4" width="100;" alt="zpaynter"/>
