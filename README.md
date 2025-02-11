@@ -434,6 +434,12 @@ To use the [i18n](https://angular.io/guide/i18n) API for translation of the labe
 
 #### Current release
 
+* `@angular/core`: `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0`
+* `@angular/material`: `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` with `MatSelectModule` (`@angular/material/select`)
+
+
+#### Version [`7.0.10`](https://github.com/bithost-gmbh/ngx-mat-select-search/tree/7.0.10)
+
 * `@angular/core`: `^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0`
 * `@angular/material`: `^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` with `MatSelectModule` (`@angular/material/select`)
 
