@@ -65,7 +65,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "9a:12:bb:95:c2:8b:7a:be:29:42:99:34:06:4f:68:cd"
-      - run: node_modules/.bin/gh-pages --message "[ci skip] Updates" --src artifacts/dist/browser
+      - run: node_modules/.bin/gh-pages --message "[ci skip] Updates" --dist artifacts/dist/browser
 workflows:
   version: 2
   build-and-deploy:
