@@ -30,7 +30,7 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
   protected _onDestroy = new Subject<void>();
 
 
-  constructor() { }
+
 
   ngOnInit() {
     // load the initial bank list

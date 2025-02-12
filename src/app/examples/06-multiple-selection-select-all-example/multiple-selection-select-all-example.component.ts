@@ -39,7 +39,7 @@ export class MultipleSelectionSelectAllExampleComponent implements OnInit, After
   protected _onDestroy = new Subject<void>();
 
 
-  constructor() { }
+
 
   ngOnInit() {
     // set initial selection

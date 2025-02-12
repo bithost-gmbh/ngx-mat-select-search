@@ -56,7 +56,7 @@ export class ServerSideSearchExampleComponent implements OnInit, OnDestroy {
         this.searching = false;
         this.filteredServerSideBanks.next(filteredBanks);
       },
-        error => {
+        () => {
           // no errors in our simulated example
           this.searching = false;
           // handle error...

@@ -31,7 +31,7 @@ export class CustomNoEntriesFoundExampleComponent implements OnInit, AfterViewIn
   protected _onDestroy = new Subject<void>();
 
 
-  constructor() { }
+
 
   ngOnInit() {
     // set initial selection
