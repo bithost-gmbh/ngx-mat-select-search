@@ -20,7 +20,7 @@ See it in action at
   see example code, builds in browser, latest version, latest material version
 * [https://bithost-gmbh.github.io/ngx-mat-select-search/](https://bithost-gmbh.github.io/ngx-mat-select-search/)
 
-  pre-built, latest version, older material version, works on mobile
+  pre-built, latest version, material 19, works on mobile
 
 **Important Note**: This project is meant as a temporary implementation of [https://github.com/angular/material2/issues/5697](https://github.com/angular/material2/issues/5697).
 The goal is to have an implementation in the official Angular Material repository, a new PR will be created.
