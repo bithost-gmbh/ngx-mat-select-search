@@ -33,7 +33,6 @@ import { MatSelectSearchClearDirective } from './mat-select-search-clear.directi
 import { configurableDefaultOptions, MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
 import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.directive';
 
-/* tslint:disable:member-ordering component-selector */
 /**
  * Component providing an input field for searching MatSelect options.
  *
@@ -222,7 +221,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
   private _lastExternalInputValue?: string;
 
-  onTouched: Function = (_: any) => { };
+  onTouched: () => void = ()  => {
+    // do nothing.
+  };
 
   /** Reference to the MatSelect options */
   public set _options(_options: QueryList<MatOption>) {
@@ -231,6 +232,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   public get _options(): QueryList<MatOption> {
     return this._options$.getValue();
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null as any);
 
   private optionsList$: Observable<MatOption[] | null> = this._options$.pipe(
@@ -247,6 +250,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   );
 
   /** Previously selected values when using <mat-select [multiple]="true">*/
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private previousSelectedValues: any[];
 
   public _formControl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
@@ -281,7 +285,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       return;
     }
     for (const key of configurableDefaultOptions) {
-      if (defaultOptions.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(defaultOptions, key)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (this[key] as any) = defaultOptions[key];
       }
     }
@@ -324,7 +329,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     this.matSelect.openedChange
       .pipe(
         take(1),
-        switchMap((_) => {
+        switchMap(() => {
         this._options = this.matSelect.options;
 
         // Closure variable for tracking the most recent first option.
@@ -436,7 +441,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   _handleKeydown(event: KeyboardEvent) {
     // Prevent propagation for all alphanumeric characters in order to avoid selection issues
 
-    // tslint:disable-next-line:max-line-length
     // Needed to avoid handling in https://github.com/angular/components/blob/5439460d1fe166f8ec34ab7d48f05e0dd7f6a946/src/material/select/select.ts#L965
     if ((event.key && event.key.length === 1)
       || (this.preventHomeEndKeyPropagation && (event.key === 'Home' || event.key === 'End'))
@@ -492,7 +496,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     ).subscribe(fn);
   }
 
-  registerOnTouched(fn: Function) {
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 

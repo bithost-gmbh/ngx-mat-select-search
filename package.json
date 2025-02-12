@@ -10,7 +10,7 @@
     "build.ci": "npm run build -- --progress=false --base-href=/ngx-mat-select-search/",
     "test": "ng test --watch=false",
     "test.ci": "npm run test -- --progress=false --watch=false",
-    "lint": "echo \"NO LINTING CONFIGURED!!!\"",
+    "lint": "ng lint",
     "build-lib": "ng-packagr -p ng-package.json"
   },
   "author": "Esteban Gehring, Bithost GmbH",
@@ -52,8 +52,10 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^12.20.52",
+    "angular-eslint": "19.1.0",
     "codelyzer": "^6.0.2",
     "core-js": "^2.6.12",
+    "eslint": "^9.20.0",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.20",
@@ -65,6 +67,7 @@
     "rxjs": "^6.6.7",
     "ts-node": "~7.0.1",
     "typescript": "5.7.3",
+    "typescript-eslint": "8.23.0",
     "zone.js": "^0.15.0"
   },
   "dependencies": {

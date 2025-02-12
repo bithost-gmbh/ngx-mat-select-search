@@ -34,7 +34,7 @@ export class TooltipSelectAllExampleComponent implements OnInit, AfterViewInit, 
   protected _onDestroy = new Subject<void>();
 
 
-  constructor() { }
+
 
   ngOnInit() {
     // set initial selection
