@@ -7,7 +7,8 @@
 
 $clear-button-width: 40px;
 $multiple-check-width: 33px;
-$mat-option-height: 3em;
+//set min-height according to `.mat-mdc-option` min-height (https://github.com/angular/components/blob/f699d2e2a4f2648abe68ccde0a30b70fdd313f37/src/material/core/option/option.scss#L19C3-L19C20)
+$mat-option-min-height: 48px;
 $mat-select-search-clear-x: 4px;
 $mat-select-search-spinner-x: 16px;
 $mat-select-search-toggle-all-checkbox-x: 5px;
@@ -50,8 +51,8 @@ $mat-select-panel-padding: 8px;
   outline: none;
   background-color: var(--mat-select-panel-background-color);
   padding: 0 $clear-button-width + $mat-select-search-clear-x 0 16px;
-  height: calc($mat-option-height - 1px);
-  line-height: calc($mat-option-height - 1px);
+  height: calc($mat-option-min-height - 1px);
+  line-height: calc($mat-option-min-height - 1px);
 
   :host-context([dir="rtl"]) & {
     padding-right: 16px;
