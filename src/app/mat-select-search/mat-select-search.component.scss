@@ -30,7 +30,7 @@ $mat-select-panel-padding: 8px;
     TODO: implement proper theming (https://github.com/bithost-gmbh/ngx-mat-select-search/issues/34)
   */
   box-shadow: none;
-  background-color: var(--mat-select-panel-background-color);
+  background-color: var(--mat-sys-surface-container);
 
   &.mat-select-search-inner-multiple.mat-select-search-inner-toggle-all {
     .mat-select-search-inner-row {
@@ -48,7 +48,7 @@ $mat-select-panel-padding: 8px;
   font-size: inherit;
   color: currentColor;
   outline: none;
-  background-color: var(--mat-select-panel-background-color);
+  background-color: var(--mat-sys-surface-container);
   padding: 0 $clear-button-width + $mat-select-search-clear-x 0 16px;
   height: calc($mat-option-height - 1px);
   line-height: calc($mat-option-height - 1px);
