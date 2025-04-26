@@ -39,7 +39,7 @@ If you feel like this library was useful to you and saved you and your business 
 
 Thank you very much to our financial supporters!
 
-<!-- readme: pschulzk,sponsors -start -->
+<!-- readme: pschulzk,SalvatoreB98,sponsors -start -->
 <table>
 	<tbody>
 		<tr>
@@ -53,7 +53,7 @@ Thank you very much to our financial supporters!
 		</tr>
 	<tbody>
 </table>
-<!-- readme: pschulzk,sponsors -end -->
+<!-- readme: pschulzk,SalvatoreB98,sponsors -end -->
 
 ### Collaborators
 
@@ -440,8 +440,8 @@ To use the [i18n](https://angular.io/guide/i18n) API for translation of the labe
 
 #### Current release
 
-* `@angular/core`: `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0`
-* `@angular/material`: `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` with `MatSelectModule` (`@angular/material/select`)
+* `@angular/core`: `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0`
+* `@angular/material`: `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0` with `MatSelectModule` (`@angular/material/select`)
 
 
 #### Version [`7.0.10`](https://github.com/bithost-gmbh/ngx-mat-select-search/tree/7.0.10)

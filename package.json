@@ -1,7 +1,7 @@
 {
   "name": "ngx-mat-select-search",
   "description": "Angular component providing an input field for searching / filtering MatSelect options of the Angular Material library.",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -32,7 +32,7 @@
   ],
   "homepage": "https://github.com/bithost-gmbh/ngx-mat-select-search",
   "peerDependencies": {
-    "@angular/material": "^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+    "@angular/material": "^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.1.6",

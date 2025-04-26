@@ -1,6 +1,17 @@
 # Changelog
 
 
+## 8.0.1
+* Enhancement: Add compatibility with `@angular/material`: `^20.0.0`
+* Fix: Missing brackground color on search input field
+  [#542](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/542)
+
+  Thanks to @melroy89
+* Fix: When changing the font-size, the select input had a wrong height
+  [#541](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/541)
+
+  Thanks to @angelaki
+
 ## 8.0.0
 * Upgrade: Upgrade project to Angular 19
   [#520](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/520)
