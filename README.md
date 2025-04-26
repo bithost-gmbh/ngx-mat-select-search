@@ -117,6 +117,13 @@ Thank you very much to all our community contributors!
 		</tr>
 		<tr>
             <td align="center">
+                <a href="https://github.com/melroy89">
+                    <img src="https://avatars.githubusercontent.com/u/628926?v=4" width="100;" alt="melroy89"/>
+                    <br />
+                    <sub><b>Melroy Van Den Berg</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/mstawick">
                     <img src="https://avatars.githubusercontent.com/u/1216844?v=4" width="100;" alt="mstawick"/>
                     <br />
@@ -151,6 +158,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Cristian Raducanu</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/damianmigo">
                     <img src="https://avatars.githubusercontent.com/u/1733403?v=4" width="100;" alt="damianmigo"/>
@@ -158,8 +167,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Damian Miranda</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/Danevandy99">
                     <img src="https://avatars.githubusercontent.com/u/13788320?v=4" width="100;" alt="Danevandy99"/>
@@ -195,6 +202,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Null</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/gustavovitor">
                     <img src="https://avatars.githubusercontent.com/u/37344068?v=4" width="100;" alt="gustavovitor"/>
@@ -202,8 +211,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Gustavo Miranda</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/meta72">
                     <img src="https://avatars.githubusercontent.com/u/3915589?v=4" width="100;" alt="meta72"/>
@@ -239,6 +246,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Joe DeCock</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/JomalJohny">
                     <img src="https://avatars.githubusercontent.com/u/43292719?v=4" width="100;" alt="JomalJohny"/>
@@ -246,8 +255,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Jomal Johny</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/bulldog98">
                     <img src="https://avatars.githubusercontent.com/u/314259?v=4" width="100;" alt="bulldog98"/>
@@ -260,13 +267,6 @@ Thank you very much to all our community contributors!
                     <img src="https://avatars.githubusercontent.com/u/2454275?v=4" width="100;" alt="KristofGilis"/>
                     <br />
                     <sub><b>Kristof Gilis</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/melroy89">
-                    <img src="https://avatars.githubusercontent.com/u/628926?v=4" width="100;" alt="melroy89"/>
-                    <br />
-                    <sub><b>Melroy Van Den Berg</b></sub>
                 </a>
             </td>
             <td align="center">
