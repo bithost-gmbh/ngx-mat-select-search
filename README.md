@@ -50,6 +50,13 @@ Thank you very much to our financial supporters!
                     <sub><b>Philip Viktor Schulz-Klingauf</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/salvatoreb98">
+                    <img src="https://avatars.githubusercontent.com/u/77462490?v=4" width="100;" alt="salvatoreb98"/>
+                    <br />
+                    <sub><b>Salvatore Butera</b></sub>
+                </a>
+            </td>
 		</tr>
 	<tbody>
 </table>
