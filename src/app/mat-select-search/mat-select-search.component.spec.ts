@@ -8,7 +8,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
@@ -31,13 +31,15 @@ interface Bank {
 
 @Component({
   selector: 'mat-select-search-test',
-  standalone: false,
+  imports: [MatSelectSearchComponent, MatFormFieldModule, MatSelectModule, ReactiveFormsModule, NgFor, AsyncPipe],
   template: `
     <h3>Single selection</h3>
     <p>
       <mat-form-field>
         <mat-select [formControl]="bankCtrl" placeholder="Bank" #selectSingle>
-          <ngx-mat-select-search [formControl]="bankFilterCtrl" #selectSearchSingle></ngx-mat-select-search>
+          <mat-option>
+            <ngx-mat-select-search [formControl]="bankFilterCtrl" #selectSearchSingle></ngx-mat-select-search>
+          </mat-option>
           <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
             {{bank.name}}
           </mat-option>
@@ -70,7 +72,9 @@ interface Bank {
     <p>
       <mat-form-field>
         <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #selectMulti>
-          <ngx-mat-select-search [formControl]="bankMultiFilterCtrl" #selectSearchMulti></ngx-mat-select-search>
+          <mat-option>
+            <ngx-mat-select-search [formControl]="bankMultiFilterCtrl" #selectSearchMulti></ngx-mat-select-search>
+          </mat-option>
           <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
             {{bank.name}}
           </mat-option>
@@ -267,9 +271,10 @@ describe('MatSelectSearchComponent', () => {
         ReactiveFormsModule,
         MatFormFieldModule,
         MatSelectModule,
-        NgxMatSelectSearchModule
+        NgxMatSelectSearchModule,
+        MatSelectSearchTestComponent
       ],
-      declarations: [MatSelectSearchTestComponent],
+      declarations: [],
       providers: [{
         provide: LiveAnnouncer,
         useValue: {
@@ -326,8 +331,8 @@ describe('MatSelectSearchComponent', () => {
               expect(searchField).toBe(document.activeElement);
 
               const optionElements = document.querySelectorAll('mat-option');
-              expect(component.matSelect.options.length).toBe(4);
-              expect(optionElements.length).toBe(4);
+              expect(component.matSelect.options.length).toBe(5);
+              expect(optionElements.length).toBe(5);
 
               done();
             });
@@ -337,7 +342,7 @@ describe('MatSelectSearchComponent', () => {
     });
 
 
-    it('should filter the options available and hightlight the first option in the list, filter the options by input "c" and reset the list', (done) => {
+    it('should filter the options available and highlight the first option in the list, filter the options by input "c" and reset the list', (done) => {
 
       component.filteredBanks
         .pipe(
@@ -358,7 +363,7 @@ describe('MatSelectSearchComponent', () => {
               const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input');
               expect(searchField).toBeTruthy();
 
-              expect(component.matSelect.options.length).toBe(4);
+              expect(component.matSelect.options.length).toBe(5);
 
               // search for "c"
               component.matSelectSearch._formControl.setValue('c');
@@ -373,9 +378,10 @@ describe('MatSelectSearchComponent', () => {
                   fixture.detectChanges();
 
                   setTimeout(() => {
-                    expect(component.matSelect.options.length).toBe(2);
-                    expect(component.matSelect.options.first.value.id).toBe('C');
-                    expect(component.matSelect.options.first.active).toBe(true, 'first active');
+                    expect(component.matSelect.options.length).toBe(3);
+                    const firstSelectableOption = component.matSelect.options.get(1);
+                    expect(firstSelectableOption?.value.id).toBe('C');
+                    expect(firstSelectableOption?.active).toBe(true, 'first active');
 
                     component.matSelectSearch._reset(true);
                     fixture.detectChanges();
@@ -389,9 +395,9 @@ describe('MatSelectSearchComponent', () => {
                       .subscribe(() => {
                         fixture.detectChanges();
                         if (component.matSelectSearch.clearSearchInput) {
-                          expect(component.matSelect.options.length).toBe(4);
+                          expect(component.matSelect.options.length).toBe(5);
                         } else {
-                          expect(component.matSelect.options.length).toBe(2);
+                          expect(component.matSelect.options.length).toBe(3);
                         }
 
                         done();
@@ -434,7 +440,7 @@ describe('MatSelectSearchComponent', () => {
                   fixture.detectChanges();
 
                   setTimeout(() => {
-                    expect(component.matSelect.options.length).toBe(0);
+                    expect(component.matSelect.options.length).toBe(1);
 
                     component.matSelectSearch._handleKeyup({keyCode: DOWN_ARROW} as KeyboardEvent);
                     expect(announcer.announce).not.toHaveBeenCalled();
@@ -487,7 +493,7 @@ describe('MatSelectSearchComponent', () => {
       });
 
 
-      it('should filter the options available and hightlight the first option in the list, filter the options by input "c" and reset the list', (done) => {
+      it('should filter the options available and highlight the first option in the list, filter the options by input "c" and reset the list', (done) => {
 
         component.filteredBanksMatOption
           .pipe(
@@ -553,7 +559,7 @@ describe('MatSelectSearchComponent', () => {
       });
 
       it('should compare first option changed by value of "bic"', (done) => {
-        component.matSelectMatOption.compareWith = (b1: Bank, b2: Bank) => b1.bic.value === b2.bic.value;
+        component.matSelectMatOption.compareWith = (b1: Bank, b2: Bank) => b1?.bic.value === b2?.bic.value;
 
         component.filteredBanksMatOption
           .pipe(
@@ -793,9 +799,10 @@ describe('MatSelectSearchComponent with default options', () => {
         ReactiveFormsModule,
         MatFormFieldModule,
         MatSelectModule,
-        NgxMatSelectSearchModule
+        NgxMatSelectSearchModule,
+        MatSelectSearchTestComponent
       ],
-      declarations: [MatSelectSearchTestComponent],
+      declarations: [],
       providers: [
         {
           provide: LiveAnnouncer,

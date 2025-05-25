@@ -23,7 +23,7 @@ import {
   QueryList,
   ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatFormField } from '@angular/material/form-field';
 import { MatSelect } from '@angular/material/select';
@@ -32,6 +32,13 @@ import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from '
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 import { configurableDefaultOptions, MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
 import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.directive';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDivider } from '@angular/material/divider';
+import { AsyncPipe } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 /**
  * Component providing an input field for searching MatSelect options.
@@ -113,7 +120,6 @@ import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.
  */
 @Component({
   selector: 'ngx-mat-select-search',
-  standalone: false,
   templateUrl: './mat-select-search.component.html',
   styleUrls: ['./mat-select-search.component.scss'],
   providers: [
@@ -122,6 +128,9 @@ import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.
       useExisting: forwardRef(() => MatSelectSearchComponent),
       multi: true
     }
+  ],
+  imports: [
+    MatCheckbox, ReactiveFormsModule, MatDivider, AsyncPipe, MatTooltip, MatProgressSpinner, MatIcon, MatButtonModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -274,7 +283,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
     @Optional() @Inject(MatOption) public matOption: MatOption,
-    @Optional() @Inject(MatFormField) public matFormField: MatFormField,
+    @Optional() @Inject(MatFormField) public matFormField?: MatFormField,
     @Optional() @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS) defaultOptions?: MatSelectSearchOptions
   ) {
     this.applyDefaultOptions(defaultOptions);

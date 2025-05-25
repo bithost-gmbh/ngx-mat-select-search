@@ -1,95 +1,35 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { MatSelect } from '@angular/material/select';
+import { Component, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { startWith } from 'rxjs/operators';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectSearchComponent } from '../../mat-select-search/mat-select-search.component';
 
 import { Bank, BANKS } from '../demo-data';
 
 @Component({
   selector: 'app-multiple-selection-example',
-  standalone: false,
   templateUrl: './multiple-selection-example.component.html',
-  styleUrls: ['./multiple-selection-example.component.scss']
+  styleUrl: './multiple-selection-example.component.scss',
+  imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatSelectSearchComponent]
 })
-export class MultipleSelectionExampleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MultipleSelectionExampleComponent {
 
   /** List of banks */
   protected banks: Bank[] = BANKS;
 
   /** Control for the selected bank for multi-selection */
-  public bankMultiCtrl: FormControl<Bank[]> = new FormControl<Bank[]>([], {nonNullable: true});
+  public bankMultiCtrl: FormControl<Bank[]> = new FormControl<Bank[]>([this.banks[10], this.banks[11], this.banks[12]], {nonNullable: true});
 
   /** Control for the MatSelect filter keyword multi-selection */
   public bankMultiFilterCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
   /** List of banks filtered by search keyword */
-  public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
-
-  @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
-
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
-
-
-
-
-  ngOnInit() {
-    // set initial selection
-    this.bankMultiCtrl.setValue([this.banks[10], this.banks[11], this.banks[12]]);
-
-    // load the initial bank list
-    this.filteredBanksMulti.next(this.banks.slice());
-
-    // listen for search field value changes
-    this.bankMultiFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterBanksMulti();
-      });
-  }
-
-  ngAfterViewInit() {
-    this.setInitialValue();
-  }
-
-  ngOnDestroy() {
-    this._onDestroy.next();
-    this._onDestroy.complete();
-  }
-
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
-  protected setInitialValue() {
-    this.filteredBanksMulti
-      .pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
-        // and after the mat-option elements are available
-        this.multiSelect.compareWith = (a: Bank, b: Bank) => a && b && a.id === b.id;
-      });
-  }
-
-  protected filterBanksMulti() {
-    if (!this.banks) {
-      return;
-    }
-    // get the search keyword
-    let search = this.bankMultiFilterCtrl.value;
-    if (!search) {
-      this.filteredBanksMulti.next(this.banks.slice());
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    // filter the banks
-    this.filteredBanksMulti.next(
-      this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
-    );
-  }
-
+  public $filteredBanks = computed(() => {
+    const search = (this.$bankControlsChanges() || '').toLowerCase();
+    if (!search) return [...this.banks];
+    return this.banks.filter(bank => bank.name.toLowerCase().includes(search));
+  });
+  $bankControlsChanges = toSignal<string>(this.bankMultiFilterCtrl.valueChanges.pipe(startWith('')));
 }

@@ -3,7 +3,7 @@
   <mat-form-field>
     <mat-select [formControl]="bankCtrl" placeholder="Bank" #singleSelect>
       <mat-option>
-        <ngx-mat-select-search *ngIf="true" [formControl]="bankFilterCtrl" [preventHomeEndKeyPropagation]="true">
+        <ngx-mat-select-search [formControl]="bankFilterCtrl" [preventHomeEndKeyPropagation]="true">
           <span ngxMatSelectNoEntriesFound>
             No entries found
             <button mat-button color="primary">
@@ -12,9 +12,12 @@
           </span>
         </ngx-mat-select-search>
       </mat-option>
-      <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
-        {{bank.name}}
-      </mat-option>
+      @for(bank of $filteredBanks(); track $index)
+      {
+        <mat-option [value]="bank">
+          {{bank.name}}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 </p>

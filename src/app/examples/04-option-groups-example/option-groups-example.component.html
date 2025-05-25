@@ -3,13 +3,19 @@
   <mat-form-field>
     <mat-select [formControl]="bankGroupsCtrl" placeholder="Bank" #singleSelect>
       <mat-option>
-        <ngx-mat-select-search [formControl]="bankGroupsFilterCtrl"></ngx-mat-select-search>
+        <ngx-mat-select-search [formControl]="bankGroupsFilterCtrl" />
       </mat-option>
-      <mat-optgroup *ngFor="let group of filteredBankGroups | async" [label]="group.name">
-        <mat-option *ngFor="let bank of group.banks" [value]="bank">
-          {{bank.name}}
-        </mat-option>
-      </mat-optgroup>
+      @for(group of $filteredBankGroups(); track $index)
+      {
+        <mat-optgroup [label]="group.name">
+          @for(bank of group.banks; track $index)
+          {
+            <mat-option [value]="bank">
+              {{bank.name}}
+            </mat-option>
+          }
+        </mat-optgroup>
+      }
     </mat-select>
   </mat-form-field>
 </p>

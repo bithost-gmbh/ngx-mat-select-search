@@ -1,21 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ReplaySubject, Subject } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { Component, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { startWith } from 'rxjs/operators';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
+import { MatSelectSearchComponent } from '../../mat-select-search/mat-select-search.component';
 import { Bank, BankGroup, BANKGROUPS } from '../demo-data';
 
 
 @Component({
   selector: 'app-option-groups-example',
-  standalone: false,
   templateUrl: './option-groups-example.component.html',
-  styleUrls: ['./option-groups-example.component.scss']
+  styleUrl: './option-groups-example.component.scss',
+  imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatSelectSearchComponent]
 })
-export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
+export class OptionGroupsExampleComponent {
 
   /** List of bank groups */
-  protected bankGroups: BankGroup[] = BANKGROUPS;
+  protected bankGroups: BankGroup[] = this.copyBankGroups(BANKGROUPS);
 
   /** Control for the selected bank for option groups */
   public bankGroupsCtrl: FormControl<Bank | null> = new FormControl<Bank | null>(null);
@@ -23,57 +26,17 @@ export class OptionGroupsExampleComponent implements OnInit, OnDestroy {
   /** Control for the MatSelect filter keyword for option groups */
   public bankGroupsFilterCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
-  /** List of bank groups filtered by search keyword for option groups */
-  public filteredBankGroups: ReplaySubject<BankGroup[]> = new ReplaySubject<BankGroup[]>(1);
 
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
-
-
-
-
-  ngOnInit() {
-    // load the initial bank list
-    this.filteredBankGroups.next(this.copyBankGroups(this.bankGroups));
-
-    // listen for search field value changes
-    this.bankGroupsFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterBankGroups();
-      });
-  }
-
-  ngOnDestroy() {
-    this._onDestroy.next();
-    this._onDestroy.complete();
-  }
-
-
-  protected filterBankGroups() {
-    if (!this.bankGroups) {
-      return;
-    }
-    // get the search keyword
-    let search = this.bankGroupsFilterCtrl.value;
-    const bankGroupsCopy = this.copyBankGroups(this.bankGroups);
-    if (!search) {
-      this.filteredBankGroups.next(bankGroupsCopy);
-      return;
-    } else {
-      search = search.toLowerCase();
-    }
-    // filter the banks
-    this.filteredBankGroups.next(
-      bankGroupsCopy.filter(bankGroup => {
-        const showBankGroup = bankGroup.name.toLowerCase().indexOf(search) > -1;
-        if (!showBankGroup) {
-          bankGroup.banks = bankGroup.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
-        }
-        return bankGroup.banks.length > 0;
-      })
-    );
-  }
+  public $filteredBankGroups = computed(() => {
+    const search = (this.$bankControlsChanges() || '').toLowerCase();
+    if (!search) return this.bankGroups;
+    return this.copyBankGroups(BANKGROUPS).filter(bankGroup => {
+      if(bankGroup.name.toLowerCase().includes(search)) return true;
+      bankGroup.banks = bankGroup.banks.filter(bank => bank.name.toLowerCase().includes(search));
+      return bankGroup.banks.length > 0; 
+    });
+  });
+  $bankControlsChanges = toSignal<string>(this.bankGroupsFilterCtrl.valueChanges.pipe(startWith('')));
 
   protected copyBankGroups(bankGroups: BankGroup[]) {
     const bankGroupsCopy: BankGroup[] = [];

@@ -10,20 +10,22 @@ found in the LICENSE file at https://angular.io/license
 <!-- Note: the  mat-datepicker-content mat-tab-header are needed to inherit the material theme colors, see PR #22 -->
 <div
       #innerSelectSearch
-      class="mat-select-search-inner mat-typography mat-datepicker-content mat-tab-header"
-      [ngClass]="{'mat-select-search-inner-multiple': matSelect.multiple, 'mat-select-search-inner-toggle-all': _isToggleAllCheckboxVisible() }">
+      [class.mat-select-search-inner-multiple]="matSelect.multiple"
+      [class.mat-select-search-inner-toggle-all]="_isToggleAllCheckboxVisible()"
+      [class]="'mat-select-search-inner mat-typography mat-datepicker-content mat-tab-header'">
 
   <div class="mat-select-search-inner-row">
-    <mat-checkbox *ngIf="_isToggleAllCheckboxVisible()"
-                  [color]="matFormField?.color"
-                  class="mat-select-search-toggle-all-checkbox"
-                  [checked]="toggleAllCheckboxChecked"
-                  [indeterminate]="toggleAllCheckboxIndeterminate"
-                  [matTooltip]="toggleAllCheckboxTooltipMessage"
-                  matTooltipClass="ngx-mat-select-search-toggle-all-tooltip"
-                  [matTooltipPosition]="toggleAllCheckboxTooltipPosition"
-                  (change)="_emitSelectAllBooleanToParent($event.checked)"
-    ></mat-checkbox>
+    @if(_isToggleAllCheckboxVisible())
+    {
+      <mat-checkbox [color]="matFormField?.color"
+                    class="mat-select-search-toggle-all-checkbox"
+                    [checked]="toggleAllCheckboxChecked"
+                    [indeterminate]="toggleAllCheckboxIndeterminate"
+                    [matTooltip]="toggleAllCheckboxTooltipMessage"
+                    matTooltipClass="ngx-mat-select-search-toggle-all-tooltip"
+                    [matTooltipPosition]="toggleAllCheckboxTooltipPosition"
+                    (change)="_emitSelectAllBooleanToParent($event.checked)" />
+    }
 
     <input class="mat-select-search-input"
            autocomplete="off"
@@ -36,33 +38,54 @@ found in the LICENSE file at https://angular.io/license
            [placeholder]="placeholderLabel"
            [attr.aria-label]="ariaLabel"
     />
-    <mat-spinner *ngIf="searching"
-            class="mat-select-search-spinner"
-            diameter="16"></mat-spinner>
+    @if(searching)
+    {
+      <mat-spinner class="mat-select-search-spinner"
+                   diameter="16" />
+    }
 
-    <button *ngIf="!hideClearSearchButton && value && !searching"
-            mat-icon-button
-            aria-label="Clear"
-            (click)="_reset(true)"
-            class="mat-select-search-clear">
-      <ng-content *ngIf="clearIcon; else defaultIcon" select="[ngxMatSelectSearchClear]"></ng-content>
-      <ng-template #defaultIcon>
-        <mat-icon [svgIcon]="closeSvgIcon">
-          {{!closeSvgIcon ? closeIcon : null}}
-        </mat-icon>
-      </ng-template>
-    </button>
+    @if(!hideClearSearchButton && value && !searching)
+    {
+      <button mat-icon-button
+              aria-label="Clear"
+              (click)="_reset(true)"
+              class="mat-select-search-clear">
+        @if(clearIcon)
+        {
+          <ng-content select="[ngxMatSelectSearchClear]" />
+        }
+        @else if(closeSvgIcon)
+        {
+          <mat-icon [svgIcon]="closeSvgIcon" />
+        }
+        @else
+        {
+          <mat-icon>
+            {{closeIcon}}
+          </mat-icon>
+        }
+      </button>
+    }
 
-    <ng-content select=".mat-select-search-custom-header-content"></ng-content>
+
+    <ng-content select=".mat-select-search-custom-header-content" />
   </div>
 
-  <mat-divider></mat-divider>
+  <mat-divider />
 </div>
 
-<div *ngIf="_showNoEntriesFound$ | async"
-     class="mat-select-search-no-entries-found">
-  <ng-content *ngIf="noEntriesFound; else defaultNoEntriesFound"
-              select="[ngxMatSelectNoEntriesFound]"></ng-content>
-  <ng-template #defaultNoEntriesFound>{{noEntriesFoundLabel}}</ng-template>
-</div>
+@if(_showNoEntriesFound$ | async)
+{
+  <div class="mat-select-search-no-entries-found">
+    @if(noEntriesFound)
+    {
+      <ng-content select="[ngxMatSelectNoEntriesFound]" />
+    }
+    @else
+    {
+      lblb
+      {{noEntriesFoundLabel}}
+    }
+  </div>
+}
 
