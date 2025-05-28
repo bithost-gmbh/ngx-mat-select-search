@@ -10,9 +10,9 @@ found in the LICENSE file at https://angular.io/license
 <!-- Note: the  mat-datepicker-content mat-tab-header are needed to inherit the material theme colors, see PR #22 -->
 <div
       #innerSelectSearch
+      class="mat-select-search-inner mat-typography mat-datepicker-content mat-tab-header"
       [class.mat-select-search-inner-multiple]="matSelect.multiple"
-      [class.mat-select-search-inner-toggle-all]="_isToggleAllCheckboxVisible()"
-      [class]="'mat-select-search-inner mat-typography mat-datepicker-content mat-tab-header'">
+      [class.mat-select-search-inner-toggle-all]="_isToggleAllCheckboxVisible()">
 
   <div class="mat-select-search-inner-row">
     @if(_isToggleAllCheckboxVisible())
@@ -83,7 +83,6 @@ found in the LICENSE file at https://angular.io/license
     }
     @else
     {
-      lblb
       {{noEntriesFoundLabel}}
     }
   </div>

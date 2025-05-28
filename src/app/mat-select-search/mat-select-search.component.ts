@@ -130,7 +130,14 @@ import { MatButtonModule } from '@angular/material/button';
     }
   ],
   imports: [
-    MatCheckbox, ReactiveFormsModule, MatDivider, AsyncPipe, MatTooltip, MatProgressSpinner, MatIcon, MatButtonModule
+    AsyncPipe,
+    ReactiveFormsModule,
+    MatCheckbox,
+    MatDivider,
+    MatTooltip,
+    MatProgressSpinner,
+    MatIcon,
+    MatButtonModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -282,7 +289,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
-    @Optional() @Inject(MatOption) public matOption: MatOption,
+    @Optional() @Inject(MatOption) public matOption?: MatOption,
     @Optional() @Inject(MatFormField) public matFormField?: MatFormField,
     @Optional() @Inject(MAT_SELECTSEARCH_DEFAULT_OPTIONS) defaultOptions?: MatSelectSearchOptions
   ) {
