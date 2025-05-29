@@ -1,7 +1,7 @@
 <h3>Multiple selection with Select All Checkbox</h3>
 <p>
   <mat-form-field color="accent">
-    <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #multiSelect>
+    <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true">
       <mat-option>
         <ngx-mat-select-search [showToggleAllCheckbox]="true"
                                [toggleAllCheckboxIndeterminate]="$isIndeterminate()"
