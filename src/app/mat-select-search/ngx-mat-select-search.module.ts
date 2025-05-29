@@ -11,7 +11,7 @@ import { MatSelectSearchComponent } from './mat-select-search.component';
 import { MatSelectSearchClearDirective } from './mat-select-search-clear.directive';
 import { MatSelectNoEntriesFoundDirective } from './mat-select-no-entries-found.directive';
 
-export const MatSelectSearchVersion = '8.0.1';
+export const MatSelectSearchVersion = '8.0.2';
 export { MatSelectSearchClearDirective };
 export { MatSelectNoEntriesFoundDirective };
 
