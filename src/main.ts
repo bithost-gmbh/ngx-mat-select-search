@@ -8,5 +8,9 @@ if (environment.production) {
   enableProdMode();
 }
 
-bootstrapApplication(AppComponent)
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideAnimations()
+  ]
+})
   .catch(err => console.log(err));
