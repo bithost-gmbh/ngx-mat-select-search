@@ -284,12 +284,21 @@ Thank you very much to all our community contributors!
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/NachmanBerkowitz">
+                    <img src="https://avatars.githubusercontent.com/u/38742354?v=4" width="100;" alt="NachmanBerkowitz"/>
+                    <br />
+                    <sub><b>Nachman Aryeh Berkowitz</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/OvidijusStukas">
                     <img src="https://avatars.githubusercontent.com/u/9720553?v=4" width="100;" alt="OvidijusStukas"/>
                     <br />
                     <sub><b>Ovidijus Stukas</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/raysuelzer">
                     <img src="https://avatars.githubusercontent.com/u/1176341?v=4" width="100;" alt="raysuelzer"/>
@@ -297,8 +306,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Ray Suelzer</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/probert94">
                     <img src="https://avatars.githubusercontent.com/u/18258317?v=4" width="100;" alt="probert94"/>
@@ -334,6 +341,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Thierry Nischelwitzer</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/vlio20">
                     <img src="https://avatars.githubusercontent.com/u/4542641?v=4" width="100;" alt="vlio20"/>
@@ -341,8 +350,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Vlad Ioffe</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/WX9yMOXWId">
                     <img src="https://avatars.githubusercontent.com/u/30053114?v=4" width="100;" alt="WX9yMOXWId"/>
