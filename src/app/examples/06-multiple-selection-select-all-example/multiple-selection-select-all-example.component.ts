@@ -1,144 +1,56 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { MatSelect } from '@angular/material/select';
+import { Component, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { startWith } from 'rxjs/operators';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
+import { MatSelectSearchComponent } from '../../mat-select-search/mat-select-search.component';
 import { Bank, BANKS } from '../demo-data';
 
 @Component({
   selector: 'app-multiple-selection-select-all-example',
-  standalone: false,
   templateUrl: './multiple-selection-select-all-example.component.html',
-  styleUrls: ['./multiple-selection-select-all-example.component.scss']
+  styleUrl: './multiple-selection-select-all-example.component.scss',
+  imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatSelectSearchComponent]
 })
-export class MultipleSelectionSelectAllExampleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MultipleSelectionSelectAllExampleComponent {
 
   /** List of banks */
   protected banks: Bank[] = BANKS;
 
   /** Control for the selected bank for multi-selection */
-  public bankMultiCtrl: FormControl<Bank[]> = new FormControl<Bank[]>([], {nonNullable: true});
+  public bankMultiCtrl: FormControl<Bank[]> = new FormControl<Bank[]>([this.banks[10], this.banks[11], this.banks[12]], {nonNullable: true});
 
   /** Control for the MatSelect filter keyword multi-selection */
   public bankMultiFilterCtrl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
 
   /** List of banks filtered by search keyword */
-  public filteredBanksMulti: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
+  public $filteredBanks = computed(() => {
+    const search = (this.$bankControlsChanges() || '').toLowerCase();
+    if (!search) return [...this.banks];
+    return this.banks.filter(bank => bank.name.toLowerCase().includes(search));
+  });
+  $bankControlsChanges = toSignal<string>(this.bankMultiFilterCtrl.valueChanges.pipe(startWith('')));
 
-  /** Local copy of filtered banks to help set the toggle all checkbox state */
-  protected filteredBanksCache: Bank[] = [];
+  $selectedBanks = toSignal<Bank[]>(this.bankMultiCtrl.valueChanges.pipe(startWith(this.bankMultiCtrl.value)));
 
-  /** Flags to set the toggle all checkbox state */
-  isIndeterminate = false;
-  isChecked = false;
-
-  @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
-
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
-
-
-
-
-  ngOnInit() {
-    // set initial selection
-    this.bankMultiCtrl.setValue([this.banks[10], this.banks[11], this.banks[12]]);
-
-    // load the initial bank list
-    this.filteredBanksMulti.next(this.banks.slice());
-
-    // listen for search field value changes
-    this.bankMultiFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterBanksMulti();
-        this.setToggleAllCheckboxState();
-      });
-
-      // listen for multi select field value changes
-    this.bankMultiCtrl.valueChanges
-    .pipe(takeUntil(this._onDestroy)).subscribe(() => {
-      this.setToggleAllCheckboxState();
-    });
-  }
-
-  ngAfterViewInit() {
-    this.setInitialValue();
-  }
-
-  ngOnDestroy() {
-    this._onDestroy.next();
-    this._onDestroy.complete();
-  }
+  $isIndeterminate = computed(() => {
+    const selectedBanks = this.$selectedBanks();
+    if (!selectedBanks) return false;
+    return selectedBanks.length > 0 && selectedBanks.length < this.banks.length;
+  });
+  $isChecked = computed(() => {
+    const selectedBanks = this.$selectedBanks();
+    if (!selectedBanks) return false;
+    return selectedBanks.length === this.banks.length;
+  });
 
   toggleSelectAll(selectAllValue: boolean) {
-    this.filteredBanksMulti.pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(val => {
-        if (selectAllValue) {
-          this.bankMultiCtrl.patchValue(val);
-        } else {
-          this.bankMultiCtrl.patchValue([]);
-        }
-      });
-    this.checkAllIfAllOptionSelected();
-  }
-
-  onToggleSingleOption() {
-    this.checkAllIfAllOptionSelected();
-  }
-
-
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
-  protected setInitialValue() {
-    this.filteredBanksMulti
-      .pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
-        // and after the mat-option elements are available
-        this.multiSelect.compareWith = (a: Bank, b: Bank) => a && b && a.id === b.id;
-      });
-  }
-
-  protected filterBanksMulti() {
-    if (!this.banks) {
-      return;
-    }
-    // get the search keyword
-    let search = this.bankMultiFilterCtrl.value;
-    if (!search) {
-      this.filteredBanksCache = this.banks.slice();
-      this.filteredBanksMulti.next(this.filteredBanksCache);
-      return;
+    if(selectAllValue) {
+      this.bankMultiCtrl.patchValue([...this.$filteredBanks()]);
     } else {
-      search = search.toLowerCase();
-    }
-    // filter the banks
-    this.filteredBanksCache = this.banks.filter(bank => bank.name.toLowerCase().indexOf(search) > -1);
-    this.filteredBanksMulti.next(this.filteredBanksCache);
-  }
-  protected setToggleAllCheckboxState() {
-    let filteredLength = 0;
-    if (this.bankMultiCtrl && this.bankMultiCtrl.value) {
-      this.filteredBanksCache.forEach(el => {
-        if (this.bankMultiCtrl.value.indexOf(el) > -1) {
-          filteredLength++;
-        }
-      });
-      this.isIndeterminate = filteredLength > 0 && filteredLength < this.filteredBanksCache.length;
-      this.isChecked = filteredLength > 0 && filteredLength === this.filteredBanksCache.length;
-    }
-  }
-  private checkAllIfAllOptionSelected() {
-    if (this.banks.length === this.bankMultiCtrl.value.length) {
-      this.isChecked = true;
-    } else {
-      this.isChecked = false;
+      this.bankMultiCtrl.patchValue([]);
     }
   }
 }

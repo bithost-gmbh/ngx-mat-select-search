@@ -11,6 +11,5 @@ import { Directive } from '@angular/core';
  */
 @Directive({
   selector: '[ngxMatSelectNoEntriesFound]',
-  standalone: false
 })
 export class MatSelectNoEntriesFoundDirective {}
