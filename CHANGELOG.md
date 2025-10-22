@@ -1,5 +1,8 @@
 # Changelog
 
+## 8.0.3
+* Enhancement: Add compatibility with `@angular/material`: `^21.0.0`
+
 ## 8.0.2
 * Enhancement: Convert to standalone component
   [#547](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/547)
