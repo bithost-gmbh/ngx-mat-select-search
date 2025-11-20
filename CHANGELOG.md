@@ -1,5 +1,8 @@
 # Changelog
 
+## 8.0.4
+* Fix: Add `@angular/material`: `^21.0.0` to `peerDependencies`
+
 ## 8.0.3
 * Enhancement: Add compatibility with `@angular/material`: `^21.0.0`
 
