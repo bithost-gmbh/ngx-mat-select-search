@@ -464,6 +464,53 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       event.stopPropagation();
     }
 
+    // For arrow keys, manually handle navigation to prevent double stepping
+    const keyManager = this.matSelect._keyManager;
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      if (keyManager) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (event.key === 'ArrowDown') {
+          if (keyManager.activeItemIndex && keyManager.activeItemIndex < this._options.toArray().length) {
+            keyManager.setNextItemActive();
+          }
+        } else {
+          keyManager.setPreviousItemActive();
+        }
+
+        // Skip the search option (at index 0) when navigating up
+        const offset = this.getOptionsLengthOffset();
+        if (
+          keyManager.activeItemIndex !== undefined &&
+          keyManager.activeItemIndex !== null &&
+          keyManager.activeItemIndex < offset
+        ) {
+          // Wrap to last item or set to first real option
+          if (event.key === 'ArrowUp') {
+            if (keyManager.activeItemIndex && keyManager.activeItemIndex > 0) {
+              keyManager.setLastItemActive();
+            }
+          } else {
+            keyManager.setActiveItem(offset);
+          }
+        }
+
+        const activeItem = keyManager.activeItem as MatOption | undefined
+        if (activeItem) {
+          const element = activeItem._getHostElement();
+          const isFirstOption = keyManager.activeItemIndex === offset;
+
+          if (isFirstOption && this.matSelect.panel) {
+            // Scroll panel to top to show first option
+            this.matSelect.panel.nativeElement.scrollTop = 0;
+          } else {
+            element.scrollIntoView({ block: 'nearest' });
+          }
+        }
+      }
+    }
+
     if (this.matSelect.multiple && event.key && event.key === 'Enter') {
       // Regain focus after multiselect, so we can further type
       setTimeout(() => this._focus());
