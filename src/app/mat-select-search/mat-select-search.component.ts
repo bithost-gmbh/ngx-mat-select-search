@@ -286,6 +286,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Reference to active descendant for ARIA Support. */
   private activeDescendant: HTMLElement;
 
+  /** Removes the panel-level keydown listener registered while the panel is open. */
+  private _removePanelKeydownListener?: () => void;
+
   constructor(@Inject(MatSelect) public matSelect: MatSelect,
     public changeDetectorRef: ChangeDetectorRef,
     private _viewportRuler: ViewportRuler,
@@ -331,7 +334,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
           if (!this.disableInitialFocus) {
             this._focus();
           }
+          this._installPanelKeydownListener();
         } else {
+          this._removePanelKeydownListener?.();
+          this._removePanelKeydownListener = undefined;
           // clear it when closing
           if (this.clearSearchInput) {
             this._reset();
@@ -441,6 +447,8 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   }
 
   ngOnDestroy() {
+    this._removePanelKeydownListener?.();
+    this._removePanelKeydownListener = undefined;
     this._onDestroy.next();
     this._onDestroy.complete();
   }
@@ -474,6 +482,30 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
       this._reset(true);
       event.stopPropagation();
     }
+  }
+
+  /**
+   * Angular Material v21 inlines the select panel into the mat-select host element via a
+   * popover (cdkConnectedOverlayUsePopover="inline"). As a result, keydown events on the
+   * panel bubble up to mat-select's host (keydown) listener, which calls _handleKeydown a
+   * second time after the panel's template (keydown) already handled it — causing arrow
+   * navigation to skip items and Enter to double-fire. We stop propagation at the panel
+   * after its template handler runs, leaving popover behavior intact.
+   */
+  private _installPanelKeydownListener() {
+    this._removePanelKeydownListener?.();
+    this._removePanelKeydownListener = undefined;
+
+    const panel = this.matSelect.panel?.nativeElement as HTMLElement | undefined;
+    if (!panel) {
+      return;
+    }
+
+    const handler = (event: KeyboardEvent) => {
+      event.stopPropagation();
+    };
+    panel.addEventListener('keydown', handler);
+    this._removePanelKeydownListener = () => panel.removeEventListener('keydown', handler);
   }
 
   /**

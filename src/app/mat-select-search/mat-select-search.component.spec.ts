@@ -451,6 +451,53 @@ describe('MatSelectSearchComponent', () => {
         });
     });
 
+    // Reproduces https://github.com/bithost-gmbh/ngx-mat-select-search/issues/562.
+    // Angular Material v21 inlines the select panel into the mat-select host via a popover
+    // (cdkConnectedOverlayUsePopover="inline"), so keydown events on the panel bubble up to
+    // mat-select's host (keydown) handler, causing _handleKeydown to fire twice. We stop
+    // propagation at the panel level after the panel's template handler runs.
+    it('should stop keydown events from bubbling past the select panel', (done) => {
+      component.filteredBanks
+        .pipe(
+          take(1),
+          delay(1)
+        )
+        .subscribe(() => {
+          fixture.detectChanges();
+
+          component.matSelect.open();
+          fixture.detectChanges();
+
+          component.matSelect.openedChange
+            .pipe(
+              take(1),
+              delay(1)
+            )
+            .subscribe(() => {
+              const panel = component.matSelect.panel.nativeElement as HTMLElement;
+              expect(panel).toBeTruthy();
+
+              // Simulate mat-select's host keydown binding (which fires in v21 due to popover
+              // inlining) by attaching a spy on an ancestor of the panel.
+              const ancestor = panel.parentElement as HTMLElement;
+              expect(ancestor).toBeTruthy();
+              const ancestorListener = jasmine.createSpy('ancestorKeydown');
+              ancestor.addEventListener('keydown', ancestorListener);
+
+              const event = new KeyboardEvent('keydown', {
+                key: 'ArrowDown',
+                bubbles: true,
+                cancelable: true,
+              });
+              panel.dispatchEvent(event);
+
+              ancestor.removeEventListener('keydown', ancestorListener);
+              expect(ancestorListener).not.toHaveBeenCalled();
+              done();
+            });
+        });
+    });
+
     describe('inside mat-option', () => {
 
       it('should show a search field and focus it when opening the select', (done) => {
