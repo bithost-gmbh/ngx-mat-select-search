@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.0.5
+* Fix: keyboard navigation happens twice in angular v21
+  [#562](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/562)
+
+  Thanks to @paulirwin, @MarkCuypersPpw
+* Fix: Add `@angular/material`: `^22.0.0` to `peerDependencies`
+
 ## 8.0.4
 * Fix: Add `@angular/material`: `^21.0.0` to `peerDependencies`
 
