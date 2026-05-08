@@ -300,6 +300,13 @@ Thank you very much to all our community contributors!
 		</tr>
 		<tr>
             <td align="center">
+                <a href="https://github.com/paulirwin">
+                    <img src="https://avatars.githubusercontent.com/u/1874103?v=4" width="100;" alt="paulirwin"/>
+                    <br />
+                    <sub><b>Paul Irwin</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/raysuelzer">
                     <img src="https://avatars.githubusercontent.com/u/1176341?v=4" width="100;" alt="raysuelzer"/>
                     <br />
@@ -334,6 +341,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Stas Amasev</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/nischi">
                     <img src="https://avatars.githubusercontent.com/u/2036054?v=4" width="100;" alt="nischi"/>
@@ -341,8 +350,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Thierry Nischelwitzer</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/vlio20">
                     <img src="https://avatars.githubusercontent.com/u/4542641?v=4" width="100;" alt="vlio20"/>
@@ -378,6 +385,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Null</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/ruekart">
                     <img src="https://avatars.githubusercontent.com/u/9154610?v=4" width="100;" alt="ruekart"/>
