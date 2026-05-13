@@ -498,6 +498,51 @@ describe('MatSelectSearchComponent', () => {
         });
     });
 
+    // Reproduces https://github.com/bithost-gmbh/ngx-mat-select-search/issues/594.
+    // The fix for #562 stopped propagation for *all* keydown events on the panel,
+    // including ESC. mat-select closes the panel on ESC via a body-level keydown
+    // dispatcher (CdkConnectedOverlay -> overlayKeydown -> _handleOverlayKeydown),
+    // so the ESC event must be allowed to bubble out of the panel to the body.
+    it('should allow Escape keydown to bubble past the select panel so mat-select can close', (done) => {
+      component.filteredBanks
+        .pipe(
+          take(1),
+          delay(1)
+        )
+        .subscribe(() => {
+          fixture.detectChanges();
+
+          component.matSelect.open();
+          fixture.detectChanges();
+
+          component.matSelect.openedChange
+            .pipe(
+              take(1),
+              delay(1)
+            )
+            .subscribe(() => {
+              const panel = component.matSelect.panel.nativeElement as HTMLElement;
+              expect(panel).toBeTruthy();
+
+              const ancestor = panel.parentElement as HTMLElement;
+              expect(ancestor).toBeTruthy();
+              const ancestorListener = jasmine.createSpy('ancestorKeydown');
+              ancestor.addEventListener('keydown', ancestorListener);
+
+              const event = new KeyboardEvent('keydown', {
+                key: 'Escape',
+                bubbles: true,
+                cancelable: true,
+              });
+              panel.dispatchEvent(event);
+
+              ancestor.removeEventListener('keydown', ancestorListener);
+              expect(ancestorListener).toHaveBeenCalled();
+              done();
+            });
+        });
+    });
+
     describe('inside mat-option', () => {
 
       it('should show a search field and focus it when opening the select', (done) => {
