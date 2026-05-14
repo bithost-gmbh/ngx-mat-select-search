@@ -491,6 +491,10 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
    * second time after the panel's template (keydown) already handled it — causing arrow
    * navigation to skip items and Enter to double-fire. We stop propagation at the panel
    * after its template handler runs, leaving popover behavior intact.
+   *
+   * Escape is intentionally excluded: mat-select closes the panel on Escape via the CDK
+   * overlay's body-level keydown dispatcher (overlayKeydown -> _handleOverlayKeydown), so
+   * the event must be allowed to bubble out of the panel. See #594.
    */
   private _installPanelKeydownListener() {
     this._removePanelKeydownListener?.();
@@ -502,6 +506,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     }
 
     const handler = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        return;
+      }
       event.stopPropagation();
     };
     panel.addEventListener('keydown', handler);
