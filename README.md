@@ -138,6 +138,13 @@ Thank you very much to all our community contributors!
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/paulirwin">
+                    <img src="https://avatars.githubusercontent.com/u/1874103?v=4" width="100;" alt="paulirwin"/>
+                    <br />
+                    <sub><b>Paul Irwin</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/AleixFerreCP">
                     <img src="https://avatars.githubusercontent.com/u/93319700?v=4" width="100;" alt="AleixFerreCP"/>
                     <br />
@@ -158,6 +165,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Blaze Walker</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/achilehero">
                     <img src="https://avatars.githubusercontent.com/u/14956052?v=4" width="100;" alt="achilehero"/>
@@ -165,8 +174,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Cristian Raducanu</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/damianmigo">
                     <img src="https://avatars.githubusercontent.com/u/1733403?v=4" width="100;" alt="damianmigo"/>
@@ -202,6 +209,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Erendis</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/GipHub123">
                     <img src="https://avatars.githubusercontent.com/u/12637608?v=4" width="100;" alt="GipHub123"/>
@@ -209,8 +218,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Null</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/gustavovitor">
                     <img src="https://avatars.githubusercontent.com/u/37344068?v=4" width="100;" alt="gustavovitor"/>
@@ -246,6 +253,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Jean-Francois Cere</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/josephdecock">
                     <img src="https://avatars.githubusercontent.com/u/1145533?v=4" width="100;" alt="josephdecock"/>
@@ -253,8 +262,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Joe DeCock</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/JomalJohny">
                     <img src="https://avatars.githubusercontent.com/u/43292719?v=4" width="100;" alt="JomalJohny"/>
@@ -290,20 +297,13 @@ Thank you very much to all our community contributors!
                     <sub><b>Nachman Aryeh Berkowitz</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/OvidijusStukas">
                     <img src="https://avatars.githubusercontent.com/u/9720553?v=4" width="100;" alt="OvidijusStukas"/>
                     <br />
                     <sub><b>Ovidijus Stukas</b></sub>
-                </a>
-            </td>
-		</tr>
-		<tr>
-            <td align="center">
-                <a href="https://github.com/paulirwin">
-                    <img src="https://avatars.githubusercontent.com/u/1874103?v=4" width="100;" alt="paulirwin"/>
-                    <br />
-                    <sub><b>Paul Irwin</b></sub>
                 </a>
             </td>
             <td align="center">
