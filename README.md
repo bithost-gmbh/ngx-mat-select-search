@@ -412,19 +412,19 @@ Install `ngx-mat-select-search` in your project:
 npm install ngx-mat-select-search
 ```
 
-Import the `NgxMatSelectSearchModule` e.g. in your `app.module.ts`:
+Import the `NgxMatSelectSearchModule` e.g. in your `app.component.ts`:
 ```typescript
 import { MatSelectModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
-@NgModule({
+@Component({
   imports: [
     ...
     MatSelectModule,
     NgxMatSelectSearchModule
   ],
 })
-export class AppModule {}
+export class AppComponent {}
 ```
 
 Use the `ngx-mat-select-search` component inside a `mat-select` element by placing it inside a `<mat-option>` element:
@@ -618,20 +618,19 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
 The default values of several `@Input()` properties can be set globally with the [`provideMatSelectSearchOptions()`](src/app/mat-select-search/default-options.ts) function.
 See the documentation of the corresponding `@Input()` properties of `MatSelectSearchComponent`.
 
-Example:
+Example for providing default values in your `app.config.ts`:
 ```typescript
 import { provideMatSelectSearchOptions } from 'ngx-mat-select-search';
 
-@NgModule({
-  ...
+export const appConfig: ApplicationConfig = {
   providers: [
+    ...,
     provideMatSelectSearchOptions({
       closeIcon: 'delete',
       noEntriesFoundLabel: 'No options found',
     })
-  ]
-})
-class AppModule {}
+  ],
+}
 ```
 
 ## Known Problems
