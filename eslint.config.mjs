@@ -1,9 +1,10 @@
 // @ts-check
-const eslint = require("@eslint/js");
-const tseslint = require("typescript-eslint");
-const angular = require("angular-eslint");
+import { defineConfig } from "eslint/config";
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import angular from "angular-eslint";
 
-module.exports = tseslint.config(
+export default defineConfig(
   {
     files: ["**/*.ts"],
     extends: [
@@ -14,7 +15,9 @@ module.exports = tseslint.config(
     ],
     processor: angular.processInlineTemplates,
     rules: {
-      "@angular-eslint/prefer-standalone": "off",
+      // Breaking change to migrate to the inject function
+      "@angular-eslint/prefer-inject": "off",
+      "@typescript-eslint/no-explicit-any": "off",
       "@angular-eslint/directive-selector": [
         "error",
         {
@@ -38,5 +41,5 @@ module.exports = tseslint.config(
       ...angular.configs.templateAccessibility,
     ],
     rules: {},
-  }
+  },
 );
