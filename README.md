@@ -108,12 +108,21 @@ Thank you very much to all our community contributors!
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/Lehoczky">
+                    <img src="https://avatars.githubusercontent.com/u/31937175?v=4" width="100;" alt="Lehoczky"/>
+                    <br />
+                    <sub><b>Lehoczky Zoltán</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/sirh3e">
                     <img src="https://avatars.githubusercontent.com/u/24867927?v=4" width="100;" alt="sirh3e"/>
                     <br />
                     <sub><b>Sirh3e</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/tonyholt">
                     <img src="https://avatars.githubusercontent.com/u/893926?v=4" width="100;" alt="tonyholt"/>
@@ -121,8 +130,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Tony H</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/melroy89">
                     <img src="https://avatars.githubusercontent.com/u/628926?v=4" width="100;" alt="melroy89"/>
@@ -158,6 +165,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Null</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/blazewalker59">
                     <img src="https://avatars.githubusercontent.com/u/21110755?v=4" width="100;" alt="blazewalker59"/>
@@ -165,8 +174,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Blaze Walker</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/achilehero">
                     <img src="https://avatars.githubusercontent.com/u/14956052?v=4" width="100;" alt="achilehero"/>
@@ -202,6 +209,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Edgar Scheiermann</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/arucar">
                     <img src="https://avatars.githubusercontent.com/u/37804893?v=4" width="100;" alt="arucar"/>
@@ -209,8 +218,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Erendis</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/GipHub123">
                     <img src="https://avatars.githubusercontent.com/u/12637608?v=4" width="100;" alt="GipHub123"/>
@@ -246,6 +253,8 @@ Thank you very much to all our community contributors!
                     <sub><b>Iblis Lin</b></sub>
                 </a>
             </td>
+		</tr>
+		<tr>
             <td align="center">
                 <a href="https://github.com/jfcere">
                     <img src="https://avatars.githubusercontent.com/u/6987084?v=4" width="100;" alt="jfcere"/>
@@ -253,8 +262,6 @@ Thank you very much to all our community contributors!
                     <sub><b>Jean-Francois Cere</b></sub>
                 </a>
             </td>
-		</tr>
-		<tr>
             <td align="center">
                 <a href="https://github.com/josephdecock">
                     <img src="https://avatars.githubusercontent.com/u/1145533?v=4" width="100;" alt="josephdecock"/>
@@ -281,13 +288,6 @@ Thank you very much to all our community contributors!
                     <img src="https://avatars.githubusercontent.com/u/2454275?v=4" width="100;" alt="KristofGilis"/>
                     <br />
                     <sub><b>Kristof Gilis</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/Lehoczky">
-                    <img src="https://avatars.githubusercontent.com/u/31937175?v=4" width="100;" alt="Lehoczky"/>
-                    <br />
-                    <sub><b>Lehoczky Zoltán</b></sub>
                 </a>
             </td>
             <td align="center">
