@@ -615,24 +615,20 @@ Custom content with the CSS class `mat-select-search-custom-header-content` can 
 ```
 
 #### Global default options
-Providing the [`MAT_SELECTSEARCH_DEFAULT_OPTIONS`](src/app/mat-select-search/default-options.ts) 
-InjectionToken, the default values of several `@Input()` properties can be set globally.
+The default values of several `@Input()` properties can be set globally with the [`provideMatSelectSearchOptions()`](src/app/mat-select-search/default-options.ts) function.
 See the documentation of the corresponding `@Input()` properties of `MatSelectSearchComponent`.
 
 Example:
 ```typescript
-import { MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from 'ngx-mat-select-search';
+import { provideMatSelectSearchOptions } from 'ngx-mat-select-search';
 
 @NgModule({
   ...
   providers: [
-    {
-      provide: MAT_SELECTSEARCH_DEFAULT_OPTIONS,
-      useValue: <MatSelectSearchOptions>{
-        closeIcon: 'delete',
-        noEntriesFoundLabel: 'No options found',
-      }
-    }
+    provideMatSelectSearchOptions({
+      closeIcon: 'delete',
+      noEntriesFoundLabel: 'No options found',
+    })
   ]
 })
 class AppModule {}

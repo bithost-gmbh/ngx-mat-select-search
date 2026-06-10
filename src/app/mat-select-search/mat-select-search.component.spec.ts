@@ -21,7 +21,7 @@ import { MatSelectSearchComponent } from './mat-select-search.component';
 import { NgxMatSelectSearchModule } from './ngx-mat-select-search.module';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
-import { MAT_SELECTSEARCH_DEFAULT_OPTIONS, MatSelectSearchOptions } from './default-options';
+import { provideMatSelectSearchOptions } from './default-options';
 
 interface Bank {
   id: string;
@@ -902,12 +902,9 @@ describe('MatSelectSearchComponent with default options', () => {
             announce: jasmine.createSpy('announce')
           }
         },
-        {
-          provide: MAT_SELECTSEARCH_DEFAULT_OPTIONS,
-          useValue: {
-            placeholderLabel: 'Mega bla',
-          } as MatSelectSearchOptions,
-        },
+        provideMatSelectSearchOptions({
+          placeholderLabel: 'Mega bla',
+        }),
       ]
     })
       .compileComponents();
