@@ -11,7 +11,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cimg/node:20.18.3-browsers
+      - image: cimg/node:22.22.3-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
