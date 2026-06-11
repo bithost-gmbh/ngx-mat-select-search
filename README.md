@@ -10,7 +10,7 @@
 ## What does it do?
 Angular component providing an input field for searching / filtering [MatSelect](https://material.angular.io/components/select/overview) options of the [Angular Material](https://material.angular.io) library.
 
-<img src="src/assets/example-new.png" alt="Example" width="293"/>
+<img src="public/example-new.png" alt="Example" width="293"/>
 
 ## Try it
 See it in action at 

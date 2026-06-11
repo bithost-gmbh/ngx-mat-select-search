@@ -8,7 +8,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
-import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
@@ -31,18 +31,20 @@ interface Bank {
 
 @Component({
   selector: 'mat-select-search-test',
-  imports: [MatSelectSearchComponent, MatFormFieldModule, MatSelectModule, ReactiveFormsModule, NgFor, AsyncPipe],
+  imports: [MatSelectSearchComponent, MatFormFieldModule, MatSelectModule, ReactiveFormsModule, AsyncPipe],
   template: `
     <h3>Single selection</h3>
     <p>
       <mat-form-field>
         <mat-select [formControl]="bankCtrl" placeholder="Bank" #selectSingle>
           <mat-option>
-            <ngx-mat-select-search [formControl]="bankFilterCtrl" #selectSearchSingle></ngx-mat-select-search>
+            <ngx-mat-select-search [formControl]="bankFilterCtrl" #selectSearchSingle />
           </mat-option>
-          <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
-            {{bank.name}}
-          </mat-option>
+          @for (bank of filteredBanks | async; track bank) {
+            <mat-option [value]="bank">
+              {{bank.name}}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </p>
@@ -56,11 +58,13 @@ interface Bank {
         <mat-select [formControl]="bankCtrlMatOption" placeholder="Bank" #selectSingleMatOption>
           <mat-option>
             <ngx-mat-select-search [formControl]="bankFilterCtrlMatOption"
-                                   #selectSearchSingleMatOption></ngx-mat-select-search>
+            #selectSearchSingleMatOption />
           </mat-option>
-          <mat-option *ngFor="let bank of filteredBanksMatOption | async" [value]="bank">
-            {{bank.name}}
-          </mat-option>
+          @for (bank of filteredBanksMatOption | async; track bank) {
+            <mat-option [value]="bank">
+              {{bank.name}}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </p>
@@ -73,21 +77,25 @@ interface Bank {
       <mat-form-field>
         <mat-select [formControl]="bankMultiCtrl" placeholder="Banks" [multiple]="true" #selectMulti>
           <mat-option>
-            <ngx-mat-select-search [formControl]="bankMultiFilterCtrl" #selectSearchMulti></ngx-mat-select-search>
+            <ngx-mat-select-search [formControl]="bankMultiFilterCtrl" #selectSearchMulti />
           </mat-option>
-          <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
-            {{bank.name}}
-          </mat-option>
+          @for (bank of filteredBanksMulti | async; track bank) {
+            <mat-option [value]="bank">
+              {{bank.name}}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
     </p>
     <p>
       Selected Banks:
     </p>
-    <ul *ngFor="let bank of bankMultiCtrl?.value">
-      <li>{{bank.name}}</li>
-    </ul>
-  `,
+    @for (bank of bankMultiCtrl.value; track bank) {
+      <ul>
+        <li>{{bank.name}}</li>
+      </ul>
+    }
+    `,
 })
 export class MatSelectSearchTestComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -413,7 +421,7 @@ describe('MatSelectSearchComponent', () => {
     });
 
     it('should not announce active option if there are no options', (done) => {
-      const announcer = TestBed.get(LiveAnnouncer);
+      const announcer = TestBed.inject(LiveAnnouncer);
       component.filteredBanks
         .pipe(
           take(1),
@@ -723,7 +731,7 @@ describe('MatSelectSearchComponent', () => {
 
   describe('with initial selection', () => {
 
-    it('should set the initial selection of MatSelect', waitForAsync((done) => {
+    it('should set the initial selection of MatSelect', waitForAsync((done: any) => {
       component.initialSingleSelection = component.banks[3];
       fixture.detectChanges();
 
@@ -764,7 +772,7 @@ describe('MatSelectSearchComponent', () => {
 
     }));
 
-    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', waitForAsync((done) => {
+    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', waitForAsync((done: any) => {
       component.initialMultiSelection = [component.banks[1]];
       fixture.detectChanges();
 

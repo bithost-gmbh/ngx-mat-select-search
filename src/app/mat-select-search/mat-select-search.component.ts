@@ -249,7 +249,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     return this._options$.getValue();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public _options$: BehaviorSubject<QueryList<MatOption>> = new BehaviorSubject<QueryList<MatOption>>(null as any);
 
   private optionsList$: Observable<MatOption[] | null> = this._options$.pipe(
@@ -266,7 +265,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   );
 
   /** Previously selected values when using <mat-select [multiple]="true">*/
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private previousSelectedValues: any[];
 
   public _formControl: FormControl<string> = new FormControl<string>('', {nonNullable: true});
@@ -305,7 +303,6 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     }
     for (const key of configurableDefaultOptions) {
       if (Object.prototype.hasOwnProperty.call(defaultOptions, key)) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (this[key] as any) = defaultOptions[key];
       }
     }
@@ -619,7 +616,7 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
             }
             const optionValues = this.matSelect.options.map(option => option.value);
             this.previousSelectedValues.forEach(previousValue => {
-              if (!values.some(v => this.matSelect.compareWith(v, previousValue))
+              if (!values.some((v: any) => this.matSelect.compareWith(v, previousValue))
                 && !optionValues.some(v => this.matSelect.compareWith(v, previousValue))) {
                 // if a value that was selected before is deselected and not found in the options, it was deselected
                 // due to the filtering, so we restore it.
