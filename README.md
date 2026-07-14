@@ -94,6 +94,13 @@ Thank you very much to all our community contributors!
                 </a>
             </td>
             <td align="center">
+                <a href="https://github.com/Lehoczky">
+                    <img src="https://avatars.githubusercontent.com/u/31937175?v=4" width="100;" alt="Lehoczky"/>
+                    <br />
+                    <sub><b>Lehoczky Zoltán</b></sub>
+                </a>
+            </td>
+            <td align="center">
                 <a href="https://github.com/swierzbicki">
                     <img src="https://avatars.githubusercontent.com/u/7196324?v=4" width="100;" alt="swierzbicki"/>
                     <br />
@@ -105,13 +112,6 @@ Thank you very much to all our community contributors!
                     <img src="https://avatars.githubusercontent.com/u/38611461?v=4" width="100;" alt="angelaki"/>
                     <br />
                     <sub><b>Tristan</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/Lehoczky">
-                    <img src="https://avatars.githubusercontent.com/u/31937175?v=4" width="100;" alt="Lehoczky"/>
-                    <br />
-                    <sub><b>Lehoczky Zoltán</b></sub>
                 </a>
             </td>
             <td align="center">
