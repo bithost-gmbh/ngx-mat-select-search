@@ -10,7 +10,7 @@
 ## What does it do?
 Angular component providing an input field for searching / filtering [MatSelect](https://material.angular.io/components/select/overview) options of the [Angular Material](https://material.angular.io) library.
 
-<img src="src/assets/example-new.png" alt="Example" width="293"/>
+<img src="public/example-new.png" alt="Example" width="293"/>
 
 ## Try it
 See it in action at 
@@ -20,7 +20,7 @@ See it in action at
   see example code, builds in browser, latest version, latest material version
 * [https://bithost-gmbh.github.io/ngx-mat-select-search/](https://bithost-gmbh.github.io/ngx-mat-select-search/)
 
-  pre-built, latest version, material 19, works on mobile
+  pre-built, latest version, material 20, works on mobile
 
 **Important Note**: This project is meant as a temporary implementation of [https://github.com/angular/material2/issues/5697](https://github.com/angular/material2/issues/5697).
 The goal is to have an implementation in the official Angular Material repository, a new PR will be created.
@@ -470,8 +470,8 @@ To use the [i18n](https://angular.io/guide/i18n) API for translation of the labe
 
 #### Current release
 
-* `@angular/core`: `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0`
-* `@angular/material`: `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0` with `MatSelectModule` (`@angular/material/select`)
+* `@angular/core`: `^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0`
+* `@angular/material`: `^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0` with `MatSelectModule` (`@angular/material/select`)
 
 
 #### Version [`7.0.10`](https://github.com/bithost-gmbh/ngx-mat-select-search/tree/7.0.10)

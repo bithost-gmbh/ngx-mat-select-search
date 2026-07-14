@@ -62,7 +62,11 @@ $mat-select-panel-padding: 8px;
 }
 
 .mat-select-search-input::placeholder {
-  color: var(--mdc-filled-text-field-input-text-placeholder-color);
+  /*
+    `--mat-form-field-filled-input-text-placeholder-color` is to support Angular Material 20+
+    `--mdc-filled-text-field-input-text-placeholder-color` is for Angular Material 19 and below
+  */
+  color: var(--mat-form-field-filled-input-text-placeholder-color, var(--mdc-filled-text-field-input-text-placeholder-color));
 }
 
 .mat-select-search-inner-toggle-all {
