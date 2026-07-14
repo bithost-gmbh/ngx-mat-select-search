@@ -1,5 +1,15 @@
 # Changelog
 
+## 9.0.0
+* Upgrade: Upgrade project to Angular 20
+  [#608](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/608)
+
+  Thanks to @Lehoczky
+
+> [!CAUTION]
+> **Breaking Change**:  `@angular/material`: `<= 16` is not supported anymore, please use `ngx-mat-select-search@8.0.6` in that case.
+See [README.md#compatibility](README.md#compatibility)
+
 ## 8.0.6
 * Fix: allow Escape to bubble past the panel so mat-select can close
   [#564](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/594)
