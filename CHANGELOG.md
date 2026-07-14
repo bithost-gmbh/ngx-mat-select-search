@@ -5,6 +5,10 @@
   [#608](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/608)
 
   Thanks to @Lehoczky
+* Enhancement: add a new `provideMatSelectSearchOptions()` to provide default values
+  [#604](https://github.com/bithost-gmbh/ngx-mat-select-search/pull/604)
+
+  Thanks to @Lehoczky
 
 > [!CAUTION]
 > **Breaking Change**:  `@angular/material`: `<= 16` is not supported anymore, please use `ngx-mat-select-search@8.0.6` in that case.
