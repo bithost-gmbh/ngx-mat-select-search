@@ -1,14 +1,11 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
-    beforeEach(waitForAsync(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        NoopAnimationsModule
-      ],
+      imports: [],
     }).compileComponents();
   }));
   it('should create the app', waitForAsync(() => {

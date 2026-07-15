@@ -9,7 +9,6 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { ReplaySubject } from 'rxjs';
@@ -275,7 +274,6 @@ describe('MatSelectSearchComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        NoopAnimationsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatSelectModule,
@@ -895,7 +893,6 @@ describe('MatSelectSearchComponent with default options', () => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        NoopAnimationsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatSelectModule,
