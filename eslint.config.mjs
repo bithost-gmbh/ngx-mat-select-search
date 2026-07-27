@@ -21,6 +21,7 @@ export default defineConfig(
       "@angular-eslint/directive-selector": [
         "error",
         {
+          prefix: ["app", "ngxMatSelect"],
           type: "attribute",
           style: "camelCase",
         },
@@ -28,6 +29,7 @@ export default defineConfig(
       "@angular-eslint/component-selector": [
         "error",
         {
+          prefix: ["app", "ngx-mat-select"],
           type: "element",
           style: "kebab-case",
         },

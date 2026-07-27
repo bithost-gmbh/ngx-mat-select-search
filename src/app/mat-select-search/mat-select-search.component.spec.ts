@@ -9,7 +9,6 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { ReplaySubject } from 'rxjs';
@@ -30,7 +29,7 @@ interface Bank {
 }
 
 @Component({
-  selector: 'mat-select-search-test',
+  selector: 'ngx-mat-select-search-test',
   imports: [MatSelectSearchComponent, MatFormFieldModule, MatSelectModule, ReactiveFormsModule, AsyncPipe],
   template: `
     <h3>Single selection</h3>
@@ -275,7 +274,6 @@ describe('MatSelectSearchComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        NoopAnimationsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatSelectModule,
@@ -450,7 +448,7 @@ describe('MatSelectSearchComponent', () => {
                   setTimeout(() => {
                     expect(component.matSelect.options.length).toBe(1);
 
-                    component.matSelectSearch._handleKeyup({keyCode: DOWN_ARROW} as KeyboardEvent);
+                    component.matSelectSearch._handleKeyup({ keyCode: DOWN_ARROW } as KeyboardEvent);
                     expect(announcer.announce).not.toHaveBeenCalled();
                     done();
                   });
@@ -895,7 +893,6 @@ describe('MatSelectSearchComponent with default options', () => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        NoopAnimationsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatSelectModule,
@@ -926,38 +923,38 @@ describe('MatSelectSearchComponent with default options', () => {
   });
 
 
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    it('should show a search field and focus it when opening the select', (done) => {
+  it('should show a search field and focus it when opening the select', (done) => {
 
-      component.filteredBanks
-        .pipe(
-          take(1),
-          delay(1)
-        )
-        .subscribe(() => {
-          // when the filtered banks are initialized
-          fixture.detectChanges();
+    component.filteredBanks
+      .pipe(
+        take(1),
+        delay(1)
+      )
+      .subscribe(() => {
+        // when the filtered banks are initialized
+        fixture.detectChanges();
 
-          component.matSelect.open();
-          fixture.detectChanges();
+        component.matSelect.open();
+        fixture.detectChanges();
 
-          component.matSelect.openedChange
-            .pipe(
-              take(1),
-              delay(1)
-            )
-            .subscribe(() => {
-              const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input') as HTMLInputElement;
+        component.matSelect.openedChange
+          .pipe(
+            take(1),
+            delay(1)
+          )
+          .subscribe(() => {
+            const searchField = document.querySelector('.mat-select-search-inner .mat-select-search-input') as HTMLInputElement;
 
-              expect(searchField.placeholder).toBe('Mega bla');
-              done();
-            });
+            expect(searchField.placeholder).toBe('Mega bla');
+            done();
+          });
 
-        });
+      });
 
-    });
+  });
 
 });
